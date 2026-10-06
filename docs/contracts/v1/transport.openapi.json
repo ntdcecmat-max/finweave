@@ -1,0 +1,72 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "FinWeave protected transport candidate / BLOCKED",
+    "version": "0.1.0",
+    "description": "Opaque shape only; algorithm/session/attestation/key-release protocol unselected. DO NOT USE for real data."
+  },
+  "paths": {
+    "/transport/v1/exchange": {
+      "post": {
+        "operationId": "protectedExchangeCandidate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "$ref": "#/components/schemas/ProtectedEnvelope"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sealed inner Reply or ErrorDTO; never plaintext financial response",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProtectedEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-status": "BLOCKED_SECURITY_POC"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProtectedEnvelope": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "transportVersion": {
+            "type": "string",
+            "const": "1"
+          },
+          "channelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,80}$"
+          },
+          "sequence": {
+            "type": "string",
+            "pattern": "^(0|[1-9]\\d{0,19})$"
+          },
+          "ciphertext": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000000
+          }
+        },
+        "required": [
+          "transportVersion",
+          "channelId",
+          "sequence",
+          "ciphertext"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

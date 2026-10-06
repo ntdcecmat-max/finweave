@@ -1,0 +1,5542 @@
+[
+  {
+    "operationId": "getSession",
+    "input": {},
+    "output": {
+      "subjectId": "OWNER-DEMO",
+      "deviceId": "DEVICE-DEMO",
+      "workspaceIds": [
+        "W-DEMO"
+      ],
+      "role": "owner",
+      "expiresAt": "2026-11-01T18:00:00+07:00",
+      "synthetic": true
+    }
+  },
+  {
+    "operationId": "getWorkspace",
+    "input": {},
+    "output": {
+      "id": "W-DEMO",
+      "version": 10,
+      "businessClock": "2026-10-31T18:00:00+07:00",
+      "trackingStart": "2026-10-01",
+      "currency": "VND",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "synthetic": true
+    }
+  },
+  {
+    "operationId": "updateTrackingSettings",
+    "input": {
+      "trackingStart": "2026-10-01",
+      "reason": "Xác nhận mốc theo dõi"
+    },
+    "output": {
+      "operationId": "updateTrackingSettings",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listAccounts",
+    "input": {
+      "includeArchived": false,
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "name": "Ngân hàng giả lập",
+          "kind": "bank",
+          "opening": {
+            "value": "20000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-BANK",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "26500000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getAccount",
+    "input": {
+      "id": "A-BANK"
+    },
+    "output": {
+      "name": "Ngân hàng giả lập",
+      "kind": "bank",
+      "opening": {
+        "value": "20000000",
+        "currency": "VND"
+      },
+      "openingDate": "2026-10-01",
+      "id": "A-BANK",
+      "version": 1,
+      "archived": false,
+      "balance": {
+        "value": {
+          "value": "26500000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "evidenceIds": [
+        "EV-01"
+      ]
+    }
+  },
+  {
+    "operationId": "createAccount",
+    "input": {
+      "name": "Ngân hàng giả lập",
+      "kind": "bank",
+      "opening": {
+        "value": "20000000",
+        "currency": "VND"
+      },
+      "openingDate": "2026-10-01"
+    },
+    "output": {
+      "operationId": "createAccount",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "archiveAccount",
+    "input": {
+      "id": "A-WALLET",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "archiveAccount",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listHoldings",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "kind": "all"
+    },
+    "output": {
+      "items": [
+        {
+          "name": "DEMO-A",
+          "kind": "stock",
+          "quantity": {
+            "value": "100",
+            "unit": "share"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": null,
+          "purity": null,
+          "cost": null,
+          "costDate": null,
+          "id": "H-STOCK",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getHolding",
+    "input": {
+      "id": "H-STOCK"
+    },
+    "output": {
+      "name": "DEMO-A",
+      "kind": "stock",
+      "quantity": {
+        "value": "100",
+        "unit": "share"
+      },
+      "quantityDate": "2026-10-01",
+      "market": "VN-demo",
+      "product": null,
+      "purity": null,
+      "cost": null,
+      "costDate": null,
+      "id": "H-STOCK",
+      "version": 1,
+      "costQuantity": null,
+      "archived": false,
+      "valuation": {
+        "value": {
+          "value": "5000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "evidenceIds": [
+        "EV-01"
+      ]
+    }
+  },
+  {
+    "operationId": "createHolding",
+    "input": {
+      "name": "DEMO-A",
+      "kind": "stock",
+      "quantity": {
+        "value": "100",
+        "unit": "share"
+      },
+      "quantityDate": "2026-10-01",
+      "market": "VN-demo",
+      "product": null,
+      "purity": null,
+      "cost": null,
+      "costDate": null
+    },
+    "output": {
+      "operationId": "createHolding",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updateHoldingQuantity",
+    "input": {
+      "id": "H-STOCK",
+      "quantity": {
+        "value": "110",
+        "unit": "share"
+      },
+      "date": "2026-10-31",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "updateHoldingQuantity",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updateHoldingCost",
+    "input": {
+      "id": "H-STOCK",
+      "cost": null,
+      "date": "2026-10-31",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "updateHoldingCost",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listHoldingMovements",
+    "input": {
+      "id": "H-STOCK",
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "MOVE-01",
+          "holdingId": "H-STOCK",
+          "version": 1,
+          "quantity": {
+            "value": "100",
+            "unit": "share"
+          },
+          "delta": null,
+          "date": "2026-10-01",
+          "kind": "declaration",
+          "eventId": null,
+          "reason": "Lượng đầu kỳ tự khai báo",
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "listPriceQuotes",
+    "input": {
+      "holdingId": "H-STOCK",
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "asOf": "2026-10-31T18:00:00+07:00"
+    },
+    "output": {
+      "items": [
+        {
+          "id": "Q-01",
+          "version": 1,
+          "holdingId": "H-STOCK",
+          "price": {
+            "value": "50000",
+            "currency": "VND",
+            "per": "share"
+          },
+          "at": "2026-10-31T17:00:00+07:00",
+          "sourceId": "S-PRICE",
+          "fxVndPerUsd": null,
+          "fxAt": null,
+          "compatible": true,
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "recordPriceQuote",
+    "input": {
+      "holdingId": "H-STOCK",
+      "price": {
+        "value": "50000",
+        "currency": "VND",
+        "per": "share"
+      },
+      "at": "2026-10-31T17:00:00+07:00",
+      "sourceId": "S-PRICE",
+      "fxVndPerUsd": null,
+      "fxAt": null,
+      "compatible": true
+    },
+    "output": {
+      "operationId": "recordPriceQuote",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listTransactions",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "kind": "all",
+      "posting": "all",
+      "reconciliation": "all",
+      "category": null,
+      "accountId": null,
+      "planItemId": null,
+      "search": "",
+      "sort": "date_desc_id"
+    },
+    "output": {
+      "items": [
+        {
+          "kind": "expense",
+          "amount": {
+            "value": "150000",
+            "currency": "VND"
+          },
+          "date": "2026-10-05",
+          "accountId": "A-CASH",
+          "description": "Ăn trưa giả lập",
+          "category": "Ăn uống",
+          "posting": "posted",
+          "reference": "REF-DEMO-04",
+          "id": "DEMO-04",
+          "version": 1,
+          "toAccountId": null,
+          "reconciliation": "clear",
+          "originId": null,
+          "reversalOf": null,
+          "holdingId": null,
+          "planLinkId": null,
+          "manualCategoryOverride": false,
+          "evidenceIds": [
+            "EV-01"
+          ],
+          "history": []
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getTransaction",
+    "input": {
+      "id": "DEMO-04"
+    },
+    "output": {
+      "kind": "expense",
+      "amount": {
+        "value": "150000",
+        "currency": "VND"
+      },
+      "date": "2026-10-05",
+      "accountId": "A-CASH",
+      "description": "Ăn trưa giả lập",
+      "category": "Ăn uống",
+      "posting": "posted",
+      "reference": "REF-DEMO-04",
+      "id": "DEMO-04",
+      "version": 1,
+      "toAccountId": null,
+      "reconciliation": "clear",
+      "originId": null,
+      "reversalOf": null,
+      "holdingId": null,
+      "planLinkId": null,
+      "manualCategoryOverride": false,
+      "evidenceIds": [
+        "EV-01"
+      ],
+      "history": []
+    }
+  },
+  {
+    "operationId": "createEvent",
+    "input": {
+      "kind": "expense",
+      "amount": {
+        "value": "150000",
+        "currency": "VND"
+      },
+      "date": "2026-10-03",
+      "accountId": "A-CASH",
+      "description": "Ăn trưa giả lập",
+      "category": "Ăn uống",
+      "posting": "posted",
+      "reference": null
+    },
+    "output": {
+      "operationId": "createEvent",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updateDraft",
+    "input": {
+      "id": "DRAFT-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập",
+      "amount": {
+        "value": "120000",
+        "currency": "VND"
+      },
+      "description": "Điều chỉnh nhập nhầm"
+    },
+    "output": {
+      "operationId": "updateDraft",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "correctPostedEvent",
+    "input": {
+      "id": "DEMO-04",
+      "reason": "Người dùng xác nhận dữ liệu giả lập",
+      "amount": {
+        "value": "120000",
+        "currency": "VND"
+      },
+      "description": "Điều chỉnh nhập nhầm"
+    },
+    "output": {
+      "operationId": "correctPostedEvent",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updateCategory",
+    "input": {
+      "id": "DEMO-04",
+      "reason": "Người dùng xác nhận dữ liệu giả lập",
+      "category": "Ăn uống"
+    },
+    "output": {
+      "operationId": "updateCategory",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "postDraft",
+    "input": {
+      "id": "DRAFT-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "postDraft",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "linkRefund",
+    "input": {
+      "refundId": "REFUND-01",
+      "originId": "DEMO-04",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "linkRefund",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "recordCashCount",
+    "input": {
+      "accountId": "A-CASH",
+      "observed": {
+        "value": "2800000",
+        "currency": "VND"
+      },
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "recordCashCount",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "getOverview",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      }
+    },
+    "output": {
+      "id": "R-01",
+      "version": 10,
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "snapshotRefs": {
+        "workspaceVersion": 10,
+        "sourceVersions": {
+          "S-BANK": 1,
+          "S-PRICE": 1
+        },
+        "holdingVersions": {
+          "H-STOCK": 1,
+          "H-GOLD": 1
+        },
+        "quoteIds": [
+          "Q-01",
+          "Q-02"
+        ],
+        "eventVersions": {
+          "DEMO-04": 1
+        },
+        "planVersions": {},
+        "goalVersions": {}
+      },
+      "cash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "income": {
+        "value": {
+          "value": "10000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "grossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "refunds": {
+        "value": {
+          "value": "200000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "netExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "scopedFlow": {
+        "value": {
+          "value": "9100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "knownAssetSubtotal": {
+        "value": "76100000",
+        "currency": "VND"
+      },
+      "spending": [
+        {
+          "category": "Ăn uống",
+          "gross": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-04",
+            "DEMO-05"
+          ]
+        },
+        {
+          "category": "Mua sắm",
+          "gross": {
+            "value": "600000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "200000",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-06",
+            "DEMO-07"
+          ]
+        },
+        {
+          "category": "Chưa phân loại",
+          "gross": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-08"
+          ]
+        }
+      ],
+      "accounts": [
+        {
+          "name": "Ngân hàng giả lập",
+          "kind": "bank",
+          "opening": {
+            "value": "20000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-BANK",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "26500000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Ví giả lập",
+          "kind": "wallet",
+          "opening": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-WALLET",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "1750000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Cash giả lập",
+          "kind": "cash",
+          "opening": {
+            "value": "2000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-CASH",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "2850000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "holdings": [
+        {
+          "name": "DEMO-A",
+          "kind": "stock",
+          "quantity": {
+            "value": "100",
+            "unit": "share"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": null,
+          "purity": null,
+          "cost": null,
+          "costDate": null,
+          "id": "H-STOCK",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Vàng nhẫn giả lập",
+          "kind": "gold",
+          "quantity": {
+            "value": "5",
+            "unit": "chi"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": "nhẫn",
+          "purity": "9999",
+          "cost": null,
+          "costDate": null,
+          "id": "H-GOLD",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "40000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "EV-01"
+      ]
+    }
+  },
+  {
+    "operationId": "getSpendingReport",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      }
+    },
+    "output": {
+      "id": "R-01",
+      "version": 10,
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "snapshotRefs": {
+        "workspaceVersion": 10,
+        "sourceVersions": {
+          "S-BANK": 1,
+          "S-PRICE": 1
+        },
+        "holdingVersions": {
+          "H-STOCK": 1,
+          "H-GOLD": 1
+        },
+        "quoteIds": [
+          "Q-01",
+          "Q-02"
+        ],
+        "eventVersions": {
+          "DEMO-04": 1
+        },
+        "planVersions": {},
+        "goalVersions": {}
+      },
+      "cash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "income": {
+        "value": {
+          "value": "10000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "grossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "refunds": {
+        "value": {
+          "value": "200000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "netExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "scopedFlow": {
+        "value": {
+          "value": "9100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "knownAssetSubtotal": {
+        "value": "76100000",
+        "currency": "VND"
+      },
+      "spending": [
+        {
+          "category": "Ăn uống",
+          "gross": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-04",
+            "DEMO-05"
+          ]
+        },
+        {
+          "category": "Mua sắm",
+          "gross": {
+            "value": "600000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "200000",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-06",
+            "DEMO-07"
+          ]
+        },
+        {
+          "category": "Chưa phân loại",
+          "gross": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-08"
+          ]
+        }
+      ],
+      "accounts": [
+        {
+          "name": "Ngân hàng giả lập",
+          "kind": "bank",
+          "opening": {
+            "value": "20000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-BANK",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "26500000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Ví giả lập",
+          "kind": "wallet",
+          "opening": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-WALLET",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "1750000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Cash giả lập",
+          "kind": "cash",
+          "opening": {
+            "value": "2000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-CASH",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "2850000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "holdings": [
+        {
+          "name": "DEMO-A",
+          "kind": "stock",
+          "quantity": {
+            "value": "100",
+            "unit": "share"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": null,
+          "purity": null,
+          "cost": null,
+          "costDate": null,
+          "id": "H-STOCK",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Vàng nhẫn giả lập",
+          "kind": "gold",
+          "quantity": {
+            "value": "5",
+            "unit": "chi"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": "nhẫn",
+          "purity": "9999",
+          "cost": null,
+          "costDate": null,
+          "id": "H-GOLD",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "40000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "EV-01"
+      ]
+    }
+  },
+  {
+    "operationId": "getPortfolio",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      }
+    },
+    "output": {
+      "id": "R-01",
+      "version": 10,
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "snapshotRefs": {
+        "workspaceVersion": 10,
+        "sourceVersions": {
+          "S-BANK": 1,
+          "S-PRICE": 1
+        },
+        "holdingVersions": {
+          "H-STOCK": 1,
+          "H-GOLD": 1
+        },
+        "quoteIds": [
+          "Q-01",
+          "Q-02"
+        ],
+        "eventVersions": {
+          "DEMO-04": 1
+        },
+        "planVersions": {},
+        "goalVersions": {}
+      },
+      "cash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "income": {
+        "value": {
+          "value": "10000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "grossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "refunds": {
+        "value": {
+          "value": "200000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "netExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "scopedFlow": {
+        "value": {
+          "value": "9100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "knownAssetSubtotal": {
+        "value": "76100000",
+        "currency": "VND"
+      },
+      "spending": [
+        {
+          "category": "Ăn uống",
+          "gross": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-04",
+            "DEMO-05"
+          ]
+        },
+        {
+          "category": "Mua sắm",
+          "gross": {
+            "value": "600000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "200000",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "400000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-06",
+            "DEMO-07"
+          ]
+        },
+        {
+          "category": "Chưa phân loại",
+          "gross": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "refunds": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "net": {
+            "value": "100000",
+            "currency": "VND"
+          },
+          "eventIds": [
+            "DEMO-08"
+          ]
+        }
+      ],
+      "accounts": [
+        {
+          "name": "Ngân hàng giả lập",
+          "kind": "bank",
+          "opening": {
+            "value": "20000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-BANK",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "26500000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Ví giả lập",
+          "kind": "wallet",
+          "opening": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-WALLET",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "1750000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Cash giả lập",
+          "kind": "cash",
+          "opening": {
+            "value": "2000000",
+            "currency": "VND"
+          },
+          "openingDate": "2026-10-01",
+          "id": "A-CASH",
+          "version": 1,
+          "archived": false,
+          "balance": {
+            "value": {
+              "value": "2850000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "holdings": [
+        {
+          "name": "DEMO-A",
+          "kind": "stock",
+          "quantity": {
+            "value": "100",
+            "unit": "share"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": null,
+          "purity": null,
+          "cost": null,
+          "costDate": null,
+          "id": "H-STOCK",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        {
+          "name": "Vàng nhẫn giả lập",
+          "kind": "gold",
+          "quantity": {
+            "value": "5",
+            "unit": "chi"
+          },
+          "quantityDate": "2026-10-01",
+          "market": "VN-demo",
+          "product": "nhẫn",
+          "purity": "9999",
+          "cost": null,
+          "costDate": null,
+          "id": "H-GOLD",
+          "version": 1,
+          "costQuantity": null,
+          "archived": false,
+          "valuation": {
+            "value": {
+              "value": "40000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "EV-01"
+      ]
+    }
+  },
+  {
+    "operationId": "getInsights",
+    "input": {
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "INS-01",
+          "version": 10,
+          "title": "Nhóm chi lớn nhất",
+          "text": "Ăn uống và Mua sắm đồng hạng chi ròng 400.000 đồng.",
+          "context": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [
+              "A-BANK",
+              "A-WALLET",
+              "A-CASH"
+            ],
+            "snapshotVersion": 10
+          },
+          "metric": {
+            "value": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "target": {
+            "navigation": "transactions",
+            "objectType": "event",
+            "objectId": "DEMO-04"
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "listSources",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "S-BANK",
+          "version": 1,
+          "name": "Nguồn ngân hàng giả lập",
+          "kind": "bank",
+          "connection": "connected",
+          "lastSuccess": "2026-10-31T18:00:00+07:00",
+          "lastAttempt": "2026-10-31T18:00:00+07:00",
+          "errorCode": null,
+          "freshness": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          }
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "refreshSource",
+    "input": {
+      "id": "S-BANK"
+    },
+    "output": {
+      "operationId": "refreshSource",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "disconnectSource",
+    "input": {
+      "id": "S-BANK",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "disconnectSource",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "reconnectSource",
+    "input": {
+      "id": "S-BANK"
+    },
+    "output": {
+      "operationId": "reconnectSource",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "previewImport",
+    "input": {
+      "accountId": "A-BANK",
+      "fileName": "synthetic.csv",
+      "csv": "date,amount,description,reference\n2026-10-12,100000,Thu khác,DEMO-NEW",
+      "mapping": {
+        "date": "date",
+        "amount": "amount",
+        "description": "description",
+        "reference": "reference",
+        "dateFormat": "yyyy-MM-dd",
+        "amountFormat": "signed_integer_vnd",
+        "encoding": "UTF-8"
+      },
+      "expectedWorkspaceVersion": 10
+    },
+    "output": {
+      "id": "IP-01",
+      "previewToken": "PT-import-01",
+      "expiresAt": "2026-10-31T18:10:00+07:00",
+      "workspaceVersion": 10,
+      "fileDigest": "1054b9980b433f94ff46a22632dbfdcc0a23f6127d6c37905f3268ae0729496b",
+      "mappingDigest": "482a2ebd55f761e3142f48828cdd3f550816af6a56ed0f96071afc7116ac6533",
+      "profileVersion": "csv-demo-v1",
+      "mappingVersion": 1,
+      "accountId": "A-BANK",
+      "rows": [
+        {
+          "id": "ROW-01",
+          "index": 1,
+          "rawEvidenceId": "EV-raw-01",
+          "status": "valid",
+          "normalized": {
+            "kind": "income",
+            "amount": {
+              "value": "100000",
+              "currency": "VND"
+            },
+            "date": "2026-10-12",
+            "accountId": "A-BANK",
+            "description": "Ăn trưa giả lập",
+            "category": "Thu khác",
+            "posting": "posted",
+            "reference": null
+          },
+          "errors": [],
+          "matchedEventId": null
+        }
+      ],
+      "quality": {
+        "status": "complete",
+        "sourceIds": [
+          "S-BANK"
+        ],
+        "asOf": "2026-10-31T18:00:00+07:00",
+        "reasons": []
+      }
+    }
+  },
+  {
+    "operationId": "confirmImport",
+    "input": {
+      "previewId": "IP-01",
+      "previewToken": "PT-import-01",
+      "selectedRowIds": [
+        "ROW-01"
+      ]
+    },
+    "output": {
+      "id": "JOB-01",
+      "version": 1,
+      "state": "pending",
+      "previewId": "IP-01",
+      "accountId": "A-BANK",
+      "sourceId": "S-CSV",
+      "profileVersion": "csv-demo-v1",
+      "mappingVersion": 1,
+      "selectedRowIds": [
+        "ROW-01"
+      ],
+      "committedEventIds": [],
+      "reviewCaseIds": [],
+      "resultWorkspaceVersion": null,
+      "errorCode": null,
+      "createdAt": "2026-10-31T18:00:00+07:00",
+      "updatedAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "getImportJob",
+    "input": {
+      "id": "JOB-01"
+    },
+    "output": {
+      "id": "JOB-01",
+      "version": 1,
+      "state": "pending",
+      "previewId": "IP-01",
+      "accountId": "A-BANK",
+      "sourceId": "S-CSV",
+      "profileVersion": "csv-demo-v1",
+      "mappingVersion": 1,
+      "selectedRowIds": [
+        "ROW-01"
+      ],
+      "committedEventIds": [],
+      "reviewCaseIds": [],
+      "resultWorkspaceVersion": null,
+      "errorCode": null,
+      "createdAt": "2026-10-31T18:00:00+07:00",
+      "updatedAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "listImportJobs",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "JOB-01",
+          "version": 1,
+          "state": "pending",
+          "previewId": "IP-01",
+          "accountId": "A-BANK",
+          "sourceId": "S-CSV",
+          "profileVersion": "csv-demo-v1",
+          "mappingVersion": 1,
+          "selectedRowIds": [
+            "ROW-01"
+          ],
+          "committedEventIds": [],
+          "reviewCaseIds": [],
+          "resultWorkspaceVersion": null,
+          "errorCode": null,
+          "createdAt": "2026-10-31T18:00:00+07:00",
+          "updatedAt": "2026-10-31T18:00:00+07:00"
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "listReviewCases",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "status": "all",
+      "type": "all"
+    },
+    "output": {
+      "items": [
+        {
+          "id": "RV-01",
+          "version": 1,
+          "type": "cash",
+          "title": "Chênh lệch cash giả lập",
+          "status": "open",
+          "eventId": null,
+          "holdingId": null,
+          "accountId": "A-CASH",
+          "variance": {
+            "value": "-50000",
+            "currency": "VND"
+          },
+          "observed": {
+            "value": "2800000",
+            "currency": "VND"
+          },
+          "rawEvidenceId": "EV-01",
+          "history": []
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getReviewCase",
+    "input": {
+      "id": "RV-01"
+    },
+    "output": {
+      "id": "RV-01",
+      "version": 1,
+      "type": "cash",
+      "title": "Chênh lệch cash giả lập",
+      "status": "open",
+      "eventId": null,
+      "holdingId": null,
+      "accountId": "A-CASH",
+      "variance": {
+        "value": "-50000",
+        "currency": "VND"
+      },
+      "observed": {
+        "value": "2800000",
+        "currency": "VND"
+      },
+      "rawEvidenceId": "EV-01",
+      "history": []
+    }
+  },
+  {
+    "operationId": "resolveReviewCase",
+    "input": {
+      "id": "RV-01",
+      "resolution": {
+        "action": "adjustUnknown",
+        "reason": "Người dùng xác nhận dữ liệu giả lập"
+      }
+    },
+    "output": {
+      "operationId": "resolveReviewCase",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listPlanItems",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "includeArchived": false,
+      "kind": "all"
+    },
+    "output": {
+      "items": [
+        {
+          "name": "Thu nhập tháng 11 giả lập",
+          "kind": "income",
+          "amount": {
+            "value": "5000000",
+            "currency": "VND"
+          },
+          "accountId": "A-BANK",
+          "start": "2026-11-01",
+          "end": "2026-11-30",
+          "recurrence": "once",
+          "dayOfMonth": 1,
+          "category": "Thu nhập",
+          "holdingId": null,
+          "id": "P-01",
+          "version": 1,
+          "archived": false,
+          "baselineCash": {
+            "value": "31100000",
+            "currency": "VND"
+          },
+          "baselineAssets": {
+            "value": "76100000",
+            "currency": "VND"
+          },
+          "history": []
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "createPlanItem",
+    "input": {
+      "name": "Thu nhập tháng 11 giả lập",
+      "kind": "income",
+      "amount": {
+        "value": "5000000",
+        "currency": "VND"
+      },
+      "accountId": "A-BANK",
+      "start": "2026-11-01",
+      "end": "2026-11-30",
+      "recurrence": "once",
+      "dayOfMonth": 1,
+      "category": "Thu nhập",
+      "holdingId": null
+    },
+    "output": {
+      "operationId": "createPlanItem",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updatePlanItem",
+    "input": {
+      "id": "P-01",
+      "item": {
+        "name": "Thu nhập tháng 11 giả lập",
+        "kind": "income",
+        "amount": {
+          "value": "5000000",
+          "currency": "VND"
+        },
+        "accountId": "A-BANK",
+        "start": "2026-11-01",
+        "end": "2026-11-30",
+        "recurrence": "once",
+        "dayOfMonth": 1,
+        "category": "Thu nhập",
+        "holdingId": null
+      },
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "updatePlanItem",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "archivePlanItem",
+    "input": {
+      "id": "P-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "archivePlanItem",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "getPlanForecast",
+    "input": {
+      "horizon": "2026-11-30"
+    },
+    "output": {
+      "version": 10,
+      "horizon": "2026-11-30",
+      "actualCash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "actualAssets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "forecastCash": {
+        "value": {
+          "value": "36100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "planned",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "forecastAssets": {
+        "value": {
+          "value": "81100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "planned",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "items": [
+        {
+          "item": {
+            "name": "Thu nhập tháng 11 giả lập",
+            "kind": "income",
+            "amount": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "accountId": "A-BANK",
+            "start": "2026-11-01",
+            "end": "2026-11-30",
+            "recurrence": "once",
+            "dayOfMonth": 1,
+            "category": "Thu nhập",
+            "holdingId": null,
+            "id": "P-01",
+            "version": 1,
+            "archived": false,
+            "baselineCash": {
+              "value": "31100000",
+              "currency": "VND"
+            },
+            "baselineAssets": {
+              "value": "76100000",
+              "currency": "VND"
+            },
+            "history": []
+          },
+          "occurrenceId": "P-01-20261101",
+          "date": "2026-11-01",
+          "actual": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "remaining": {
+            "value": "5000000",
+            "currency": "VND"
+          },
+          "overspend": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "links": []
+        }
+      ],
+      "assumptions": [
+        "Ví dụ chỉ có planned income 5 triệu, không phải fixture Plan đầy đủ."
+      ]
+    }
+  },
+  {
+    "operationId": "linkPlanActual",
+    "input": {
+      "planItemId": "P-01",
+      "planItemVersion": 1,
+      "occurrenceId": "P-01-20261101",
+      "eventId": "ACTUAL-01",
+      "eventVersion": 1,
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "linkPlanActual",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "unlinkPlanActual",
+    "input": {
+      "id": "LINK-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "unlinkPlanActual",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "listGoals",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      },
+      "status": "all"
+    },
+    "output": {
+      "items": [
+        {
+          "name": "Mục tiêu giả lập",
+          "target": {
+            "value": "5000000",
+            "currency": "VND"
+          },
+          "due": "2026-11-30",
+          "contributionSchedule": null,
+          "id": "G-01",
+          "version": 1,
+          "status": "active",
+          "allocations": [
+            {
+              "id": "AL-01",
+              "version": 1,
+              "goalId": "G-01",
+              "accountId": "A-BANK",
+              "earmarked": {
+                "value": "3000000",
+                "currency": "VND"
+              },
+              "funded": {
+                "value": "3000000",
+                "currency": "VND"
+              },
+              "shortfall": {
+                "value": "0",
+                "currency": "VND"
+              },
+              "active": true
+            }
+          ],
+          "funded": {
+            "value": {
+              "value": "3000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "shortfall": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "progressPercent": "60",
+          "history": []
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getGoalProgress",
+    "input": {
+      "id": "G-01"
+    },
+    "output": {
+      "name": "Mục tiêu giả lập",
+      "target": {
+        "value": "5000000",
+        "currency": "VND"
+      },
+      "due": "2026-11-30",
+      "contributionSchedule": null,
+      "id": "G-01",
+      "version": 1,
+      "status": "active",
+      "allocations": [
+        {
+          "id": "AL-01",
+          "version": 1,
+          "goalId": "G-01",
+          "accountId": "A-BANK",
+          "earmarked": {
+            "value": "3000000",
+            "currency": "VND"
+          },
+          "funded": {
+            "value": "3000000",
+            "currency": "VND"
+          },
+          "shortfall": {
+            "value": "0",
+            "currency": "VND"
+          },
+          "active": true
+        }
+      ],
+      "funded": {
+        "value": {
+          "value": "3000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "shortfall": {
+        "value": "0",
+        "currency": "VND"
+      },
+      "progressPercent": "60",
+      "history": []
+    }
+  },
+  {
+    "operationId": "createGoal",
+    "input": {
+      "name": "Mục tiêu giả lập",
+      "target": {
+        "value": "5000000",
+        "currency": "VND"
+      },
+      "due": "2026-11-30",
+      "contributionSchedule": null
+    },
+    "output": {
+      "operationId": "createGoal",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "updateGoal",
+    "input": {
+      "id": "G-01",
+      "goal": {
+        "name": "Mục tiêu giả lập",
+        "target": {
+          "value": "5000000",
+          "currency": "VND"
+        },
+        "due": "2026-11-30",
+        "contributionSchedule": null
+      },
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "updateGoal",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "allocateGoal",
+    "input": {
+      "goalId": "G-01",
+      "accountId": "A-BANK",
+      "amount": {
+        "value": "3000000",
+        "currency": "VND"
+      },
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "allocateGoal",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "releaseGoalAllocation",
+    "input": {
+      "goalId": "G-01",
+      "allocationId": null,
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "releaseGoalAllocation",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "markGoalAchieved",
+    "input": {
+      "id": "G-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "markGoalAchieved",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "archiveGoal",
+    "input": {
+      "id": "G-01",
+      "reason": "Người dùng xác nhận dữ liệu giả lập"
+    },
+    "output": {
+      "operationId": "archiveGoal",
+      "workspaceVersion": 11,
+      "objectVersions": {},
+      "affectedIds": [
+        "CREATED-01"
+      ],
+      "replayed": false
+    }
+  },
+  {
+    "operationId": "simulateGoalOutcome",
+    "input": {
+      "goalId": "G-01",
+      "mode": "save",
+      "amount": {
+        "value": "1000000",
+        "currency": "VND"
+      },
+      "count": 2,
+      "accountId": "A-BANK",
+      "firstDate": "2026-11-01",
+      "intervalDays": 14,
+      "horizon": "2026-11-30"
+    },
+    "output": {
+      "goalId": "G-01",
+      "mode": "save",
+      "amount": {
+        "value": "1000000",
+        "currency": "VND"
+      },
+      "count": 2,
+      "accountId": "A-BANK",
+      "firstDate": "2026-11-01",
+      "intervalDays": 14,
+      "horizon": "2026-11-30",
+      "id": "SIM-01",
+      "version": 1,
+      "baseWorkspaceVersion": 10,
+      "goalVersion": 1,
+      "snapshotRefs": {
+        "workspaceVersion": 10,
+        "sourceVersions": {
+          "S-BANK": 1,
+          "S-PRICE": 1
+        },
+        "holdingVersions": {
+          "H-STOCK": 1,
+          "H-GOLD": 1
+        },
+        "quoteIds": [
+          "Q-01",
+          "Q-02"
+        ],
+        "eventVersions": {
+          "DEMO-04": 1
+        },
+        "planVersions": {},
+        "goalVersions": {
+          "G-01": 1
+        }
+      },
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "steps": [
+        {
+          "date": "2026-11-01",
+          "amount": {
+            "value": "1000000",
+            "currency": "VND"
+          },
+          "mode": "save"
+        },
+        {
+          "date": "2026-11-15",
+          "amount": {
+            "value": "1000000",
+            "currency": "VND"
+          },
+          "mode": "save"
+        }
+      ],
+      "baseCash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseAssets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseIncome": {
+        "value": {
+          "value": "10000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseGrossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseNetExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseScopedFlow": {
+        "value": {
+          "value": "9100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "income": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "scopedFlow": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cumulativeGrossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cumulativeNetExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "grossExpense": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "netExpense": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "goalFunded": {
+        "value": {
+          "value": "5000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assumptions": [
+        "Góp từ tiền hiện có; không phát sinh thu nhập; giá cố định."
+      ],
+      "createdAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "listSimulations",
+    "input": {
+      "goalId": "G-01",
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "goalId": "G-01",
+          "mode": "save",
+          "amount": {
+            "value": "1000000",
+            "currency": "VND"
+          },
+          "count": 2,
+          "accountId": "A-BANK",
+          "firstDate": "2026-11-01",
+          "intervalDays": 14,
+          "horizon": "2026-11-30",
+          "id": "SIM-01",
+          "version": 1,
+          "baseWorkspaceVersion": 10,
+          "goalVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 10,
+            "sourceVersions": {
+              "S-BANK": 1,
+              "S-PRICE": 1
+            },
+            "holdingVersions": {
+              "H-STOCK": 1,
+              "H-GOLD": 1
+            },
+            "quoteIds": [
+              "Q-01",
+              "Q-02"
+            ],
+            "eventVersions": {
+              "DEMO-04": 1
+            },
+            "planVersions": {},
+            "goalVersions": {
+              "G-01": 1
+            }
+          },
+          "context": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [
+              "A-BANK",
+              "A-WALLET",
+              "A-CASH"
+            ],
+            "snapshotVersion": 10
+          },
+          "steps": [
+            {
+              "date": "2026-11-01",
+              "amount": {
+                "value": "1000000",
+                "currency": "VND"
+              },
+              "mode": "save"
+            },
+            {
+              "date": "2026-11-15",
+              "amount": {
+                "value": "1000000",
+                "currency": "VND"
+              },
+              "mode": "save"
+            }
+          ],
+          "baseCash": {
+            "value": {
+              "value": "31100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "baseAssets": {
+            "value": {
+              "value": "76100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "baseIncome": {
+            "value": {
+              "value": "10000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "baseGrossExpense": {
+            "value": {
+              "value": "1100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "baseNetExpense": {
+            "value": {
+              "value": "900000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "baseScopedFlow": {
+            "value": {
+              "value": "9100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "income": {
+            "value": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "scopedFlow": {
+            "value": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "cumulativeGrossExpense": {
+            "value": {
+              "value": "1100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "cumulativeNetExpense": {
+            "value": {
+              "value": "900000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "cash": {
+            "value": {
+              "value": "31100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "assets": {
+            "value": {
+              "value": "76100000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "grossExpense": {
+            "value": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "netExpense": {
+            "value": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "goalFunded": {
+            "value": {
+              "value": "5000000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "simulated",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          "assumptions": [
+            "Góp từ tiền hiện có; không phát sinh thu nhập; giá cố định."
+          ],
+          "createdAt": "2026-10-31T18:00:00+07:00"
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "getSimulation",
+    "input": {
+      "id": "SIM-01"
+    },
+    "output": {
+      "goalId": "G-01",
+      "mode": "save",
+      "amount": {
+        "value": "1000000",
+        "currency": "VND"
+      },
+      "count": 2,
+      "accountId": "A-BANK",
+      "firstDate": "2026-11-01",
+      "intervalDays": 14,
+      "horizon": "2026-11-30",
+      "id": "SIM-01",
+      "version": 1,
+      "baseWorkspaceVersion": 10,
+      "goalVersion": 1,
+      "snapshotRefs": {
+        "workspaceVersion": 10,
+        "sourceVersions": {
+          "S-BANK": 1,
+          "S-PRICE": 1
+        },
+        "holdingVersions": {
+          "H-STOCK": 1,
+          "H-GOLD": 1
+        },
+        "quoteIds": [
+          "Q-01",
+          "Q-02"
+        ],
+        "eventVersions": {
+          "DEMO-04": 1
+        },
+        "planVersions": {},
+        "goalVersions": {
+          "G-01": 1
+        }
+      },
+      "context": {
+        "period": {
+          "start": "2026-10-01",
+          "endExclusive": "2026-11-01",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "accountIds": [
+          "A-BANK",
+          "A-WALLET",
+          "A-CASH"
+        ],
+        "snapshotVersion": 10
+      },
+      "steps": [
+        {
+          "date": "2026-11-01",
+          "amount": {
+            "value": "1000000",
+            "currency": "VND"
+          },
+          "mode": "save"
+        },
+        {
+          "date": "2026-11-15",
+          "amount": {
+            "value": "1000000",
+            "currency": "VND"
+          },
+          "mode": "save"
+        }
+      ],
+      "baseCash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseAssets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseIncome": {
+        "value": {
+          "value": "10000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseGrossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseNetExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "baseScopedFlow": {
+        "value": {
+          "value": "9100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "actual",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "income": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "scopedFlow": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cumulativeGrossExpense": {
+        "value": {
+          "value": "1100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cumulativeNetExpense": {
+        "value": {
+          "value": "900000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "cash": {
+        "value": {
+          "value": "31100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assets": {
+        "value": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "grossExpense": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "netExpense": {
+        "value": {
+          "value": "0",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "goalFunded": {
+        "value": {
+          "value": "5000000",
+          "currency": "VND"
+        },
+        "missingReason": null,
+        "classification": "simulated",
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        },
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "assumptions": [
+        "Góp từ tiền hiện có; không phát sinh thu nhập; giá cố định."
+      ],
+      "createdAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "listConversations",
+    "input": {
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "C-01",
+          "version": 1,
+          "title": "Tổng quan tháng 10 giả lập",
+          "createdAt": "2026-10-31T18:00:00+07:00",
+          "updatedAt": "2026-10-31T18:00:00+07:00",
+          "lastContext": {
+            "navigation": "home",
+            "route": "/home",
+            "query": {
+              "period": {
+                "start": "2026-10-01",
+                "endExclusive": "2026-11-01",
+                "timezone": "Asia/Ho_Chi_Minh"
+              },
+              "accountIds": [
+                "A-BANK",
+                "A-WALLET",
+                "A-CASH"
+              ],
+              "snapshotVersion": 10
+            },
+            "transactionFilter": null,
+            "selected": null,
+            "workspaceVersion": 10,
+            "snapshotRefs": {
+              "workspaceVersion": 10,
+              "sourceVersions": {
+                "S-BANK": 1,
+                "S-PRICE": 1
+              },
+              "holdingVersions": {
+                "H-STOCK": 1,
+                "H-GOLD": 1
+              },
+              "quoteIds": [
+                "Q-01",
+                "Q-02"
+              ],
+              "eventVersions": {
+                "DEMO-04": 1
+              },
+              "planVersions": {},
+              "goalVersions": {}
+            },
+            "capturedAt": "2026-10-31T18:00:00+07:00"
+          }
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "createConversation",
+    "input": {
+      "title": "Tổng quan tháng 10 giả lập"
+    },
+    "output": {
+      "id": "C-01",
+      "version": 1,
+      "title": "Tổng quan tháng 10 giả lập",
+      "createdAt": "2026-10-31T18:00:00+07:00",
+      "updatedAt": "2026-10-31T18:00:00+07:00",
+      "lastContext": {
+        "navigation": "home",
+        "route": "/home",
+        "query": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "transactionFilter": null,
+        "selected": null,
+        "workspaceVersion": 10,
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "capturedAt": "2026-10-31T18:00:00+07:00"
+      }
+    }
+  },
+  {
+    "operationId": "getConversation",
+    "input": {
+      "id": "C-01"
+    },
+    "output": {
+      "conversation": {
+        "id": "C-01",
+        "version": 1,
+        "title": "Tổng quan tháng 10 giả lập",
+        "createdAt": "2026-10-31T18:00:00+07:00",
+        "updatedAt": "2026-10-31T18:00:00+07:00",
+        "lastContext": {
+          "navigation": "home",
+          "route": "/home",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [
+              "A-BANK",
+              "A-WALLET",
+              "A-CASH"
+            ],
+            "snapshotVersion": 10
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 10,
+          "snapshotRefs": {
+            "workspaceVersion": 10,
+            "sourceVersions": {
+              "S-BANK": 1,
+              "S-PRICE": 1
+            },
+            "holdingVersions": {
+              "H-STOCK": 1,
+              "H-GOLD": 1
+            },
+            "quoteIds": [
+              "Q-01",
+              "Q-02"
+            ],
+            "eventVersions": {
+              "DEMO-04": 1
+            },
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-31T18:00:00+07:00"
+        }
+      },
+      "messages": {
+        "items": [
+          {
+            "id": "M-01",
+            "conversationId": "C-01",
+            "version": 1,
+            "role": "user",
+            "text": "Nhóm chi nào lớn nhất?",
+            "context": {
+              "navigation": "home",
+              "route": "/home",
+              "query": {
+                "period": {
+                  "start": "2026-10-01",
+                  "endExclusive": "2026-11-01",
+                  "timezone": "Asia/Ho_Chi_Minh"
+                },
+                "accountIds": [
+                  "A-BANK",
+                  "A-WALLET",
+                  "A-CASH"
+                ],
+                "snapshotVersion": 10
+              },
+              "transactionFilter": null,
+              "selected": null,
+              "workspaceVersion": 10,
+              "snapshotRefs": {
+                "workspaceVersion": 10,
+                "sourceVersions": {
+                  "S-BANK": 1,
+                  "S-PRICE": 1
+                },
+                "holdingVersions": {
+                  "H-STOCK": 1,
+                  "H-GOLD": 1
+                },
+                "quoteIds": [
+                  "Q-01",
+                  "Q-02"
+                ],
+                "eventVersions": {
+                  "DEMO-04": 1
+                },
+                "planVersions": {},
+                "goalVersions": {}
+              },
+              "capturedAt": "2026-10-31T18:00:00+07:00"
+            },
+            "state": "processing",
+            "result": null,
+            "errorCode": null,
+            "createdAt": "2026-10-31T18:00:00+07:00"
+          }
+        ],
+        "nextCursor": null,
+        "snapshotVersion": 10,
+        "totalCount": 1
+      }
+    }
+  },
+  {
+    "operationId": "listMessages",
+    "input": {
+      "conversationId": "C-01",
+      "page": {
+        "cursor": null,
+        "pageSize": 25
+      }
+    },
+    "output": {
+      "items": [
+        {
+          "id": "M-01",
+          "conversationId": "C-01",
+          "version": 1,
+          "role": "user",
+          "text": "Nhóm chi nào lớn nhất?",
+          "context": {
+            "navigation": "home",
+            "route": "/home",
+            "query": {
+              "period": {
+                "start": "2026-10-01",
+                "endExclusive": "2026-11-01",
+                "timezone": "Asia/Ho_Chi_Minh"
+              },
+              "accountIds": [
+                "A-BANK",
+                "A-WALLET",
+                "A-CASH"
+              ],
+              "snapshotVersion": 10
+            },
+            "transactionFilter": null,
+            "selected": null,
+            "workspaceVersion": 10,
+            "snapshotRefs": {
+              "workspaceVersion": 10,
+              "sourceVersions": {
+                "S-BANK": 1,
+                "S-PRICE": 1
+              },
+              "holdingVersions": {
+                "H-STOCK": 1,
+                "H-GOLD": 1
+              },
+              "quoteIds": [
+                "Q-01",
+                "Q-02"
+              ],
+              "eventVersions": {
+                "DEMO-04": 1
+              },
+              "planVersions": {},
+              "goalVersions": {}
+            },
+            "capturedAt": "2026-10-31T18:00:00+07:00"
+          },
+          "state": "processing",
+          "result": null,
+          "errorCode": null,
+          "createdAt": "2026-10-31T18:00:00+07:00"
+        }
+      ],
+      "nextCursor": null,
+      "snapshotVersion": 10,
+      "totalCount": 1
+    }
+  },
+  {
+    "operationId": "sendAssistantMessage",
+    "input": {
+      "conversationId": "C-01",
+      "text": "Nhóm chi nào lớn nhất?",
+      "context": {
+        "navigation": "home",
+        "route": "/home",
+        "query": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "transactionFilter": null,
+        "selected": null,
+        "workspaceVersion": 10,
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "capturedAt": "2026-10-31T18:00:00+07:00"
+      }
+    },
+    "output": {
+      "id": "M-01",
+      "conversationId": "C-01",
+      "version": 1,
+      "role": "user",
+      "text": "Nhóm chi nào lớn nhất?",
+      "context": {
+        "navigation": "home",
+        "route": "/home",
+        "query": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "transactionFilter": null,
+        "selected": null,
+        "workspaceVersion": 10,
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "capturedAt": "2026-10-31T18:00:00+07:00"
+      },
+      "state": "processing",
+      "result": null,
+      "errorCode": null,
+      "createdAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "getAssistantMessage",
+    "input": {
+      "id": "M-01"
+    },
+    "output": {
+      "id": "M-01",
+      "conversationId": "C-01",
+      "version": 1,
+      "role": "assistant",
+      "text": "Ăn uống và Mua sắm đồng hạng chi ròng 400.000 đồng trong fixture; mở giao dịch để xem bằng chứng.",
+      "context": {
+        "navigation": "home",
+        "route": "/home",
+        "query": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "transactionFilter": null,
+        "selected": null,
+        "workspaceVersion": 10,
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "capturedAt": "2026-10-31T18:00:00+07:00"
+      },
+      "state": "completed",
+      "result": {
+        "id": "AR-01",
+        "messageId": "M-01",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "home",
+          "route": "/home",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [
+              "A-BANK",
+              "A-WALLET",
+              "A-CASH"
+            ],
+            "snapshotVersion": 10
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 10,
+          "snapshotRefs": {
+            "workspaceVersion": 10,
+            "sourceVersions": {
+              "S-BANK": 1,
+              "S-PRICE": 1
+            },
+            "holdingVersions": {
+              "H-STOCK": 1,
+              "H-GOLD": 1
+            },
+            "quoteIds": [
+              "Q-01",
+              "Q-02"
+            ],
+            "eventVersions": {
+              "DEMO-04": 1
+            },
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-31T18:00:00+07:00"
+        },
+        "tool": "reports",
+        "text": "Ăn uống và Mua sắm đồng hạng chi ròng 400.000 đồng trong fixture; mở giao dịch để xem bằng chứng.",
+        "metrics": [
+          {
+            "value": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "missingReason": null,
+            "classification": "actual",
+            "quality": {
+              "status": "complete",
+              "sourceIds": [
+                "S-BANK"
+              ],
+              "asOf": "2026-10-31T18:00:00+07:00",
+              "reasons": []
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          }
+        ],
+        "evidenceIds": [
+          "EV-01"
+        ],
+        "targets": [
+          {
+            "navigation": "transactions",
+            "objectType": "event",
+            "objectId": "DEMO-04"
+          }
+        ],
+        "stale": false,
+        "createdAt": "2026-10-31T18:00:00+07:00"
+      },
+      "errorCode": null,
+      "createdAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "cancelAssistantMessage",
+    "input": {
+      "id": "M-01"
+    },
+    "output": {
+      "id": "M-01",
+      "conversationId": "C-01",
+      "version": 1,
+      "role": "user",
+      "text": "Nhóm chi nào lớn nhất?",
+      "context": {
+        "navigation": "home",
+        "route": "/home",
+        "query": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "transactionFilter": null,
+        "selected": null,
+        "workspaceVersion": 10,
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "capturedAt": "2026-10-31T18:00:00+07:00"
+      },
+      "state": "cancelled",
+      "result": null,
+      "errorCode": null,
+      "createdAt": "2026-10-31T18:00:00+07:00"
+    }
+  },
+  {
+    "operationId": "getEvidence",
+    "input": {
+      "id": "EV-01"
+    },
+    "output": {
+      "id": "EV-01",
+      "sourceId": null,
+      "kind": "manual",
+      "recordedAt": "2026-10-31T18:00:00+07:00",
+      "observedDate": "2026-10-05",
+      "reference": "REF-DEMO-04",
+      "subjectRefs": [
+        {
+          "type": "event",
+          "id": "DEMO-04"
+        }
+      ],
+      "content": {
+        "format": "manual_declaration",
+        "rawText": "Giao dịch Bữa trưa giả lập; tự ghi nhận.",
+        "normalizedFields": {
+          "amount": "150000",
+          "currency": "VND",
+          "date": "2026-10-05",
+          "accountId": "A-CASH"
+        }
+      }
+    }
+  },
+  {
+    "operationId": "previewMutation",
+    "input": {
+      "operationId": "createEvent",
+      "input": {
+        "kind": "expense",
+        "amount": {
+          "value": "150000",
+          "currency": "VND"
+        },
+        "date": "2026-10-03",
+        "accountId": "A-CASH",
+        "description": "Ăn trưa giả lập",
+        "category": "Ăn uống",
+        "posting": "posted",
+        "reference": null
+      },
+      "expectedWorkspaceVersion": 10,
+      "expectedObjectVersions": {}
+    },
+    "output": {
+      "previewToken": "PT-01",
+      "operationId": "createEvent",
+      "workspaceVersion": 10,
+      "expiresAt": "2026-10-31T18:10:00+07:00",
+      "before": {
+        "id": "R-01",
+        "version": 10,
+        "context": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "cash": {
+          "value": {
+            "value": "31100000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "assets": {
+          "value": {
+            "value": "76100000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "income": {
+          "value": {
+            "value": "10000000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "grossExpense": {
+          "value": {
+            "value": "1100000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "refunds": {
+          "value": {
+            "value": "200000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "netExpense": {
+          "value": {
+            "value": "900000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "scopedFlow": {
+          "value": {
+            "value": "9100000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "knownAssetSubtotal": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "spending": [
+          {
+            "category": "Ăn uống",
+            "gross": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-04",
+              "DEMO-05"
+            ]
+          },
+          {
+            "category": "Mua sắm",
+            "gross": {
+              "value": "600000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "200000",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-06",
+              "DEMO-07"
+            ]
+          },
+          {
+            "category": "Chưa phân loại",
+            "gross": {
+              "value": "100000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "100000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-08"
+            ]
+          }
+        ],
+        "accounts": [
+          {
+            "name": "Ngân hàng giả lập",
+            "kind": "bank",
+            "opening": {
+              "value": "20000000",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-BANK",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "26500000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Ví giả lập",
+            "kind": "wallet",
+            "opening": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-WALLET",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "1750000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Cash giả lập",
+            "kind": "cash",
+            "opening": {
+              "value": "2000000",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-CASH",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "2850000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          }
+        ],
+        "holdings": [
+          {
+            "name": "DEMO-A",
+            "kind": "stock",
+            "quantity": {
+              "value": "100",
+              "unit": "share"
+            },
+            "quantityDate": "2026-10-01",
+            "market": "VN-demo",
+            "product": null,
+            "purity": null,
+            "cost": null,
+            "costDate": null,
+            "id": "H-STOCK",
+            "version": 1,
+            "costQuantity": null,
+            "archived": false,
+            "valuation": {
+              "value": {
+                "value": "5000000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Vàng nhẫn giả lập",
+            "kind": "gold",
+            "quantity": {
+              "value": "5",
+              "unit": "chi"
+            },
+            "quantityDate": "2026-10-01",
+            "market": "VN-demo",
+            "product": "nhẫn",
+            "purity": "9999",
+            "cost": null,
+            "costDate": null,
+            "id": "H-GOLD",
+            "version": 1,
+            "costQuantity": null,
+            "archived": false,
+            "valuation": {
+              "value": {
+                "value": "40000000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          }
+        ],
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "after": {
+        "id": "R-01",
+        "version": 10,
+        "context": {
+          "period": {
+            "start": "2026-10-01",
+            "endExclusive": "2026-11-01",
+            "timezone": "Asia/Ho_Chi_Minh"
+          },
+          "accountIds": [
+            "A-BANK",
+            "A-WALLET",
+            "A-CASH"
+          ],
+          "snapshotVersion": 10
+        },
+        "snapshotRefs": {
+          "workspaceVersion": 10,
+          "sourceVersions": {
+            "S-BANK": 1,
+            "S-PRICE": 1
+          },
+          "holdingVersions": {
+            "H-STOCK": 1,
+            "H-GOLD": 1
+          },
+          "quoteIds": [
+            "Q-01",
+            "Q-02"
+          ],
+          "eventVersions": {
+            "DEMO-04": 1
+          },
+          "planVersions": {},
+          "goalVersions": {}
+        },
+        "cash": {
+          "value": {
+            "value": "30950000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "assets": {
+          "value": {
+            "value": "75950000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "income": {
+          "value": {
+            "value": "10000000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "grossExpense": {
+          "value": {
+            "value": "1250000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "refunds": {
+          "value": {
+            "value": "200000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "netExpense": {
+          "value": {
+            "value": "1050000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "scopedFlow": {
+          "value": {
+            "value": "8950000",
+            "currency": "VND"
+          },
+          "missingReason": null,
+          "classification": "actual",
+          "quality": {
+            "status": "complete",
+            "sourceIds": [
+              "S-BANK"
+            ],
+            "asOf": "2026-10-31T18:00:00+07:00",
+            "reasons": []
+          },
+          "evidenceIds": [
+            "EV-01"
+          ]
+        },
+        "knownAssetSubtotal": {
+          "value": "76100000",
+          "currency": "VND"
+        },
+        "spending": [
+          {
+            "category": "Ăn uống",
+            "gross": {
+              "value": "550000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "550000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-04",
+              "DEMO-05",
+              "PROPOSED-01"
+            ]
+          },
+          {
+            "category": "Mua sắm",
+            "gross": {
+              "value": "600000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "200000",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "400000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-06",
+              "DEMO-07"
+            ]
+          },
+          {
+            "category": "Chưa phân loại",
+            "gross": {
+              "value": "100000",
+              "currency": "VND"
+            },
+            "refunds": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "net": {
+              "value": "100000",
+              "currency": "VND"
+            },
+            "eventIds": [
+              "DEMO-08"
+            ]
+          }
+        ],
+        "accounts": [
+          {
+            "name": "Ngân hàng giả lập",
+            "kind": "bank",
+            "opening": {
+              "value": "20000000",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-BANK",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "26500000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Ví giả lập",
+            "kind": "wallet",
+            "opening": {
+              "value": "0",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-WALLET",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "1750000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Cash giả lập",
+            "kind": "cash",
+            "opening": {
+              "value": "2000000",
+              "currency": "VND"
+            },
+            "openingDate": "2026-10-01",
+            "id": "A-CASH",
+            "version": 1,
+            "archived": false,
+            "balance": {
+              "value": {
+                "value": "2700000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          }
+        ],
+        "holdings": [
+          {
+            "name": "DEMO-A",
+            "kind": "stock",
+            "quantity": {
+              "value": "100",
+              "unit": "share"
+            },
+            "quantityDate": "2026-10-01",
+            "market": "VN-demo",
+            "product": null,
+            "purity": null,
+            "cost": null,
+            "costDate": null,
+            "id": "H-STOCK",
+            "version": 1,
+            "costQuantity": null,
+            "archived": false,
+            "valuation": {
+              "value": {
+                "value": "5000000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          },
+          {
+            "name": "Vàng nhẫn giả lập",
+            "kind": "gold",
+            "quantity": {
+              "value": "5",
+              "unit": "chi"
+            },
+            "quantityDate": "2026-10-01",
+            "market": "VN-demo",
+            "product": "nhẫn",
+            "purity": "9999",
+            "cost": null,
+            "costDate": null,
+            "id": "H-GOLD",
+            "version": 1,
+            "costQuantity": null,
+            "archived": false,
+            "valuation": {
+              "value": {
+                "value": "40000000",
+                "currency": "VND"
+              },
+              "missingReason": null,
+              "classification": "actual",
+              "quality": {
+                "status": "complete",
+                "sourceIds": [
+                  "S-BANK"
+                ],
+                "asOf": "2026-10-31T18:00:00+07:00",
+                "reasons": []
+              },
+              "evidenceIds": [
+                "EV-01"
+              ]
+            },
+            "evidenceIds": [
+              "EV-01"
+            ]
+          }
+        ],
+        "evidenceIds": [
+          "EV-01"
+        ]
+      },
+      "warnings": [],
+      "classification": "actual"
+    }
+  }
+]

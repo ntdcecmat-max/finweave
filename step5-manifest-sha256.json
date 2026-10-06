@@ -1,0 +1,1074 @@
+{
+  "date": "2026-10-06",
+  "level": "Step 5 synthetic frontend delivery, not formal M2/security gate",
+  "files": [
+    {
+      "path": "FinWeave_Agent_Execution_Playbook.md",
+      "sha256": "e7db4f88cae0d06c45466efd321bbc815b5552377fa842b0a0881a25909ee3da"
+    },
+    {
+      "path": "FinWeave_Human_Setup_and_Prompts.md",
+      "sha256": "ae8a0b0785f37b141e71e926b2cd452716feaf22fe444e11505fe157159dc1d7"
+    },
+    {
+      "path": "FinWeave_Ideas.md",
+      "sha256": "b4a8f5a5f45bb36bf7ceec1f013e1616764738e25e499edd1fb270735c2d85db"
+    },
+    {
+      "path": "FinWeave_Tech_Stack.md",
+      "sha256": "f32417407943e7ba770e775c9d83cc887049a55e3ae731c3c1d5f43e9774306e"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7d7e6eb758cca73f8600148ae6bc28bd3d9c505f17ce791efa65d3b1d81b2e61"
+    },
+    {
+      "path": "Start-Prototype.cmd",
+      "sha256": "441f3319df3365debea51139cf43a03dae9a1a9795ea1f302d997fd60a1b1a29"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "58b414867181b6fb6e6fd90bd7e78df9c58ebb7100b16815efcb9830a9eea6ce"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-001-frontend.md",
+      "sha256": "1dfbcb8b4817af71ca75432f9d43c507021d9e3b7d5d948bef3fa54807861462"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-002-contracts-and-m2-reuse.md",
+      "sha256": "aefe2aea1758f141d040d5c00e21cb78bbbb4e34409575f00544c5310ab27c50"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-003-privacy-boundary.md",
+      "sha256": "0d7b38086d11a2dbe3432bec36d85095237769da13ac8cd1fde2993edbace9bc"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-004-stateful-mock-and-read-model.md",
+      "sha256": "34d9537cdd7871c7a8a9701f382ba0b6566b18f66f9c0c0d94e915f95b7730c6"
+    },
+    {
+      "path": "docs/architecture/high-level-design.md",
+      "sha256": "7e581d836ca9f9793a641973891ec74fff97c80edf468d7797066d58cc2d947c"
+    },
+    {
+      "path": "docs/architecture/low-level-design.md",
+      "sha256": "25dd597658bf4262568f62481136cb69c217985d241a87226f39138f03226353"
+    },
+    {
+      "path": "docs/architecture/views/architecture-views.md",
+      "sha256": "6a4e482ee11c33dc8d2a004ce4d1d1053e7a8ca0290f80fce2aadcfcfd2b16f1"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sha256": "9273be178f912d281acdd9c57562f6cc7c62c3af71f945ee4d56cef97ff164a0"
+    },
+    {
+      "path": "docs/contracts/error-auth-idempotency.md",
+      "sha256": "77b16919c4bfa4a0cd7caab75cfeecc89a6374bbf4255d6fb5320f86f14b6118"
+    },
+    {
+      "path": "docs/contracts/file-event-contracts.md",
+      "sha256": "6dec6525df1d613437db97c7f31cdf22de12f81b4a37fd7d01526f788088a0cb"
+    },
+    {
+      "path": "docs/contracts/source-to-target-mapping.csv",
+      "sha256": "08fd51e9843485c54fb6df15b3287bdec6091d9fd3b73f2462b3e1c0455edab6"
+    },
+    {
+      "path": "docs/contracts/v1/examples.json",
+      "sha256": "95f1f5477dac7971e1c534fabe1f74972a52e1442167fcc081740337294447c0"
+    },
+    {
+      "path": "docs/contracts/v1/identity-examples.json",
+      "sha256": "8d0ea47ac8e08ece3e218509911c06120e19338a0f0f5d6d3c34dbc3acabf7b9"
+    },
+    {
+      "path": "docs/contracts/v1/identity-scenarios.json",
+      "sha256": "7a8ebf61fda91a982364b46033e114e4f641470c509470c4ce5517a2dfc9aa21"
+    },
+    {
+      "path": "docs/contracts/v1/identity.openapi.json",
+      "sha256": "2bfb2ac462d083ce48b804e3953288da20ccbccc909c7c57e3ab25ec5c2b17f1"
+    },
+    {
+      "path": "docs/contracts/v1/logical.openapi.json",
+      "sha256": "d6b8ada7136bfe115ab74f0a961e1bd07eeaffbf23504fa54d91d30476ad57f8"
+    },
+    {
+      "path": "docs/contracts/v1/mock-scenarios.json",
+      "sha256": "bc067144d7c94e0acd30dabfd80b379dc15ac531592bf061b3343a0b16416b94"
+    },
+    {
+      "path": "docs/contracts/v1/schemas.json",
+      "sha256": "f432df5b84f2bd0f043beafa9bbb6c273aea8e3c1755118095b9ef1a24d07ab5"
+    },
+    {
+      "path": "docs/contracts/v1/transport.openapi.json",
+      "sha256": "29129a207f6571ab4b5a2f99d1afd5e91f5d1e9320acdbcb2be6e3e2067eda4f"
+    },
+    {
+      "path": "docs/data/data-requirements.md",
+      "sha256": "9cda4f4cdb4c31d9456e11f2642626538b7581a2fe680b4a2d4ac1c31cdb364b"
+    },
+    {
+      "path": "docs/data/logical-data-model.md",
+      "sha256": "5f419437dab782e54217e0c418768cdb7bcbda5a1615e0c9bfab1b52b6a39eea"
+    },
+    {
+      "path": "docs/design/accessibility-requirements.md",
+      "sha256": "78e5b252a46b16480746f3710927aa31536c69418231ace75e9ba315a93790f7"
+    },
+    {
+      "path": "docs/design/authentication-specification.md",
+      "sha256": "ebf861758b1ad6b5c440fd360f00306cf36054a42afcec98741364655d290f96"
+    },
+    {
+      "path": "docs/design/component-specifications.md",
+      "sha256": "2dae77030d2a7712bcc008b677383c2e350b971cb34ca1523b12ca1472c41dfb"
+    },
+    {
+      "path": "docs/design/design-system.md",
+      "sha256": "4b6affe3b54c62a5bacdc4b4204c4d853af97c59a28dbc382738471d33d8a4e4"
+    },
+    {
+      "path": "docs/design/interface-catalogue.md",
+      "sha256": "7c785005eb470bc82e9129d6edb0b43b03d4a1109997030c7f95360cd28a673f"
+    },
+    {
+      "path": "docs/design/pattern-library.md",
+      "sha256": "ad3d7cb61d36496417deb599e874b811656a3c46bda0c71fd515180e716e02d3"
+    },
+    {
+      "path": "docs/design/reference-catalogue.md",
+      "sha256": "64b3e55f8113f12d9dc365d4acfe3114a7b73fb56950a87994f9af7350ba1a1c"
+    },
+    {
+      "path": "docs/design/research-plan.md",
+      "sha256": "8e3ff8e547191443ffdde37e50b42192a4802b45022c255cce0d7da9a655d3bd"
+    },
+    {
+      "path": "docs/design/screen-behavior-specification.md",
+      "sha256": "59b3b25cff8151f9871847c10ea60822a75249126f9a4b77e3b7498828d3a943"
+    },
+    {
+      "path": "docs/design/ux-ui-specification.md",
+      "sha256": "5fa8170e43f49851b141da3c39d4db73f2f8f72fbc8ab29cd5f5467a4b20dabd"
+    },
+    {
+      "path": "docs/design/validation-report.md",
+      "sha256": "786b3cabc0198bcfdaa9d4c3516c2ad97948d037e7fff331926d086763d2aa7d"
+    },
+    {
+      "path": "docs/execution/decisions.md",
+      "sha256": "3c61fc43f88e8a9958d4dfeecbd3bb2c62c0c6ce44fc13de4600d757a0dd09ae"
+    },
+    {
+      "path": "docs/execution/evidence/step5-accessibility-1440.json",
+      "sha256": "2264b259f927cca41a0fb80bf5f48de4c8ba340550251ab57c0be43cab6e5d16"
+    },
+    {
+      "path": "docs/execution/evidence/step5-accessibility-360.json",
+      "sha256": "8c66d102c8b38945db1b873567ec7f73b961e3adb98994544f812fd49909d2cc"
+    },
+    {
+      "path": "docs/execution/evidence/step5-accessibility-390.json",
+      "sha256": "46689a8b6a319d2f1c86ee8fd9d7e7ed9b41da5b0fedf58d97bd4ce9cf94a5f0"
+    },
+    {
+      "path": "docs/execution/evidence/step5-accessibility-results.json",
+      "sha256": "8c66d102c8b38945db1b873567ec7f73b961e3adb98994544f812fd49909d2cc"
+    },
+    {
+      "path": "docs/execution/evidence/step5-action-coverage.md",
+      "sha256": "7222c93e4d84ab34dfe17b8409037d2759d0af59e9cc2eb966a1334b5e2d1c88"
+    },
+    {
+      "path": "docs/execution/evidence/step5-action-inventory.json",
+      "sha256": "e221c01253b8080f563480b2ca8753921ecb9857b108aa3162591fb7efd90a4a"
+    },
+    {
+      "path": "docs/execution/evidence/step5-addon-browser-results.json",
+      "sha256": "ef287862eec00294a57ee4a834bd6d2e85dc83a41cfcf40294e1bfbe8f6ced4b"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-accessibility.json",
+      "sha256": "9a0cad042f3fdd2dfad13d491c31d6da319d9482968f30ca25b03a0f9241030e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-denied-1440.png",
+      "sha256": "d6ef863218c93d4f2fed2c7eeca656ca3f424048369578b12ea23df7ccab57c2"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-denied-360.png",
+      "sha256": "c7f8f4bf6c497445a601df424bfcc0d055a14590d37af71442b52d64347ab06f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-denied-390.png",
+      "sha256": "c44521b6906d3a09b52dd7b3da49088feda56d41b2e27d5acbead5a8f7dcbfd1"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-expired-1440.png",
+      "sha256": "f4b02a219f859d8ded54a0c4319c1dea8dc4e9b98af0643cbf216039a11f3a9e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-expired-360.png",
+      "sha256": "8b7e7ae6a53d26263993ee6e7df3dbb828d7981a3ed97cf1a47572888f9782d6"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-expired-390.png",
+      "sha256": "99f2ef47b23d504c21799eef093a21a6f95cabbc440f72f95a49bafee590bc87"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-forgot-1440.png",
+      "sha256": "45e08b8759e30befa65b28122aafc5035520f3dbd9108b60baad6d1962912f83"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-forgot-360.png",
+      "sha256": "7ac8fababacc2f0212a3be3baff77b52ec3e106901d001c83cb6214738770bd9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-forgot-390.png",
+      "sha256": "79fb84bd240fc014e0d3fdab79d102c3248693ea4a7f6573fd7c48b7a556b95e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-login-1440.png",
+      "sha256": "4eb0bf7c7a17e1809f23d33b42de0001f23bc5d3aa3230acd1811da2ab746684"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-login-360.png",
+      "sha256": "8285c5656237df23179be420e5c3fa79eb11378c0f3779187236924c7d300579"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-login-390.png",
+      "sha256": "c27f681e04a6657805e6632b85fb10e8082c46fa08e4fa14b5d988f88a0d6b71"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-register-1440.png",
+      "sha256": "8266c3f6e686d13d2178df334c40ef323cff65fb2b74732f147d82f89b7c2014"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-register-360.png",
+      "sha256": "bba2d03dabc9f5d8ace6af2598a8d990883af652853b3d8af15eab24082ff5de"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-register-390.png",
+      "sha256": "bdafc480d9f5e0c3c88b504a67a7ebe1981a750a42f3542e91ed98cd6121801d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-reset-1440.png",
+      "sha256": "6da94f6d6ef1877e74909e24222d0133286aa3f5c2c076d92ab4894d0b1fff22"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-reset-360.png",
+      "sha256": "35d17f3c401186dde90ead8937ce67c4d49b521f46e41295d1f52ff37f02d7ed"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-reset-390.png",
+      "sha256": "a96354907a6cfe2bec2574eb123f01c58831d5353db33ff18220a07799e20db4"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-verify-1440.png",
+      "sha256": "33b703f87a5314d1e0efea2e58014c88a40b653963d1d25a50760ffa31ed9eaa"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-verify-360.png",
+      "sha256": "c2941ca6c6d16b18a76064adc9fad0b5c6f14c25b96f24529a0b1382eab18a1f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/auth-verify-390.png",
+      "sha256": "4772f827c884012cfdf79f7ed3b79cd54db7468bcae929dca3f1777e874b57a4"
+    },
+    {
+      "path": "docs/execution/evidence/step5-auth-screenshots/module-catalogue-1440.png",
+      "sha256": "3511c61be22993a777a2cf92335034d6ef9ec59b6f6efe124e171d9b11408953"
+    },
+    {
+      "path": "docs/execution/evidence/step5-browser-first-run.json",
+      "sha256": "2ab5fdbc6ab33f0c19d52d1f0a433f119d54767b206dd0f4a1d732f47f436dc2"
+    },
+    {
+      "path": "docs/execution/evidence/step5-browser-results.json",
+      "sha256": "1cf67355361c45b302496dce27560a8298018b838426816620260930994587df"
+    },
+    {
+      "path": "docs/execution/evidence/step5-browser.log",
+      "sha256": "7c10a7c82790dc22a8510c89e617529d1472d8d14796acc39eed9f2947f7293d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-build.log",
+      "sha256": "9094147fd4fc0e17129d9ce221f55143bf7d0e59be1f422d1850d7ded16ff11f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-context-browser-results.json",
+      "sha256": "c146b7449857bf45c1cae594c54564bb222ddc27db44fabdd0f5851a21f601be"
+    },
+    {
+      "path": "docs/execution/evidence/step5-contracts.log",
+      "sha256": "0895049dfcee0694d2f79331928eb1a2dc33d2c01fc5ff93cf15b6dbb9d9752a"
+    },
+    {
+      "path": "docs/execution/evidence/step5-delivery-checks.json",
+      "sha256": "b943439da6ea154ef7bf73fb3ca796bf75e4c17d27f99c7fede020929b1ff2ce"
+    },
+    {
+      "path": "docs/execution/evidence/step5-evidence-summary.json",
+      "sha256": "2224a3e7da5cff0009eeda6365e42cb78803e97c75750504156d4f6eaf1b978a"
+    },
+    {
+      "path": "docs/execution/evidence/step5-jobs-ai-results.json",
+      "sha256": "7011a22a050c658ea6f55a958c7b77f3044061ea7ca4111079e05023599db718"
+    },
+    {
+      "path": "docs/execution/evidence/step5-network-calls.json",
+      "sha256": "33d39b123c3c920085248bf5446e0e59c79e4e222eaf8f350a658b9ad8e64ea1"
+    },
+    {
+      "path": "docs/execution/evidence/step5-performance-results.json",
+      "sha256": "5be7463d48018a404724c1ace5e999c96af78f801c3b8c784f747af60db4cfaf"
+    },
+    {
+      "path": "docs/execution/evidence/step5-reduced-motion.json",
+      "sha256": "38a6727e894d639a8a351c685f7560d0c0e12155531729082bf0f4a3f5fcc5f7"
+    },
+    {
+      "path": "docs/execution/evidence/step5-repository-results.json",
+      "sha256": "21db212e2d1d4b33bdbb8e0f115757a48cda6f2189c49eb65e07af30934ce9e3"
+    },
+    {
+      "path": "docs/execution/evidence/step5-retry-browser-results.json",
+      "sha256": "d9f947b00f920d651de94b308d4588cf26d7cb6be735d384c9993bf1cf5e1c0d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-runtime-coverage.md",
+      "sha256": "8134bae7926931572ba60683125579a263e825266bff8ca37d8f0f73d9e85cce"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B01-gold-display.png",
+      "sha256": "ba5e926d96c3acd2a89e1eaac6a91721975a7496ed26201aa982a22f90bd6345"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B02-custom-period-unknown.png",
+      "sha256": "7c9d55ddb3f63400d5491090adc1044ceba40049756ff116ea39fad0222c8ddc"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B03-correction-result.png",
+      "sha256": "9b201a98ca88170395dba988909fcda43726c0e752dacf62a2217c2cde4e698b"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B04-source-failed-preserved.png",
+      "sha256": "8ccd53e2caa618a7eb726034c110c4bb41ed1f53bc1eb33c4d2fa597a9091b0d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B05-international-gold-FX.png",
+      "sha256": "b1db580281e08aa123457fb6f4087fcea0afeaaff953fb73de4d302f2f3303d9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B06-filter-empty.png",
+      "sha256": "573df846ea5a2f32e6a6599f0b52b3fad0143e5728a87db638cf86d3d28baeb1"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B07-plan-actual-remaining.png",
+      "sha256": "c0f992352adfadd52f5f6f2dd0463fa3716fd13b0237975ed24eb169d2c9291d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B08-goal-shortfall.png",
+      "sha256": "82d76dbc3cd76ac1a71f89afc5d6697bf6dddf048439cd639fcb61e77b70662c"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B09-simulation-comparison.png",
+      "sha256": "8d7b1f2b7d33c38fcf467e2afaa107a6ffc5601699219830b5f7a284a253ee28"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B10-chat-privacy.png",
+      "sha256": "4b928acdbead850141a1454fbbc1c4401da60e7f852efd3d47ca32876be8eeb9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_ai.png",
+      "sha256": "ff545e9a478d4553105cb8dbade806955827e8b7e48481c655a3fec8d30fa842"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_ai_history.png",
+      "sha256": "4d48a4896f7e2e217dd4c3d8b32206cfcf6e6774b201abf669b7e837abf605eb"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_data.png",
+      "sha256": "04f959ac944514e1ac72787524d24c61766c0d627e65ae77a5869261d1c05c66"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_data_review.png",
+      "sha256": "3a03809ead33adfbe1af86c42150f53342d199897915fec988912333ad3e7c29"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_design.png",
+      "sha256": "8a784643ad7ebd18b8ff15538f720b9a56bce5241ae46b6cc10eea4675a9f2ae"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_home.png",
+      "sha256": "b7110183b3a06779008c6e913c2cf6127fb3fff9b839bd4e8e866efafc1e766d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_home_assets.png",
+      "sha256": "2e915ced6abb44083b406f986d8589f26fc32628d25f5830289f02f6103b77b1"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_home_reports.png",
+      "sha256": "3c30ada1471d9a167f0b561f0bdefcb5388621010b4bb47a6dc50a758c07d655"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_plan.png",
+      "sha256": "d9ad143e5d28c8c8e1d2fe690f6aa251de11e76883524358c28da2a6307a74f9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_plan_goals.png",
+      "sha256": "618e9c6d05f8ff06b617bcf63945bbb1bb76b91f414c54806d98af5ba4b0aa95"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_plan_simulation.png",
+      "sha256": "8d0d6868552c64c12e8ffc13464397f83409441c250411b685b56ca5c52bcea9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-1440-_transactions.png",
+      "sha256": "e7a2074b1664a418de98217dceaad465a01eebed4c7cce17e461519a68b60c13"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_ai.png",
+      "sha256": "d39752afc60e228125dfde857b61be3eb207bc6c3e170ec70bb0ada3830061bb"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_ai_history.png",
+      "sha256": "253ed0c4ccf6db603207437a9441b1953671e116a7189492dbaecd1d52c33e2d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_data.png",
+      "sha256": "127359a9d69d53598914903168c46c01152474acaf7fa1815054ab00501891d6"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_data_review.png",
+      "sha256": "c84b780012197777d3b5afb71d53eaae38bef4612534cf7f439d97e33a18447c"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_design.png",
+      "sha256": "0f3a326636f00061d3985c0a7fae2babcfc7bf7bb87fe288a497c19743e0116c"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_home.png",
+      "sha256": "a7e4f05c014dec5a8c872d4376734e26c80ed702d23c5f7cbfa99095914de7b4"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_home_assets.png",
+      "sha256": "942a00733ef2e90d28c38b2d568ec1c23bf69261a7bef482f40e22722636369a"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_home_reports.png",
+      "sha256": "9928611c2462b75303297e7c41256c4a2fe8af6f665582c1bc42c6efbe29335c"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_plan.png",
+      "sha256": "5924c6b2f7c6454c633132795c56ec4712430ec9aa7e7e3e6d03a8619f92a3f5"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_plan_goals.png",
+      "sha256": "8583a626eb012d440ab794189af0616b8700bb3504b074d87519ba1e0337fbc8"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_plan_simulation.png",
+      "sha256": "7dba601993b16eec6533078507e8c6758c5a543996efff035105157d45506c91"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-360-_transactions.png",
+      "sha256": "5fdd80ab8399733275e0cd0c97f1b5952bce6823cf60d5e652122ae485e5a223"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_ai.png",
+      "sha256": "fae9bb400dd07f42647d46c1a505e3902d044d22c187361633168c0a150368cf"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_ai_history.png",
+      "sha256": "ae911ef776dc5c29151bea6d56b47b32e61798c889ac86a0317a150624158969"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_data.png",
+      "sha256": "9069e43560ab1da2ca0f0803db77e415d301f04c4a5bd58c68f8ffd720b6d854"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_data_review.png",
+      "sha256": "5cd42dd4c94fa432b9208f83adb21f628c76284fcb62ea5c433bfe001094c4a7"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_design.png",
+      "sha256": "f5d0e644a48bb08d3cedf30cfd76170b9a9e4e062c4954ecdaa066d900bcacac"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_home.png",
+      "sha256": "e78fd31c627154b0dc9320344cb34c5541ace5d3c0c8bcb852d5f76f18c2092f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_home_assets.png",
+      "sha256": "c9bd89b1d3f126db538f56028b8a0b48a3c8b0c56664c92a270b047576944634"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_home_reports.png",
+      "sha256": "fa4a3927716a4a39cee668dc198d6952fb5ac7d5522be0bdf7e276000b870fa9"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_plan.png",
+      "sha256": "9f9127b42e450435ee26500ff52be90e5885e8deb4d644f945126a8a2f96098f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_plan_goals.png",
+      "sha256": "d03279f4741222fc16d5872cacd6eaabbb431cb5353774403bf357523e2ef047"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_plan_simulation.png",
+      "sha256": "33b3c8dbbe1abc942455f1880fc07e73f1f8d6de25eb424f11a1d6c7d7cf1bb1"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B12-390-_transactions.png",
+      "sha256": "d27cb9177e73484bdf75ae0b71a755b53777e3b005b96f150657189a3aa96054"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-360-contextual-panel.png",
+      "sha256": "8ea39a86b9494c8ae1d778d3ec7e33ef636590d060ab8fe4c73eb0c852e61738"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-360-preview.png",
+      "sha256": "e9ff6fde8a2303dda68d0a6ee000104ae3a2382a4c77f33cade9447f97c9c19e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-360-transaction-detail.png",
+      "sha256": "a33fc54a59ff49359f7fdef568e0fa9f4ffb3563bb3edc357a53c0d55c00fd69"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-360-validation.png",
+      "sha256": "925e8fcb6ab54cd046624837a6cd7401f19d1fb2b2db70fa5f2e16a5bd11fade"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-390-contextual-panel.png",
+      "sha256": "7cc04313138350cb59c4845e2df2b5b207b321c277ffc6bbdad9a160904aef6c"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-390-preview.png",
+      "sha256": "a1045739e01566827d91b4aa3d64f05d3b00127ec5e31600e0388364a3dd01f0"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-390-transaction-detail.png",
+      "sha256": "74a6df94ce1b2754c964d631147e87400520646896aa87df010b32bb22e5281d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B13-390-validation.png",
+      "sha256": "4c0613e331e39cebbcc6efd2a69b19ef2d2fca65a9e30ac730825218d09ccf7f"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B14-new-holding-quantity.png",
+      "sha256": "5431cf15da636789c4de791fefc839ca7489c5bd9d072c9ba16a8d66bd74b590"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B15-independent-freshness.png",
+      "sha256": "d37aea38f9084aba75eb215be94154882373286ed687f7222f3020269c25e758"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B16-AI-no-data.png",
+      "sha256": "6a09eb5f91cb822955bb836d9686afc59821bf21b8cd3c619ff6996eb8479f7b"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B20-dated-simulation.png",
+      "sha256": "017a4d0524c12ff28ac01bde428041922e330eca099ec3d83fc06a327e4d66c7"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/B20-review-supplement-result.png",
+      "sha256": "5118ee974dfa2998090013ec0c1758bda7801c6ffb28c72a4e699d43148e7979"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N01-cash-mutation.png",
+      "sha256": "fdb79eceba4dec0d66f7ffe8475c3136d718261d7f4aeecae5d88c47f3725f36"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N02-recovered-mutation.png",
+      "sha256": "76d2280da12d367ccfbd8be11412505d13f8ec20fc4c3b7dd47b79f112975383"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N03-import-job.png",
+      "sha256": "54b1949d55bf183ce6fce916087c00745a89bb3945de579114de6c48b7070d3e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N04-chat-history.png",
+      "sha256": "2a7b82f1a0311a4df395a9e7cb8bc8714fb67d28c961b9b872f0902f6cbc43b4"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N05-new-bank-import.png",
+      "sha256": "d6931e0409af01bb7d9125906a8e1ab7e1b092aec961c3ad9fd6ff54fef39def"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N06-paginated-history.png",
+      "sha256": "eee27215926e6a47883b01f5cc41f483d73ec5bab2ef4dac46ea5d38d930b012"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/N07-context-filter.png",
+      "sha256": "48208f1e3b4b0108bf7ed1c93f89166774b308dc19bab26f6e4cf7356cae7e28"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/manual-final-home-cash.jpg",
+      "sha256": "2f2a67164b3bab405a02475264daff05e0928f9531ffec579fc9907b4d75547e"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/manual-home-after-cash-viewport.jpg",
+      "sha256": "4807c1d893b647512f298e35f06ea1b6d2b5d37f0d088879a5268f196b1bab6d"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/manual-home-after-cash.jpg",
+      "sha256": "87e81ebfce83008528cdea2bb4ec220d9c696a66c0365690282179af320b214b"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/manual-mobile-cash-360.jpg",
+      "sha256": "43498740a973cf111108012c09f84696bf8a9c204ab7e75440fea49101de55c4"
+    },
+    {
+      "path": "docs/execution/evidence/step5-screenshots/manual-mobile-mask-360.jpg",
+      "sha256": "152cc6cf1206c8f18016f7a9dcd0e0027c694748a344085d08e47064e62ee1ea"
+    },
+    {
+      "path": "docs/execution/evidence/step5-unit-results.json",
+      "sha256": "f10d613ba7048a5a9719de11b587daa8436084e3545cd88e4d3a699ceaa46a24"
+    },
+    {
+      "path": "docs/execution/evidence/step5-unit.log",
+      "sha256": "2220e4f2c5bdd952362ff9c1e534cadfd1246c54a80d8563b52384a4663bebea"
+    },
+    {
+      "path": "docs/execution/evidence/step5-validation-report.md",
+      "sha256": "dc546545414fffe4f1d0aa3c8a8f659898dfaf011ea72541f688aad64ec93aa2"
+    },
+    {
+      "path": "docs/execution/plan.md",
+      "sha256": "798c8269d2debf48c047e8a0831642f47ee7ca3c345f67c65a3fd5c31f64c3d4"
+    },
+    {
+      "path": "docs/execution/progress.md",
+      "sha256": "17e820f3243f068dd8547c77e8d4e21af2684c3866cab5c807206a4dd97b5b7d"
+    },
+    {
+      "path": "docs/execution/traceability.md",
+      "sha256": "da12c609ed0df2836d8dd391ea30bc30d9c0f83a723c096c0622a5669749177d"
+    },
+    {
+      "path": "docs/frontend/configuration-baseline.md",
+      "sha256": "884fb8b3d2e8bf8c4dc4402b1a6750c3a66dc8b7dac9a50f4154a53686bd88bf"
+    },
+    {
+      "path": "docs/frontend/mock-implementation.md",
+      "sha256": "0cfcdb2cfe9cf5b9c54fb7bb72b30b7f502bd25c3b8859f6f3ca4923e5f650d4"
+    },
+    {
+      "path": "docs/governance/artifact-register.md",
+      "sha256": "29ecc638b9b6eeb985ca635601a6e4a355e519a04bc23739f0bca7bff527349c"
+    },
+    {
+      "path": "docs/product/README.md",
+      "sha256": "5acdb02756e55114c1370572a856ba3a0e39a73b1eb757e22dc7f077c4e59c26"
+    },
+    {
+      "path": "docs/product/assumptions-constraints.md",
+      "sha256": "670eee591cc363a25302c5083e1827dbc844ab3faa7bfb6c08918f7becb6b427"
+    },
+    {
+      "path": "docs/product/backlog.md",
+      "sha256": "16784df0da43ef48e9ff3cedec7c992ef8abac2bf1520944d529437a5cf5dcac"
+    },
+    {
+      "path": "docs/product/business-rules.md",
+      "sha256": "a0c43324e313bb02e97ec8b6db8a511160e4a4b8f9b20fe999989412be001f03"
+    },
+    {
+      "path": "docs/product/cost-model.md",
+      "sha256": "ac98acdeb4a1b9b3e620e20239fb307d4e4cd1795001346aacdee075d4c6b3dd"
+    },
+    {
+      "path": "docs/product/feasibility-study.md",
+      "sha256": "00f8dc24004af9651eb90d04b274ac185dc739fcbec7eab7f68de930d18f612b"
+    },
+    {
+      "path": "docs/product/operational-scenarios.md",
+      "sha256": "5345ff4e27d0eb6be8fbbbcfa3bcf51594d3f5dec849bbff6122f78f2215ae1c"
+    },
+    {
+      "path": "docs/product/options-analysis.md",
+      "sha256": "2cefc5c7ca8ebd1c41e1f0189046df65c822aea6ac350405388b64d9f87b55cf"
+    },
+    {
+      "path": "docs/product/prd.md",
+      "sha256": "f38dedbc98c3a276d0f8b18fb69b36e8e82241d20847178db25f2dd8f5ca9422"
+    },
+    {
+      "path": "docs/product/problem-statement.md",
+      "sha256": "9b2625ad0989bd88cfc0faa2f4601336c886c06ab1a49672d2dab10bf7b3b269"
+    },
+    {
+      "path": "docs/product/product-vision.md",
+      "sha256": "7c522b6611c527ca06cb8ba239a9f6ed8b8d8ba5b0ae1a4f18d1f67a0b76c4d6"
+    },
+    {
+      "path": "docs/product/project-charter.md",
+      "sha256": "9db6e0292ec95e1a2cff0248f785759cb6b47ad5169b29fdb17dde1d2b75eaa7"
+    },
+    {
+      "path": "docs/product/risk-register.md",
+      "sha256": "25c1ee4a880d47989517cd0ddb03334eae0349129b86c7c08e1e9397cfe6f0d2"
+    },
+    {
+      "path": "docs/product/roadmap.md",
+      "sha256": "60f8002b7e22dcd0dbca1b9303f22553ff61e31fb76e2057087f49d6a4d6787e"
+    },
+    {
+      "path": "docs/product/scope.md",
+      "sha256": "d9d86cf0a4a76da808281f6dc19625feb2629a2375bf710d291fb2dc0bfc6868"
+    },
+    {
+      "path": "docs/product/stakeholder-needs.md",
+      "sha256": "89b12094a40d9f967d7fb05142bf9b2e4e83e889126e6085e41589417814faec"
+    },
+    {
+      "path": "docs/product/use-cases.md",
+      "sha256": "c60bda493190b00bc21de4b61a2b22c15745ed715efe6456b19b1c8b1edbf3f0"
+    },
+    {
+      "path": "docs/product/value-proposition.md",
+      "sha256": "b8c29e768b7835b7a257980835f69cf767ad85bf7789136a440c028a4d43529e"
+    },
+    {
+      "path": "docs/requirements/context-model.md",
+      "sha256": "ea1d4ff32237360b7a50342d2ea3bbdb75789c05df677fcd51efb37cc84a6184"
+    },
+    {
+      "path": "docs/requirements/glossary.md",
+      "sha256": "22875a23a2f320628d2930a7fe9b71779b3d292636ae2d7f9e22230fbe105f7d"
+    },
+    {
+      "path": "docs/requirements/srs.md",
+      "sha256": "5634f042a720bd5794cfd6ac139d24b0b353e7ea10ab6d1eedbc8cb5ceec52cb"
+    },
+    {
+      "path": "docs/security/security-design.md",
+      "sha256": "c68f1e0e340f84e3ed01706a3ddb97bcf095684e5a0b53e14677d0e8b1da6877"
+    },
+    {
+      "path": "finweave-web/.env.example",
+      "sha256": "a1cba8d361d5243e2a5b4db2aab11ac81821eb6c268e14c43728427b35f2bee3"
+    },
+    {
+      "path": "finweave-web/.gitignore",
+      "sha256": "af01f416f1ab806cf3e4e1ede29a16702e1718c45c7539604a760b2eb8d27858"
+    },
+    {
+      "path": "finweave-web/README.md",
+      "sha256": "2242bf737a2b046cfcd5f28fa534aa706522885c8e7f502fc795eff45c486d1f"
+    },
+    {
+      "path": "finweave-web/dist/THIRD_PARTY_NOTICES.txt",
+      "sha256": "5c1030fee4f0bc78d7ab9fd458a1224773a7e1a449b713cd776c6e433f5220fc"
+    },
+    {
+      "path": "finweave-web/dist/assets/browser-DsMI63Vj.js",
+      "sha256": "6ce98d9a0d810489f237a8fe2e6d91424fa70368c8e7d5ba9e12da471d8e174e"
+    },
+    {
+      "path": "finweave-web/dist/assets/index-BR7pud-j.css",
+      "sha256": "8f781f27b4759015dedc4b6d59b1e2af8c9ebf6158e0685e688c55f58a3e0b94"
+    },
+    {
+      "path": "finweave-web/dist/assets/index-mkVfrQcd.js",
+      "sha256": "803d0b8173cd0e6f27f14f2a1be1d54490f4e4ce9d9495fdf27b0c29c65327d4"
+    },
+    {
+      "path": "finweave-web/dist/index.html",
+      "sha256": "56a55237bbe6ea7756c8c8c692570b3660f05e23f334f3b599d52b484a33e726"
+    },
+    {
+      "path": "finweave-web/dist/mockServiceWorker.js",
+      "sha256": "54269ae9d3bced635ad4ce98a80479100e0443020c7725cef91e3182ff5a8d59"
+    },
+    {
+      "path": "finweave-web/index.html",
+      "sha256": "55a2c03071b8f9148301f307a0f5ad915e87a3ce2348c892e43d75b003ebac1e"
+    },
+    {
+      "path": "finweave-web/package-lock.json",
+      "sha256": "93ce8cb03f0e38b9b448de82d26af704f8d1693315dd862813599b2beffb2b95"
+    },
+    {
+      "path": "finweave-web/package.json",
+      "sha256": "1ce0315018868592d13604c2bc58261373b25516df73f2895875c7c1c6489d4b"
+    },
+    {
+      "path": "finweave-web/playwright.config.ts",
+      "sha256": "610302e826fa65257e3530f879758e2c95059987c461dd883efcd3e7e818d4d1"
+    },
+    {
+      "path": "finweave-web/playwright.step4.config.ts",
+      "sha256": "f01e072b096cfecb860bba27105273395064a9702f532a528c9031d3239720d3"
+    },
+    {
+      "path": "finweave-web/playwright.step5-addon.config.ts",
+      "sha256": "403e8cb6a240c2bcb7209af098f437e6e33e3a57dbdbfeb9c900ad83e116320c"
+    },
+    {
+      "path": "finweave-web/playwright.step5-context.config.ts",
+      "sha256": "de4937045f1f6b6a0e8acfaab80bbbc3a7fc8f4384324c39ca47d40c8c6daa43"
+    },
+    {
+      "path": "finweave-web/playwright.step5-retry.config.ts",
+      "sha256": "34cce04a50b366fdce8cb6bac50cf5b31b6448c8af4709a94405343eec06b28f"
+    },
+    {
+      "path": "finweave-web/playwright.step5.config.ts",
+      "sha256": "6295b692a56664f60a9c33c87160c7e0b6283353309eecae9477254efbbd71e5"
+    },
+    {
+      "path": "finweave-web/public/THIRD_PARTY_NOTICES.txt",
+      "sha256": "5c1030fee4f0bc78d7ab9fd458a1224773a7e1a449b713cd776c6e433f5220fc"
+    },
+    {
+      "path": "finweave-web/public/mockServiceWorker.js",
+      "sha256": "54269ae9d3bced635ad4ce98a80479100e0443020c7725cef91e3182ff5a8d59"
+    },
+    {
+      "path": "finweave-web/run-local.cjs",
+      "sha256": "df5c0e6bd48692d6dd424b39e5e0f463f0a130ec2259c8daa1367b9a73825863"
+    },
+    {
+      "path": "finweave-web/scripts/audit-step4.ts",
+      "sha256": "babb58b68602ca210cf00eab66db95879b8cf4bc7320760651d5e27bde17b411"
+    },
+    {
+      "path": "finweave-web/scripts/audit-step5.ts",
+      "sha256": "da62eacf8d0244b030e78ba9cc71732f943e50ae01e828d3b2dc0d9fb76d97c1"
+    },
+    {
+      "path": "finweave-web/scripts/check.cjs",
+      "sha256": "953da646d82c55aa100a58124905af4b1be878ce42cb1c0c5163f55acb5bd05b"
+    },
+    {
+      "path": "finweave-web/scripts/generate-contracts.ts",
+      "sha256": "e44935713729783a06d50b5582e12a70801752d8f8cab07af999e10b3c6d7505"
+    },
+    {
+      "path": "finweave-web/scripts/run-contracts.cjs",
+      "sha256": "cad5031d4ff93b4cb5fd7bc598a6af4c018277e7de077d4b218629f799d4973b"
+    },
+    {
+      "path": "finweave-web/scripts/verify-delivery.cjs",
+      "sha256": "635dae62b9b65cd4b13bfe0005415931615384366fb003f57bbb6eda1c683b32"
+    },
+    {
+      "path": "finweave-web/src/app/App.tsx",
+      "sha256": "a15a3d350c322598b8e111d75c0ccdb6993e64accd6b397eeab9248a4fb5411e"
+    },
+    {
+      "path": "finweave-web/src/app/actions.ts",
+      "sha256": "d81f6dfc45b9822d44def4edebf370e52d30e0172201323a1a6005891ce27eb7"
+    },
+    {
+      "path": "finweave-web/src/app/chat-provider.tsx",
+      "sha256": "81b7c7a40cb1127e2cf2c866f98556f65c1093ed93ae5308d7ace68f5ea92ee2"
+    },
+    {
+      "path": "finweave-web/src/app/context.tsx",
+      "sha256": "192bd86049f8af4c0eb80c97fc2b73cee6690f742934940c50102b359131b1df"
+    },
+    {
+      "path": "finweave-web/src/app/view.tsx",
+      "sha256": "96ccd47b2291441906c7022678daa8a429b3b8d8a0f800fa065eca4577946ac7"
+    },
+    {
+      "path": "finweave-web/src/components/ActionForm.tsx",
+      "sha256": "d07803b1efc18438edaa35b1be8fc0b0caf1f770f4d53f1810bc2befbf64f51d"
+    },
+    {
+      "path": "finweave-web/src/components/FinancialChart.tsx",
+      "sha256": "e5a17b7b72361e5ff9e14e923dc7246c37a0e1b96af6faf272092241e5ec2b50"
+    },
+    {
+      "path": "finweave-web/src/components/ui.tsx",
+      "sha256": "e0dacb4ddfd1d017f3b17e9579398a4f0037a954d5dc88272c6f276cd8b033b5"
+    },
+    {
+      "path": "finweave-web/src/contracts/examples.ts",
+      "sha256": "04f7539e0a169e9eba25a14d4b29363efddfc4919cc645589ee985a8b20f179d"
+    },
+    {
+      "path": "finweave-web/src/contracts/identity.ts",
+      "sha256": "d88b86a34952754808c82e4c326c6121faf798cfeb7cacc6e6ec9577a3c0a1f2"
+    },
+    {
+      "path": "finweave-web/src/contracts/interface-catalogue.ts",
+      "sha256": "42d7d9184092290ed3f18dafba2baedc51c97144eeac9016e9974ca55e5451c9"
+    },
+    {
+      "path": "finweave-web/src/contracts/operations.ts",
+      "sha256": "b2cc4be920777ce3656b33833d6a2601a638d677389ff3e433ab1506eba09c80"
+    },
+    {
+      "path": "finweave-web/src/contracts/presentation.ts",
+      "sha256": "53d61ac34867875b1a09a023e06273d54a2548538cbf7838234ffdc4065d46aa"
+    },
+    {
+      "path": "finweave-web/src/contracts/schemas.ts",
+      "sha256": "7a5be457c8f2d783e7e85fdb557b122d899f29916b0d13d406dadc0f2bd711e1"
+    },
+    {
+      "path": "finweave-web/src/design/DesignPage.tsx",
+      "sha256": "cdfa9e44d9837dca8aef2cb04374fe8f133271fd443cc62e2c607ba00c19286b"
+    },
+    {
+      "path": "finweave-web/src/design/ModuleCatalogue.tsx",
+      "sha256": "9b8e92b6c6eb760b6a91e087acb12297393f11658fa7c7967ff5b536c3eab5e7"
+    },
+    {
+      "path": "finweave-web/src/design/base.css",
+      "sha256": "fc46ac5ae7fa67e05fcce156a2a5bee4a4b79c96471e6b83c8edd170165bddd4"
+    },
+    {
+      "path": "finweave-web/src/design/layout.css",
+      "sha256": "6c06976908e61be426c6a21e3d00d563b58e30703cbb0d580887de590e252100"
+    },
+    {
+      "path": "finweave-web/src/design/tokens.css",
+      "sha256": "6e47997127452de03c6739b39da559f64cee2972edb7ae4a280135bd4444892e"
+    },
+    {
+      "path": "finweave-web/src/domain/commands.ts",
+      "sha256": "c4dfba0448f9869c4de687521d24f098f7b5f7912acc2ba763306f06b8ca28f1"
+    },
+    {
+      "path": "finweave-web/src/domain/fixtures.ts",
+      "sha256": "c1a601ac9f93f07ab15d5e2b435937b395f1ddeaf8839d73b859bb9fac8c9610"
+    },
+    {
+      "path": "finweave-web/src/domain/import.ts",
+      "sha256": "c7211de15c17b89b26fa9e79a817d48b35341c3bca6320d78e664e8e947f85ee"
+    },
+    {
+      "path": "finweave-web/src/domain/model.ts",
+      "sha256": "0f3c9a4e61cc28285a7f4c49bad7b8a76e93ba8942d6933b6afd9eb98e97116b"
+    },
+    {
+      "path": "finweave-web/src/domain/selectors.ts",
+      "sha256": "f40af85278900e3076fe11f79b043b7a5cb9fbc009e67c3a13c2baf18182669c"
+    },
+    {
+      "path": "finweave-web/src/features/Assistant.tsx",
+      "sha256": "b51ace0ed3ef4eb4557a4d3e4d2f8e8528ca27838e8b9ef50408e381b9dddc13"
+    },
+    {
+      "path": "finweave-web/src/features/Auth.tsx",
+      "sha256": "d3411ca6f509f024eceb8bb3ac8615b6b485c460a2c586ccac2efabaade84298"
+    },
+    {
+      "path": "finweave-web/src/features/Data.tsx",
+      "sha256": "8d337884f30f2ab9cd247d4ac007a37a3fc1b57bcc7c28d93ab3a2f8eb7b7c4d"
+    },
+    {
+      "path": "finweave-web/src/features/Details.tsx",
+      "sha256": "9330e0d7be6293ea48288bee3992dc08dfeb7c6050c7d335901f5d6ae2107513"
+    },
+    {
+      "path": "finweave-web/src/features/Home.tsx",
+      "sha256": "b8d23a33c029d7cc3fcec7866e054af7991333b985bbc7ab240b747c5224a411"
+    },
+    {
+      "path": "finweave-web/src/features/ImportJobs.tsx",
+      "sha256": "d768ad263ac67c6e3b0fdf338712c07e1ca3a4bacd42a6cfbf5221d000497a9e"
+    },
+    {
+      "path": "finweave-web/src/features/ImportWizard.tsx",
+      "sha256": "15d13b7e0b989f3dbf294468058808cc5a7f861fbbf16c5232d87490888d1c13"
+    },
+    {
+      "path": "finweave-web/src/features/Plan.tsx",
+      "sha256": "b5158d2ed4c757db9e1f73236412410756909fbda1ef9f419fd26d73bd1c4c60"
+    },
+    {
+      "path": "finweave-web/src/features/Transactions.tsx",
+      "sha256": "03ea2b3778e4373bda608a838ed6bc1b8c05a05501140fb27e9070a84a07ed66"
+    },
+    {
+      "path": "finweave-web/src/features/auth.css",
+      "sha256": "ce721960f72d814e220e75b8b643cef62ccfb7f6f896b29389f3eff3428f400d"
+    },
+    {
+      "path": "finweave-web/src/main.tsx",
+      "sha256": "cc687deedaaaf260beec7be8c88ad389986817ff031c93886ec3b8c45037ea97"
+    },
+    {
+      "path": "finweave-web/src/mocks/browser.ts",
+      "sha256": "80d69d67521b91cd644c14e044aaadf13b197c79a3eeeac794914aaee239cb68"
+    },
+    {
+      "path": "finweave-web/src/mocks/command-mapping.ts",
+      "sha256": "868c2e4fe061db94c00fcb41340cc3540f642908e84e709e681e77a66bfb4732"
+    },
+    {
+      "path": "finweave-web/src/mocks/contract-fixtures.ts",
+      "sha256": "d7f219cf95c5090ef85e28e58674109f2b4862724d16743c6970ceccc955079c"
+    },
+    {
+      "path": "finweave-web/src/mocks/handlers.ts",
+      "sha256": "d083682484206ac6ced35dcd0bd04ceb41b20667c5cad74c04341cfc0c2c513f"
+    },
+    {
+      "path": "finweave-web/src/mocks/projections.ts",
+      "sha256": "f256df1df41b958d339459156566986717459c45779c574f82b09940a2bd7af0"
+    },
+    {
+      "path": "finweave-web/src/mocks/repository.ts",
+      "sha256": "40bd0bf1d20e4589e10b9e810c3a757ea3f46e43a6a6b284ff1856fdfd2253ee"
+    },
+    {
+      "path": "finweave-web/src/mocks/scripted-assistant.ts",
+      "sha256": "92eae29660e056274ff09041f1adaec6cc6e425807f25799e0327a19a8f667c6"
+    },
+    {
+      "path": "finweave-web/src/services/api.ts",
+      "sha256": "e9df229b8b8279c91c5019908a11c61ac354c0c05f3e76d658d271edc0307ca8"
+    },
+    {
+      "path": "finweave-web/src/services/assistant.ts",
+      "sha256": "06d5b1e95a86dd4b8de320c32c661b25cef58614e73296f497acd5bd97aa38a5"
+    },
+    {
+      "path": "finweave-web/src/services/command-adapter.ts",
+      "sha256": "7824ee9aa16dbf515d45eb40619661f26fc02b5078d1624aaf00eaa93974ddf7"
+    },
+    {
+      "path": "finweave-web/src/services/contracts.ts",
+      "sha256": "04c4e0723ccf1a87a3f34549af2ed3513df30328dc5c842d252b51b175e93ea0"
+    },
+    {
+      "path": "finweave-web/src/services/demo.ts",
+      "sha256": "1420c17276abb62de927fc360b51ecb7fdd7dc2b9da94d486596431335686c45"
+    },
+    {
+      "path": "finweave-web/src/services/mock-auth.ts",
+      "sha256": "53db893e9590b1cf97aa5f8c9c58f683418384c1e23a70560e2c1657fbeed433"
+    },
+    {
+      "path": "finweave-web/src/services/presentation.ts",
+      "sha256": "fa7a329b1557d1d29168a974840b049982ab2d9f8ad20bb9afe900169ddb0cef"
+    },
+    {
+      "path": "finweave-web/src/services/protected-transport.ts",
+      "sha256": "08ba7d9537b395891e00e3b78cf569bd362a8a6350544ff906cf829f1b6e0377"
+    },
+    {
+      "path": "finweave-web/tsconfig.json",
+      "sha256": "00b4ed15f0a86dcf52993b5d080ccd6a9a5724ce474d66b65603201ac2280c25"
+    },
+    {
+      "path": "finweave-web/vite.config.ts",
+      "sha256": "bdd0a30252b0af20ee7b686825425a8493f4ac9f0aba7284959ce3e6ad1d4a26"
+    },
+    {
+      "path": "navigations.md",
+      "sha256": "dd4faa206b16464b46a7e5bcce56a3d7ec18cb64a7674ccf6c9c54ff8e125202"
+    }
+  ]
+}

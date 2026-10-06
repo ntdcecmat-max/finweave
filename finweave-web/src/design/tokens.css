@@ -1,0 +1,18 @@
+:root {
+ --color-bg:#f5f7f6;--color-surface:#fff;--color-ink:#17342d;--color-muted:#60716b;
+ --color-primary:#1c5143;--color-primary-soft:#e8f2ed;--color-income:#16714d;--color-expense:#b94b43;
+ --color-refund:#3269a8;--color-warning:#805b10;--color-error:#ab352f;--color-planned:#6654a4;
+ --color-simulated:#88601a;--color-unknown:#60716b;--color-border:#dce5df;--color-focus:#386fe0;
+ --chart-bank:#1c5143;--chart-wallet:#3d9180;--chart-cash:#8bb89e;--chart-stock:#8172af;--chart-gold:#c4a052;
+ --font-body:'Segoe UI',Arial,sans-serif;--text-meta:12px;--text-small:14px;--text-body:16px;--text-h2:22px;--text-h1:30px;--text-metric:36px;
+ --line-meta:18px;--line-small:21px;--line-body:24px;--line-h2:30px;--line-h1:38px;--line-metric:44px;
+ --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;
+ --sidebar:224px;--content-max:1240px;--control:44px;--chart-height:240px;--panel-width:420px;
+ --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;--border-width:1px;
+ --shadow-card:0 2px 12px #17342d05;--shadow-dialog:0 20px 80px #10251b26;
+ --breakpoint-mobile:640px;--breakpoint-shell:1000px;--z-nav:20;--z-header:25;--z-mascot:30;--z-overlay:40;--z-dialog:50;--z-toast:60;
+ --motion-fast:120ms;--motion-normal:180ms;--motion-ease:cubic-bezier(.2,.8,.2,1);
+}
+@media(max-width:639px){:root{--text-h1:26px;--line-h1:34px;--text-metric:30px;--line-metric:38px;--panel-width:100%;}}
+@media(prefers-reduced-motion:reduce){:root{--motion-fast:0ms;--motion-normal:0ms;}*,*::before,*::after{animation-duration:0ms!important;transition-duration:0ms!important;scroll-behavior:auto!important;}}

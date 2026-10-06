@@ -1,0 +1,1 @@
+import base from './playwright.step6.config';import {defineConfig} from '@playwright/test';export default defineConfig({...base,grep:/S6-E08|S6-E09|S6-E10|N05/,reporter:[['list'],['json',{outputFile:'../docs/execution/evidence/step6-pilot-results.json'}]],outputDir:'../docs/execution/evidence/step6-pilot-artifacts'});

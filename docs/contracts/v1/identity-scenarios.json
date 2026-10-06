@@ -1,0 +1,92 @@
+[
+  {
+    "operationId": "signIn",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  },
+  {
+    "operationId": "registerIdentity",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  },
+  {
+    "operationId": "verifyIdentityChallenge",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  },
+  {
+    "operationId": "requestPasswordReset",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  },
+  {
+    "operationId": "resetIdentityPassword",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  },
+  {
+    "operationId": "signOut",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "Network mock implemented with session ownership/idempotency; scenario list is a specification, actual executed cases are in Step 5 validation. Real identity remains blocked."
+  }
+]

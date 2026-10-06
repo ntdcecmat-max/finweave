@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-05T18:25:55.099Z",
+  "sourceProject": "C:\\Users\\Lenovo\\Downloads\\Kì 1 năm 3\\Information Systems Modeling and Design",
+  "outputSnapshot": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-05\\th-c-hi-n-b-c\\outputs\\FinWeave-M1",
+  "originalInputsPreserved": [
+    {
+      "path": "FinWeave_Ideas.md",
+      "originalSHA256": "b4a8f5a5f45bb36bf7ceec1f013e1616764738e25e499edd1fb270735c2d85db",
+      "deliverySHA256": "b4a8f5a5f45bb36bf7ceec1f013e1616764738e25e499edd1fb270735c2d85db"
+    },
+    {
+      "path": "FinWeave_Agent_Execution_Playbook.md",
+      "originalSHA256": "e7db4f88cae0d06c45466efd321bbc815b5552377fa842b0a0881a25909ee3da",
+      "deliverySHA256": "e7db4f88cae0d06c45466efd321bbc815b5552377fa842b0a0881a25909ee3da"
+    },
+    {
+      "path": "FinWeave_Human_Setup_and_Prompts.md",
+      "originalSHA256": "ae8a0b0785f37b141e71e926b2cd452716feaf22fe444e11505fe157159dc1d7",
+      "deliverySHA256": "ae8a0b0785f37b141e71e926b2cd452716feaf22fe444e11505fe157159dc1d7"
+    },
+    {
+      "path": "FinWeave_Tech_Stack.md",
+      "originalSHA256": "f32417407943e7ba770e775c9d83cc887049a55e3ae731c3c1d5f43e9774306e",
+      "deliverySHA256": "f32417407943e7ba770e775c9d83cc887049a55e3ae731c3c1d5f43e9774306e"
+    },
+    {
+      "path": "navigations.md",
+      "originalSHA256": "dd4faa206b16464b46a7e5bcce56a3d7ec18cb64a7674ccf6c9c54ff8e125202",
+      "deliverySHA256": "dd4faa206b16464b46a7e5bcce56a3d7ec18cb64a7674ccf6c9c54ff8e125202"
+    },
+    {
+      "path": "docs/governance/baselines/scope-v1-analysis-v1.zip",
+      "originalSHA256": "befaae04b239e124e3e24a16d09760d9e4347036a9caa6dc89d5784189db2e69",
+      "deliverySHA256": "befaae04b239e124e3e24a16d09760d9e4347036a9caa6dc89d5784189db2e69"
+    }
+  ],
+  "requirementsPreserved": [
+    {
+      "path": "docs/product/scope.md",
+      "requirementContentPreserved": true,
+      "originalSHA256": "48466759d1940de9d295e9252ca6d6b7b307cbbad5126753bacd9cfc6b2f3a27"
+    },
+    {
+      "path": "docs/product/prd.md",
+      "requirementContentPreserved": true,
+      "originalSHA256": "c6d3f89d525bcc0cb742b21f2a98a215d610adff09950ce529cac153c39ffffb"
+    },
+    {
+      "path": "docs/requirements/srs.md",
+      "requirementContentPreserved": true,
+      "originalSHA256": "f6a093550e6e115a417d32136082eb6e05be1502b297eec20a4836750c73ffc3"
+    }
+  ],
+  "references": {
+    "count": 40,
+    "catalogued": 40,
+    "directlyViewedByAgent": 40,
+    "redistributedAsAssets": false
+  },
+  "sourceSync": "completed; copied code/dist and current docs, SHA256 matched; five root inputs, References and historical archive preserved; no node_modules copied",
+  "scope": "scope-v2/analysis-v2, M1 only, 28 AC"
+}

@@ -1,0 +1,38 @@
+import {CONTRACT_VERSION} from '../contracts/schemas';
+import {operations,validateInput,validateOutput} from '../contracts/operations';
+import type {OperationId,Input} from '../contracts/operations';
+import {identityOperations} from '../contracts/identity';
+import type {IdentityOperationId,IdentityServices} from '../contracts/identity';
+import {bindServices} from './contracts';
+import type {LogicalTransport,CallOptions,Reply} from './contracts';
+import {BlockedProtectedTransport} from './protected-transport';
+export const dataMode=import.meta.env.VITE_DATA_MODE||'synthetic_mock';
+let sessionId:string|null=null;
+let syntheticWakeup:(()=>Promise<void>)|null=null;
+// Bootstrap injects lifecycle readiness; services never import mock state.
+export function setSyntheticWakeup(wakeup:()=>Promise<void>){syntheticWakeup=wakeup;}
+export function setApiSession(id:string|null){sessionId=id;}
+export const getApiSession=()=>sessionId;
+export class ApiError extends Error {constructor(message:string,public code:string,public status=0,public retryable=false,public fieldErrors:any[]=[],public retryAfterSeconds:number|null=null){super(message);}}
+export async function network(path:string,body:unknown,signal?:AbortSignal) {
+ if(dataMode!=='synthetic_mock')throw new ApiError('Security transport chưa được kiểm chứng. Không gửi dữ liệu thật.','SECURITY_TRANSPORT_NOT_VERIFIED');
+ const controller=new AbortController();const abort=()=>controller.abort();if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});let timeout=false;const timer=setTimeout(()=>{timeout=true;controller.abort();},5000);
+ try{await syntheticWakeup?.();const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-FinWeave-Synthetic':'true',...(sessionId?{'X-FinWeave-Mock-Session':sessionId}:{})},body:JSON.stringify(body),signal:controller.signal});let data:any;try{data=await response.json();}catch{throw new ApiError('Phản hồi server không hợp lệ. Chưa xác nhận kết quả; giữ yêu cầu để thử lại.','SERVICE_UNAVAILABLE',response.ok?502:response.status,true);}if(!response.ok)throw new ApiError(data.message||'Request chưa hoàn tất.',data.code||'SERVICE_UNAVAILABLE',response.status,response.status>=500||!!data.retryable,data.fieldErrors||[],data.retryAfterSeconds??null);return data;}
+ catch(error){if(error instanceof ApiError)throw error;if(controller.signal.aborted)throw new ApiError(timeout?'Timeout: chưa biết kết quả. Thử lại cùng yêu cầu.':'Đã hủy request.',timeout?'TIMEOUT':'CANCELLED',0,timeout);throw new ApiError('Không kết nối được mock network. Giữ input và thử lại.','OFFLINE',0,true);}
+ finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+}
+export class HttpSyntheticTransport implements LogicalTransport {
+ readonly mode='synthetic_mock' as const;
+ async call<K extends OperationId>(operation:K,input:Input<K>,options:CallOptions):Promise<Reply<K>> {
+  let parsed:Input<K>;try{parsed=validateInput(operation,input);}catch(e){const issues=(e as any).issues||[];const amountIssue=issues.find((issue:any)=>issue.message?.includes('VND nguyên'));throw new ApiError(amountIssue?.message||'Dữ liệu chưa hợp lệ. Kiểm tra số tiền, ngày và trường bắt buộc.','VALIDATION',422,false,issues);}
+  const reply=await network('/__mock/v1/logical/'+operation,{contractVersion:CONTRACT_VERSION,requestId:options.requestId,workspaceId:options.workspaceId,operationId:operation,input:parsed,mutation:options.mutation},options.signal);
+  if(reply.contractVersion!==CONTRACT_VERSION||reply.requestId!==options.requestId||!Number.isInteger(reply.workspaceVersion)||reply.workspaceVersion<1)throw new ApiError('Response không khớp contract. Chưa áp dụng dữ liệu.','SERVICE_UNAVAILABLE',502,true);
+  try{return {...reply,data:validateOutput(operation,reply.data)};}catch{throw new ApiError('Dữ liệu phản hồi không khớp schema. Chưa áp dụng dữ liệu; giữ yêu cầu để thử lại.','SERVICE_UNAVAILABLE',502,true);}
+ }
+}
+export const services=bindServices(dataMode==='synthetic_mock'?new HttpSyntheticTransport():new BlockedProtectedTransport());
+export const queryOptions=(signal?:AbortSignal):CallOptions=>({requestId:crypto.randomUUID(),workspaceId:'W-DEMO',mutation:null,signal});
+export const mutationOptions=(version:number,key:string,previewToken:string|null,objects:Record<string,number>={}):CallOptions=>({...queryOptions(),mutation:{idempotencyKey:key,expectedWorkspaceVersion:version,expectedObjectVersions:objects,previewToken}});
+export const identityServices=new Proxy({} as IdentityServices,{get:(_target,key)=>(input:unknown,options:any)=>{const name=key as IdentityOperationId;return network('/__mock/v1/identity/'+name,{contractVersion:CONTRACT_VERSION,requestId:options.requestId,idempotencyKey:options.idempotencyKey,input},options.signal).then(data=>identityOperations[name].output.parse(data));}});
+export const identityOptions=()=>({contractVersion:CONTRACT_VERSION,requestId:crypto.randomUUID(),idempotencyKey:crypto.randomUUID()});
+export const syntheticControl=(input:unknown)=>network('/__mock/v1/control',input);

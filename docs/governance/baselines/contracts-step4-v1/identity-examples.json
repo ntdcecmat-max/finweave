@@ -1,0 +1,81 @@
+{
+  "signIn": {
+    "input": {
+      "email": "demo@finweave.test",
+      "password": "FinWeaveDemo!2026"
+    },
+    "output": {
+      "challengeId": "DEMO-CHALLENGE",
+      "state": "challenge",
+      "expiresAt": "2026-10-06T01:05:00+07:00",
+      "synthetic": true
+    }
+  },
+  "registerIdentity": {
+    "input": {
+      "email": "an@finweave.test",
+      "name": "An",
+      "password": "FinWeaveDemo!2026",
+      "passwordConfirmation": "FinWeaveDemo!2026",
+      "syntheticAcknowledgement": true
+    },
+    "output": {
+      "challengeId": "DEMO-CHALLENGE",
+      "state": "challenge",
+      "expiresAt": "2026-10-06T01:05:00+07:00",
+      "synthetic": true
+    }
+  },
+  "verifyIdentityChallenge": {
+    "input": {
+      "challengeId": "DEMO-CHALLENGE",
+      "code": "123456"
+    },
+    "output": {
+      "session": {
+        "subjectId": "OWNER-DEMO",
+        "deviceId": "DEVICE-DEMO",
+        "workspaceIds": [
+          "W-DEMO"
+        ],
+        "role": "owner",
+        "expiresAt": "2026-10-06T01:30:00+07:00",
+        "synthetic": true
+      },
+      "profile": {
+        "email": "demo@finweave.test",
+        "name": "Chủ workspace demo"
+      },
+      "synthetic": true
+    }
+  },
+  "requestPasswordReset": {
+    "input": {
+      "email": "demo@finweave.test"
+    },
+    "output": {
+      "message": "Nếu tài khoản demo phù hợp, bạn có thể tiếp tục đặt lại mật khẩu.",
+      "synthetic": true
+    }
+  },
+  "resetIdentityPassword": {
+    "input": {
+      "resetToken": "DEMO-RESET",
+      "password": "FinWeaveDemo!2026",
+      "passwordConfirmation": "FinWeaveDemo!2026"
+    },
+    "output": {
+      "message": "Mật khẩu demo đã thay đổi trong phiên này.",
+      "synthetic": true
+    }
+  },
+  "signOut": {
+    "input": {
+      "sessionId": "SESSION-DEMO"
+    },
+    "output": {
+      "signedOut": true,
+      "synthetic": true
+    }
+  }
+}

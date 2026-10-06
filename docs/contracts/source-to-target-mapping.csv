@@ -1,0 +1,55 @@
+mapping_id,source,source_field,target_dto,target_field,transform,validation_or_missing,evidence_or_security,status
+MAP01,UI account,opening,AccountInput,opening.value,Locale UI input to integer decimal string,VND nonnegative; no exponent; no float,manual Evidence; opening capital not income,specified
+MAP02,UI account,date,AccountInput,openingDate,Keep ISO date-only,trackingStart <= date <= businessClock,manual declaration,specified
+MAP03,M1 Account,source,Account,evidenceIds,Create stable synthetic Evidence ID; keep original text,Do not mark source verified,inside protected scope in real,adapter planned
+MAP04,M1 Account,no version,Account,version,Introduce explicit object version at migration,Use synthetic migration version1; no invented legacy version,record workspace provenance,adapter planned
+MAP05,UI holding,quantity and unit,HoldingInput,quantity,Stock share; gold luong multiply10 to canonicalchi,Nonnegative; stockshare/goldchi; originalunit retained,Evidence original quantity unit/date,specified
+MAP06,UI holding,kind market product purity,HoldingInput,identity fields,Keep values for compatibility,Gold product/purity required; quote identity must match,private association with holding,specified
+MAP07,M1 Holding,cost optional,Holding,cost costDate costQuantity,Absent optional to null; declared quantity coverage,Nonnegative cost; missing notzero,manual source; no actualentry,adapter planned
+MAP08,M1 Holding,quantities,HoldingMovement,quantityDelta date kind eventId evidenceIds version,Map quantities/date/reason to structured movements with synthetic IDs,Actual investmentmovement not doublecount,immutable movement provenance,adapter planned
+MAP09,UI event,amount kind,EventInput,amount kind,Positive integeramount with kind; signed effects in EntryGroups,amount>0; date in actualcoverage,posted balanced atomic groups,specified
+MAP10,UI transfer,account to fee oneLeg,EventInput,accountId toAccountId fee oneLeg,Two activeaccounts plus separate fee expense,from != to; incomplete leg to Review,one transaction all effects,specified
+MAP11,UI refund,origin,EventInput,originId,Eligible original event link ornull,refund<=remainingoriginal; sameworkspace/date/account,receivingperiod metric not originperiod,specified
+MAP12,UI investment,holding quantity,EventInput,holdingId quantity,Cash out plus linked holding movement,active compatibleholding; quantity>0,no expense; protect position,specified
+MAP13,M1 Event,posting reconciliation category,Transaction,three independent fields,Preserve independentaxes,No category implies posted or reconciled,manualoverride independent revision,adapter planned
+MAP14,M1 correction,reversal boolean and history,Transaction EntryGroup,reversalOf replacement linkage,Resolve actual original/reversal/replacement IDs,No bareboolean loss of linkage,append-only entries/reason/evidence,adapter planned
+MAP15,CSV UTF8,date,EventInput,date,Apply declared yyyy-MM-dd ordd/MM/yyyy mapping,Invalidcalendar/missing -> invalidrow,rawEvidence immutable protected,specified
+MAP16,CSV UTF8,amount,EventInput,kind and amount,Signed positive income; negative expense absolutevalue,Zero/noninteger/exponent invalidrow; VNDonly,No transfer/refund inference from text,specified
+MAP17,CSV UTF8,description,EventInput,description,Trim whitespace; retain raw original,required length1..500,private field no gateway/log snippets,specified
+MAP18,CSV UTF8,reference,EventInput,reference,Empty to null; match normalized authorizedsource ref,Duplicate candidate criteria/version; no silentdedupe,sourceRecord parser/mapping versions,specified
+MAP19,CSV request,selected account,ImportPreview,accountId,Authorize active bankaccount from caller,CSV must not override owner/workspace,preview binding owner/account/workspace,specified
+MAP20,CSV request,file and mapping,ImportPreview,fileDigest mappingDigest,Trusted SHA256 bytes and canonicalmapping digest,Bind profileVersion and full rowuniverse,logicalprivate metadata; no rawfile relay,specified
+MAP21,CSV preview,valid invalid duplicate rows,ImportRow,status normalized errors,Stable rowID byfile rowindex profileVersion,Only valid selected; invalid normalizednull,rawEvidenceID and matchedEventID,specified
+MAP22,CSV confirm,preview and selectedRowIds,ImportJob,selectedRowIds committedEventIds,Atomic selectedsubset plus unmatchedReview oncompletion,Wrongtoken/version/expiry ->409; failed0post,key/job completion atomic,specified
+MAP23,Notification fixture,raw notification,SourceRecord EventInput,normalizedEventId,Parser normalized samefinancialrules,Missing/truncated ->Review; not Androidpermission real,private raw record retained,mock-only planned
+MAP24,Source revision,same ref new amount,Transaction EntryGroup,version correction history,Sameamount evidenceonly; changedamount reversalreplacement,Preserve manualcategoryoverride; no duplicatefinancialeffect,source/parser version Evidence,mock-only planned
+MAP25,Manual cash count,observed, CashObservation,observed variance,Compare sameas-of calculatedcash snapshot,observed0 valid; missing null; cashaccountonly,Observation not posting,specified
+MAP26,Review cash,variance and action,Transaction EntryGroup,signedadjustment or expense,Unknownadjust vs forgottenexpense per action,Expense onlynegativevariance; defer keepsopen/retry0,decision history/case version,specified
+MAP27,Manual quantity,quantity and date,Holding,quantity quantityDate,Add declarationmovement and recompute as-of,Date/unit guard; quantities don'tchange cash,holding evidence/time,specified
+MAP28,Quote fixture,price currency unit,Quote,price,Preserve inputquote; normalize onlyvaluation,price>0; compatiblemarket/product/purity/unit; nofuturequote,private subscription association,specified
+MAP29,Quote fixture,FX and FXdate,Quote,fxVndPerUsd fxAt,Keep VND-per-USD decimal and timestamp,FX>0; missing USD conversion -> Metricnull,FX evidence/version/time,specified
+MAP30,Engine,quantity xprice xFX,Report,assets knownAssetSubtotal,Unitconversion then round-half-up eachholding to1VND,Missingcomponent totalnull but knownsubtotal retained,sameSnapshotRefs/chart/table,specified
+MAP31,Engine,source states and times,Quality,status reasons,Independent quantity/price/FX/source freshness,>30d/>24h/>24h/>48h strict; failedrefresh retains lastsuccess,nofake qualitypercent,specified
+MAP32,M1 Period,start end scope,QueryContext,period accountIds,end ->endExclusive; scope -> accountIds,start<end; VND scope not pagecounts,private filters inside sealed body,adapter planned
+MAP33,UI Plan,date end day recurrence,PlanInput,start end dayOfMonth recurrence,Calendar occurrences with clamp to lastday,Futurestart forcreate; end>=start; horizon<=24months,planned classification and baseline freeze,specified
+MAP34,M1 Event,plan planVersion,ActualLink,item refs occurrence event refs,Explicit relationship with actual effect references,Unique planVersion/eventId; posted/type/account/date/currencyguards,no actualduplicate/secondledger,adapter planned
+MAP35,Engine Plan,eligibleactuals,PlanForecast,actual remaining overspend,remaining=maxplanned-actual0; overspend separate,No double subtraction; refund/reversal signed effects,snapshot samefinancialversion,specified
+MAP36,UI Goal,target due contribution,GoalInput,target due contributionSchedule,Normalize optional schedule to null,PositiveVNDtarget; contribution plannednotfunded,goal history/version,specified
+MAP37,UI allocation,amount account,Allocation,earmarked funded shortfall,Aggregate availablebacking peraccount; pro-rata floor1VND+stableIDremainder,activegoal/account; nofutureincome earmark; actualspendallowed,no cashentry fromallocation,specified
+MAP38,M1 Goal,no explicitversion,Goal,version,Add version field during repositorymigration,Not equate historyarraylength toversion,workspace scoped syntheticadapter,adapter planned
+MAP39,UI simulation,mode count firstdate interval horizon,SimulationInput,steps,Generate ascendingdatedsteps within horizon,1..24count; interval1..366; sufficientcash eachstep,simulated notactual mutation,specified
+MAP40,M1 simulation,version context string,Simulation,baseWorkspaceVersion snapshotRefs context,Decode typedcontext and keep frozen source/plan/goal refs,No overwritten historicalbaseline; unknown metric preserved,result assumes fixedprice,adapter planned
+MAP41,Engine Insights,rulecard values,Insight,metric target evidence,Read fromauthorizedsnapshot and link samecontext,No trend without baseline; no narratednumber source,structuredResult authoritative,specified
+MAP42,Chat UI,current nav period selected filters,AIContext,captured fields,Clone atsend beforeasync tool; bind authorizedversions,IDs checked independentprompt; context immutable,sealed when real; maskfreetext,specified
+MAP43,Scripted tool,report goal plan simulation,AIResult,metrics evidence targets,Whitelisted authorizedread-only tool result,Failed/no-data/denied -> Message.resultnull,noSQL/rawledger/mutations/LLM,specified
+MAP44,M1 Chat state,local messages,Conversation Message,history version state,Sharedconversationfull/panel; typed captured context,Terminalcancel cannot acceptlatecompletedresult,retentionreal open; synthetic tillreset,adapter planned
+MAP45,Auth UI,synthetic email password,Identity request,credentials,LocalMockAuthService only .test dummycredentialsmemory,Wrongcredentials/code reject; no provider/mail,realcredentials transport BLOCKED,auth mock running
+MAP46,Auth challenge,code and pendingidentity,IdentityResult,session profile,Oneusedemochallenge then30minmemoryownersession,Code123456 mock;5minchallengeexpiry; realsecurity unverified,AuthGate beforefinancialqueries,auth mock running
+MAP47,Auth reset,token newpassword,Identity request,reset fields,Oneusetokenupdatesdummycredential inmemory,Unknownidentity genericresponse; invalidtokenreject,no plaintextsecret/log/provider,auth mock running
+MAP48,Auth logout or expiry,session,UI/query/mockstore,clear session cache chat financialfixture,Cancel queries unmountproviders clearSyntheticSession,No financialDTO aftergate; reloadlogin,notrealrevoke/recoverysecurity,auth mock running
+
+MAP49,CSV UTF8,signed_integer_vnd,ImportMapping,amount,normalize signed into debit/credit,VND integer + date profile,original SHA and staging only,implemented mock
+MAP50,CSV original bytes,raw rows,ImportPreview/Evidence,fileDigest/rawText,SHA256 file/mapping stable ROW IDs,max64KB and20rows; raw retained,synthetic only,implemented mock
+MAP51,Workspace,Store snapshot,PresentationSnapshot,data/snapshotVersion,strict read-only DTO and pureselectors,sameversion; no clientStorewrite,synthetic only; protected blocked,implemented mock
+MAP52,Identity mock,verified challenge,Session,sessionId,ephemeral header + fake tabmarker,session gate401/403; no password persisted,not real auth proof,implemented mock
+MAP53,AI read tools,captured Store/context,Conversation/Message/AIResult,context/result/history,readonly scripted tool + polling/cancel,frozen refs and metric classification,synthetic only,implemented mock

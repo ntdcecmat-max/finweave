@@ -1,0 +1,1 @@
+import base from './playwright.step6.config';import {defineConfig} from '@playwright/test';export default defineConfig({...base,grep:/S6-E11|S6-E04|S6-E07|S6-E09|B10 |B18 |N04 |N07 /,reporter:[['list'],['json',{outputFile:'../docs/execution/evidence/step6-ai-regression-results.json'}]],outputDir:'../docs/execution/evidence/step6-ai-regression-artifacts'});

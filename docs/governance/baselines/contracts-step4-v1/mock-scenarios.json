@@ -1,0 +1,1329 @@
+[
+  {
+    "operationId": "getSession",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getWorkspace",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateTrackingSettings",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listAccounts",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getAccount",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createAccount",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "archiveAccount",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listHoldings",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getHolding",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createHolding",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateHoldingQuantity",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateHoldingCost",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listHoldingMovements",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listPriceQuotes",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "recordPriceQuote",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listTransactions",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getTransaction",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createEvent",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateDraft",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "correctPostedEvent",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateCategory",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "postDraft",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "linkRefund",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "recordCashCount",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getOverview",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getSpendingReport",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getPortfolio",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getInsights",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listSources",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "refreshSource",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "disconnectSource",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "reconnectSource",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "previewImport",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "confirmImport",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getImportJob",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [
+      "job_running",
+      "job_completed",
+      "job_failed"
+    ],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listImportJobs",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listReviewCases",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getReviewCase",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "resolveReviewCase",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listPlanItems",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createPlanItem",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updatePlanItem",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "archivePlanItem",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getPlanForecast",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "linkPlanActual",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "unlinkPlanActual",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listGoals",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getGoalProgress",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createGoal",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "updateGoal",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "allocateGoal",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "releaseGoalAllocation",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "markGoalAchieved",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "archiveGoal",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "simulateGoalOutcome",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listSimulations",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getSimulation",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listConversations",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "createConversation",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getConversation",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "listMessages",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "sendAssistantMessage",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getAssistantMessage",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [
+      "ai_no_data",
+      "ai_tool_failed"
+    ],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "cancelAssistantMessage",
+    "kind": "mutation",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "getEvidence",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  },
+  {
+    "operationId": "previewMutation",
+    "kind": "query",
+    "scenarios": [
+      "success",
+      "validation",
+      "unauthenticated",
+      "forbidden",
+      "not_found",
+      "version_conflict",
+      "idempotency_conflict",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "cancelled"
+    ],
+    "additional": [],
+    "level": "protocol fixtures; domain stateful M2 wiring remains Step 5"
+  }
+]

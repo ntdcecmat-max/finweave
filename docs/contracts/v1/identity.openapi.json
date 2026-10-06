@@ -1,0 +1,2997 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "FinWeave identity logical / SYNTHETIC ONLY",
+    "version": "1.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:4181",
+      "description": "Stateful synthetic mock, real identity bootstrap blocked."
+    }
+  ],
+  "paths": {
+    "/__mock/v1/identity/signIn": {
+      "post": {
+        "operationId": "signIn",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "maxLength": 254,
+                        "format": "email",
+                        "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                      },
+                      "password": {
+                        "type": "string",
+                        "minLength": 12,
+                        "maxLength": 128
+                      }
+                    },
+                    "required": [
+                      "email",
+                      "password"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "email": "demo@finweave.test",
+                  "password": "FinWeaveDemo!2026"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "challengeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "state": {
+                      "type": "string",
+                      "const": "challenge"
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "challengeId",
+                    "state",
+                    "expiresAt",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "challengeId": "DEMO-CHALLENGE",
+                  "state": "challenge",
+                  "expiresAt": "2026-10-06T01:05:00+07:00",
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": false,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          }
+        ]
+      }
+    },
+    "/__mock/v1/identity/registerIdentity": {
+      "post": {
+        "operationId": "registerIdentity",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "maxLength": 254,
+                        "format": "email",
+                        "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80
+                      },
+                      "password": {
+                        "type": "string",
+                        "minLength": 12,
+                        "maxLength": 128
+                      },
+                      "passwordConfirmation": {
+                        "type": "string",
+                        "minLength": 12,
+                        "maxLength": 128
+                      },
+                      "syntheticAcknowledgement": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "email",
+                      "name",
+                      "password",
+                      "passwordConfirmation",
+                      "syntheticAcknowledgement"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "email": "an@finweave.test",
+                  "name": "An",
+                  "password": "FinWeaveDemo!2026",
+                  "passwordConfirmation": "FinWeaveDemo!2026",
+                  "syntheticAcknowledgement": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "challengeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "state": {
+                      "type": "string",
+                      "const": "challenge"
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "challengeId",
+                    "state",
+                    "expiresAt",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "challengeId": "DEMO-CHALLENGE",
+                  "state": "challenge",
+                  "expiresAt": "2026-10-06T01:05:00+07:00",
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": false,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          }
+        ]
+      }
+    },
+    "/__mock/v1/identity/verifyIdentityChallenge": {
+      "post": {
+        "operationId": "verifyIdentityChallenge",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "challengeId": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                      },
+                      "code": {
+                        "type": "string",
+                        "pattern": "^\\d{6}$"
+                      }
+                    },
+                    "required": [
+                      "challengeId",
+                      "code"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "challengeId": "DEMO-CHALLENGE",
+                  "code": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "session": {
+                      "type": "object",
+                      "properties": {
+                        "sessionId": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                        },
+                        "subjectId": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                        },
+                        "deviceId": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                        },
+                        "workspaceIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                          }
+                        },
+                        "role": {
+                          "type": "string",
+                          "const": "owner"
+                        },
+                        "expiresAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+                        },
+                        "synthetic": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "sessionId",
+                        "subjectId",
+                        "deviceId",
+                        "workspaceIds",
+                        "role",
+                        "expiresAt",
+                        "synthetic"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "profile": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "maxLength": 254,
+                          "format": "email",
+                          "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "required": [
+                        "email",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "session",
+                    "profile",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "session": {
+                    "sessionId": "SESSION-DEMO",
+                    "subjectId": "OWNER-DEMO",
+                    "deviceId": "DEVICE-DEMO",
+                    "workspaceIds": [
+                      "W-DEMO"
+                    ],
+                    "role": "owner",
+                    "expiresAt": "2026-10-06T01:30:00+07:00",
+                    "synthetic": true
+                  },
+                  "profile": {
+                    "email": "demo@finweave.test",
+                    "name": "Chủ workspace demo"
+                  },
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": false,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          }
+        ]
+      }
+    },
+    "/__mock/v1/identity/requestPasswordReset": {
+      "post": {
+        "operationId": "requestPasswordReset",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "maxLength": 254,
+                        "format": "email",
+                        "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                      }
+                    },
+                    "required": [
+                      "email"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "email": "demo@finweave.test"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "message": "Nếu tài khoản demo phù hợp, bạn có thể tiếp tục đặt lại mật khẩu.",
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": false,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          }
+        ]
+      }
+    },
+    "/__mock/v1/identity/resetIdentityPassword": {
+      "post": {
+        "operationId": "resetIdentityPassword",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "resetToken": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                      },
+                      "password": {
+                        "type": "string",
+                        "minLength": 12,
+                        "maxLength": 128
+                      },
+                      "passwordConfirmation": {
+                        "type": "string",
+                        "minLength": 12,
+                        "maxLength": 128
+                      }
+                    },
+                    "required": [
+                      "resetToken",
+                      "password",
+                      "passwordConfirmation"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "resetToken": "DEMO-RESET",
+                  "password": "FinWeaveDemo!2026",
+                  "passwordConfirmation": "FinWeaveDemo!2026"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "message": "Mật khẩu demo đã thay đổi trong phiên này.",
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": false,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          }
+        ]
+      }
+    },
+    "/__mock/v1/identity/signOut": {
+      "post": {
+        "operationId": "signOut",
+        "summary": "Synthetic identity contract; real identity bootstrap BLOCKED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "contractVersion": {
+                    "type": "string",
+                    "const": "1.1.0"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                  },
+                  "input": {
+                    "type": "object",
+                    "properties": {
+                      "sessionId": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                      }
+                    },
+                    "required": [
+                      "sessionId"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "contractVersion",
+                  "requestId",
+                  "idempotencyKey",
+                  "input"
+                ],
+                "additionalProperties": false
+              },
+              "example": {
+                "contractVersion": "1.1.0",
+                "requestId": "ID-REQ-01",
+                "idempotencyKey": "ID-KEY-01",
+                "input": {
+                  "sessionId": "SESSION-DEMO"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synthetic identity outcome only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "signedOut": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "synthetic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "signedOut",
+                    "synthetic"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "signedOut": true,
+                  "synthetic": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Logical identity error; must be sealed in protected bootstrap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "contractVersion": {
+                      "type": "string",
+                      "const": "1.1.0"
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "VALIDATION",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "IDEMPOTENCY_CONFLICT",
+                        "INVALID_CREDENTIALS",
+                        "EMAIL_INVALID",
+                        "EMAIL_EXISTS",
+                        "PASSWORD_POLICY",
+                        "PASSWORD_MISMATCH",
+                        "CHALLENGE_INVALID",
+                        "CHALLENGE_EXPIRED",
+                        "RESET_INVALID",
+                        "UNAUTHENTICATED",
+                        "RATE_LIMITED",
+                        "OFFLINE",
+                        "TIMEOUT",
+                        "SERVICE_UNAVAILABLE",
+                        "SECURITY_TRANSPORT_NOT_VERIFIED"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "contractVersion",
+                    "requestId",
+                    "code",
+                    "message",
+                    "retryable",
+                    "retryAfterSeconds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-authorized-session-required": true,
+        "x-real-transport": "BLOCKED; identity bootstrap, registration/recovery independent Ops unverified",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-FinWeave-Synthetic",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "true"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-FinWeave-Mock-Session",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ephemeral synthetic session ID, never a real credential."
+          }
+        ]
+      }
+    }
+  }
+}

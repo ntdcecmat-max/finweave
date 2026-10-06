@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-pages/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example

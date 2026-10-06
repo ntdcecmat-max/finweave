@@ -1,0 +1,92 @@
+[
+  {
+    "operationId": "signIn",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  },
+  {
+    "operationId": "registerIdentity",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  },
+  {
+    "operationId": "verifyIdentityChallenge",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  },
+  {
+    "operationId": "requestPasswordReset",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  },
+  {
+    "operationId": "resetIdentityPassword",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  },
+  {
+    "operationId": "signOut",
+    "scenarios": [
+      "success",
+      "validation",
+      "invalid_credential_or_challenge",
+      "expired_challenge_or_token",
+      "rate_limited",
+      "timeout",
+      "offline",
+      "unavailable",
+      "duplicate_idempotency"
+    ],
+    "level": "local mock screens validate credentials/expiry/reset; network and atomic auth idempotency adapter still planned"
+  }
+]

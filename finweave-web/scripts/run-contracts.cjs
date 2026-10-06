@@ -1,0 +1,3 @@
+// Use the pinned Vite TS loader; no second build tool or runtime dependency.
+const path=require('node:path');process.chdir(path.resolve(__dirname,'..'));
+(async()=>{const {createServer}=await import('vite');const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true,include:[]}});try{await server.ssrLoadModule('/scripts/generate-contracts.ts');if(!process.argv.includes('--generate-only'))await server.ssrLoadModule(process.argv.includes('--step6')?'/scripts/audit-step6.ts':process.argv.includes('--step5')?'/scripts/audit-step5.ts':'/scripts/audit-step4.ts');}finally{await server.close();}})().catch(error=>{console.error(error);process.exitCode=1;});

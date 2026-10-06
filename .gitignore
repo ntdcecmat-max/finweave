@@ -1,0 +1,17 @@
+# Runtime/generated files; keep the exact dependency lock and public mock worker.
+**/node_modules/
+**/dist/
+**/dist-pages/
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+!**/.env.example
+work/
+References/
+docs/execution/evidence/
+**/test-results/
+**/playwright-report/
+**/.vercel/
+.DS_Store
+Thumbs.db
+

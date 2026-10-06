@@ -1,0 +1,15 @@
+# ADR-002 — Giữ app M1, thêm logical contracts để chuẩn bị M2
+
+ARC-ADR-002 · accepted cho bước 4 bởi AG theo nhiệm vụ 06/10/2026; scope-v2/analysis-v2, 28 REQ/AC. Không thay ADR-001 hoặc quyết định backend.
+
+Project hiện có `finweave-web`: React 19.3.0 / Router 8.4.0 / Vite 8.3.2 / TypeScript 5.9.3; native CSS tokens, Radix, RHF/Zod, TanStack Query, ECharts, Decimal, Lucide, MSW, Vitest/Playwright/axe. Kiểm package, lock, source, runtime, thiết kế và báo cáo M1. Node bundled 24.19.0 đáp ứng engine24.x. Không có AGENTS.md hoặc quy định bổ sung ở project/các thư mục cha đã kiểm. Không có backend/Git repository; không scaffold, clone hay cài framework mới.
+
+Giữ đúng 21 direct exact pins và lockfile. `npm ci --offline --ignore-scripts` từ cache M1 đã thành công tại project hiện tại; không lấy phiên bản mới, không kích hoạt lifecycle scripts không cần thiết. Tổng cài đặt có thể khác inventory lịch sử do optional platform packages; báo cáo bước 4 ghi số thực tế. Cache là work artefact, không dependency mới. License/notices M1 vẫn là đầu vào, chưa legal clearance cho phát hành. Không dùng kết quả audit offline làm chứng minh hết lỗ hổng hiện tại.
+
+Chọn Zod4 hiện có làm single source của logical schemas và TypeScript inferred DTO/services. Xuất JSON Schema draft2020-12 và OpenAPI3.1.1 có version1.0.0 bằng API `z.toJSONSchema`; script dùng TS loader Vite đã cài. Không thêm codegen/validator/build tool. JSON Schema kiểm cấu trúc; cross-field/business rules, quyền và snapshot consistency được đặc tả riêng, một số guard độc lập thực thi ở `validateInput`. Không dùng schema client làm authorization.
+
+OpenAPI3.1.1 được cố định để kiểm chứng cùng draft2020-12; không tự dùng số version tài liệu mới nhất. [OpenAPI3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [JSON Schema2020-12](https://json-schema.org/draft/2020-12), [Zod JSON Schema](https://zod.dev/json-schema) được kiểm 06/10/2026. Mỗi operation có input/output/request/reply schema cụ thể, example và invalidation metadata. File generated không sửa tay; thay nguồn rồi regenerate/test.
+
+Tái dùng components/tokens, /design, forms và selectors/domain oracles M1. Bước4 thêm schema/interfaces/protocolfixture/tài liệu và các màn auth mock/catalgoue theo yêu cầu bổ sung. UI tài chính vẫn dùng `/demo/state`, `/demo/preview`, `/demo/command`, AI local scripted và CSV preview local. Auth và catalogue UI đã bổ sung theo user: mock identity service local, không real provider. Bước 5 phải chuyển từng feature qua services version1, MSW stateful handlers và query keys đã đặc tả; đây là migration trong app hiện tại. Contract fixture không được trình bày như app M2 đã chạy.
+
+Hệ quả: named service types giảm lệch DTO; generated paths là spec cho mock M2, chưa HTTP handlers. Không cho finance DTO gửi tới gateway thật. Backend framework/DB/vendor giữ open vì privacy PoC quyết định placement và transport; Rails từ Sure không phải quyết định. M2 AI tiếp tục scripted mock, không provider/LLM/paid account/public deploy. [ADR-003](ADR-003-privacy-boundary.md) chặn transport thật.
