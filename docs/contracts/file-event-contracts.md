@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
 # File & Event Contracts v1.0.0
 
 ARC-FILE-001 / ARC-EVT-001 · 06/10/2026 · M2synthetic spec; no collector/real provider/eventbus installed. [Source-to-target](source-to-target-mapping.csv), [API](README.md).

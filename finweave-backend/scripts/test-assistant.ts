@@ -1,0 +1,8 @@
+import {startCluster} from './runtime-cluster.ts';
+import {runAssistantTests} from '../tests/assistant.ts';
+import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {sha} from '../src/runtime/crypto.ts';
+const source:Record<string,string>={};for(const dir of ['src/runtime','src/engine','database/runtime'])for(const name of await readdir(dir))source[dir+'/'+name]=sha(await readFile(dir+'/'+name));for(const file of ['tests/assistant.ts','scripts/test-assistant.ts','scripts/runtime-cluster.ts','scripts/build-assistant-contract.ts','scripts/verify-assistant-evidence.ts','package.json','pnpm-lock.yaml','../docs/agent/decision-schemas.json','../docs/agent/tool-registry.json'])source[file]=sha(await readFile(file));
+const evidence:any={scope:'LOCAL_POSTGRES_BE14_BE15_DETERMINISTIC_AND_PROVIDER_TEST_DOUBLES_NO_REAL_MODEL_NO_REAL_DATA',node:process.version,startedAt:new Date().toISOString(),source,status:'FAIL'};let cluster:Awaited<ReturnType<typeof startCluster>>|undefined;
+try{cluster=await startCluster('assistant-'+Date.now());evidence.measurements=[];evidence.results=await runAssistantTests(cluster.admin,cluster.configs,evidence.measurements);evidence.status='PASS';}catch(e){console.error(e);evidence.error={message:(e as Error).message,stack:(e as Error).stack};process.exitCode=1;}finally{if(cluster){await cluster.stop();evidence.clusterStopped=true;}evidence.finishedAt=new Date().toISOString();const dir=resolve('../docs/execution/evidence/backend-assistant-local-2026-10-11');await mkdir(dir,{recursive:true});const path=resolve(dir,'assistant-'+Date.now()+'.json');await writeFile(path,JSON.stringify(evidence,null,2)+'\n',{flag:'wx'});console.log('Evidence: '+path);}

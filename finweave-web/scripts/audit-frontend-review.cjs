@@ -1,0 +1,22 @@
+// Read-only source/contract audit: does not regenerate v1 or alter a sealed handover.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),ts=require('typescript');
+const app=path.resolve(__dirname,'..'),root=path.resolve(app,'..');
+const out=path.resolve(root,'docs/execution/evidence/frontend-review-2026-10-08',process.argv[2]||'final');
+fs.mkdirSync(out,{recursive:true});
+const read=p=>fs.readFileSync(path.resolve(root,p),'utf8');
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(path.resolve(root,p))).digest('hex');
+function exportedKeys(file,name){
+ const source=ts.createSourceFile(file,read('finweave-web/'+file),ts.ScriptTarget.Latest,true);let keys;
+ function walk(node){if(ts.isVariableDeclaration(node)&&node.name.getText(source)===name){let value=node.initializer;while(value&&(ts.isAsExpression(value)||ts.isSatisfiesExpression(value)))value=value.expression;if(value&&ts.isObjectLiteralExpression(value))keys=value.properties.map(p=>p.name.getText(source).replace(/^['"]|['"]$/g,''));}ts.forEachChild(node,walk);}walk(source);
+ if(!keys)throw Error('Cannot audit '+file+':'+name);return keys;
+}
+const business=exportedKeys('src/contracts/operations.ts','operations'),identity=exportedKeys('src/contracts/identity.ts','identityOperations'),prototype=exportedKeys('src/contracts/operational.ts','v2Operations');
+const catText=read('finweave-web/src/contracts/surface-catalogue.ts'),screens=JSON.parse(catText.slice(catText.indexOf('= [')+2).replace(/;\s*$/,''));
+const openapi=JSON.parse(read('docs/contracts/v2/openapi.json'));
+const canonical=Object.entries(openapi.paths).flatMap(([route,methods])=>Object.entries(methods).filter(([method])=>['get','post','put','patch','delete'].includes(method)).map(([method,op])=>({route,method,operationId:op.operationId})));
+const ids=['UI-U:19','UI-AUTH:8','UI-S:10','UI-M:6','UI-ADM:7'].flatMap(s=>{const[prefix,count]=s.split(':');return Array.from({length:Number(count)},(_,i)=>prefix+'-'+String(i+1).padStart(2,'0'));});
+const checks={uniqueScreens:screens.length===50&&new Set(screens.map(s=>s.id)).size===50,exactSpecIDs:ids.every(id=>screens.some(s=>s.id===id)),sourceFilesExist:screens.every(s=>fs.existsSync(path.resolve(app,s.source))),business70:business.length===70,identity6:identity.length===6,operational18:prototype.length===18,canonical133:canonical.length===133,version1:read('finweave-web/src/contracts/schemas.ts').includes("CONTRACT_VERSION = '1.1.0'")||/CONTRACT_VERSION\s*=\s*'1.1.0'/.test(read('finweave-web/src/contracts/schemas.ts')),separateAdminGateway:read('finweave-web/admin/api.ts').includes('class SyntheticOperationsGateway'),nativeOnlyInterface:!fs.existsSync(path.resolve(app,'android'))};
+const result={generatedAt:new Date().toISOString(),checks,pass:Object.values(checks).every(Boolean),catalogue:screens,api:{business:{version:'1.1.0',transport:'/__mock/v1/logical/{operation}',operations:business},identity:{version:'1.1.0',operations:identity},operationalPrototype:{versionLabel:'2.0.0',transport:'/__mock/v2/operational',operations:prototype,canonicalCompatible:false,fixtureOnly:['getState','registerExampleDevice','testCollector']},admin:{transport:'in-memory adminGateway',canonicalCompatible:false,operations:['signIn','signOut','snapshot','preview','confirm']},target:{version:openapi.info.version,operations:canonical.length,paths:canonical.map(x=>x.route),status:'contract handover, not running backend'},mapping:'docs/contracts/v2/consumer-operation-mapping.csv'},sources:Object.fromEntries(['finweave-web/src/contracts/surface-catalogue.ts','finweave-web/src/contracts/schemas.ts','finweave-web/src/contracts/operations.ts','finweave-web/src/contracts/identity.ts','finweave-web/src/contracts/operational.ts','finweave-web/admin/api.ts','finweave-web/admin/contracts.ts','finweave-web/src/native/collector.ts','docs/contracts/v2/openapi.json','docs/contracts/v2/consumer-operation-mapping.csv'].map(p=>[p,hash(p)])),limits:['No backend conformance, native implementation, signed APK or production security claim.','Version label 2.0.0 alone is not migration/conformance proof.','Catalogue/check links are traceability, not evidence of complete state coverage.']};
+fs.writeFileSync(path.join(out,'source-contract-audit.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify({pass:result.pass,checks,counts:{screens:screens.length,business:business.length,identity:identity.length,operational:prototype.length,canonical:canonical.length}}));
+if(!result.pass)process.exitCode=1;

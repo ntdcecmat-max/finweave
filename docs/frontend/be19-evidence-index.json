@@ -1,0 +1,111 @@
+{
+  "revision": "FW-API-T1-D1J2-005",
+  "nativeRevision": "FW-NATIVE-BRIDGE-003",
+  "gitHead": "fac053c",
+  "dirtyWorkingTree": true,
+  "sourceDigest": "b2d8fa27202dce16684e3e36d6d5db6da5951a8c6ff0bf9e6b718a8899c5d9ec",
+  "dataProfile": "synthetic-local",
+  "deviceE2E": "NOT_RUN_USER_CONFIRMED_NO_DEVICE",
+  "runs": [
+    {
+      "scope": "build",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/build-1791817266988/manifest.json",
+      "manifestSha256": "8c5edc131cc930de41474db70c56b63540d1828d39f65b0be6a8fda092da694a",
+      "sourceDigest": "42df01251e391010f1d9c6c2f103628d644de6d327aedb8fb814fe38c54f8944",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "BUILD",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": [
+        "finweave-web/tests/be19.integration.test.ts"
+      ]
+    },
+    {
+      "scope": "android",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/android-1791817279713/manifest.json",
+      "manifestSha256": "e439718bd095c050a405ca291b0af41881d3044c574a3132c64437601e4df535",
+      "sourceDigest": "42df01251e391010f1d9c6c2f103628d644de6d327aedb8fb814fe38c54f8944",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "BUILD",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": [
+        "finweave-web/tests/be19.integration.test.ts"
+      ]
+    },
+    {
+      "scope": "unit",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/unit-1791817284122/manifest.json",
+      "manifestSha256": "8a22a962ca8248a8ff70263a57447cc25e2beddf4ffa2c74a09fc54f29774dfd",
+      "sourceDigest": "42df01251e391010f1d9c6c2f103628d644de6d327aedb8fb814fe38c54f8944",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "MOCK_REGRESSION",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": [
+        "finweave-web/tests/be19.integration.test.ts"
+      ]
+    },
+    {
+      "scope": "integration",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/integration-1791822427706/manifest.json",
+      "manifestSha256": "475bcea0bc5a9e38c9ce98e7894ea92d13aa99d6298c5388f77ae625353ff540",
+      "sourceDigest": "b2d8fa27202dce16684e3e36d6d5db6da5951a8c6ff0bf9e6b718a8899c5d9ec",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "REAL_HTTP_POSTGRES",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": []
+    },
+    {
+      "scope": "mockbuild",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/mockbuild-1791817324495/manifest.json",
+      "manifestSha256": "8764f0c78675f6eee274d6ef002e06ec3f8590ba95822073f2b1d54635a0e7c5",
+      "sourceDigest": "42df01251e391010f1d9c6c2f103628d644de6d327aedb8fb814fe38c54f8944",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "MOCK_REGRESSION",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": [
+        "finweave-web/tests/be19.integration.test.ts"
+      ]
+    },
+    {
+      "scope": "mockbrowser",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/mockbrowser-1791817327854/manifest.json",
+      "manifestSha256": "75c26ebec5cd24eb77e8bb4bcac8e86ca3655da51c27a306a570edd1c96dd297",
+      "sourceDigest": "42df01251e391010f1d9c6c2f103628d644de6d327aedb8fb814fe38c54f8944",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "transportScope": "MOCK_REGRESSION",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "changedSinceRun": [
+        "finweave-web/tests/be19.integration.test.ts"
+      ]
+    },
+    {
+      "scope": "typecheck",
+      "status": "PASS",
+      "manifest": "docs/execution/evidence/be19/typecheck-1791822670607/manifest.json",
+      "manifestSha256": "5ed57630111bd276c78344a3f7943af4758ca30d882d0aa4e3c023c42e890eb9",
+      "sourceDigest": "b2d8fa27202dce16684e3e36d6d5db6da5951a8c6ff0bf9e6b718a8899c5d9ec",
+      "backendSourceDigest": "5c5137fe66bf31c60ddecf5113ef95febf619ad61342571e7c395ac0e543a69f",
+      "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+      "transportScope": "BUILD",
+      "changedSinceRun": []
+    }
+  ],
+  "counts": {
+    "integration": 13,
+    "mockBrowser": 67,
+    "mockUnit": 140,
+    "nativeJvm": 44,
+    "nativeContractJvm": 5
+  },
+  "additionalBackendEvidence": "docs/execution/evidence/backend-ops-local-2026-10-11/ops-1791815763972.json",
+  "runtimeSourceDigest": "752a727e50d1eff7e9d149a5f963b369ef75a5edc7f3a86ff0f6ce6d8b59fd6d",
+  "testRevisionDelta": [
+    "finweave-web/tests/be19.integration.test.ts"
+  ],
+  "additionalConfigEvidence": "docs/execution/evidence/be19/final-config-1791821525946/config-manifest.json"
+}

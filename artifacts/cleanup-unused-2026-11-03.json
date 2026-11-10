@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-03",
+  "reason": "Superseded website build archives and replaced dependency backup; latest archive and active dependencies retained",
+  "items": [
+    {
+      "path": "finweave-web/.local/dependency-backup-1793675305581",
+      "files": 48365,
+      "bytes": 951023734,
+      "removed": true
+    },
+    {
+      "path": "artifacts/sites/finweave-market-live-20261103.tar.gz",
+      "files": 1,
+      "bytes": 37643357,
+      "removed": true
+    },
+    {
+      "path": "artifacts/sites/finweave-market-pnj-20261103.tar.gz",
+      "files": 1,
+      "bytes": 37643662,
+      "removed": true
+    },
+    {
+      "path": "artifacts/sites/finweave-market-pnj-final-20261103.tar.gz",
+      "files": 1,
+      "bytes": 37643688,
+      "removed": true
+    },
+    {
+      "path": "artifacts/sites/finweave-market-cloud-20261103.tar.gz",
+      "files": 1,
+      "bytes": 37643766,
+      "removed": true
+    },
+    {
+      "path": "artifacts/sites/finweave-price-layout-20261103.tar.gz",
+      "files": 1,
+      "bytes": 37644354,
+      "removed": true
+    }
+  ],
+  "totalBytes": 1139242561.0
+}

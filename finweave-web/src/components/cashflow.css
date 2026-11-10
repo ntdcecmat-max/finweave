@@ -1,0 +1,34 @@
+.collapsible-card{padding:0;overflow:hidden}
+.collapsible-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px}
+.collapsible-head h2{flex:1;min-width:0;font-size:20px;line-height:28px}
+.collapsible-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:0;border:0;background:transparent;color:var(--color-ink);text-align:left;font-size:inherit;font-weight:600}
+.collapsible-chevron{width:30px;height:30px;border:1px solid #a8b5ac;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none;color:#748078}
+.collapsible-chevron svg{transition:transform 150ms}
+.is-closed>.collapsible-head .collapsible-chevron svg{transform:rotate(-90deg)}
+.collapsible-actions{display:flex;align-items:center;flex:none}
+.collapsible-content{padding:8px 24px 24px}
+.collapsible-description{margin-bottom:20px}
+.collapsible-card.is-closed .collapsible-head{padding-top:8px;padding-bottom:8px}
+.cashflow-card .collapsible-content{padding:0 0 18px}
+.cashflow-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #edf0ee;border-bottom:1px solid #edf0ee;background:#fcfdfc}
+.cashflow-metrics>div{padding:20px 24px;text-align:center}
+.cashflow-metrics>div+div{border-left:1px solid #e8ede9}
+.cashflow-metrics>div>span{display:block;margin-bottom:7px;font-size:11px;color:#59665e;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.cashflow-metrics strong{font-size:22px;line-height:30px;letter-spacing:-.4px}
+.cashflow-income{color:#278344}.cashflow-expense{color:#bf503c}
+.cashflow-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px 16px}
+.cashflow-period{margin-top:5px;font-size:14px;font-weight:600}
+.cashflow-controls{display:flex;align-items:center;gap:12px}
+.cashflow-controls select{min-height:38px;padding:7px 12px;border:1px solid #e0e5e1;border-radius:7px;background:white;color:#49564c;font-size:12px;max-width:100%}
+.cashflow-view-toggle{display:flex;border:1px solid #e0e5e1;border-radius:7px;overflow:hidden}
+.cashflow-view-toggle button{width:40px;min-height:38px;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:white;color:#7b837d}
+.cashflow-view-toggle button+button{border-left:1px solid #e0e5e1}
+.cashflow-view-toggle button[aria-pressed=true]{background:#edf2ee;color:#24553a}
+.cashflow-scroll{overflow-x:auto;margin:0 12px 8px;scrollbar-width:thin}
+.cashflow-sankey{width:100%;min-width:820px}
+.cashflow-note,.cashflow-view>.chart-table{margin:12px 24px 0}
+.cashflow-view>.table-wrap{margin:0 24px}
+.cashflow-table-label{display:flex;align-items:center;gap:8px;min-height:44px}
+.cashflow-empty{padding:60px 24px;text-align:center;color:var(--color-muted);font-size:14px}
+@media(max-width:639px){.collapsible-head{padding:12px 14px;gap:8px}.collapsible-head h2{font-size:18px}.collapsible-toggle{gap:9px}.collapsible-content{padding:8px 16px 20px}.cashflow-metrics>div{padding:14px 6px}.cashflow-metrics>div>span{font-size:9px;letter-spacing:.3px}.cashflow-metrics strong{font-size:15px;letter-spacing:-.3px}.cashflow-toolbar{padding:18px 16px;flex-wrap:wrap;gap:12px}.cashflow-controls{width:100%;justify-content:space-between;gap:8px}.cashflow-note,.cashflow-view>.chart-table{margin-left:16px;margin-right:16px}.cashflow-view>.table-wrap{margin-left:16px;margin-right:16px}.cashflow-sankey{min-width:760px}}
+@media(prefers-reduced-motion:reduce){.collapsible-chevron svg{transition:none}}

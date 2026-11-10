@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Tài sản đầu tư và giá thị trường
+actor "Chủ workspace" as Owner
+actor "Nhà cung cấp giá" as Price
+rectangle "FinWeave — Tài sản đầu tư và giá thị trường" {
+usecase "UC-STOCK-01\nKhai báo và quản lý danh mục cổ\nphiếu" as UC_STOCK_01
+usecase "UC-GOLD-01\nKhai báo và quản lý vàng" as UC_GOLD_01
+usecase "UC-HOLD-01\nCập nhật số lượng, giá vốn và\nlịch sử tài sản" as UC_HOLD_01
+usecase "UC-PRICE-01\nĐồng bộ giá thị trường thủ công\nhoặc hằng ngày" as UC_PRICE_01
+usecase "UC-REVIEW-02\nKiểm tra chất lượng giá và tài\nsản" as UC_REVIEW_02
+usecase "UC-BUY-01\nLiên kết mua tài sản với tài\nkhoản thanh toán" as UC_BUY_01
+}
+Owner -- UC_STOCK_01
+Owner -- UC_GOLD_01
+Owner -- UC_HOLD_01
+Owner -- UC_BUY_01
+Owner -- UC_PRICE_01
+Owner -- UC_REVIEW_02
+Price -- UC_PRICE_01
+UC_BUY_01 ..> UC_HOLD_01 : <<extend>>\n[chọn mua và có căn cứ thanh toán]
+note on link
+  Extension point: chọn loại cập nhật holding
+end note
+@enduml

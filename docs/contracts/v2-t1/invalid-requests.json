@@ -1,0 +1,417 @@
+[
+  {
+    "operationId": "createAccount",
+    "part": "request",
+    "case": "exponent VND",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createAccount",
+      "input": {
+        "name": "Ngân hàng giả lập",
+        "kind": "bank",
+        "opening": {
+          "value": "1e6",
+          "currency": "VND"
+        },
+        "openingDate": "2026-10-01"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "createAccount",
+    "part": "request",
+    "case": "fractional VND",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createAccount",
+      "input": {
+        "name": "Ngân hàng giả lập",
+        "kind": "bank",
+        "opening": {
+          "value": "1.1",
+          "currency": "VND"
+        },
+        "openingDate": "2026-10-01"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "createAccount",
+    "part": "request",
+    "case": "unknown input field",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createAccount",
+      "input": {
+        "name": "Ngân hàng giả lập",
+        "kind": "bank",
+        "opening": {
+          "value": "20000000",
+          "currency": "VND"
+        },
+        "openingDate": "2026-10-01",
+        "unrecognized": true
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "createAccount",
+    "part": "request",
+    "case": "invalid calendar date",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createAccount",
+      "input": {
+        "name": "Ngân hàng giả lập",
+        "kind": "bank",
+        "opening": {
+          "value": "20000000",
+          "currency": "VND"
+        },
+        "openingDate": "2026-02-30"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "ingestNotifications",
+    "part": "request",
+    "case": "raw notification forbidden",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "ingestNotifications",
+      "input": {
+        "deviceId": "D_A",
+        "items": [
+          {
+            "eventKey": "SYNTHETIC_01",
+            "bindingId": "BIND_A",
+            "bindingVersion": 0,
+            "sourceKey": "test_bank",
+            "revision": 0,
+            "observedAt": "2026-10-08T11:00:00+07:00",
+            "parserVersion": "SYNTHETIC_BANK_V1",
+            "payloadDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "normalizedEvidence": {
+              "amount": "100000",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "****0001",
+              "transactionRef": "SYNTH_TXN_01",
+              "sourceOccurredAt": "2026-10-08T11:00:00+07:00",
+              "ruleStatus": "complete"
+            },
+            "rawNotification": "SYNTHETIC_FORBIDDEN"
+          }
+        ],
+        "deviceEpoch": 0,
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "ingestNotifications",
+    "part": "request",
+    "case": "device epoch required",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "ingestNotifications",
+      "input": {
+        "deviceId": "D_A",
+        "items": [
+          {
+            "eventKey": "SYNTHETIC_01",
+            "bindingId": "BIND_A",
+            "bindingVersion": 0,
+            "sourceKey": "test_bank",
+            "revision": 0,
+            "observedAt": "2026-10-08T11:00:00+07:00",
+            "parserVersion": "SYNTHETIC_BANK_V1",
+            "payloadDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "normalizedEvidence": {
+              "amount": "100000",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "****0001",
+              "transactionRef": "SYNTH_TXN_01",
+              "sourceOccurredAt": "2026-10-08T11:00:00+07:00",
+              "ruleStatus": "complete"
+            }
+          }
+        ],
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "ingestNotifications",
+    "part": "reply",
+    "case": "durable ACK cannot lack receiptID",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "data": {
+        "receipts": [
+          {
+            "eventKey": "SYNTHETIC_ID",
+            "revision": 0,
+            "receiptId": null,
+            "state": "durable",
+            "errorCode": null
+          }
+        ],
+        "acceptedAt": "2026-10-08T11:00:00+07:00"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "ingestNotifications",
+    "part": "reply",
+    "case": "rejected ACK cannot claim receipt",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "data": {
+        "receipts": [
+          {
+            "eventKey": "SYNTHETIC_ID",
+            "revision": 0,
+            "receiptId": "SYNTHETIC_ID",
+            "state": "rejected",
+            "errorCode": "VALIDATION"
+          }
+        ],
+        "acceptedAt": "2026-10-08T11:00:00+07:00"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "executeImportJob",
+    "part": "request",
+    "case": "dispatch generation required",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": "SYNTHETIC_ID",
+      "operationId": "executeImportJob",
+      "input": {
+        "importJobId": "SYNTHETIC_ID",
+        "dispatchJobId": "SYNTHETIC_ID",
+        "leaseToken": "SYNTHETIC_ID",
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "executeImportJob",
+    "part": "request",
+    "case": "worker tenant required",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": null,
+      "operationId": "executeImportJob",
+      "input": {
+        "importJobId": "SYNTHETIC_ID",
+        "dispatchJobId": "SYNTHETIC_ID",
+        "leaseToken": "SYNTHETIC_ID",
+        "generation": 0,
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "adminSignIn",
+    "part": "request",
+    "case": "admin workspace must be null",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_FORGED",
+      "operationId": "adminSignIn",
+      "input": {
+        "email": "demo@finweave.test",
+        "password": "SYNTHETIC_01",
+        "mfaCode": "100000"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "getSession",
+    "part": "request",
+    "case": "query cannot carry mutation",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "getSession",
+      "input": {},
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "renewNativeSession",
+    "part": "request",
+    "case": "no refresh credential in JSON input",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "renewNativeSession",
+      "input": {
+        "refreshToken": "SYNTHETIC_FORBIDDEN"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "linkPlanActual",
+    "part": "request",
+    "case": "no invented planVersion field",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "linkPlanActual",
+      "input": {
+        "planItemId": "P-01",
+        "planItemVersion": 1,
+        "occurrenceId": "P-01-20261101",
+        "eventId": "ACTUAL-01",
+        "eventVersion": 1,
+        "reason": "Người dùng xác nhận dữ liệu giả lập",
+        "planVersion": 1
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "rejected": true,
+    "scope": "structural only"
+  },
+  {
+    "operationId": "createAccount",
+    "part": "Error",
+    "case": "Expired replay cannot claim not_committed",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "REPLAY_EXPIRED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed",
+      "resultRef": "RESULT_SYNTHETIC"
+    },
+    "rejected": true,
+    "scope": "structural only"
+  }
+]

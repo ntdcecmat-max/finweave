@@ -1,0 +1,886 @@
+{
+  "scope": "Independent expected DESIGN models only; no bank regex, real provider data, Engine/backend/native/quota/crypto implementation executed",
+  "vectors": [
+    {
+      "id": "gold_1",
+      "kind": "gold",
+      "input": {
+        "raw": "1234.5",
+        "locale": "en-US",
+        "scale": "1000",
+        "unit": "chi"
+      },
+      "expected": {
+        "stored": "1234500",
+        "unit": "chi",
+        "canonicalNumerator": "1234500",
+        "canonicalDenominator": "1"
+      }
+    },
+    {
+      "id": "gold_2",
+      "kind": "gold",
+      "input": {
+        "raw": "12345",
+        "locale": "en-US",
+        "scale": "1000",
+        "unit": "luong"
+      },
+      "expected": {
+        "stored": "12345000",
+        "unit": "luong",
+        "canonicalNumerator": "1234500",
+        "canonicalDenominator": "1"
+      }
+    },
+    {
+      "id": "gold_3",
+      "kind": "gold",
+      "input": {
+        "raw": "1.234,5",
+        "locale": "vi-VN",
+        "scale": "1000",
+        "unit": "chi"
+      },
+      "expected": {
+        "stored": "1234500",
+        "unit": "chi",
+        "canonicalNumerator": "1234500",
+        "canonicalDenominator": "1"
+      }
+    },
+    {
+      "id": "gold_4",
+      "kind": "gold",
+      "input": {
+        "raw": "1,234.50",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "luong"
+      },
+      "expected": {
+        "stored": "1234.5",
+        "unit": "luong",
+        "canonicalNumerator": "2469",
+        "canonicalDenominator": "20"
+      }
+    },
+    {
+      "id": "gold_5",
+      "kind": "gold",
+      "input": {
+        "raw": "0.00000001",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "luong"
+      },
+      "expected": {
+        "stored": "0.00000001",
+        "unit": "luong",
+        "canonicalNumerator": "1",
+        "canonicalDenominator": "1000000000"
+      }
+    },
+    {
+      "id": "gold_6",
+      "kind": "gold",
+      "input": {
+        "raw": "1,234",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": {
+        "stored": "1234",
+        "unit": "chi",
+        "canonicalNumerator": "1234",
+        "canonicalDenominator": "1"
+      }
+    },
+    {
+      "id": "gold_7",
+      "kind": "gold",
+      "input": {
+        "raw": "1,234",
+        "locale": "vi-VN",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": {
+        "stored": "1.234",
+        "unit": "chi",
+        "canonicalNumerator": "617",
+        "canonicalDenominator": "500"
+      }
+    },
+    {
+      "id": "gold_invalid_8",
+      "kind": "gold",
+      "input": {
+        "raw": "0",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_9",
+      "kind": "gold",
+      "input": {
+        "raw": "-1",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_10",
+      "kind": "gold",
+      "input": {
+        "raw": "1e3",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_11",
+      "kind": "gold",
+      "input": {
+        "raw": "NaN",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_12",
+      "kind": "gold",
+      "input": {
+        "raw": "12.34,5",
+        "locale": "vi-VN",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_13",
+      "kind": "gold",
+      "input": {
+        "raw": "1,23.4",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_14",
+      "kind": "gold",
+      "input": {
+        "raw": "1.000000001",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_15",
+      "kind": "gold",
+      "input": {
+        "raw": "1234567890123456789",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_16",
+      "kind": "gold",
+      "input": {
+        "raw": "123",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "oz"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "gold_invalid_17",
+      "kind": "gold",
+      "input": {
+        "raw": "١٢٣",
+        "locale": "en-US",
+        "scale": "1",
+        "unit": "chi"
+      },
+      "expected": "REJECT"
+    },
+    {
+      "id": "market_all_hypothetical_gates",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": true
+    },
+    {
+      "id": "market_missing_accessApproved",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": false,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_scopeReadOnly",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": false,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_rightsForUseApproved",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": false,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_quotaVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": false,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_responseBoundsVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": false,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_priceScaleVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": false,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_identityVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": false,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_basisFinalityVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": false,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_timeMappingVerified",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": false,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_storageRetentionCompatible",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": false,
+        "runtimePocPassed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "market_missing_runtimePocPassed",
+      "kind": "market_gate",
+      "input": {
+        "accessApproved": true,
+        "scopeReadOnly": true,
+        "rightsForUseApproved": true,
+        "quotaVerified": true,
+        "responseBoundsVerified": true,
+        "priceScaleVerified": true,
+        "identityVerified": true,
+        "basisFinalityVerified": true,
+        "timeMappingVerified": true,
+        "storageRetentionCompatible": true,
+        "runtimePocPassed": false
+      },
+      "expected": false
+    },
+    {
+      "id": "capture_all_hypothetical_gates",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "ELIGIBLE_NOT_BANK_PROOF"
+    },
+    {
+      "id": "capture_missing_ownerSelectedApp",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": false,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_consent",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": false,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_packageVerified",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": false,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_signerVerified",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": false,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_appVersionVerified",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": false,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_deviceMatrixVerified",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": false,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_templateVerified",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": false,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_bindingUnambiguous",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": false,
+        "privacyPassed": true,
+        "nativePocPassed": true
+      },
+      "expected": "LOCAL_WARNING_NO_UPLOAD"
+    },
+    {
+      "id": "capture_missing_privacyPassed",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": false,
+        "nativePocPassed": true
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "capture_missing_nativePocPassed",
+      "kind": "collector_gate",
+      "input": {
+        "ownerSelectedApp": true,
+        "consent": true,
+        "packageVerified": true,
+        "signerVerified": true,
+        "appVersionVerified": true,
+        "deviceMatrixVerified": true,
+        "templateVerified": true,
+        "bindingUnambiguous": true,
+        "privacyPassed": true,
+        "nativePocPassed": false
+      },
+      "expected": "PAUSE"
+    },
+    {
+      "id": "finality_41",
+      "kind": "finality",
+      "input": {
+        "state": "settled",
+        "bound": true,
+        "currency": "VND",
+        "amount": "100123"
+      },
+      "expected": "ELIGIBLE_ENGINE_REVIEW_OR_POST"
+    },
+    {
+      "id": "finality_42",
+      "kind": "finality",
+      "input": {
+        "state": "pending",
+        "bound": true,
+        "currency": "VND",
+        "amount": "100123"
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "finality_43",
+      "kind": "finality",
+      "input": {
+        "state": "failed_no_movement",
+        "bound": true,
+        "currency": "VND",
+        "amount": "100123"
+      },
+      "expected": "DISCARD_NO_ACTUAL"
+    },
+    {
+      "id": "finality_44",
+      "kind": "finality",
+      "input": {
+        "state": "redacted",
+        "bound": true,
+        "currency": "VND",
+        "amount": null
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "finality_45",
+      "kind": "finality",
+      "input": {
+        "state": "settled",
+        "bound": false,
+        "currency": "VND",
+        "amount": "100123"
+      },
+      "expected": "LOCAL_WARNING_NO_UPLOAD"
+    },
+    {
+      "id": "finality_46",
+      "kind": "finality",
+      "input": {
+        "state": "settled",
+        "bound": true,
+        "currency": "USD",
+        "amount": "100123"
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "finality_47",
+      "kind": "finality",
+      "input": {
+        "state": "settled",
+        "bound": true,
+        "currency": "VND",
+        "amount": null
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "finality_48",
+      "kind": "finality",
+      "input": {
+        "state": "settled",
+        "bound": true,
+        "currency": "VND",
+        "amount": "0"
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "finality_49",
+      "kind": "finality",
+      "input": {
+        "state": "fee_ambiguous",
+        "bound": true,
+        "currency": "VND",
+        "amount": "100123"
+      },
+      "expected": "BOUND_INCOMPLETE_REVIEW"
+    },
+    {
+      "id": "quote_time_50",
+      "kind": "time",
+      "input": {
+        "mode": "SOURCE_DATETIME",
+        "final": true,
+        "calendar": false,
+        "future": false
+      },
+      "expected": true
+    },
+    {
+      "id": "quote_time_51",
+      "kind": "time",
+      "input": {
+        "mode": "SOURCE_DATETIME",
+        "final": false,
+        "calendar": false,
+        "future": false
+      },
+      "expected": false
+    },
+    {
+      "id": "quote_time_52",
+      "kind": "time",
+      "input": {
+        "mode": "SOURCE_DATETIME",
+        "final": true,
+        "calendar": false,
+        "future": true
+      },
+      "expected": false
+    },
+    {
+      "id": "quote_time_53",
+      "kind": "time",
+      "input": {
+        "mode": "VERIFIED_SESSION_FINAL_BOUND",
+        "final": true,
+        "calendar": true,
+        "future": false
+      },
+      "expected": true
+    },
+    {
+      "id": "quote_time_54",
+      "kind": "time",
+      "input": {
+        "mode": "VERIFIED_SESSION_FINAL_BOUND",
+        "final": true,
+        "calendar": false,
+        "future": false
+      },
+      "expected": false
+    },
+    {
+      "id": "quote_time_55",
+      "kind": "time",
+      "input": {
+        "mode": "MISSING",
+        "final": true,
+        "calendar": true,
+        "future": false
+      },
+      "expected": false
+    },
+    {
+      "id": "stale_86399",
+      "kind": "stale",
+      "input": {
+        "seconds": 86399
+      },
+      "expected": false
+    },
+    {
+      "id": "stale_86400",
+      "kind": "stale",
+      "input": {
+        "seconds": 86400
+      },
+      "expected": false
+    },
+    {
+      "id": "stale_86401",
+      "kind": "stale",
+      "input": {
+        "seconds": 86401
+      },
+      "expected": true
+    },
+    {
+      "id": "wallet_projection_bank",
+      "kind": "projection",
+      "input": {
+        "kind": "bank"
+      },
+      "expected": "bank"
+    },
+    {
+      "id": "wallet_projection_wallet",
+      "kind": "projection",
+      "input": {
+        "kind": "wallet"
+      },
+      "expected": "bank"
+    },
+    {
+      "id": "wallet_projection_price",
+      "kind": "projection",
+      "input": {
+        "kind": "price"
+      },
+      "expected": "price"
+    },
+    {
+      "id": "wallet_projection_manual",
+      "kind": "projection",
+      "input": {
+        "kind": "manual"
+      },
+      "expected": null
+    },
+    {
+      "id": "wallet_projection_csv",
+      "kind": "projection",
+      "input": {
+        "kind": "csv"
+      },
+      "expected": null
+    },
+    {
+      "id": "same_amount_time_not_economic_identity",
+      "kind": "dedupe",
+      "input": {
+        "trustedSameEconomicKey": false,
+        "restoredReceiptMissing": false
+      },
+      "expected": "REVIEW_NOT_SUPPRESS"
+    },
+    {
+      "id": "cross_device_verified_same_economic_key",
+      "kind": "dedupe",
+      "input": {
+        "trustedSameEconomicKey": true,
+        "restoredReceiptMissing": false
+      },
+      "expected": "PROVENANCE_ONLY_DELTA_ZERO"
+    },
+    {
+      "id": "restore_missing_not_auto_reingest",
+      "kind": "dedupe",
+      "input": {
+        "trustedSameEconomicKey": true,
+        "restoredReceiptMissing": true
+      },
+      "expected": "INVESTIGATE_NO_REINGEST"
+    }
+  ]
+}

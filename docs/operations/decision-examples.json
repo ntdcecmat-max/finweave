@@ -1,0 +1,582 @@
+{
+  "status": "ABSTRACT_POLICY_ONLY_NOT_PRODUCTION_RUNTIME",
+  "cases": [
+    {
+      "id": "open-ready",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": true
+    },
+    {
+      "id": "open-deny-deployLockHeld",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": false,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-maintenance",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": false,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-oldWriterFenced",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": false,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-noActiveClaims",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": false,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-schemaChecksumsMatch",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": false,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-grantsVerified",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": false,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-registryCompatible",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": false,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-recoveryGateOpen",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": false,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-smokePassed",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": false,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-backupVerified",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": false,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-deny-pendingDeniesAnchored",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": false,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "open-wrong-phase",
+      "kind": "canOpen",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "migrated",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "rollback-compatible",
+      "kind": "canRollback",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": true
+      },
+      "expected": true
+    },
+    {
+      "id": "rollback-unknown",
+      "kind": "canRollback",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": true,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": false
+      },
+      "expected": false
+    },
+    {
+      "id": "rollback-unfenced",
+      "kind": "canRollback",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "smoke_passed",
+        "deployLockHeld": true,
+        "maintenance": true,
+        "oldWriterFenced": false,
+        "noActiveClaims": true,
+        "schemaChecksumsMatch": true,
+        "grantsVerified": true,
+        "registryCompatible": true,
+        "recoveryGateOpen": true,
+        "smokePassed": true,
+        "backupVerified": true,
+        "pendingDeniesAnchored": true,
+        "priorCodeCompatible": true
+      },
+      "expected": false
+    },
+    {
+      "id": "rpo-snapshot-23-0",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 23,
+        "uploadAgeHours": 0,
+        "durableReceipt": true,
+        "inventoryVerified": true
+      },
+      "expected": true
+    },
+    {
+      "id": "rpo-snapshot-24-0",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 24,
+        "uploadAgeHours": 0,
+        "durableReceipt": true,
+        "inventoryVerified": true
+      },
+      "expected": true
+    },
+    {
+      "id": "rpo-snapshot-24.01-0",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 24.01,
+        "uploadAgeHours": 0,
+        "durableReceipt": true,
+        "inventoryVerified": true
+      },
+      "expected": false
+    },
+    {
+      "id": "rpo-snapshot-25-0",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 25,
+        "uploadAgeHours": 0,
+        "durableReceipt": true,
+        "inventoryVerified": true
+      },
+      "expected": false
+    },
+    {
+      "id": "rpo-snapshot-23-3",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 23,
+        "uploadAgeHours": 3,
+        "durableReceipt": true,
+        "inventoryVerified": true
+      },
+      "expected": true
+    },
+    {
+      "id": "rpo-no-receipt",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 1,
+        "uploadAgeHours": 0,
+        "durableReceipt": false,
+        "inventoryVerified": true
+      },
+      "expected": false
+    },
+    {
+      "id": "rpo-no-inventory",
+      "kind": "rpo",
+      "input": {
+        "snapshotAgeHours": 1,
+        "uploadAgeHours": 0,
+        "durableReceipt": true,
+        "inventoryVerified": false
+      },
+      "expected": false
+    },
+    {
+      "id": "expired-33.9",
+      "kind": "snapshotMustRemove",
+      "input": {
+        "ageDays": 33.9
+      },
+      "expected": false
+    },
+    {
+      "id": "expired-34",
+      "kind": "snapshotMustRemove",
+      "input": {
+        "ageDays": 34
+      },
+      "expected": false
+    },
+    {
+      "id": "expired-34.1",
+      "kind": "snapshotMustRemove",
+      "input": {
+        "ageDays": 34.1
+      },
+      "expected": true
+    },
+    {
+      "id": "expired-35",
+      "kind": "snapshotMustRemove",
+      "input": {
+        "ageDays": 35
+      },
+      "expected": true
+    },
+    {
+      "id": "erase-ready",
+      "kind": "canCompleteErasure",
+      "input": {
+        "witnessAnchored": true,
+        "activePurged": true,
+        "actualPacksPurged": true,
+        "allCopiesInventoried": true
+      },
+      "expected": true
+    },
+    {
+      "id": "erase-metadata-only",
+      "kind": "canCompleteErasure",
+      "input": {
+        "witnessAnchored": true,
+        "activePurged": true,
+        "actualPacksPurged": false,
+        "allCopiesInventoried": true
+      },
+      "expected": false
+    },
+    {
+      "id": "erase-not-anchored",
+      "kind": "canCompleteErasure",
+      "input": {
+        "witnessAnchored": false,
+        "activePurged": true,
+        "actualPacksPurged": true,
+        "allCopiesInventoried": true
+      },
+      "expected": false
+    },
+    {
+      "id": "erase-active-remains",
+      "kind": "canCompleteErasure",
+      "input": {
+        "witnessAnchored": true,
+        "activePurged": false,
+        "actualPacksPurged": true,
+        "allCopiesInventoried": true
+      },
+      "expected": false
+    },
+    {
+      "id": "erase-copies-unknown",
+      "kind": "canCompleteErasure",
+      "input": {
+        "witnessAnchored": true,
+        "activePurged": true,
+        "actualPacksPurged": true,
+        "allCopiesInventoried": false
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-PASS",
+      "kind": "gatePass",
+      "input": {
+        "status": "PASS",
+        "sameSource": true,
+        "sameConfig": true,
+        "executed": true
+      },
+      "expected": true
+    },
+    {
+      "id": "gate-NOT_RUN",
+      "kind": "gatePass",
+      "input": {
+        "status": "NOT_RUN",
+        "sameSource": true,
+        "sameConfig": true,
+        "executed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-BLOCKED",
+      "kind": "gatePass",
+      "input": {
+        "status": "BLOCKED",
+        "sameSource": true,
+        "sameConfig": true,
+        "executed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-FAIL",
+      "kind": "gatePass",
+      "input": {
+        "status": "FAIL",
+        "sameSource": true,
+        "sameConfig": true,
+        "executed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-oldsource",
+      "kind": "gatePass",
+      "input": {
+        "status": "PASS",
+        "sameSource": false,
+        "sameConfig": true,
+        "executed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-oldconfig",
+      "kind": "gatePass",
+      "input": {
+        "status": "PASS",
+        "sameSource": true,
+        "sameConfig": false,
+        "executed": true
+      },
+      "expected": false
+    },
+    {
+      "id": "gate-unexecuted",
+      "kind": "gatePass",
+      "input": {
+        "status": "PASS",
+        "sameSource": true,
+        "sameConfig": true,
+        "executed": false
+      },
+      "expected": false
+    }
+  ]
+}

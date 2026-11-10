@@ -1,0 +1,52 @@
+import {spawn} from 'node:child_process';
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import assert from 'node:assert/strict';
+const root=process.cwd(),web=resolve(root,'finweave-web'),backend=resolve(root,'finweave-backend');
+const {chromium,expect}=createRequire(resolve(web,'package.json'))('@playwright/test'),{Pool}=createRequire(resolve(backend,'package.json'))('pg');
+process.chdir(backend);
+const {startCluster}=await import('../../finweave-backend/scripts/runtime-cluster.ts');
+const {buildApp}=await import('../../finweave-backend/src/runtime/app.ts');
+const cluster=await startCluster('screenshot-ui-'+Date.now()),pool=new Pool({connectionString:cluster.configs.user.databaseUrl}),mails=[];
+cluster.configs.user.origin='http://127.0.0.1:14310';
+const app=await buildApp(cluster.configs.user,pool,{async send(m){mails.push(m);}}),out=resolve(root,'docs/execution/evidence/screenshots-2026-11-03/ui-'+Date.now());await mkdir(out,{recursive:true});
+let server,browser,page;const result={status:'FAIL',checks:[],scope:'synthetic images; actual Windows OCR / browser / HTTP / PostgreSQL'};
+const pass=name=>{result.checks.push(name);console.log('PASS '+name);};
+try{
+ await app.listen({host:'127.0.0.1',port:14310});
+ const env=Object.fromEntries(Object.entries(process.env).filter(([key])=>!key.startsWith('FW_')));
+ server=spawn(process.execPath,['node_modules/vite/bin/vite.js','--config','vite.screenshot-test.config.ts','--host','127.0.0.1'],{cwd:web,env:{...env,VITE_DATA_MODE:'backend',FINWEAVE_VITE_CACHE:'.local/vite-screenshot-ui'},windowsHide:true,stdio:'ignore'});
+ let ready=false;for(let i=0;i<120;i++){try{if((await fetch('http://127.0.0.1:15173')).ok){ready=true;break;}}catch{}await new Promise(ok=>setTimeout(ok,250));}assert(ready);
+ browser=await chromium.launch({channel:'msedge',headless:true});page=await browser.newPage({viewport:{width:1440,height:1000}});page.setDefaultTimeout(25000);
+ await page.goto('http://127.0.0.1:15173/auth/register');const email='screenshot-'+Date.now()+'@owner.test',password='Screenshot UI password 2026!';
+ await page.locator('#auth-name').fill('Screenshot test');await page.locator('#auth-email').fill(email);await page.locator('#auth-password').fill(password);await page.locator('#auth-confirm').fill(password);await page.getByRole('checkbox').check();await page.getByRole('button',{name:'Tạo tài khoản',exact:true}).click();await page.waitForURL(/auth\/verify/);await page.locator('#auth-code').fill(mails.findLast(m=>m.email===email).code);await page.getByRole('button',{name:'Xác nhận mã',exact:true}).click();await page.waitForURL(/\/home/);
+ const call=(op,input={},mutation=null)=>page.evaluate(async({op,input,mutation})=>{const api=await import('/src/services/real-transport.ts');return api.realCall(op,input,{mutation});},{op,input,mutation});
+ const w=(await call('getWorkspace')).data,date=w.businessClock.slice(0,10),input={name:'BIDV synthetic UI',kind:'bank',opening:{value:'100000',currency:'VND'},openingDate:date};
+ const preview=(await call('previewMutation',{operationId:'createAccount',input,expectedWorkspaceVersion:w.version,expectedObjectVersions:{}})).data;
+ const account=(await call('createAccount',input,{idempotencyKey:crypto.randomUUID(),expectedWorkspaceVersion:w.version,expectedObjectVersions:{},previewToken:preview.previewToken})).data.affectedIds[0];
+ const fixture=await browser.newPage({viewport:{width:600,height:1100},deviceScaleFactor:1});
+ const [y,m,d]=date.split('-');const formatted=d+'/'+m+'/'+y;
+ const notice=(amount,ref,time)=>`<article><h2>BIDV xin thong bao toi Quy khach</h2><p>Thoi gian giao dich: ${time} ${formatted}</p><p>Tai khoan thanh toan: 1234567890</p><p>So tien GD: <b>${amount} VND</b></p><p>So du cuoi: 900,000 VND</p><p>Noi dung giao dich: Thanh toan thu nghiem</p><p>Ma giao dich: ${ref}</p></article>`;
+ const style='<style>body{font-family:Arial;background:white;margin:16px}article{padding:20px;background:#f3f4f3;border-radius:24px;margin-bottom:24px}h2{font-size:24px}p{font-size:24px;line-height:1.5;margin:12px 0}</style>';
+ await fixture.setContent(style+notice('-10,000','UI-TEST-001','14:58')+notice('+10,000','UI-TEST-002','14:56'));const multi=resolve(out,'synthetic-two.png');await fixture.screenshot({path:multi,fullPage:true});
+ await fixture.setContent(style+notice('5,000','UI-TEST-003','14:59'));const unsigned=resolve(out,'synthetic-unsigned.png');await fixture.screenshot({path:unsigned,fullPage:true});await fixture.close();
+ await page.goto('http://127.0.0.1:15173/transactions');await page.getByLabel('Ghi vào tài khoản').selectOption(account);await page.getByLabel('Tệp ảnh giao dịch').setInputFiles(multi);
+ await expect(page.locator('#screenshot-import')).toContainText('Đã lưu 2 giao dịch.',{timeout:30000});assert.equal((await call('getAccount',{id:account})).data.balance.value.value,'100000');pass('upload -> JPEG compression -> real Windows OCR -> two automatic ledger entries');
+ await page.locator('#screenshot-import').screenshot({path:resolve(out,'desktop.png')});
+ await page.reload();await expect(page.locator('.transaction-list')).toContainText('Ảnh giao dịch');const transactions=await cluster.admin.query("SELECT id,payload FROM fw_finance.event_heads WHERE workspace_id=$1 AND payload->>'kind'<>'opening'",[w.id]);assert.equal(transactions.rows.length,2);pass('transactions survive a full browser reload');
+ await page.getByLabel('Tệp ảnh giao dịch').setInputFiles(multi);await expect(page.locator('#screenshot-import')).toContainText('Bỏ qua 2 giao dịch trùng.',{timeout:30000});pass('resubmitting the same image skips both duplicates');
+ await page.getByRole('button',{name:'Nhập ảnh khác',exact:true}).click();await page.getByLabel('Tệp ảnh giao dịch').setInputFiles(unsigned);await expect(page.getByLabel('Loại giao dịch 1')).toBeVisible({timeout:30000});await expect(page.getByLabel('Loại giao dịch 1')).toHaveValue('unknown');await page.getByLabel('Loại giao dịch 1').selectOption('expense');await page.getByRole('button',{name:'Xác nhận và lưu 1 giao dịch',exact:true}).click();await expect(page.locator('#screenshot-import')).toContainText('Đã lưu 1 giao dịch.');assert.equal((await call('getAccount',{id:account})).data.balance.value.value,'95000');pass('unsigned OCR result waits for explicit correction before saving');
+ await page.setViewportSize({width:390,height:844});await page.locator('#screenshot-import').screenshot({path:resolve(out,'mobile.png')});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);pass('390px mobile layout has no horizontal overflow');
+ await page.reload();await page.locator('.mobile-transactions .table-btn').first().click();await expect(page.getByRole('dialog')).toContainText('Nguồn ảnh giao dịch');await expect(page.getByRole('dialog')).toContainText('Giờ giao dịch trên ảnh');pass('transaction detail shows saved screenshot provenance and occurrence time');
+ await page.keyboard.press('Escape');await page.setViewportSize({width:1440,height:1000});
+ async function addAccount(name){const workspace=(await call('getWorkspace')).data,body={name,kind:'bank',opening:{value:'100000',currency:'VND'},openingDate:date},p=(await call('previewMutation',{operationId:'createAccount',input:body,expectedWorkspaceVersion:workspace.version,expectedObjectVersions:{}})).data;return (await call('createAccount',body,{idempotencyKey:crypto.randomUUID(),expectedWorkspaceVersion:workspace.version,expectedObjectVersions:{},previewToken:p.previewToken})).data.affectedIds[0];}
+ const genericAccount=await addAccount('FutureBank selected account'),genericFixture=await browser.newPage({viewport:{width:700,height:650},deviceScaleFactor:1});
+ const genericBody=`<article><h2>Bank: FutureBank</h2><p>Account: 5556667770</p><p>Credited: 35000 VND</p><p>${date} 13:14:15</p><p>Description: Synthetic salary</p></article>`;
+ await genericFixture.setContent(style+genericBody);const genericImage=resolve(out,'generic-bank.png');await genericFixture.screenshot({path:genericImage,fullPage:true});
+ await genericFixture.setContent(style+'<div>Image copy</div>'+genericBody);const similarImage=resolve(out,'generic-bank-copy.png');await genericFixture.screenshot({path:similarImage,fullPage:true});await genericFixture.close();
+ await page.reload();await page.getByLabel('Ghi vào tài khoản').selectOption(genericAccount);await page.getByLabel('Tệp ảnh giao dịch').setInputFiles(genericImage);await expect(page.locator('#screenshot-import')).toContainText('Đã lưu 1 giao dịch.',{timeout:30000});assert.equal((await call('getAccount',{id:genericAccount})).data.balance.value.value,'135000');pass('unknown bank and English credit layout auto-save without a reference or bank-specific template');
+ await page.getByRole('button',{name:'Nhập ảnh khác',exact:true}).click();await page.getByLabel('Tệp ảnh giao dịch').setInputFiles(similarImage);const duplicateChoice=page.getByLabel('Tôi đã đối chiếu và xác nhận đây là giao dịch khác, cần ghi thêm');await expect(duplicateChoice).toBeVisible({timeout:30000});await expect(page.getByRole('button',{name:'Xác nhận và lưu 1 giao dịch',exact:true})).toBeDisabled();await duplicateChoice.check();await page.getByRole('button',{name:'Xác nhận và lưu 1 giao dịch',exact:true}).click();await expect(page.locator('#screenshot-import')).toContainText('Đã lưu 1 giao dịch.');assert.equal((await call('getAccount',{id:genericAccount})).data.balance.value.value,'170000');pass('similar reference-less screenshot waits for an explicit distinct-transaction decision in the UI');
+ result.status='PASS';
+}catch(e){result.error=String(e.message);if(page&&!page.isClosed()){await page.screenshot({path:resolve(out,'failure.png'),fullPage:true}).catch(()=>{});result.visibleText=await page.locator('body').innerText().catch(()=>null);}throw e;}
+finally{await browser?.close();if(server&&server.exitCode===null){const close=new Promise(ok=>server.once('exit',ok));server.kill();await close;}await app.close();await pool.end();await cluster.stop();await writeFile(resolve(out,'results.json'),JSON.stringify(result,null,2));console.log('Evidence: '+out);}

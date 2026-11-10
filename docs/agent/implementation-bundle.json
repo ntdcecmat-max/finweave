@@ -1,0 +1,72 @@
+{
+  "id": "FW-AGENT-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-005",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+  "files": {
+    "api": {
+      "path": "docs/contracts/v2-t1-r5/openapi.json",
+      "sha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802"
+    },
+    "database": {
+      "path": "docs/data/target-t1-async/target-model.json",
+      "sha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424"
+    },
+    "sourceBundle": {
+      "path": "docs/sources/implementation-bundle.json",
+      "sha256": "f5eda75e794ade7236cad64a6d1aebfcef8ccdcc67c2fead5d8cccb372e5f7bc"
+    },
+    "asyncBundle": {
+      "path": "docs/async/implementation-bundle.json",
+      "sha256": "4994176b71f62ff2e776fe68866d563c3e8809c103b8db921dac8c7a5950bc62"
+    },
+    "androidBase": {
+      "path": "docs/android/implementation-bundle.json",
+      "sha256": "1a460f76a969d80dace0fd9af0bb574a1a29db861173f49714b3deaa3f4b066b"
+    },
+    "nativeBridge": {
+      "path": "docs/agent/native-bridge-003.json",
+      "sha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+    },
+    "security": {
+      "path": "docs/security/t1/security-policy.json",
+      "sha256": "f02497dc8584babf6aa6a27f3302198abc675ca407becee0a35f46075291ae97"
+    },
+    "engine": {
+      "path": "docs/domain/engine-policy.json",
+      "sha256": "2cd8171dde4c324e5408f0e3f354f48fb5b9c402213c4529e87e17f8da3d53aa"
+    },
+    "policy": {
+      "path": "docs/agent/agent-policy.json",
+      "sha256": "4904fdc0bb039aba4eabcfdd80f160f0f5aaeac54052e6406aa2ad0c5510a7ac"
+    },
+    "tools": {
+      "path": "docs/agent/tool-registry.json",
+      "sha256": "653747425c2886821fa1a3fdfca104368b37f256019b8b6e25413e825d1e4315"
+    },
+    "decisions": {
+      "path": "docs/agent/decision-schemas.json",
+      "sha256": "60c54d88db9265a0cb896ba19f3a4494b7ad4ab1b6c8407ff946fd8ccb3237be"
+    },
+    "promptTemplate": {
+      "path": "docs/agent/prompt-template.md",
+      "sha256": "9f20dbcdf3731363116b0d2a0b4c742df13e6a85ec5a75e9ffffa68ff22149fb"
+    },
+    "evalCases": {
+      "path": "docs/agent/evaluation-cases.json",
+      "sha256": "f177997c5d4fa1468702e694713595bcad0bc64410413af2baf5461123ab1151"
+    },
+    "aiProductSpec": {
+      "path": "docs/product/ai-agent-specification.md",
+      "sha256": "1a10628ed8a5e2f0d25f3ee738761fb5a97d0602080c3d9d3f513e91be3d4664"
+    },
+    "modelManifest": {
+      "path": "docs/agent/model-manifest-template.json",
+      "sha256": "16b1daa4cef2213c834dc175e61ec21ea6c707049eb56c79f16088da1dda486c"
+    }
+  },
+  "inheritedBindings": "Source/async/API004 and security/API002 semantic base; current request/auth actors unchanged, explicit output/bridge delta in API005. Grants/registry/consumers NOT_IMPLEMENTED.",
+  "runtime": "NOT_RUN",
+  "modelEnabled": false
+}

@@ -69,7 +69,7 @@ export const operations = {
  updateGoal:operation('mutation',obj({id:S.Id,goal:S.GoalInput,reason:S.Reason}),S.MutationAck,planning,true),
  allocateGoal:operation('mutation',obj({goalId:S.Id,accountId:S.Id,amount:S.Amount,reason:S.Reason}),S.MutationAck,planning,true),
  releaseGoalAllocation:operation('mutation',obj({goalId:S.Id,allocationId:S.Id.nullable(),reason:S.Reason}),S.MutationAck,planning,true),
- markGoalAchieved:operation('mutation',reasonId,S.MutationAck,planning,true),
+ markGoalAchieved:operation('mutation',reasonId.extend({assessment:obj({monthlyExpense:S.OpeningAmount,debt:S.OpeningAmount.nullable()}).optional()}),S.MutationAck,planning,true),
  archiveGoal:operation('mutation',reasonId,S.MutationAck,planning,true),
  simulateGoalOutcome:operation('mutation',S.SimulationInput,S.Simulation,['workspace','simulations','aiStaleness'],true),
  listSimulations:operation('query',obj({goalId:S.Id.nullable(),page:S.PageInput}),S.page(S.Simulation),[]),

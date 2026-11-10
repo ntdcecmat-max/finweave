@@ -1,0 +1,20 @@
+requirement,consumer,scenario,evidenceScope,result,evidence
+API005_AUTH,user,register OTP owned workspace session restore,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+API005_FIELDS,user,decimal string above 2^53 and UI readback,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+API005_NULL_TIME,user,null timestamp schedule goal and timezone instant,REAL_HTTP_POSTGRES_AND_UNIT,PASS,docs/frontend/be19-evidence-index.json
+API005_PAGING,user,opaque cursor snapshot consistency,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_STATES,user,empty offline abort stale denied representative flows,REAL_HTTP_POSTGRES,PASS_TESTED_SUBSET,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_LOADING_ERROR,user_admin,loading and error regression UI flows,SYNTHETIC_MOCK,PASS_MOCK_ONLY,docs/execution/evidence/be19/mockbrowser-1791817327854/mock-browser-results.json
+BE19_REAL_LOADING_ERROR,user,delayed genuine snapshot connection refused and UI retry,REAL_HTTP_WITH_NETWORK_FAULT,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_SYNC,user_browser_pair,two consumers poll persisted workspace,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_DUPLICATE,user,event and import exact replay same key,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_LOGOUT_REVOKE,user_admin,signOut session denied and admin logout,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_CANCEL,user,completed Assistant cancel refused with persisted result,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_LATE,user,genuine HTTP response delayed after transport fence,REAL_HTTP_WITH_DELAY_FAULT,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_ADMIN,admin,MFA seven routes role denial,REAL_HTTP_POSTGRES,PASS,docs/execution/evidence/be19/integration-1791822427706/integration-results.json
+BE19_OPS_CONCURRENCY,backend_ops,reason digest expiry replay lease accepted vs applied,REAL_POSTGRES_INJECT,PASS,docs/execution/evidence/backend-ops-local-2026-10-11/ops-1791815763972.json
+BE19_REGRESSION,user_admin,67 browser cases preserved,SYNTHETIC_MOCK,PASS_MOCK_ONLY,docs/execution/evidence/be19/mockbrowser-1791817327854/mock-browser-results.json
+BE19_ANDROID,android,debug APK and 44 JVM tests,BUILD_JVM,PASS_BUILD_JVM_ONLY,docs/execution/evidence/be19/android-1791817279713/native-result.json
+BE19_NATIVE_E2E,android,Keystore broker enrollment logout revoke offline cancel,DEVICE_E2E,NOT_RUN_USER_CONFIRMED_NO_DEVICE,docs/frontend/be19-report.md
+BE19_CROSS_NATIVE,three_clients,web native admin synchronization,DEVICE_E2E,NOT_RUN_USER_CONFIRMED_NO_DEVICE,docs/frontend/be19-report.md
+BE19_PROTOTYPE_ACTIONS,user,refreshSource ingestSourceEvidence reviseSourceRecord,REAL_HTTP,NOT_IMPLEMENTED_SYNTHETIC_ONLY,docs/frontend/be19-consumer-mapping.json

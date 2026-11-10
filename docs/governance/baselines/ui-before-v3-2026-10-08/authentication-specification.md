@@ -1,0 +1,24 @@
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
+> Trạng thái hiện hành 06/10/2026: bước5 đã chuyển frontend sang stateful mock network contract1.1.0. Phần “planned/Step5pending” bên dưới giữ lịch sử thiết kế bước4; implementation thực tế, lựa chọn read model và giới hạn ở [ADR004](../architecture/adr/ADR-004-stateful-mock-and-read-model.md) và [Mock Implementation](../frontend/mock-implementation.md). Real transport/security vẫn BLOCKED.
+
+# Authentication & System Screens v0.1
+
+DES-AUTH-001 · 06/10/2026 · bổ sung theo yêu cầu trực tiếp về màn auth/đăng nhập, không thay28REQ/AC cũ. System utility ngoài5nav; auth mock chạy trong app hiện tại. [Identity contract](../contracts/v1/identity.openapi.json), interfaces `src/contracts/identity.ts`; realauth/recovery/device enrollment BLOCKED theo [Security](../security/security-design.md).
+
+| Route/giao diện | Fields / validation / actions | State / hậu điều kiện / quyền |
+|---|---|---|
+| /auth/login | Emaildemo @finweave.test*, passworddemo*; Điền thôngtinmẫu/HiệnẨnpassword local; submitMockAuthService.signIn; linksregister/forgot | initial/editing/invalidcredentials/challenge; khôngfinancequeries trướcxácthực; knownfixture demo@finweave.test / FinWeaveDemo!2026; genericerror khôngprofileleak |
+| /auth/register | name*1–80, emaildemo*, password*12–128 cóchữsốkýhiệu, confirmation*match, syntheticAcknowledgement*true | validate/duplicate/challenge; verifiedregistration createsmemoryidentity; khôngmail/terms/billing/socialsignin; reloadresetdemoidentity |
+| /auth/verify | code*6digits, challengeexisting/notexpired5min; demo123456; submitverifyIdentityChallenge | missingchallenge/wrongcode/expired/verified; single-usechallenge→owner30minsession; capturedreturnTo chỉinternalbusinessroute; notreal2FAproof |
+| /auth/forgot | emaildemo*; requestPasswordReset genericresponse choexisting/unknown .test; CTA môphỏnglinkreset | validation/submitted; khôngmaildelivery; unknowncannotresetaccount; same response tránhenumerationdemo |
+| /auth/reset?token=… | tokenopaque, password*/confirmation* rulesnhưregister; resetIdentityPassword | invalid/consumedtoken/mismatch/completed; dummycredential changedmemory, signIn usesnewpassword; tokenoneuse; routeunknowntokennoreset |
+| /auth/expired | No sensitivefields; CTA đăngnhậplại | sessionexpired/cleared; actual30mintimer hoặcSettings thửhếtphiên; cancelsqueries/clearscache/financialfixture/chat/drafts; notfinancialclock |
+| /auth/denied | No financialfields; CTA workspaceownednếuauthenticated hoặclogin | 403illustration/authzscenarioui, nosensitiveDTO; noswitchforeignworkspace; realobjectauthunverified |
+| Settings→Tài khoản & phiên | Profilemockname/email (privacy rendershidden), owner/device/sessionlabel; signOut; Thửhếtphiên; Thửtừchốitruycập | signOutclearsqueryandsyntheticfinancialsession/chat/UI; credentialfixturememory survives untilpage reload forregister/resetwalkthrough; backtoprelogin; noprovider/logoutreal |
+
+Protected-route gate nằm trước AppProvider: unauthenticated khôntrender/fetchfinancialworkspace. Dummycredentials only memory. Synthetic sessionmarker (identity/expiry, khôngpassword/token/key) giữ trong sessionStorage của tab30phút để reload quaylạiworkspace; logout/expiry clear marker. Marker chỉmock, khôngproofreal auth. Dummycredentials memoryonly explicitlyNOTrealpasswordstorage/securityscheme. Realpasswordinputs/credentialprotocolmustnotplaintextforwardOpsgateway; identitybootstrap/enrollment/resetauthority independentOpsrequiredPoC. MockAuthService khôngHTTP/provider/mail; logicalidentityAPIpaths spec choadapterbước5, khôngclaim endpoint deployed.
+
+Visual: giữ primarygreen, fontSegoeUI, componentButton/Badge/input/focus; desktopbrandstory+formcolumn, mobilebrandbar+fullwidthfields; text Việt, 44pxtargets, alert/status semantics, taborder, focusheadingafterroute, inputerrorfocus, passwordshowtogglearia-pressed. Mãdemohiệnrõkhôngprompt userrealOTP. Browserback fromverifyphảicancelchallengebylogin/link; passwordfields clearedroutechange vàafter successfulchallengecreation. Authsessiontimer clientDate.now khácfinancialbusinessClock cốđịnhfixture.
+
+Authflowcases bổ sung AUTH-UI-01…08 là acceptance checks cho yêu cầu mới, không renumber/recover oldbaselineAC: protecteddeeplinklogin+return; wrongcredential/code; registervalidate/verify/login; forgot/reset/tokenconsumed; logoutclearsfinancialedit/history; sessionexpiredclear;403noDTO; desktop/mobile360/390keyboard/axe. Evidence ghi khi chạy; chưauserparticipation/realsecurityPoC.

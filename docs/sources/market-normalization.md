@@ -1,0 +1,27 @@
+# Chuẩn hóa giá và thời điểm
+
+## Stock catalogue/price
+
+Identity là instrumentId + exchange + listing lifecycle/version, không chỉ symbol. Source V3 catalogue adapter xác minh loại cổ phiếu cơ sở/đơn vị VND/share, listing/trading status; không coi CW/future/ETF hoặc ticker trùng sàn là cash stock được hỗ trợ. Delisted/suspended/unknown vẫn giữ holding/history, giá không trở thành0. Không tự đổi symbol identity khi tái niêm yết. User vẫn nhập mã+số lượng; ambiguity cần xác nhận catalogue, không bắt nhập giá hằng ngày.
+
+V3 candidate GET `/api/v3/data/securitiesByBoard`, `/api/v3/data/securitiesSummary`, `/api/v3/data/ohlc`; read-only API origin `https://api.ssi.com.vn` theo docs. Không endpoint trading/order/asset account, không dùng API token có quyền giao dịch nếu không cần. Các endpoints/paging/filter/units cần kiểm lại khi PoC và pin adapter version; chưa gọi các endpoints này. Không lấy scale1000 hoặc page cap của V2 áp V3. Header reset format/unit chưa được xác nhận, retry deny until parse semantics known.
+
+Stock basis dùng **unadjusted close** nếu nguồn xác nhận đáp ứng; adjusted series không thay close cho số share owner đang giữ. Split/dividend/corporate action ảnh hưởng quantity cần Engine command/owner evidence; price worker không đổi quantity/cash/ledger. Volume không quantity của owner. Decimal strings → exact decimal/rational → canonical VND/share tối đa8fraction digits và18integer digits theo API; không JS float, không truncate/round silently khi nguồn vượt precision. Positive finite only, missing/zero/NaN/HTML/error-body/duplicate page mismatch bị reject, giữ last-good.
+
+## Gold profiles và locale
+
+Profile frozen: product/purity/brand/region/sourceRef/side/currency/unit/version. Canonical valuation VND/chỉ, 1lượng=10chỉ; source scale nghìn nhân1000 **đúng một lần**. Quote observation lưu giá đã bỏ scale nghìn nhưng **giữ sourceUnit** để khớp ARCH08: ví dụ hoàn toàn giả `12345` nghìnVND/lượng → stored price12345000VND/lượng → valuation1234500VND/chỉ. `1234.5` nghìnVND/chỉ → stored1234500VND/chỉ. Không vừa chia10 giá stored vừa để unit=luong, không rounding unit price trước nhân quantity. Derived price/valuation dùng exact rational khi chia10 tạo nhiều hơn8fraction digits; không buộc ghi một quote mới đã làm tròn. Giá đã là giá product không nhân purity thêm. Tất cả ví dụ là fixture giả, không live market quote.
+
+Locale/decimal/group separators được pin cho đúng source field/version; không tự đoán `1,234` là1.234 hay1234. Invalid grouping/Unicode digit/currency lẫn trong field machine/precision vượt schema → reject. Display format không được chạy ngược thành parser tự đoán. Giá mua/bán lưu riêng side; buy estimate ≠sell replacement; chưa chọn profile thì no compatible quote. Foreign XAU/oz hay khácregion/brand không tự fallback, không tự thêm FX provider ngoài feature đã đặc tả.
+
+## quoteAsOf khác fetchedAt và thời điểm biết dữ liệu
+
+quoteAsOf là thời điểm giá đại diện; fetchedAt là lúc nhận; recordedAt/history cutoff là lúc hệ thống biết. Không stamp fetchedAt để làm quote cũ thành fresh. Timezone thị trường Asia/Ho_Chi_Minh được pin, UTC trên wire. Reject quote time trong tương lai hoặc tradingDate bất khả thi. source time chỉ có ngày cần **verified finality + verified session calendar/time mapping** mới suy ra session bound, lưu `timePrecision=session_bound`, semantics=VERIFIED_SESSION_FINAL_BOUND trong private profile_snapshot và không nói đây là timestamp upstream chính xác. Calendar phải bao phủ sàn/date/holiday/session thực và có version; không đoán14:45 cho mọi market. Chưa có các bằng chứng này thì date-only row không publish quote mới. Gold page missing date/time cũng không publish fresh.
+
+Nếu nguồn cung cấp datetime chính xác, dùng SOURCE_DATETIME sau timezone/format/finality check. Intraday đang giao dịch không gọi final unadjusted close. Daily18:00 là lịch **thử cập nhật**, không bảo đảm lúc đó nguồn đã có giá đóng cửa hôm nay. Khi chưa đủ quote semantics giữ quote cũ/unknown và error code SOURCE_TIME_UNKNOWN hoặc SOURCE_BASIS_UNVERIFIED; không bịa snapshot. Weekend/holiday/suspension giữ last-known, không backfill synthetic ngày thiếu hoặc đổi quoteAsOf sang ngày chạy job.
+
+ARCH08 default stale khi price/FX age>24h (đúng24h chưa stale), source success>48h, quantity>30d. Không đổi ngầm threshold theo calendar; marketClosed diagnostic không reset freshness. `quality` tính lại tại read asOf; row từng fresh không vĩnh viễn fresh. Historical snapshot dùng frozen quote/profile/cutoff, correction mới không sửa bản sealed. Provenance store nguồn+adapter+profile+rights+calendar versions, normalization+time precision và input fingerprint chuẩn hóa, không hash/store unauthorized upstream body.
+
+## Fallback/corrections
+
+Fallback tự động chỉ khi explicitly approved compatible instrument/profile/side/basis/unit/time/rights scope và quota, giữ provider provenance mới. Thay provider/cache entitlement không được sửa history hoặc chia sẻ credential/cache giữa tenants. Chưa xác nhận tương thích thì giữ last-good/unknown, cho owner manual dated quote với nguồn rõ. Manual không được masquerade SSI/PNJ; `compatible` từ client là yêu cầu, server tự validate, không authority. Correction giữ bản observation cũ, append bản mới với revision/lineage; không overwrite actual. Source fingerprint gồm normalizedvalue + source time + identity + profile/adapter/rights versions, cùng value nhưng time mới vẫn observation mới.

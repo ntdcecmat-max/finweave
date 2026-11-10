@@ -1,0 +1,9 @@
+# Changelog r1 — 08/10/2026
+
+- Chọn working tree đã review, lưu HEAD/Git status/SHA256/deletions và snapshot source/config/lockfile/assets; tách output build/cache. Không restore source hoặc các original đã xóa.
+- Review 9 đường dẫn drift cũ: 2 source nghiệp vụ, 1 tooling, 6 build output. Audit-step6 hiện khác cả hash historical-after: giữ current content đã review, không suy tác nhân. Historical FAIL/raw hashes giữ nguyên.
+- Sửa metadata bảng trong canonical: ledger draft khác planning draft; durable receipt khác posted; staging/import/history/preview/replay; opening/holding/quote/Goal/draft bundle; đúng bảng metadata admin và domain worker. Thêm scope metadata để không biến dependency list thành quyền ghi. Canonical schemas/paths/examples không đổi, API **2.0.0** giữ nguyên.
+- Thay mapping generic bằng mapping có source symbol/path, actual call/reference, trạng thái, transformations và field-diff riêng; bao gồm typed Proxy, indexed service dispatch, source action lookup, admin, native và target-only internal operations. Fixtures không thành endpoint; Android permission vẫn do OS/user.
+- API/data mapping bỏ suy luận theo tên leaf; thêm storage mapping có quy tắc được review, frozen JSONB, command và Engine projections; validate canonical paths/physical columns. Model/001/ERD/dictionary tái sinh trong sandbox giống bytes hiện hành; migrations không sửa.
+- Dùng evidence revision mới, guard chống ghi đè revision đã seal; nâng kiểm tra kiểu/default/constraints/index, dependency versions, historical preservation và consistency khi ZIP. Không chạy legacy writers, frontend build/tests, SQL, provider, deploy, Git commit/push/tag.
+- Đính chính mức bằng chứng: raw Step6 đang có 130 unit pass và browser 24 pass/35 fail ở thời điểm đọc; không gắn các lượt đó với snapshot r1 hoặc nghiệm thu source hiện tại. R1 chỉ chạy artifact checks.

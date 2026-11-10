@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Thiết lập, tài khoản và tiền mặt
+actor "Chủ workspace" as Owner
+rectangle "FinWeave — Thiết lập, tài khoản và tiền mặt" {
+usecase "UC-SET-01\nThiết lập mốc theo dõi và thông\nsố" as UC_SET_01
+usecase "UC-BANK-01\nTạo và quản lý tài khoản ngân\nhàng/ví" as UC_BANK_01
+usecase "UC-CASH-01\nTạo và quản lý ví tiền mặt" as UC_CASH_01
+usecase "UC-CASH-02\nKiểm đếm và đối soát tiền mặt" as UC_CASH_02
+usecase "UC-ACC-02\nLưu trữ và khôi phục tài khoản" as UC_ACC_02
+usecase "UC-CASH-03\nXác nhận điều chỉnh chênh lệch\ntiền mặt" as UC_CASH_03
+}
+Owner -- UC_SET_01
+Owner -- UC_BANK_01
+Owner -- UC_CASH_01
+Owner -- UC_CASH_02
+Owner -- UC_CASH_03
+Owner -- UC_ACC_02
+UC_CASH_03 ..> UC_CASH_02 : <<extend>>\n[có chênh lệch và owner chọn điều chỉnh]
+note on link
+  Extension point: sau khi hiển thị chênh lệch
+end note
+@enduml

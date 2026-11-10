@@ -1,0 +1,18 @@
+# Lifecycle, polling và recovery
+
+08/10/2026. Mọi status là server authority; receipt/job/run ID chỉ trả sau durable persistence. Đồng hồ timeout client5s hiện tại không đặt trần lifetime job.
+
+| Loại | Chuyển trạng thái | Poll/retry/terminal |
+| --- | --- | --- |
+| Receipt | received→parsed→posted / needs_review / ignored / failed | received/parsed poll1,2,4,8,15s+jitter. posted/ignored terminal; needs_review đợi owner, failed chỉ reprocess qua worker policy/Review, client replay không tạo receipt mới. revision mới tạo evidence liên quan, giữ receipt cũ |
+| Import | pending→running→completed / failed | Confirm202 trả jobId. Poll như trên; failed chưa commit effects, diagnostics sanitized; same key trả cùng job, không tự tạo import mới. Retry worker giữ selected subset/file digest. Chưa completed không có committedEventIds/resultWorkspaceVersion |
+| Price | queued→running→succeeded / partial / failed / rate_limited | rate_limited→queued khi nextAttempt tới hạn; max3 attempts mỗi chu kỳ. Partial giữ last-good và per-holding reasons. Same manual request/in-flight coalesces; cooldown60s/source/workspace. Daily18:00+07, recovery latest, không giả missing days. Terminal results immutable; retry tạo attempt/job liên quan có dedupe |
+| Message | queued→processing→completed / failed / cancelled | send202; poll by ID, terminal không overwritten bởi result trễ. Cancel request không chứng minh cancelled tới ACK hoặc refetch. History lưu captured context/refs, không cập nhật narrative cũ thành số mới |
+| Agent | queued→reading→awaiting_user / simulating→draft_ready / completed / partial / failed / cancelled | awaiting_user release worker lease; answer đúng question/version resume. Max2 clarification rồi state partial + continuation explicit. User wait không tính60s active. Cancel fencing giữ draft đã tạo với label, không confirm. draft_ready nghĩa run tạo được draft, chưa active plan |
+| Draft | draft→previewed→confirmed; draft/previewed→superseded / expired | Revise/rebase về draft, invalidates preview/simulation. Preview TTL600s, draft unconfirmed30d. Expired token không tự đổi active data. Confirm same key returns committed bundle even sau expiry/version đã tăng; new key stale returns409 |
+| Device/binding | active→revoked; enabled→disabled | Không revive ID owner/key cũ bằng đổi user. Re-enroll mới challenge/key proof+ID. Quarantine queue old owner; chỉ cùng owner/device sau reauth rõ mới retry, account B không nhận queue A |
+| Ops job | queued→running→succeeded / failed / paused | Retry failed/no live lease/source enabled; disable source pauses queued. Running commit recheck source/lease before domain effects. Không ép job thành success hoặc bypass entitlement qua admin |
+
+Poll foreground tối đa60s rồi hiển thị pending và cho tiếp tục kiểm tra; không đánh dấu failed chỉ vì UI hết thời gian chờ. Background pause, focus/network-restored refetch; version sync20s. Tôn trọng Retry-After, exponential backoff+jitter capped60s cho lỗi transient; no auto retry401/403/409/422. Native outbox network retries capped5 phút, tối đa7 ngày/1000 items rồi quarantine+pause, không silent drop.
+
+Crash trước transaction commit rollback; sau commit replay result. Crash sau provider response trước commit có thể gọi lại provider nhưng quote fingerprint ngăn lịch sử trùng. Claim lease dùng transaction ngắn, network ngoài transaction; fence token+lease không stale khi commit. Receipt ACK không xóa local item nếu envelope/item validation thất bại. Batch trả partial ACK: xóa chỉ durable items, giữ rejected để quarantine hoặc sửa theo owner action; không đổi eventKey khi retry.

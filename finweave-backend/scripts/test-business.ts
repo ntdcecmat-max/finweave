@@ -1,0 +1,8 @@
+import { startCluster } from './runtime-cluster.ts';
+import { runBusinessTests } from '../tests/business.ts';
+import { mkdir,readFile,writeFile,readdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { sha } from '../src/runtime/crypto.ts';
+const source:Record<string,string>={};for(const dir of ['src/runtime','src/engine','database/runtime'])for(const name of await readdir(dir))source[dir+'/'+name]=sha(await readFile(dir+'/'+name));for(const file of ['tests/business.ts','tests/business.unit.test.ts','tests/business.oracle.test.ts','tests/business-oracle.py','scripts/test-business.ts','scripts/runtime-cluster.ts','package.json','pnpm-lock.yaml'])source[file]=sha(await readFile(file));
+const evidence:any={scope:'LOCAL_POSTGRES_BE05_BE09_BE10_BE11_BE12_BE13_API_DATABASE',node:process.version,startedAt:new Date().toISOString(),source,status:'FAIL'};let cluster:Awaited<ReturnType<typeof startCluster>>|undefined;
+try{cluster=await startCluster('business-'+Date.now());evidence.results=await runBusinessTests(cluster.admin,cluster.configs);evidence.status='PASS';}catch(e){console.error(e);evidence.error={message:(e as Error).message,stack:(e as Error).stack};process.exitCode=1;}finally{if(cluster){await cluster.stop();evidence.clusterStopped=true;}evidence.finishedAt=new Date().toISOString();const dir=resolve('../docs/execution/evidence/backend-business-local-2026-10-10');await mkdir(dir,{recursive:true});const path=resolve(dir,'business-'+Date.now()+'.json');await writeFile(path,JSON.stringify(evidence,null,2)+'\n',{flag:'wx'});console.log('Evidence: '+path);}

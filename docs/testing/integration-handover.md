@@ -1,27 +1,54 @@
+> **ARCH-13 hiện hành — 09/10/2026:** [Operations](../operations/README.md) / [ADR020](../architecture/adr/ADR-020-local-first-operations-and-fenced-releases.md). API005 / DB005 / native003 giữ nguyên; local-first CI, release có bảo trì, backup/witness/alerts ngoài host. **DESIGN SPECIFIED; runtime/SQL/release/restore NOT RUN; REAL chưa bật.** Các notice revision cũ bên dưới là lịch sử; source/policy đích theo [bundle](../operations/implementation-bundle.json).
+
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](../contracts/v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
+
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
+
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
+
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](../contracts/v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](../data/target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
+
+> **ARCH-08 hiện hành — 09/10/2026:** [Financial Engine/domain](../domain/README.md), [API revision 003: 151 operations / 626 schemas](../contracts/v2-t1-r3/README.md), [DB revision 004: 86 bảng / 988 cột](../data/target-t1-domain/README.md) và [bundle/hashes](../domain/implementation-bundle.json). Kế thừa T1/auth/security; bổ sung 4 operations dự báo và 2 bảng qua J2, không sửa prior packages, frontend hoặc snapshots. **Thiết kế đã chốt; Engine/SQL/concurrency/forecast thực tế NOT RUN.** Các notice ARCH-05…07 dưới đây giữ lịch sử revision; target hiện hành theo 003/004 và các addenda này.
+
+> **ARCH-07 — 09/10/2026:** [Hồ sơ bảo vệ dữ liệu T1](../security/t1/README.md), [bundle và hashes](../security/t1/implementation-bundle.json), [schema đích 84 bảng / 960 cột](../data/target-t1-security/README.md). API revision 002 giữ nguyên 147 operations; các gói và snapshot trước được giữ nguyên. Security profile bổ sung yêu cầu triển khai, không đổi payload API. SQL, bảo mật, backup, witness và restore thực tế đều **NOT RUN**; giữ đủ tính năng và 41 AC. Nội dung ARCH-07 hiện hành làm rõ các phần còn mở trong tài liệu kế thừa.
+
+> **ARCH-06 current target08/10/2026:** [identity protocol](../security/identity/identity-access-design.md), [API FW-API-T1-D1J2-002](../contracts/v2-t1-r2/README.md), [auth DB expand](../data/target-t1-auth/README.md).147operations/82tables là target design, không implementation. Revision001 và baselines giữ nguyên; auth follow-up06 đã có spec, runtime/SQL/native/mail/security NOT RUN. Notes ARCH-05 bên dưới là revision001 reference khi mâu thuẫn identity002.
+
+> Hiện hành 08/10/2026: xem [nghiệm thu frontend](frontend-acceptance-report.md), [catalogue 50 screen IDs](../design/interface-catalogue.md), [truy vết UI](../design/ui-requirement-traceability.md). Các số liệu Step4–6 bên dưới là lịch sử; không dùng làm nghiệm thu v3.
+
+## Runtime và phiên bản API — hiệu chỉnh 08/10/2026
+
+> **BE-19 current — 12/10/2026:** bảng 08/10 và các notice DESIGN/NOT RUN bên dưới là lịch sử. [Báo cáo tích hợp](../frontend/be19-report.md) và [index có source/backend SHA256](../frontend/be19-evidence-index.json) ghi kết quả hiện tại: 13 HTTP/PostgreSQL integration PASS, 67 browser mock PASS, 140 unit PASS, user/admin build PASS, Android build/44 JVM PASS. API005/native003 adapters đã code; Android device E2E chưa chạy vì người dùng xác nhận không có thiết bị. Dữ liệu synthetic-local, REAL/provider/model/security gates chưa được mở hoặc nghiệm thu bằng các run này. Chưa chốt toàn bộ BE-19/41 AC.
+
+| Phần chạy hiện tại | Hợp đồng/transport thực tế | Kết luận |
+|---|---|---|
+| User core + identity | `1.1.0`, 70 business + 6 identity, `/__mock/v1/logical/*` và identity mock | Đang dùng schema synthetic v1.1; không là production auth |
+| User operational | 18 operations, nhãn `2.0.0`, **một** endpoint `/__mock/v2/operational` | Prototype riêng. Envelope, tên operation, fields và URL khác canonical v2; cùng nhãn không chứng minh tương thích |
+| Admin | `adminGateway` trong bộ nhớ, strict metadata DTO, 5 methods | Bundle riêng, chưa HTTP admin API hoặc production authorization |
+| Android | React wizard + `FinWeaveCollector` bridge interface | Chưa Kotlin collector, hàng đợi durable, signed APK hoặc evidence trên máy thật |
+| API bàn giao đích | `docs/contracts/v2/openapi.json`, 133 operations, `/v2/operations/*`, `/v2/identity/*`, `/v2/admin/*`, internal paths | Hợp đồng đích, chưa được frontend hiện tại tuân thủ đầy đủ; adapter/backend cần triển khai |
+
+[Consumer mapping](../contracts/v2/consumer-operation-mapping.csv) ghi các khác biệt cần chuyển đổi. Kiểm schema/examples và version label không thay thế kiểm quyền, atomic commit hoặc conformance. Ba operation `getState`, `registerExampleDevice`, `testCollector` chỉ phục vụ fixture/prototype.
+
 # Integration Handover — frontend M2 synthetic
 
-INT-HO-001 · v1.0 · 06/10/2026. Same `finweave-web` app, React/Router/Vite/TypeScript, tokens/components `/design` retained. Scope28REQ/AC, 5 primary nav, 16 business tabs +7 auth +/design, 13 modules/86 actions. API logical contract **1.1.0 exact**, 70 business +6 identity operations/64 base schemas. Candidate protected transport **0.1** is separate and unverified. Backend developer can implement against logical contracts; **real-data integration is BLOCKED_SECURITY_POC** until trusted client/code/key/auth/recovery/Anti-Ops proof is verified.
+INT-HO-001 · v1.0 · 06/10/2026. Same `finweave-web` app, React/Router/Vite/TypeScript, tokens/components `/design` retained. Scope28REQ/AC, 5 primary nav, 16 business tabs +7 auth +/design, 13 modules/86 actions. Core synthetic contract **1.1.0**; operational prototype mang nhãn **2.0.0** nhưng **chưa canonical v2 conformance**, 70 business +6 identity operations/64 base schemas. Candidate protected transport **0.1** is separate and unverified. Backend developer can implement against logical contracts; **real-data integration is BLOCKED_SECURITY_POC** until trusted client/code/key/auth/recovery/Anti-Ops proof is verified.
 
-## Run and repeat checks
+## Chạy lại kiểm tra hiện hành, giữ nguyên evidence lịch sử
 
-From repository root, `Start-Prototype.cmd` serves existing dist at **http://127.0.0.1:4181** (SPA fallback). Or from `finweave-web`: `node run-local.cjs 4181`. Leave server running before browser test. `npm run dev` uses loopback5173; build then server4181 is acceptance baseline. Node>=24.19.0<25; existing bundled executable on this machine is `C:\Users\Lenovo\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe`; use PowerShell `& 'absolute-path-to-node.exe' scripts/check-step6.cjs build`. On another machine Node24 in PATH works. If dependencies absent, `npm ci --ignore-scripts` using exact lock, not install latest. Installed Chrome needed for browser channel; no paid/public services.
-
-Actual commands, cwd `finweave-web`:
+Từ `finweave-web`, với Node theo package engines trong PATH và Chrome đã cài:
 
 ```powershell
-node scripts/check-step6.cjs typecheck
-node scripts/check-step6.cjs lint
-node scripts/check-step6.cjs build
-node scripts/check-step6.cjs unit
-node scripts/check-step6.cjs contracts
-node run-local.cjs 4181
-# Second terminal, while server stays running:
-node scripts/check-step6.cjs browser
+$env:FINWEAVE_REVIEW_RUN='rerun-20261008-1'
+node scripts/check-frontend-review.cjs rerun-20261008-1
+node node_modules/@playwright/test/cli.js test --config playwright.frontend-review.config.ts
 ```
 
-`FINWEAVE_URL` overrides test URL only. Runner uses work/tmp TEMP and writes separate step6 logs/JSON/HTML/screenshots; failed runs retained. Custom architecture lint is not ESLint/style lint. No new dependency; unchanged lock SHA256 `93ce8cb03f0e38b9b448de82d26af704f8d1693315dd862813599b2beffb2b95`. npm aliases typecheck/lint/check:m2:* call same commands. Static action audit uses checked-in Step5 hashes, no external M1 directory requirement.
+Chọn tên run mới mỗi lần; JSON/HTML/trace/screenshot nằm trong `docs/execution/evidence/frontend-review-2026-10-08/<run>/`. Browser runner tự mở hai server kiểm thử 4184/4185, tách cache khỏi preview; không cần mở frontend thủ công. 0 retries, không exclude/skip các ca thất bại. `check-frontend-review.cjs` lưu typecheck, AST lint, unit, build user/admin và source/contract audit; không sinh lại schema.
 
-Auth walkthrough: **Điền thông tin mẫu → Đăng nhập demo → 123456**. Only `.test` identities; fake password shown by UI, no real email/SMS. Synthetic session header/workspace owner checked by repository; marker sessionStorage lasts30min, no financial Store/password. Registration/password recovery are mock flows, never a production identity system.
+Không dùng `run-contracts.cjs` hoặc `check-step6.cjs contracts` để kiểm canonical v2: generator cũ ghi lại v1. Không chạy các runner Step6 lên hồ sơ lịch sử. Tái lập kiểm canonical bàn giao theo [baseline policy](../handover/baseline-policy.md), ở evidence directory mới.
+
+Auth walkthrough: **Điền thông tin mẫu → Đăng nhập demo → 123456**. Dữ liệu fixture, không gửi email/SMS, không provider thật. Reload financial Store về fixture; kết quả không chứng minh persistence.
 
 ## Boundaries and mapping
 
@@ -29,8 +56,8 @@ Auth walkthrough: **Điền thông tin mẫu → Đăng nhập demo → 123456**
 |---|---|---|
 | Components/features | src/components, features, app/context, chat-provider | Local filter/open/close/privacy/panel; forms through hooks; no fixture imports/directfetch |
 | Queries/mutations | src/services/presentation.ts, contracts.ts | Single strict readonly presentation snapshot → selectors/cards/charts/details; named typed mutations; cancel query then refetch/invalidate |
-| API | src/services/api.ts / logical transport | Strict input/output/envelope1.1.0, requestId/workspaceVersion, Abort5s, no automatic retry/fallback |
-| Contracts | src/contracts + docs/contracts/v1 | DTOs, operations, schemas/OpenAPI/examples; source-to-target map; validation/date/money/error semantics |
+| API | src/services/api.ts / logical transport | Strict core envelope **1.1.0**; operational prototype envelope riêng có nhãn **2.0.0**, khác canonical v2, requestId/workspaceVersion, Abort5s, no automatic retry/fallback |
+| Contracts | src/contracts + docs/contracts/v1, v2 | DTOs, operations, schemas/OpenAPI/examples; source-to-target map; validation/date/money/error semantics |
 | Mock only | src/mocks/browser.ts, handlers.ts, repository.ts | Lazy MSW worker, stateful atomic command handling, reset/jobs/AI/auth; replace adapter, never import mock into production UI |
 | Protected candidate | src/services transport boundary + docs/security | Closed adapter refuses before network. No plaintext fallback; secure transport construction still blocked |
 
@@ -50,17 +77,46 @@ Implement secure adapter to the established LogicalTransport interface after ind
 
 Memory Store/importjobs/chat reset on reload to F-COMPLETE; fake auth marker may survive same-tab reload. Explicit Reset clears fixture/forms/filter/mask/chat/jobs; Logout clears session/cache/drafts. None demonstrates durable backend storage, backup, provider collection or data recovery. No backend fallback/demo success on real API failure. Final self-assessment and open limits: [Acceptance](frontend-acceptance-report.md).
 
-## Final gate verification and targeted regression
+## Hồ sơ Step6 lịch sử và quy trình hiện hành
 
-After all six check modes finish: `node scripts/verify-step6.cjs`. This reads actual raw results (does not edit test status), verifies original inputs/lock/schema refs/links/manual evidence, and writes step6-acceptance-summary.json, step6-delivery-checks.json and root step6-manifest-sha256.json. If source/docs change, rerun affected checks and this delivery verification; manifest excludes itself.
+Các script `verify-step6.cjs`, `check-step6.cjs` và cấu hình AI regression cũ được giữ để truy vết cách kiểm ngày 06/10. Chúng ghi vào tên evidence Step6 dùng chung và dựa trên inventory v1; không dùng chúng để chốt nghiệm thu UI v3 hoặc canonical API v2. Báo cáo 06/10 ghi PASS nhưng raw lần 08/10 trước rà soát có 24 PASS/35 FAIL, nên kết luận cũ đã được thay bằng báo cáo hiện hành.
 
-Current accepted history:99unit; full54 + finalAI8 =55distinct. Current full browser command runs55 source cases. To repeat the affected AI regression separately (server4181 remains running):
+Chạy lại bằng hai lệnh ở phần đầu với tên run mới. Suite hiện có 67 ca browser (59 kế thừa + 8 operational) và catalogue 50 screen IDs; số unit thực chạy nằm trong raw JSON của từng lượt. Bằng chứng mới giữ riêng JSON/HTML/trace/screenshot, baseline hash và source hash trước/sau. Không cộng các lượt regression vào số ca duy nhất, không dùng PASS của một subset thay toàn bộ suite.
 
-```powershell
-$env:FINWEAVE_EVIDENCE_PREFIX='step6-ai-regression'
-node node_modules/@playwright/test/cli.js test --config playwright.step6-ai-regression.config.ts
-Remove-Item Env:FINWEAVE_EVIDENCE_PREFIX
-node scripts/verify-step6.cjs
-```
+MSW idle wake giữ cùng repository/session và dùng public worker lifecycle APIs; có deadline, không tự reset tài chính hoặc retry mutation. Core mapping 1.1.0 và operational prototype có nhãn 2.0.0 là hai hợp đồng khác nhau; cả hai chưa chứng minh canonical v2 conformance. Q&A kế thừa dùng công cụ đọc; luồng Agent mới tạo bản nháp và chỉ áp dụng Plan/Goal sau xác nhận của người dùng.
 
-Full runner sets its own evidence prefix; targeted prefix keeps the prior full screenshots intact. Archive the existing step6 evidence before intentionally replacing reports in a new acceptance run. MSW idle wake uses the same repository/session and public worker lifecycle APIs; it is bounded and preserves state, with no financial reset or automatic mutation retry. Scripts/components and tests use logical1.1.0 throughout.
+## ARCH-08 — Bàn giao Engine và forecast mới
+
+Target hiện hành [API003](../contracts/v2-t1-r3/README.md)/[DB004](../data/target-t1-domain/README.md)/[Engine bundle](../domain/implementation-bundle.json). Old payload schemas600 giữ nguyên, exact revision header đổi và4forecast operations mới. Adapters source hiện tại chưa migrate, long-term forecast vẫn local synthetic. Backend không copy browser Store/Number thành ledger authority.
+
+Trước tích hợp phải chạy production Engine vs independent vectors, PostgreSQL constraints/transactions/tenant grants, concurrency/faults và forecast worker/page/cancel/quality/performance cases. Frontend acceptance synthetic cũ không được nâng lên backend/native/security/UAT; không sửa source trong task này.
+
+## ARCH-09 — Async integration handover
+
+Target hiện hành API004 với CSV header selector fix/completeness flags/coverage paging; prototype vẫn hybrid và consumers chưa migrate. SQL005 design/bundle/registry cần backend implementation trước integration. Pending status/query không advance jobs; ACK/enqueue khác completion.32ASN cases và AUTH/SEC/DOM/native/provider gates chưa chạy.
+
+[Hồ sơ async](../async/README.md), [API004](../contracts/v2-t1-r4/README.md), [DB005](../data/target-t1-async/README.md), [ADR-016](../architecture/adr/ADR-016-postgresql-dispatch-and-explicit-sync-outcomes.md), [32 ca runtime](../async/acceptance-plan.md).
+
+## ARCH-10 — Android implementation handover
+
+Native2 mismatch requires adapter migration; production cannot use legacy mock/session headers. Compile/install/proof/Room/backup/D2D/upgrade/OEM/source/phone-web end-to-end cases32 NOT RUN; historical frontend synthetic acceptance unchanged.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+Consumer source mapping exact API004/DB005 thêm schemas private metadata; runtime frontend hybrid cần adapter riêng. 32 source cases NOT RUN; không suy source support từ historical67browser/131unit.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+Current target API005 exact+hash/native003, DB005 unchanged. Old source/async/security bundles bind via explicit inheritance (request/actor unchanged). Frontend prototype hybrid not migrated; five result.mode projections and counter bounds cần runtime tests.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).
+
+## ARCH-13 — Operations handover
+
+Pin cùng source/artifact đã kiểm, API005/DB005/native003. Required gates ghi đúng trạng thái.32 ca vận hành chưa chạy; schema/policy examples không thay nghiệm thu release/restore/auth/CI.
+
+[Hồ sơ vận hành](../operations/README.md) · [Acceptance32 NOT RUN](../operations/acceptance-plan.md) · [Báo cáo](../architecture/ARCH-13-change-report.md).

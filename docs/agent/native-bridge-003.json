@@ -1,0 +1,654 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.finweave.invalid/native-bridge-003",
+  "description": "Design only. OwnerInvocation.input must additionally validate exact pinned API004 per-operation schema; JSON outer shape alone insufficient. Legacy projection exact keys.",
+  "type": "object",
+  "$defs": {
+    "LegacyStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permission",
+        "consented",
+        "network",
+        "enrolled",
+        "ownerBound",
+        "lastObserved",
+        "lastAck",
+        "pausedReason",
+        "queue"
+      ],
+      "properties": {
+        "permission": {
+          "type": "string",
+          "enum": [
+            "granted",
+            "denied",
+            "unknown"
+          ]
+        },
+        "consented": {
+          "type": "boolean"
+        },
+        "network": {
+          "type": "string",
+          "enum": [
+            "online",
+            "offline",
+            "unknown"
+          ]
+        },
+        "enrolled": {
+          "type": "boolean"
+        },
+        "ownerBound": {
+          "type": "boolean"
+        },
+        "lastObserved": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lastAck": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pausedReason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "queue": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/LegacyQueueItem"
+          }
+        }
+      }
+    },
+    "LegacyQueueItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "state",
+        "observedAt",
+        "source",
+        "reason",
+        "retryAfter"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "sending",
+            "retry_wait",
+            "quarantined"
+          ]
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryAfter": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bridgeRevision",
+        "apiRevision",
+        "profile",
+        "buildId",
+        "requiredConsentVersion",
+        "nativeAvailable"
+      ],
+      "properties": {
+        "bridgeRevision": {
+          "type": "string",
+          "enum": [
+            "FW-NATIVE-BRIDGE-003"
+          ]
+        },
+        "apiRevision": {
+          "type": "string",
+          "enum": [
+            "FW-API-T1-D1J2-005"
+          ]
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC",
+            "REAL"
+          ]
+        },
+        "buildId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "requiredConsentVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "nativeAvailable": {
+          "const": true
+        }
+      }
+    },
+    "StatusV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bridgeRevision",
+        "generation",
+        "checkedAt",
+        "permission",
+        "network",
+        "enrolled",
+        "ownerBound",
+        "listenerBound",
+        "consent",
+        "vault",
+        "clock",
+        "readiness",
+        "reason",
+        "pendingCount",
+        "pendingBytes",
+        "quarantineCount",
+        "ackReplayCount",
+        "queueTruncated",
+        "lastObserved",
+        "lastAck",
+        "physicalPurgeOverdue",
+        "revokePending"
+      ],
+      "properties": {
+        "bridgeRevision": {
+          "type": "string",
+          "enum": [
+            "FW-NATIVE-BRIDGE-003"
+          ]
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "checkedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "permission": {
+          "type": "string",
+          "enum": [
+            "granted",
+            "denied",
+            "unknown"
+          ]
+        },
+        "network": {
+          "type": "string",
+          "enum": [
+            "online",
+            "offline",
+            "unknown"
+          ]
+        },
+        "enrolled": {
+          "type": "boolean"
+        },
+        "ownerBound": {
+          "type": "boolean"
+        },
+        "listenerBound": {
+          "type": "boolean"
+        },
+        "consent": {
+          "type": "string",
+          "enum": [
+            "required",
+            "accepted",
+            "update_required",
+            "revoked"
+          ]
+        },
+        "vault": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "ready",
+            "quarantined",
+            "key_unavailable"
+          ]
+        },
+        "clock": {
+          "type": "string",
+          "enum": [
+            "trusted",
+            "uncertain"
+          ]
+        },
+        "readiness": {
+          "type": "string",
+          "enum": [
+            "ready",
+            "paused",
+            "setup_required",
+            "update_required"
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pendingCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "pendingBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8388608
+        },
+        "quarantineCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "ackReplayCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "queueTruncated": {
+          "type": "boolean"
+        },
+        "lastObserved": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lastAck": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "physicalPurgeOverdue": {
+          "type": "boolean"
+        },
+        "revokePending": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfigureCapture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "consentVersion",
+        "bindingIds"
+      ],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "consentVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "bindingIds": {
+          "type": "array",
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      }
+    },
+    "ListQueueInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "cursor",
+        "pageSize"
+      ],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "QueuePage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "items",
+        "nextCursor"
+      ],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/LegacyQueueItem"
+          }
+        },
+        "nextCursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "OwnerInvocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "operationId",
+        "input",
+        "idempotencyKey"
+      ],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "operationId": {
+          "type": "string",
+          "enum": [
+            "getPresentationSnapshot",
+            "getImportTemplate",
+            "ingestSourceEvidence",
+            "reviseSourceRecord",
+            "getSession",
+            "getWorkspace",
+            "updateTrackingSettings",
+            "listAccounts",
+            "getAccount",
+            "createAccount",
+            "archiveAccount",
+            "listHoldings",
+            "getHolding",
+            "createHolding",
+            "updateHoldingQuantity",
+            "updateHoldingCost",
+            "listHoldingMovements",
+            "listPriceQuotes",
+            "recordPriceQuote",
+            "listTransactions",
+            "getTransaction",
+            "createEvent",
+            "updateDraft",
+            "correctPostedEvent",
+            "updateCategory",
+            "postDraft",
+            "linkRefund",
+            "recordCashCount",
+            "getOverview",
+            "getSpendingReport",
+            "getPortfolio",
+            "getInsights",
+            "listSources",
+            "refreshSource",
+            "disconnectSource",
+            "reconnectSource",
+            "previewImport",
+            "confirmImport",
+            "getImportJob",
+            "listImportJobs",
+            "listReviewCases",
+            "getReviewCase",
+            "resolveReviewCase",
+            "listPlanItems",
+            "createPlanItem",
+            "updatePlanItem",
+            "archivePlanItem",
+            "getPlanForecast",
+            "linkPlanActual",
+            "unlinkPlanActual",
+            "listGoals",
+            "getGoalProgress",
+            "createGoal",
+            "updateGoal",
+            "allocateGoal",
+            "releaseGoalAllocation",
+            "markGoalAchieved",
+            "archiveGoal",
+            "simulateGoalOutcome",
+            "listSimulations",
+            "getSimulation",
+            "listConversations",
+            "createConversation",
+            "getConversation",
+            "listMessages",
+            "sendAssistantMessage",
+            "getAssistantMessage",
+            "cancelAssistantMessage",
+            "getEvidence",
+            "previewMutation",
+            "searchInstruments",
+            "getGoldProfiles",
+            "previewHolding",
+            "confirmHolding",
+            "requestPriceRefresh",
+            "bindCollector",
+            "revokeDevice",
+            "startAgentRun",
+            "answerAgentRun",
+            "cancelAgentRun",
+            "reviseDraft",
+            "reviseDraftByMessage",
+            "refreshDraft",
+            "previewPlanningDraft",
+            "confirmPlanningDraft",
+            "listSessions",
+            "revokeSession",
+            "listWorkspaces",
+            "createWorkspace",
+            "listDevices",
+            "listCollectorBindings",
+            "disableCollectorBinding",
+            "listSourceSupport",
+            "getReceipt",
+            "listReceipts",
+            "getSyncState",
+            "getRefreshJob",
+            "listRefreshJobs",
+            "getAgentRun",
+            "listAgentRuns",
+            "getPlanningDraft",
+            "listPlanningDrafts",
+            "createPlanningDraft",
+            "discardPlanningDraft",
+            "simulatePlanningDraft",
+            "getToolResult",
+            "getCommandOutcome",
+            "startForecastRun",
+            "getForecastRun",
+            "cancelForecastRun",
+            "listCoverage",
+            "listCoverageGaps"
+          ]
+        },
+        "input": {
+          "type": "object"
+        },
+        "idempotencyKey": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "BridgeError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "retryAfter"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "NATIVE_UNAVAILABLE",
+            "UPDATE_REQUIRED",
+            "CONSENT_UPDATE_REQUIRED",
+            "PERMISSION_DENIED",
+            "LISTENER_UNBOUND",
+            "BINDING_REQUIRED",
+            "OWNER_MISMATCH",
+            "REAUTH_REQUIRED",
+            "CLOCK_UNTRUSTED",
+            "QUEUE_FULL",
+            "KEY_UNAVAILABLE",
+            "EPOCH_CHANGED",
+            "EXPIRED",
+            "NETWORK_WAIT",
+            "SERVER_RETRY_AFTER",
+            "INTEGRITY_FAILED"
+          ]
+        },
+        "retryAfter": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

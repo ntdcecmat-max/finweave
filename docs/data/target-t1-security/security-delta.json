@@ -1,0 +1,97 @@
+{
+  "previousModelSha256": "461ef34bd27a3a51952a3d7cc6d286b207486a724549b5137682d84b2eb29ad2",
+  "status": "DESIGN_NOT_SQL",
+  "changes": [
+    {
+      "table": "identities",
+      "addedColumns": [
+        "recovery_token",
+        "recovery_control_epoch"
+      ],
+      "targetRules": [
+        "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes",
+        "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+      ]
+    },
+    {
+      "table": "workspaces",
+      "addedColumns": [
+        "recovery_token",
+        "recovery_control_epoch"
+      ],
+      "targetRules": [
+        "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes",
+        "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+      ]
+    },
+    {
+      "table": "devices",
+      "addedColumns": [
+        "recovery_token",
+        "recovery_control_epoch"
+      ],
+      "targetRules": [
+        "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes",
+        "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+      ]
+    },
+    {
+      "table": "workspaces",
+      "addedColumns": [
+        "access_state"
+      ],
+      "targetRules": [
+        "Every finance query/mutation/worker rechecks workspace access_state; erasing cannot reactivate through ordinary owner/admin operation"
+      ]
+    },
+    {
+      "table": "identities",
+      "addedColumns": [
+        "recovery_reset_required"
+      ],
+      "targetRules": [
+        "Old password PHC cannot authorize sign-in while recovery_reset_required; no fallback to old backup credentials"
+      ]
+    },
+    {
+      "table": "recovery_journal",
+      "addedColumns": [
+        "scope_kind",
+        "environment_id",
+        "producer_key_id",
+        "producer_signature"
+      ],
+      "targetRules": [
+        "workspace_token is legacy-named opaque target_token, no workspace FK",
+        "UNIQUE(scope_kind,workspace_token,epoch) replaces legacy two-column unique at cutover",
+        "Append only; event body stored in delivery state must hash exactly to event_digest",
+        "epoch comes from target.recovery_control_epoch; auth/device/domain epochs remain distinct; deny events only"
+      ]
+    },
+    {
+      "table": "recovery_delivery_state",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(journal_id)",
+        "UNIQUE(command_principal_token,command_operation,command_key_digest,journal_id)",
+        "Anchored/applied require verified witness receipt matching event digest/environment/target",
+        "No update to original journal to fill checkpoint_ref; acknowledgment lives here",
+        "Recovery coordinator only; jobs table not duplicated; no finance dispatch claim"
+      ]
+    },
+    {
+      "table": "erasure_requests",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(scope_kind,target_token,request_key_digest)",
+        "Completed requires checkpoint+active purge+all copy inventories verified; not deadline alone",
+        "Identity parent completes only after every frozen workspace child completes; no cascade to erased owner",
+        "Parent, when present, must be an identity request; child must be a workspace request; identity parent has no parent; no self-link or cycles",
+        "Child inherits the original parent deadline; frozen inventory must contain every owned workspace under ownership locks",
+        "No financial body/email/raw/free text; target tombstone survives workspace deletion"
+      ]
+    }
+  ]
+}

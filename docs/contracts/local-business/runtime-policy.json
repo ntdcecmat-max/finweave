@@ -1,0 +1,119 @@
+{
+  "id": "FW-BUSINESS-001",
+  "baseRevision": "FW-API-T1-D1J2-005",
+  "baseSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+  "subsetSha256": "18b98e2add28fe3f29a84ac71d1609aa1c8dba2943856a56056a8efd64931092",
+  "operations": [
+    "allocateGoal",
+    "archiveGoal",
+    "archivePlanItem",
+    "cancelForecastRun",
+    "compareSimulations",
+    "confirmImport",
+    "createGoal",
+    "createPlanItem",
+    "getAccount",
+    "getBusinessHistory",
+    "getCommandOutcome",
+    "getEvidence",
+    "getForecastInputs",
+    "getForecastRun",
+    "getGoalProgress",
+    "getHolding",
+    "getImportJob",
+    "getImportTemplate",
+    "getInsights",
+    "getOverview",
+    "getPlanForecast",
+    "getPortfolio",
+    "getPresentationSnapshot",
+    "getReviewCase",
+    "getSimulation",
+    "getSpendingReport",
+    "getTransaction",
+    "getWorkspace",
+    "linkPlanActual",
+    "listFinancialCoverage",
+    "listForecastRuns",
+    "listGoals",
+    "listImportJobs",
+    "listPlanItems",
+    "listReviewCases",
+    "listSimulations",
+    "listTransactions",
+    "markGoalAchieved",
+    "previewImport",
+    "previewMutation",
+    "releaseGoalAllocation",
+    "resolveReviewCase",
+    "retryImportJob",
+    "setFinancialCoverage",
+    "simulateGoalOutcome",
+    "startForecastRun",
+    "unlinkPlanActual",
+    "updateGoal",
+    "updatePlanItem"
+  ],
+  "extensionOperations": [
+    "retryImportJob",
+    "getBusinessHistory",
+    "compareSimulations",
+    "listForecastRuns",
+    "getForecastInputs",
+    "setFinancialCoverage",
+    "listFinancialCoverage"
+  ],
+  "changes": {
+    "optionalSnapshotContext": [
+      "getAccount",
+      "getHolding",
+      "getTransaction",
+      "getPresentationSnapshot",
+      "listPlanItems",
+      "listGoals",
+      "getGoalProgress",
+      "getPlanForecast"
+    ],
+    "nullablePresentationSourceTimes": [
+      "lastSuccess",
+      "lastAttempt"
+    ],
+    "errors": "Business errors extend Error.code; no historical package byte changed."
+  },
+  "databaseMigration": "database/runtime/007_business_workflows.sql",
+  "publicActor": "owner only; identity/workspace checked before replay",
+  "previewSeconds": 300,
+  "importPreviewSeconds": 86400,
+  "importLimits": {
+    "csvBytes": 65536,
+    "rows": 1000,
+    "selection": 100
+  },
+  "forecastLimits": {
+    "months": 360,
+    "trials": 1000,
+    "outputGoals": 50,
+    "computeThreads": 1,
+    "sliceMilliseconds": 1900,
+    "sliceDays": 10000,
+    "pagePoints": 12,
+    "pageBytes": 262144,
+    "attemptSeconds": 600,
+    "deadlineHours": 24
+  },
+  "workerPorts": {
+    "ingestion": [
+      "process_import"
+    ],
+    "forecast": [
+      "forecast_input",
+      "checkpoint_forecast",
+      "forecast_checkpoints",
+      "checkpoint_slice",
+      "load_slices",
+      "publish_forecast",
+      "fail_forecast"
+    ]
+  },
+  "scope": "Executable synthetic-local API/database; no frontend/provider/Android/Agent/UAT acceptance claim"
+}

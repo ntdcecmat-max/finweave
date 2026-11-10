@@ -1,0 +1,14 @@
+{
+  "status": "PASS_BUILD_AND_JVM_NOT_DEVICE_ACCEPTANCE",
+  "apk": "artifacts/android/screenshots/FinWeave-screenshot-local-debug.apk",
+  "sha256": "16c437f9a4b9c9577491fcb43cb293c969884f12f9931e4fc540d6a8c93d4114",
+  "profile": "backend local Windows OCR",
+  "origin": "http://127.0.0.1:4310",
+  "signing": "ANDROID_DEBUG_NOT_PILOT_RELEASE",
+  "jvmTests": 44,
+  "failures": 0,
+  "skipped": 0,
+  "schemaAndAllowlist": "PASS",
+  "deviceCamera": "NOT_RUN",
+  "physicalDevice": "NOT_RUN"
+}

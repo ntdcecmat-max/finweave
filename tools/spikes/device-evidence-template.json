@@ -1,0 +1,13 @@
+{
+  "status": "BLOCKED_DEVICE_NOT_RUN",
+  "scope": "Actual owner-authorized device required; emulator and mock cannot satisfy gate",
+  "appId": null,
+  "apkSha256": null,
+  "signingCertificateSha256": null,
+  "toolchainManifest": null,
+  "device": {"model": null, "os": null, "oem": null, "securityPatch": null, "keystoreSecurityLevel": null},
+  "consentEvidenceRef": null,
+  "cases": ["install", "same-cert-update", "grant-deny-revoke-regrant", "notification-expected-captured", "SPKI-DER-raw64", "Room-DB-WAL-SHM-sentinel", "screen-off", "kill", "reboot", "force-stop-limitations", "offline", "partial-ACK", "lost-ACK", "429-retry-floor", "owner-switch", "revoke-inflight", "clock-rollback", "cloud-D2D-exclusion"],
+  "results": [],
+  "sanitizedLogsRef": null
+}

@@ -1,0 +1,90 @@
+{
+  "id": "FW-ASYNC-J2-001",
+  "date": "2026-10-09",
+  "status": "DESIGN_RUNTIME_NOT_RUN",
+  "delivery": "AT_LEAST_ONCE",
+  "financialEffects": "ATOMIC_DOMAIN_DEDUPE_NOT_EXACTLY_ONCE_NETWORK",
+  "queueAuthority": "jobs",
+  "library": "pg narrow SQL ports; no external queue or Redis",
+  "clock": "DB clock_timestamp after locks; monotonic elapsed supervisor timers",
+  "dispatch": {
+    "hostTickSeconds": 60,
+    "idleScanSeconds": 5,
+    "busyScanSeconds": 1,
+    "batchMax": 20,
+    "perWorkspaceRunningMax": 3,
+    "cpuForecastPoolSize": 1,
+    "notify": "OPTIONAL_WAKEUP_ONLY",
+    "ordering": "available capability slots, rotating workspace lanes; due/created/id inside lane",
+    "allTimings": "STARTING_CONFIG_NOT_MEASURED_SLO"
+  },
+  "retry": {
+    "algorithm": "equal_jitter",
+    "baseSeconds": 5,
+    "capSeconds": 900,
+    "retryAfter": "MAX_BACKOFF_AND_SERVER_FLOOR; never cap a provider floor downward",
+    "transactionAttemptsMax": 3,
+    "manualExtraCyclesMax": 2,
+    "resetAttemptCount": false,
+    "permanent": [
+      "AUTH_REVOKED",
+      "CONSENT_REVOKED",
+      "RECOVERY_FENCE",
+      "DIGEST_CONFLICT",
+      "INVALID_INPUT",
+      "PREVIEW_STALE"
+    ],
+    "transient": [
+      "NETWORK_UNKNOWN",
+      "UPSTREAM_5XX",
+      "TEMPORARY_UNAVAILABLE",
+      "LEASE_EXPIRED"
+    ],
+    "quota": "Reserve before each provider call; unknown outcome consumes quota; no auto paid fallback"
+  },
+  "schedule": {
+    "timezone": "Asia/Ho_Chi_Minh",
+    "dailyPriceLocalTime": "18:00:00",
+    "catchUp": "latest due occurrence only; historical quote backfill separate rights-gated task",
+    "manualCooldownSeconds": 60,
+    "coalesce": "exact compatible entitlement/profile/instrument set and unfinished outcome",
+    "advanceWatermark": "atomic domain+enqueue or explicit missed/disabled disposition; never from last_success"
+  },
+  "native": {
+    "batchItemsMax": 50,
+    "batchBytesMax": 262144,
+    "unackedItemsMax": 1000,
+    "unackedBytesMax": 8388608,
+    "unackedAutoRetryDays": 7,
+    "ackReplayDays": 7,
+    "ackReplayItemsMax": 1000,
+    "ackReplayBytesMax": 8388608,
+    "overdueQuarantineDays": 7,
+    "overflow": "PAUSE_CAPTURE_AND_EXPLICIT_COVERAGE_GAP_NO_SILENT_EVICTION",
+    "backgroundBackoffSecondsMin": 30,
+    "periodicSafetyMinutes": 15,
+    "restoreMissing": "INVESTIGATE_NOT_AUTO_REPOST",
+    "oldOwnerRetag": false,
+    "rawUpload": false
+  },
+  "sync": {
+    "workspaceForegroundSeconds": 20,
+    "pendingSeconds": [
+      1,
+      2,
+      4,
+      8,
+      15
+    ],
+    "jitterFraction": 0.2,
+    "slowPendingAfterSeconds": 120,
+    "slowPendingSeconds": 30,
+    "backgroundPoll": false,
+    "singleFlight": true,
+    "readAdvancesJobs": false,
+    "ordering": "session/workspace generation + recovery epoch before financial/object versions",
+    "offline": "native capture allowed under live local consent; owner financial writes need online preview/commit"
+  },
+  "recovery": "ARCH07 locked restore/witness first; old jobs/tokens fenced; no automatic financial replay",
+  "runtime": "SQL/concurrency/provider/native/heartbeat/cancellation/performance/security NOT_RUN"
+}

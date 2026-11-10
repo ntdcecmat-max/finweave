@@ -1,6 +1,8 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Stakeholder Needs
 
-ID PRD-NEED-001 · v2.0 · `analysis-v2` trên `scope-v2` · 05/10/2026 · in-review, pending external review. Owner/reviewer: Agent tự rà soát; approver: chủ sản phẩm chưa sign-off. Nguồn: [Problem](problem-statement.md), [Scope](scope.md), [Ideas](../../FinWeave_Ideas.md). **Nhu cầu suy ra từ nguồn và giả định A-01…03, không phải kết quả user research.**
+ID PRD-NEED-001 · v2.0 · `analysis-v2` trên `scope-v2` · 05/10/2026 · in-review, pending external review. Owner/reviewer: Agent tự rà soát; approver: chủ sản phẩm chưa sign-off. Nguồn: [Problem](problem-statement.md), [Scope](scope.md), [PRD hiện hành; đầu vào Ideas ở root đã bị xóa](prd.md). **Nhu cầu suy ra từ nguồn và giả định A-01…03, không phải kết quả user research.**
 
 | Need ID / stakeholder | Nhu cầu / vấn đề | Kết quả mong muốn / cách đánh giá đề xuất | Ưu tiên / truy vết |
 |---|---|---|---|

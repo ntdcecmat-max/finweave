@@ -1,0 +1,400 @@
+[
+  {
+    "operationId": "signIn",
+    "case": "Password shorter than15",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "signIn",
+      "input": {
+        "email": "demo@finweave.test",
+        "password": "AAAAAAAAAAAAAA",
+        "installationPublicKey": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "registerIdentity",
+    "case": "Password shorter than15",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "registerIdentity",
+      "input": {
+        "email": "an@finweave.test",
+        "name": "An",
+        "password": "AAAAAAAAAAAAAA",
+        "passwordConfirmation": "FinWeaveDemo!2026",
+        "syntheticAcknowledgement": true,
+        "installationPublicKey": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "resetIdentityPassword",
+    "case": "Password shorter than15",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "resetIdentityPassword",
+      "input": {
+        "resetToken": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "password": "AAAAAAAAAAAAAA",
+        "passwordConfirmation": "FinWeaveDemo!2026"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "adminSignIn",
+    "case": "Password shorter than15",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "adminSignIn",
+      "input": {
+        "email": "demo@finweave.test",
+        "password": "AAAAAAAAAAAAAA",
+        "mfaCode": "100000"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "signIn",
+    "case": "installationPublicKey explicitly required",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "signIn",
+      "input": {
+        "email": "demo@finweave.test",
+        "password": "FinWeaveDemo!2026"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "registerIdentity",
+    "case": "unknown arbitrary role forbidden",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "registerIdentity",
+      "input": {
+        "email": "an@finweave.test",
+        "name": "An",
+        "password": "FinWeaveDemo!2026",
+        "passwordConfirmation": "FinWeaveDemo!2026",
+        "syntheticAcknowledgement": true,
+        "installationPublicKey": "0000000000000000000000000000000000000000000000000000000000000000",
+        "role": "admin"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "redeemOwnerRecoveryCode",
+    "case": "short recovery code rejected",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": null,
+      "operationId": "redeemOwnerRecoveryCode",
+      "input": {
+        "email": "demo@finweave.test",
+        "recoveryCode": "123456"
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "resetIdentityPassword",
+    "case": "short reset token rejected",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "resetIdentityPassword",
+      "input": {
+        "resetToken": "123456",
+        "password": "FinWeaveDemo!2026",
+        "passwordConfirmation": "FinWeaveDemo!2026"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "renewCollectorCredential",
+    "case": "workspace required",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": null,
+      "operationId": "renewCollectorCredential",
+      "input": {
+        "deviceId": "SYNTHETIC_ID",
+        "deviceEpoch": 0,
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "renewCollectorCredential",
+    "case": "epoch required",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": "SYNTHETIC_ID",
+      "operationId": "renewCollectorCredential",
+      "input": {
+        "deviceId": "SYNTHETIC_ID",
+        "deviceEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "renewNativeSession",
+    "case": "no refresh token JSON",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": null,
+      "operationId": "renewNativeSession",
+      "input": {
+        "refreshToken": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "registerDevice",
+    "case": "DER-shaped/non-raw proof forbidden",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "registerDevice",
+      "input": {
+        "name": "Synthetic fixture",
+        "platform": "android",
+        "appVersion": "fixture-1",
+        "consentVersion": "2026-10-08",
+        "publicKey": "https://example.invalid/artifact.apk",
+        "challengeId": "SYNTHETIC_01",
+        "proof": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "adminReauthenticate",
+    "case": "owner workspace forbidden",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": "OTHER",
+      "operationId": "adminReauthenticate",
+      "input": {
+        "password": "demo@finweave.test",
+        "mfaCode": "123456"
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "verifyOwnerReauthentication",
+    "case": "extra subject cannot choose owner",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceId": null,
+      "operationId": "verifyOwnerReauthentication",
+      "input": {
+        "challengeId": "SYNTHETIC_ID",
+        "code": "123456",
+        "subjectId": "OTHER"
+      },
+      "mutation": {
+        "idempotencyKey": "SYNTHETIC_ID",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "ingestNotifications",
+    "case": "raw notification forbidden",
+    "part": "request",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "ingestNotifications",
+      "input": {
+        "deviceId": "D_A",
+        "items": [
+          {
+            "eventKey": "SYNTHETIC_01",
+            "bindingId": "BIND_A",
+            "bindingVersion": 0,
+            "sourceKey": "test_bank",
+            "revision": 0,
+            "observedAt": "2026-10-08T11:00:00+07:00",
+            "parserVersion": "SYNTHETIC_BANK_V1",
+            "payloadDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "normalizedEvidence": {
+              "amount": "100000",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "****0001",
+              "transactionRef": "SYNTH_TXN_01",
+              "sourceOccurredAt": "2026-10-08T11:00:00+07:00",
+              "ruleStatus": "complete"
+            },
+            "rawNotification": "SYNTHETIC_FORBIDDEN"
+          }
+        ],
+        "deviceEpoch": 0,
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "rejected": true
+  },
+  {
+    "operationId": "rotateOwnerRecoveryCodes",
+    "case": "recovery codes must be distinct",
+    "part": "reply",
+    "payload": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYNTHETIC_ID",
+      "workspaceVersion": null,
+      "data": {
+        "codes": [
+          "TduQFbv6CG0loKKFuDdfkqcQUN1drzS-mkOctZXyObQ",
+          "TduQFbv6CG0loKKFuDdfkqcQUN1drzS-mkOctZXyObQ",
+          "aOLXKnJGLr-drieXdZC1dAoFf_LUMt8gqaM4zon6Kvc",
+          "eLZzicYzZ99SIeWj2f-yBb9uID41YQfL3d8Q3hsIaRA",
+          "l5fWtg--__cMRgxMNIgPQWswfv6Jl2HB04x97KuKB3s",
+          "b9I7HGzSbZzbNcm9JvaWzsmHxZIzSkmQdK7uIp5n4z0",
+          "8x4s7fe6YF_9Y5N1IDDRC7y5ETU9kjA9ZcDOgIOPWHc",
+          "SHMKi-Tc6jCXv-Afyfbo7yUaLChRKH6zRnJ7a_Wr6LY",
+          "oW7SCEI9uHmO9meGU5DS4NsZB-KOem60wtNIOzu3W0U",
+          "Tgkj1KMZ13eIC7hdttx36rMrpvp6BlqmTJqB12rQmm0"
+        ],
+        "generatedAt": "2026-10-08T11:00:00+07:00"
+      }
+    },
+    "rejected": true
+  }
+]

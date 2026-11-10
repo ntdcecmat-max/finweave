@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: hướng dẫn bên dưới chỉ dành cho frontend demo cũ, không triển khai toàn hệ thống. Xem [Deployment topology](architecture/deployment-topology.md) và [topology hiện hành; nguồn Tech Stack ở root đã bị xóa](architecture/deployment-topology.md) cho ba giao diện/API/DB/scheduler. Vercel Hobby cần tuân thủ giới hạn personal non-commercial; không có deploy nào trong lượt sửa tài liệu.
+
 # Đưa FinWeave lên GitHub và liên kết Vercel
 
 Repo đề xuất: **finweave-frontend**, tài khoản GitHub **DK999vn**. Repo riêng tư vẫn có thể dùng để xuất bản frontend demo qua Vercel. Hướng dẫn này dành cho repo mới, trống, chưa có README/commit.

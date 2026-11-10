@@ -1,0 +1,51 @@
+screen,title,route,backlog,required,currentImplementation,source,remaining,status
+UI-U-01,Tổng quan,/home,"BE-05,BE-19",YES,mock,src/features/Home.tsx,"UAT, dữ liệu thật và nguồn giá lịch sử",PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-02,Báo cáo tích hợp Tổng quan,/home/reports,"BE-05,BE-19",YES,redirect,src/features/Home.tsx,Không có trang Báo cáo riêng; route cũ về /home theo quyết định người dùng,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-03,Tài khoản & Tài sản,/home/assets,"BE-03,BE-06,BE-07,BE-19",YES,mock,src/features/Home.tsx,Catalog/giá thực và lịch cập nhật server,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-04,Tất cả giao dịch,/transactions,"BE-04,BE-05,BE-19",YES,mock,src/features/Transactions.tsx,Authorization và đồng bộ server thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-05,Thu–chi,/transactions/flow,"BE-04,BE-05,BE-19",YES,mock,src/features/Transactions.tsx,Nguồn giao dịch thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-06,Chuyển tiền,/transactions/transfers,"BE-04,BE-10,BE-19",YES,mock,src/features/Transactions.tsx,Thu thập hai chân từ nguồn thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-07,Hoàn tiền,/transactions/refunds,"BE-04,BE-10,BE-19",YES,mock,src/features/Transactions.tsx,Đối soát nguồn thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-08,Tổng quan kế hoạch,/plan,"BE-11,BE-13,BE-15,BE-19",YES,mock,src/features/Plan.tsx,Hiệu chỉnh mô hình/Agent/provider thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-09,Thu nhập & Chi tiêu dự kiến,/plan/items,"BE-11,BE-13,BE-15,BE-19",YES,mock,src/features/Plan.tsx,Plan server và đồng bộ nhiều client,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-10,Đầu tư dự kiến,/plan/investments,"BE-11,BE-13,BE-15,BE-19",YES,mock,src/features/Plan.tsx,Phí/thuế/market assumptions; không auto trade,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-11,Đặt mục tiêu,/plan/goals,"BE-12,BE-13,BE-15,BE-19",YES,mock,src/features/Plan.tsx,"Khả năng đạt theo giả định, chưa là dự báo thị trường",PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-12,Mô phỏng tích hợp Đặt mục tiêu,/plan/simulation,"BE-12,BE-13,BE-19",YES,redirect,src/features/Plan.tsx,"Route cũ chuyển về Goals; mô phỏng cục bộ, không vĩ mô trực tiếp",PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-13,Nguồn dữ liệu & CSV,/data,"BE-08,BE-09,BE-19",YES,mock,src/features/DataLanding.tsx,Nguồn/collector server thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-14,Kiểm tra dữ liệu,/data/review,"BE-10,BE-19",YES,mock,src/features/Data.tsx,"Ma trận thông báo/provider thật, AI investigation đầy đủ",PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-15,Trợ lý AI,/ai,"BE-14,BE-15,BE-19",YES,mock,src/features/Assistant.tsx,Scripted/rule based; không provider/LLM thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-16,Lịch sử hội thoại,/ai/history,"BE-14,BE-19",YES,mock,src/features/Assistant.tsx,Persistence server qua restart,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-17,Thiết lập & phiên,shared/local,"BE-01,BE-03,BE-19",YES,mock,src/features/Details.tsx,"Dialog, không route riêng; auth real/security gate riêng",PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-18,Thiết bị & đồng bộ,/data/devices,"BE-08,BE-19,BE-20,BE-21",YES,partial,src/features/Devices.tsx,Last-reported synthetic; không OS live hoặc background sync thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-U-19,Chi tiết nguồn,/data/sources/:id,"BE-07,BE-08,BE-19",YES,partial,src/features/SourceDetails.tsx,"Pipeline thực, remap đúng device và hỗ trợ package thật",PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-01,Đăng nhập,/auth/login,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,Không auth provider thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-02,Đăng ký,/auth/register,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,Policy/delivery production,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-03,Xác minh,/auth/verify,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,OTP thật và abuse control,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-04,Quên mật khẩu,/auth/forgot,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,Email delivery/recovery trust,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-05,Đặt lại mật khẩu,/auth/reset,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,Recovery production,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-06,Hết phiên,/auth/expired,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,Token refresh/uncertain commit server,PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-07,Từ chối quyền,/auth/denied,"BE-01,BE-19",YES,mock,src/features/Auth.tsx,"Authorization production, không chỉ menu",PLANNED_NOT_BACKEND_ACCEPTED
+UI-AUTH-08,Tài khoản & phiên,shared/local,"BE-01,BE-19",YES,mock,src/features/Details.tsx,Native queue quarantine và logout server thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-01,Tài khoản: chi tiết & nhập tay,shared/local,"BE-03,BE-04,BE-19",YES,mock,src/features/Details.tsx,Persistence/ownership production,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-02,Tài sản: catalog/profile & chi tiết,shared/local,"BE-06,BE-07,BE-19",YES,mock,src/features/AssetSetup.tsx,Catalog/provider thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-03,Giao dịch: nhập/chi tiết/lịch sử,shared/local,"BE-04,BE-19",YES,mock,src/features/Details.tsx,Server concurrency/security,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-04,Quyết định Review,shared/local,"BE-10,BE-19",YES,mock,src/features/Details.tsx,Native/parser/review matrix đầy đủ,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-05,Bản nháp liên kết Plan/Goal,/plan/drafts/:id,"BE-11,BE-12,BE-13,BE-15,BE-19",YES,mock,src/features/AgentPlanning.tsx,Không canonical PlanDraft API hoặc provider thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-06,Preview → xác nhận,shared/local,"BE-02,BE-19",YES,mock,src/components/ActionForm.tsx,Atomic DB/recovery hạ tầng thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-07,Agent run & ràng buộc,shared/local,"BE-15,BE-19",YES,partial,src/features/AgentPlanning.tsx,Rule based; budget/model/tool security chưa nghiệm thu production,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-08,Panel ngữ cảnh & linh vật,shared/local,"BE-14,BE-15,BE-19",YES,mock,src/components/FloatingPet.tsx,Android TalkBack và native Back,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-09,CSV wizard,shared/local,"BE-09,BE-19",YES,mock,src/features/ImportWizard.tsx,Production limits/retention,PLANNED_NOT_BACKEND_ACCEPTED
+UI-S-10,Jobs & receipt,shared/local,"BE-08,BE-09,BE-17,BE-19",YES,partial,src/features/ImportJobs.tsx,"Daily server scheduler, outbox native, restore infra",PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-01,Giải thích & xin quyền,/data/android,"BE-08,BE-19,BE-20",YES,native_pending,src/features/Devices.tsx,Browser chỉ minh họa consent; OS handoff chưa chạy trên Android,PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-02,Chọn ứng dụng nguồn,/data/android,"BE-08,BE-19,BE-20",YES,native_pending,src/features/Devices.tsx,Allowlist synthetic; chưa matrix appVersion/package thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-03,Gắn tài khoản,/data/android,"BE-08,BE-19,BE-20",YES,native_pending,src/features/Devices.tsx,Binding synthetic; chưa multi-account native,PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-04,Kiểm tra thiết lập,/data/android,"BE-08,BE-19,BE-20",YES,native_pending,src/features/Devices.tsx,Receipt minh họa thiếu thông tin; không notification thật,PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-05,Trạng thái & hàng đợi,/data/android,"BE-08,BE-19,BE-20",YES,native_pending,src/native/collector.ts,Chưa native persistence/restart/reboot/OEM/offline ACK,PLANNED_NOT_BACKEND_ACCEPTED
+UI-M-06,Cài/cập nhật APK,/data/devices,"BE-16,BE-19,BE-20,BE-21",YES,native_pending,src/features/Devices.tsx,"Chưa signed APK, signing metadata, cài/update/real-device evidence",PLANNED_NOT_BACKEND_ACCEPTED
+UI-ADM-01,Tổng quan vận hành,/admin/overview,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-02,Tài khoản SaaS & thiết bị,/admin/accounts,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-03,Nguồn & bộ đọc,/admin/sources,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-04,Tác vụ,/admin/jobs,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-05,Hạn mức,/admin/quotas,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-06,Phiên bản Android,/admin/releases,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING
+UI-ADM-07,Sự cố & nhật ký,/admin/incidents,"BE-16,BE-19",YES,mock,admin/AdminApp.tsx,"Backend BE16 PostgreSQL services/negative authorization complete; UI gateway/form adapter BE19 pending",BACKEND_BE16_LOCAL_UI_BE19_PENDING

@@ -1,0 +1,7 @@
+erDiagram
+  workspaces ||--o{ forecast_runs : workspace_id
+  snapshots ||--o{ forecast_runs : base_snapshot_id
+  payload_objects ||--o{ forecast_runs : inputs_payload_id
+  payload_objects |o--o{ forecast_runs : checkpoint_payload_id
+  forecast_runs ||--o{ forecast_result_pages : run_id
+  payload_objects ||--o{ forecast_result_pages : payload_id

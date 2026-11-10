@@ -1,3 +1,33 @@
+> **03/11/2026 — Nhập giao dịch bằng ảnh:** phương thức nhập chính chuyển sang người dùng chọn/chụp ảnh, OCR tách từng giao dịch và tự lưu khi đủ thông tin; trường thiếu chờ kiểm tra. Notification Android là tùy chọn. [Yêu cầu và thiết kế hiện hành](../product/screenshot-transaction-entry.md). Các mô tả collector bắt buộc bên dưới là lịch sử phương án trước thay đổi này.
+
+> **ARCH-13 hiện hành — 09/10/2026:** [Operations](../operations/README.md) / [ADR020](../architecture/adr/ADR-020-local-first-operations-and-fenced-releases.md). API005 / DB005 / native003 giữ nguyên; local-first CI, release có bảo trì, backup/witness/alerts ngoài host. **DESIGN SPECIFIED; runtime/SQL/release/restore NOT RUN; REAL chưa bật.** Các notice revision cũ bên dưới là lịch sử; source/policy đích theo [bundle](../operations/implementation-bundle.json).
+
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
+
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
+
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
+
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](../data/target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
+
+> **ARCH-08 hiện hành — 09/10/2026:** [Financial Engine/domain](../domain/README.md), [API revision 003: 151 operations / 626 schemas](v2-t1-r3/README.md), [DB revision 004: 86 bảng / 988 cột](../data/target-t1-domain/README.md) và [bundle/hashes](../domain/implementation-bundle.json). Kế thừa T1/auth/security; bổ sung 4 operations dự báo và 2 bảng qua J2, không sửa prior packages, frontend hoặc snapshots. **Thiết kế đã chốt; Engine/SQL/concurrency/forecast thực tế NOT RUN.** Các notice ARCH-05…07 dưới đây giữ lịch sử revision; target hiện hành theo 003/004 và các addenda này.
+
+> **ARCH-07 — 09/10/2026:** [Hồ sơ bảo vệ dữ liệu T1](../security/t1/README.md), [bundle và hashes](../security/t1/implementation-bundle.json), [schema đích 84 bảng / 960 cột](../data/target-t1-security/README.md). API revision 002 giữ nguyên 147 operations; các gói và snapshot trước được giữ nguyên. Security profile bổ sung yêu cầu triển khai, không đổi payload API. SQL, bảo mật, backup, witness và restore thực tế đều **NOT RUN**; giữ đủ tính năng và 41 AC. Nội dung ARCH-07 hiện hành làm rõ các phần còn mở trong tài liệu kế thừa.
+
+> **ARCH-06 current target08/10/2026:** [identity protocol](../security/identity/identity-access-design.md), [API FW-API-T1-D1J2-002](../contracts/v2-t1-r2/README.md), [auth DB expand](../data/target-t1-auth/README.md).147operations/82tables là target design, không implementation. Revision001 và baselines giữ nguyên; auth follow-up06 đã có spec, runtime/SQL/native/mail/security NOT RUN. Notes ARCH-05 bên dưới là revision001 reference khi mâu thuẫn identity002.
+
+> **Retained revision08/10/2026 — ARCH-05:** [API T1/D1/J2 revision FW-API-T1-D1J2-001](v2-t1/README.md), [OpenAPI](v2-t1/openapi.json), [revision/hash](v2-t1/revision.json).141 operations; exact revision/hash pin vì payload 2.0.0 pre-release khôngcompatible chỉ từnhãn. `v2/` làimmutablehandoverbaseline thamchiếu; khôngregenerate nóđểchechange. v1/frontendmock dướiđây làhistory/observedimplementation, khôngtargetproduction. Backend/consumer/native/auth/security NOT RUN.
+
+# Contracts — điểm vào hiện hành
+
+08/10/2026. [Bộ API v2 thống nhất](v2/README.md) và [openapi.json](v2/openapi.json) là nguồn chuẩn **đích bàn giao**, chưa là backend triển khai. [Operational API](operational-api-spec.md) nối inventory, examples, schema, quyền và migration.
+
+Phần dưới là baseline mock1.1.0 lịch sử, còn đúng cho implementation v1 trong frontend; các chữ “hiện hành”/“current” trong phần này chỉ nói Step6 ngày06/10, không ghi đè v2 bàn giao hoặc UI implementation08/10. Không regenerate v1 trong lượt này. [Nguồn trước bàn giao](../governance/baselines/handover-before-2026-10-08/docs/contracts/README.md).
+
+---
+
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
 # FinWeave — Contract package1.1.0 / bước6
 
 ARC-API-001 · 06/10/2026 · logical/synthetic contract. 70 business operations+6identity;64named base schemas, generated OpenAPI3.1.1 và JSONSchema2020-12 cùng examples. Schema source Zod/operations/identity/presentation; generated v1 directory chứa exact1.1.0. Baseline1.0.0 được giữ trong governance/baselines/contracts-step4-v1.
@@ -45,3 +75,27 @@ User bổ sung auth screens. `identity.openapi.json`/`identity-examples.json`/`i
 UI auth hiện gọi6identity operations qua HTTP/MSW. .test credential memory only, challenge123456 single-use/5min, tab marker30min chứa opaque synthetic sessionId/profile, không password/key. Register/reset/signin cùng memory identity; reload seed reset dummy credentials/financialfixture, marker có thể còn nếu hợp lệ. Logout/expiry clear marker/cache/chat/forms. Không email/SMS/provider thật; real identity/bootstrap/transport vẫn blocked.
 
 Bước6 API rejects malformed envelope/DTO với502, HTML500 giữ server classification; mutation unknown ACK giữ immutable originalrequest/key đến successrefetch. Local synthetic lifecycle wake sau idle dùng MSW publicstop/start, không reset repository hoặc tự retry mutation. [Handover](../testing/integration-handover.md) ghi rõ cách tắt mock và phần real integration cònblocked.
+
+## ARCH-10 — Android implementation handover
+
+API004153operations634schemas unchanged. FW-NATIVE-BRIDGE-002 separate internal protocol; seven legacy methods need explicit adapter, native auth reply secrets never forwarded generically to JS.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+API004153operations634schemas giữ nguyên; upstream SSI V3 không đổi FinWeave API v2.0.0. DB wallet→wire legacy bank grouping. Unbound no receipt; extra lifecycle/public subtype cần revision trước implementation.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+API005153operations634schemas supersedes unreleased004; five Assistant result.mode consts mở enum4 và Agent counters0..8. Request/routes/actors unchanged. Native003 exact005; các gói004 vẫn historical immutable.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).
+
+## ARCH-13 — Operations handover
+
+API005 vẫn153 operations/634 schemas, native003 giữ nguyên. Runbooks không thêm public API. Release kiểm serializers, installed clients, payload/job policies; không dùng hybrid fallback production.
+
+[Hồ sơ vận hành](../operations/README.md) · [Acceptance32 NOT RUN](../operations/acceptance-plan.md) · [Báo cáo](../architecture/ARCH-13-change-report.md).

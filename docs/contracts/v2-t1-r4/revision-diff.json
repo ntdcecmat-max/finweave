@@ -1,0 +1,17 @@
+{
+  "from": "FW-API-T1-D1J2-003",
+  "to": "FW-API-T1-D1J2-004",
+  "addedOperations": [
+    "listCoverage",
+    "listCoverageGaps"
+  ],
+  "changedInheritedSchemas": [
+    "previewImportInput",
+    "getSyncStateOutput"
+  ],
+  "inheritedSchemasUnchanged": 624,
+  "newSchemas": 8,
+  "unchangedOperationsExceptRevisionMetadata": 151,
+  "wireBreakingInUnreleasedTarget": true,
+  "consumerMigration": "NOT_RUN"
+}

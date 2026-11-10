@@ -1,0 +1,56 @@
+[
+  {
+    "source": "docs\\design\\interface-catalogue.md",
+    "snapshot": "interface-catalogue.md",
+    "sha256": "A8108F59105B784E4103B57EF4BB7ED9BFFF8FC6DCCAAF9B8FDE5CB563085B1E",
+    "bytes": 871
+  },
+  {
+    "source": "docs\\design\\ux-ui-specification.md",
+    "snapshot": "ux-ui-specification.md",
+    "sha256": "717B2E804BE1E83D84CF24CFB442418247D9D981F2755347616FE4BD7F6F19C5",
+    "bytes": 13755
+  },
+  {
+    "source": "docs\\design\\screen-behavior-specification.md",
+    "snapshot": "screen-behavior-specification.md",
+    "sha256": "286DF642EA44E081233C280DC0AFDEDBF68EFEE25EE8B855998B3D97B041267F",
+    "bytes": 20851
+  },
+  {
+    "source": "docs\\design\\component-specifications.md",
+    "snapshot": "component-specifications.md",
+    "sha256": "D15A4B332BA5A6B0A040C0F88185AF2E3F01A58AEC01C457BC965DA174C01CE5",
+    "bytes": 17917
+  },
+  {
+    "source": "docs\\design\\pattern-library.md",
+    "snapshot": "pattern-library.md",
+    "sha256": "189245434E0352AF49474B90987B08ABD310B517643825E511A529DD1BD061E9",
+    "bytes": 11491
+  },
+  {
+    "source": "docs\\design\\design-system.md",
+    "snapshot": "design-system.md",
+    "sha256": "4B6AFFE3B54C62A5BACDC4B4204C4D853AF97C59A28DBC382738471D33D8A4E4",
+    "bytes": 8160
+  },
+  {
+    "source": "docs\\design\\authentication-specification.md",
+    "snapshot": "authentication-specification.md",
+    "sha256": "054555837586A6BF33E5754871C5CC16A88D896B1DB008E9010D92656DC7B98A",
+    "bytes": 5121
+  },
+  {
+    "source": "docs\\design\\accessibility-requirements.md",
+    "snapshot": "accessibility-requirements.md",
+    "sha256": "78E5B252A46B16480746F3710927AA31536C69418231ACE75E9BA315A93790F7",
+    "bytes": 3940
+  },
+  {
+    "source": "docs\\design\\operational-design-delta.md",
+    "snapshot": "operational-design-delta.md",
+    "sha256": "C15E4390F5780D9DF60F8C22C8A3D762E1EA0EBA04AED3F00A69434842E61AB4",
+    "bytes": 2684
+  }
+]

@@ -1,0 +1,21 @@
+keyId,custody,mechanism,rotation,restriction,status
+owner_credential_pepper,Identity,HMAC-SHA256,90d review; retain until all active verifier versions retired,Never silently invalidate active refresh/recovery refs,DESIGN_NOT_PROVISIONED
+owner_challenge_pepper,Identity,HMAC-SHA256,90d; old15min+retry horizon,No OTP plaintext,DESIGN_NOT_PROVISIONED
+owner_auth_replay_aead,Identity,AES-256-GCM,90d or compromise; old5min body horizon,Restore discards all replay bodies,DESIGN_NOT_PROVISIONED
+owner_csrf_hmac,Identity,HMAC-SHA256,90d; rotate sessions on retirement,Browser only,DESIGN_NOT_PROVISIONED
+owner_request_digest,Identity,HMAC-SHA256,90d; retain tombstone versions,No public password digest,DESIGN_NOT_PROVISIONED
+owner_recovery_code_pepper,Identity,HMAC-SHA256,90d review; retire after active codes rotate,Outstanding offline codes may be long-lived,DESIGN_NOT_PROVISIONED
+ops_credential_pepper,OpsIdentity,HMAC-SHA256,90d; revoke admin sessions on retire,No owner use,DESIGN_NOT_PROVISIONED
+ops_auth_replay_aead,OpsIdentity,AES-256-GCM,90d; old5min horizon,No customer bodies,DESIGN_NOT_PROVISIONED
+ops_totp_aead,OpsIdentity,AES-256-GCM,90d; reencrypt live factors; old keys until backups retire,"Seed restored only in locked recovery, admin reprovision",DESIGN_NOT_PROVISIONED
+ops_csrf_hmac,OpsIdentity,HMAC-SHA256,90d; rotate admin sessions,No customer use,DESIGN_NOT_PROVISIONED
+ops_request_digest,OpsIdentity,HMAC-SHA256,90d; preserve replay tombstone versions,Independent material from owner keys,DESIGN_NOT_PROVISIONED
+service_signature_per_profile,Exact P2 profile,HMAC-SHA256,30d coordinated drain/cutover,No shared key across profiles,DESIGN_NOT_PROVISIONED
+service_ca,Offline infrastructure custodian,Private CA signing key,Annual review; leaf30d,CA private key never in app containers,DESIGN_NOT_PROVISIONED
+checkpoint_producer,Recovery coordinator,Ed25519,90d review; public history retained,Deny events only; no finance signing authority,DESIGN_NOT_PROVISIONED
+checkpoint_witness,Independent witness custodian,Ed25519,90d review; preserve trust-key history,Private key never on finance VM,DESIGN_NOT_PROVISIONED
+volume_unlock,Infrastructure custodian,LUKS2 key material,Compromise/recovery review,Offline recovery copy; no plaintext same-volume unlock key,DESIGN_NOT_PROVISIONED
+backup_repository_password,Backup custodian; runtime backup reader,Restic native encrypted repository,90d access review; compromise => new repository,Password change alone is not master-key rotation,DESIGN_NOT_PROVISIONED
+key_capsule_recipient,Offline owner/infrastructure custodian,age recipient private key,Compromise/recovery review,Private recipient key not in capsule or finance backup,DESIGN_NOT_PROVISIONED
+apk_release_signing,Offline release custodian,Android signing key,Continuity; platform-specific rotation ARCH10/13,Not the native device key; never generic90d rotation,DESIGN_NOT_PROVISIONED
+provider_credentials,Exact approved adapter,Provider-specific,Terms/compromise-specific,Inactive/not selected until ARCH11/12 gates,DESIGN_NOT_PROVISIONED

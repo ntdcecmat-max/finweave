@@ -1,0 +1,4 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
+export default defineConfig({ root: fileURLToPath(new URL('./admin', import.meta.url)), cacheDir:fileURLToPath(new URL('./'+(process.env.FINWEAVE_VITE_CACHE?process.env.FINWEAVE_VITE_CACHE+'-admin':'node_modules/.vite-admin'),import.meta.url)), plugins: [react()], publicDir: false, server: { port: 4183, strictPort: true, host: '127.0.0.1',watch:{ignored:['**/android/**','**/dist*/**','**/.local/**']},proxy:{'/v2':{target:'http://127.0.0.1:4311',changeOrigin:true,configure:proxy=>proxy.on('proxyReq',(outgoing,request)=>{if(['http://127.0.0.1:4183','http://localhost:4183'].includes(request.headers.origin??''))outgoing.setHeader('Origin','http://127.0.0.1:4311');})}} }, build: { outDir: fileURLToPath(new URL('./dist-admin', import.meta.url)), emptyOutDir: true } });

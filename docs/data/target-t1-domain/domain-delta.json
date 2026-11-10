@@ -1,0 +1,36 @@
+{
+  "newTables": [
+    "forecast_runs",
+    "forecast_result_pages"
+  ],
+  "existingRulesAddenda": {
+    "accounts": [
+      "Opening is posted once through opening event/equity group; declaration column is not added again",
+      "Missing opening or unresolved coverage cannot become known zero; current createAccount requires an explicit owner declaration, otherwise source remains unbound/needs_setup"
+    ],
+    "ledger_accounts": [
+      "Internal account_id NULL accounts use unique purpose kind within workspace; no retarget after posted use"
+    ],
+    "entry_groups": [
+      "Deferred commit guard rejects building groups, empty groups and nonzero sum; sealed groups reject balanced append as well as update/delete",
+      "Reversal mirrors every original ledger account/currency/amount exactly once; lineage and replacement written atomically"
+    ],
+    "holding_movements": [
+      "Order by business_date then immutable sequence_no for equal-date facts; historical rebuild applies set versus delta, never sums quantity after-values",
+      "Retroactive correction revalidates every later quantity state; cannot create negative quantities or mutate a frozen old snapshot"
+    ],
+    "actual_links": [
+      "No event family linked to two active occurrences in the same planning scope, including different revisions; old revision history remains immutable",
+      "Current projection resolves signed reversal/refund/replacement lineage without duplicating cash or actual matching"
+    ],
+    "jobs": [
+      "Register typed forecast_run domain kind + forecast job_type; ForecastWorker compute-only capability; same J2 authority"
+    ],
+    "snapshots": [
+      "Freeze effective business cutoff AND recorded knowledge version, scope, quote/FX/profile/quantity refs, settings/model/rules versions",
+      "A run freezes all competing goals/allocations and account funding dependencies, not only selected output goalIds"
+    ]
+  },
+  "sql": "NOT_AUTHORED_NOT_RUN",
+  "jobAuthority": "J2_UNCHANGED"
+}

@@ -1,0 +1,320 @@
+{
+  "revision": "FW-NATIVE-BRIDGE-002",
+  "handlers": [
+    {
+      "operationId": "signIn",
+      "uiInputFields": [
+        "email",
+        "password"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "installationPublicKey"
+      ],
+      "nativeConsumedResponseFields": [
+        "challengeId",
+        "nonce"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "state",
+        "expiresAt",
+        "channel",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "signInInput",
+      "exactApiOutputSchema": "signInOutput"
+    },
+    {
+      "operationId": "registerIdentity",
+      "uiInputFields": [
+        "email",
+        "name",
+        "password",
+        "passwordConfirmation",
+        "syntheticAcknowledgement"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "installationPublicKey"
+      ],
+      "nativeConsumedResponseFields": [
+        "challengeId",
+        "nonce"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "state",
+        "expiresAt",
+        "channel",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "registerIdentityInput",
+      "exactApiOutputSchema": "registerIdentityOutput"
+    },
+    {
+      "operationId": "requestPasswordReset",
+      "uiInputFields": [
+        "email"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [],
+      "nativeConsumedResponseFields": [],
+      "jsResponseProjectionFields": [
+        "message",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "requestPasswordResetInput",
+      "exactApiOutputSchema": "requestPasswordResetOutput"
+    },
+    {
+      "operationId": "resetIdentityPassword",
+      "uiInputFields": [
+        "password",
+        "passwordConfirmation"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "resetToken"
+      ],
+      "nativeConsumedResponseFields": [],
+      "jsResponseProjectionFields": [
+        "message",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "resetIdentityPasswordInput",
+      "exactApiOutputSchema": "resetIdentityPasswordOutput"
+    },
+    {
+      "operationId": "verifyNativeIdentityChallenge",
+      "uiInputFields": [
+        "code"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "challengeId"
+      ],
+      "nativeConsumedResponseFields": [
+        "tokens"
+      ],
+      "jsResponseProjectionFields": [
+        "session",
+        "profile",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "verifyNativeIdentityChallengeInput",
+      "exactApiOutputSchema": "verifyNativeIdentityChallengeOutput"
+    },
+    {
+      "operationId": "renewNativeSession",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [],
+      "nativeConsumedResponseFields": [
+        "tokens"
+      ],
+      "jsResponseProjectionFields": [
+        "session",
+        "profile",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "renewNativeSessionInput",
+      "exactApiOutputSchema": "renewNativeSessionOutput"
+    },
+    {
+      "operationId": "requestOwnerReauthentication",
+      "uiInputFields": [
+        "password"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [],
+      "nativeConsumedResponseFields": [
+        "challengeId",
+        "nonce"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "expiresAt",
+        "channel"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "requestOwnerReauthenticationInput",
+      "exactApiOutputSchema": "requestOwnerReauthenticationOutput"
+    },
+    {
+      "operationId": "verifyOwnerReauthentication",
+      "uiInputFields": [
+        "code"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "challengeId"
+      ],
+      "nativeConsumedResponseFields": [],
+      "jsResponseProjectionFields": [
+        "reauthenticatedUntil"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "verifyOwnerReauthenticationInput",
+      "exactApiOutputSchema": "verifyOwnerReauthenticationOutput"
+    },
+    {
+      "operationId": "redeemOwnerRecoveryCode",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [
+        "email",
+        "recoveryCode"
+      ],
+      "nativeInjectedInputFields": [],
+      "nativeConsumedResponseFields": [
+        "resetToken"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "expiresAt",
+        "state"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "redeemOwnerRecoveryCodeInput",
+      "exactApiOutputSchema": "redeemOwnerRecoveryCodeOutput"
+    },
+    {
+      "operationId": "signOut",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "sessionId"
+      ],
+      "nativeConsumedResponseFields": [],
+      "jsResponseProjectionFields": [
+        "signedOut",
+        "synthetic",
+        "revokePending"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "signOutInput",
+      "exactApiOutputSchema": "signOutOutput"
+    },
+    {
+      "operationId": "rotateOwnerRecoveryCodes",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [],
+      "nativeConsumedResponseFields": [
+        "codes"
+      ],
+      "jsResponseProjectionFields": [
+        "completed",
+        "generatedAt"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "rotateOwnerRecoveryCodesInput",
+      "exactApiOutputSchema": "rotateOwnerRecoveryCodesOutput"
+    },
+    {
+      "operationId": "registerDevice",
+      "uiInputFields": [
+        "name"
+      ],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "platform",
+        "appVersion",
+        "consentVersion",
+        "publicKey",
+        "challengeId",
+        "proof"
+      ],
+      "nativeConsumedResponseFields": [],
+      "jsResponseProjectionFields": [
+        "id",
+        "name",
+        "version",
+        "appVersion",
+        "consentVersion",
+        "status",
+        "permission",
+        "network",
+        "lastSeen",
+        "lastObserved",
+        "lastAck",
+        "pending",
+        "gaps",
+        "synthetic"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "registerDeviceInput",
+      "exactApiOutputSchema": "registerDeviceOutput"
+    },
+    {
+      "operationId": "requestDeviceEnrollment",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "platform",
+        "publicKeyDigest"
+      ],
+      "nativeConsumedResponseFields": [
+        "challengeId",
+        "nonce"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "expiresAt"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "requestDeviceEnrollmentInput",
+      "exactApiOutputSchema": "requestDeviceEnrollmentOutput"
+    },
+    {
+      "operationId": "requestCollectorCredentialChallenge",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "deviceId"
+      ],
+      "nativeConsumedResponseFields": [
+        "challengeId",
+        "nonce"
+      ],
+      "jsResponseProjectionFields": [
+        "flowId",
+        "expiresAt"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "requestCollectorCredentialChallengeInput",
+      "exactApiOutputSchema": "requestCollectorCredentialChallengeOutput"
+    },
+    {
+      "operationId": "issueCollectorCredential",
+      "uiInputFields": [],
+      "nativeDialogOnlyFields": [],
+      "nativeInjectedInputFields": [
+        "deviceId",
+        "challengeId",
+        "proof"
+      ],
+      "nativeConsumedResponseFields": [
+        "token"
+      ],
+      "jsResponseProjectionFields": [
+        "deviceId",
+        "expiresAt",
+        "authorizedUntil"
+      ],
+      "uiPayloadAdditionalProperties": false,
+      "exactApiInputSchema": "issueCollectorCredentialInput",
+      "exactApiOutputSchema": "issueCollectorCredentialOutput"
+    }
+  ],
+  "flow": "Opaque CSPRNG flowId scoped installation/current owner where applicable/local generation/purpose/expiry, one active pending challenge per flow. Never JS-provided server challenge/nonce/proof/publicKey/resetToken/token. Local flowId is not serialized as an API field.",
+  "nativeValues": "installation SPKI, pending challenge ID/nonce, current session/device, android platform, actual native build/required accepted consent, collector SPKI/proof and native-vault reset token. Validate final request against API004 after injection.",
+  "recovery": "redeem code and display rotated codes in native secure dialogs; resetToken remains vault-only and is consumed on password reset. Mail reset links must be verified/captured natively, never injected into WebView URL/JS; REAL link host remains a release gate.",
+  "runtime": "NOT_RUN"
+}

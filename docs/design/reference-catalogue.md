@@ -1,3 +1,5 @@
+> AI-SPEC-001 — 08/10/2026: nguồn chức năng AI hiện hành là [đặc tả hợp nhất](../product/ai-agent-specification.md). Các mô tả scripted/read-only bên dưới ghi implementation/mock cũ; chat/history/mascot được kế thừa, Agent có quyền tạo draft theo spec và owner xác nhận riêng để áp dụng. Không hiểu mô tả mock như yêu cầu xóa capability cũ hoặc cấm draft mới.
+
 # Reference catalogue
 
 DES-REF-001 · v0.1 · 05/10/2026 · AG đã mở và xem trực tiếp đủ40 ảnh. Tên file bên dưới là đường dẫn tương đối trong References nguồn; không chỉ suy luận filename. Ảnh có bản quyền/nguồn chưa xác minh: chỉ học bố cục và interaction, không embed/copy logo, số liệu, code, illustration hoặc animation vào app. Các phần thiếu tự đề xuất từ 28UC/AC, ghi tại UX specification và decision log. Không cần user tìm ảnh thêm.

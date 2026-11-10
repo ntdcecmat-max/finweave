@@ -1,0 +1,35 @@
+{
+  "previous": "FW-API-T1-D1J2-004",
+  "current": "FW-API-T1-D1J2-005",
+  "modePaths": [
+    "/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0/properties/mode",
+    "/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0/properties/mode",
+    "/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0/properties/mode",
+    "/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0/properties/mode",
+    "/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0/properties/mode"
+  ],
+  "toolCounterPaths": [
+    "/components/schemas/startAgentRunOutput/properties/toolCalls",
+    "/components/schemas/answerAgentRunOutput/properties/toolCalls",
+    "/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+    "/components/schemas/getAgentRunOutput/properties/toolCalls",
+    "/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls"
+  ],
+  "changedSchemas": [
+    "getConversationOutput",
+    "listMessagesOutput",
+    "sendAssistantMessageOutput",
+    "getAssistantMessageOutput",
+    "cancelAssistantMessageOutput",
+    "startAgentRunOutput",
+    "answerAgentRunOutput",
+    "cancelAgentRunOutput",
+    "getAgentRunOutput",
+    "listAgentRunsOutput"
+  ],
+  "inputSchemasChanged": [],
+  "operationsAdded": [],
+  "authChanges": false,
+  "databaseChanges": false,
+  "wireVersion": "2.0.0 unreleased target; exact revision header005 required"
+}

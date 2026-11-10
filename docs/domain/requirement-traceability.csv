@@ -1,0 +1,31 @@
+requirement,description,document,backend,parentAC,runtimeCase,status
+ENG-01,Canonical money/decimal và input validation,precision-calendar-snapshots.md,BE-02/03/04/05,AC-01…12,DOM-01,SPECIFIED_RUNTIME_NOT_RUN
+ENG-02,Exact arithmetic/rounding/overflow,precision-calendar-snapshots.md,BE-03/05/13,AC-04/05/10,DOM-02,SPECIFIED_RUNTIME_NOT_RUN
+ENG-03,Business calendar và date precision,precision-calendar-snapshots.md,BE-02/03/12,AC-01/06/08/20,DOM-03,SPECIFIED_RUNTIME_NOT_RUN
+ENG-04,Monthly recurrence và identifiers,precision-calendar-snapshots.md,BE-13/14,AC-22/24/26,DOM-04,SPECIFIED_RUNTIME_NOT_RUN
+ENG-05,Quote/FX/provenance và unknown,precision-calendar-snapshots.md,BE-05/06/12,AC-04/05/10/34/35,DOM-05,SPECIFIED_RUNTIME_NOT_RUN
+ENG-06,"Snapshot closure, scope và cache",precision-calendar-snapshots.md,BE-12/13/14/15,AC-13/20/21/28,DOM-06,SPECIFIED_RUNTIME_NOT_RUN
+ENG-07,Opening và balance authority,ledger-and-portfolio.md,BE-03,AC-02/03/08,DOM-07,SPECIFIED_RUNTIME_NOT_RUN
+ENG-08,Sealed double-entry posting,ledger-and-portfolio.md,BE-04,AC-08/12,DOM-08,SPECIFIED_RUNTIME_NOT_RUN
+ENG-09,Transfer/fee/clearing,ledger-and-portfolio.md,BE-04/08/10,AC-08/15,DOM-09,SPECIFIED_RUNTIME_NOT_RUN
+ENG-10,Refund/reclassification,ledger-and-portfolio.md,BE-04/10,AC-08/12/15,DOM-10,SPECIFIED_RUNTIME_NOT_RUN
+ENG-11,Correction và lineage,ledger-and-portfolio.md,BE-04/10,AC-12/15,DOM-11,SPECIFIED_RUNTIME_NOT_RUN
+ENG-12,Quantity set/delta và history,ledger-and-portfolio.md,BE-05,AC-04/05/10,DOM-12,SPECIFIED_RUNTIME_NOT_RUN
+ENG-13,Unified import/receipt/manual authority,ledger-and-portfolio.md,BE-08/09/10,AC-06/08/15/33,DOM-13,SPECIFIED_RUNTIME_NOT_RUN
+ENG-14,Planning scope/revisions,planning-and-goals.md,BE-13,AC-22/23/38/39,DOM-14,SPECIFIED_RUNTIME_NOT_RUN
+ENG-15,Actual link và remaining,planning-and-goals.md,BE-13,AC-23,DOM-15,SPECIFIED_RUNTIME_NOT_RUN
+ENG-16,Current earmark và available,planning-and-goals.md,BE-14,AC-24/25,DOM-16,SPECIFIED_RUNTIME_NOT_RUN
+ENG-17,Funding pro-rata deterministic,planning-and-goals.md,BE-14,AC-25,DOM-17,SPECIFIED_RUNTIME_NOT_RUN
+ENG-18,Goal schedules/shared feasibility,planning-and-goals.md,BE-13/14,AC-24/26/38…40,DOM-18,SPECIFIED_RUNTIME_NOT_RUN
+ENG-19,Goal criteria và actual achieved,planning-and-goals.md,BE-14,AC-24/25,DOM-19,SPECIFIED_RUNTIME_NOT_RUN
+ENG-20,Agent draft/owner confirmation,planning-and-goals.md,BE-13/14/15,AC-27/28/38…40,DOM-20,SPECIFIED_RUNTIME_NOT_RUN
+ENG-21,Complete forecast settings và baseline,forecast-model.md,BE-13/14/15,AC-22/24/26/38…40,DOM-21,SPECIFIED_RUNTIME_NOT_RUN
+ENG-22,Extended Plan replacement/timing,forecast-model.md,BE-13,AC-22/23/26,DOM-22,SPECIFIED_RUNTIME_NOT_RUN
+ENG-23,Stochastic model/RNG/stress,forecast-model.md,BE-13/14,AC-22/24/26,DOM-23,SPECIFIED_RUNTIME_NOT_RUN
+ENG-24,Debt/reserve/pooling/contributions,forecast-model.md,BE-13/14,AC-24/26,DOM-24,SPECIFIED_RUNTIME_NOT_RUN
+ENG-25,Probability/quantile/outcome quality,forecast-model.md,BE-13/14/15,AC-24/26/27,DOM-25,SPECIFIED_RUNTIME_NOT_RUN
+ENG-26,Frozen run/pages/cancel/expiry,forecast-model.md,BE-13/17/19,AC-22/26/41,DOM-26,SPECIFIED_RUNTIME_NOT_RUN
+ENG-27,UnitOfWork/lock order,transactions-and-concurrency.md,BE-02/04/13/14,AC-08/12/23/24/25/39,DOM-27,SPECIFIED_RUNTIME_NOT_RUN
+ENG-28,Replay/versions/unknown outcome,transactions-and-concurrency.md,BE-02/04/17,AC-12/33/39,DOM-28,SPECIFIED_RUNTIME_NOT_RUN
+ENG-29,Read consistency và external finalize,transactions-and-concurrency.md,BE-06/12/17,AC-13/34/35/41,DOM-29,SPECIFIED_RUNTIME_NOT_RUN
+ENG-30,Oracle/concurrency/fault evidence,transactions-and-concurrency.md,BE-20/21,AC-01…41,DOM-30,SPECIFIED_RUNTIME_NOT_RUN

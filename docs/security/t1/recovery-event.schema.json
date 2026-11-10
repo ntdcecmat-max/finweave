@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "profile": {
+      "const": "FW-RECOVERY-EVENT-001"
+    },
+    "eventId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+    },
+    "environmentId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+    },
+    "scopeKind": {
+      "enum": [
+        "identity",
+        "workspace",
+        "device"
+      ]
+    },
+    "targetToken": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "kind": {
+      "enum": [
+        "identity_revoke",
+        "workspace_erase",
+        "identity_erase",
+        "device_revoke"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producerKeyId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,80}$"
+    }
+  },
+  "required": [
+    "profile",
+    "eventId",
+    "environmentId",
+    "scopeKind",
+    "targetToken",
+    "epoch",
+    "kind",
+    "createdAt",
+    "producerKeyId"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "identity_revoke",
+              "identity_erase"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scopeKind": {
+            "const": "identity"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "workspace_erase"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scopeKind": {
+            "const": "workspace"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "device_revoke"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scopeKind": {
+            "const": "device"
+          }
+        }
+      }
+    }
+  ]
+}

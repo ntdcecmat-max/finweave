@@ -1,3 +1,17 @@
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](../contracts/v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
+
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
+
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
+
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](../contracts/v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
+
+> **ARCH-08 hiện hành — 09/10/2026:** [Financial Engine/domain](../domain/README.md), [API revision 003: 151 operations / 626 schemas](../contracts/v2-t1-r3/README.md), [DB revision 004: 86 bảng / 988 cột](target-t1-domain/README.md) và [bundle/hashes](../domain/implementation-bundle.json). Kế thừa T1/auth/security; bổ sung 4 operations dự báo và 2 bảng qua J2, không sửa prior packages, frontend hoặc snapshots. **Thiết kế đã chốt; Engine/SQL/concurrency/forecast thực tế NOT RUN.** Các notice ARCH-05…07 dưới đây giữ lịch sử revision; target hiện hành theo 003/004 và các addenda này.
+
+> **ARCH-07 — 09/10/2026:** [Hồ sơ bảo vệ dữ liệu T1](../security/t1/README.md), [bundle và hashes](../security/t1/implementation-bundle.json), [schema đích 84 bảng / 960 cột](target-t1-security/README.md). API revision 002 giữ nguyên 147 operations; các gói và snapshot trước được giữ nguyên. Security profile bổ sung yêu cầu triển khai, không đổi payload API. SQL, bảo mật, backup, witness và restore thực tế đều **NOT RUN**; giữ đủ tính năng và 41 AC. Nội dung ARCH-07 hiện hành làm rõ các phần còn mở trong tài liệu kế thừa.
+
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
 # FinWeave — Data Requirements và Dictionary nghiệp vụ
 
 ID DAT-REQ-001 · v2.0 · analysis-v2/scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. Nguồn [Scope](../product/scope.md), [Rules](../product/business-rules.md), Ideas §1.9/19. Đây là dữ liệu logic cần cho M1 và kế thừa M2/M3, **không schema database, API hay thiết kế mã hóa đã thực thi**.
@@ -57,3 +71,33 @@ DR-07 DEMO-01…08 và DR-14 oracle theo Playbook §13, [Scenarios](../product/o
 ## Quan hệ/lineage mới
 
 ReportPeriod→ReportSnapshot→Insight/ToolResult; FinancialPlan→PlannedItems→PlanActualLinks→TrackingSnapshot; actual Event không copy sang Plan ledger. Goal→Allocations→actual balance snapshots→Progress/Shortfall; Simulation references actual/plan/goal frozenversions, không ghi event actual. Conversation→Message→capturedContext→authorized read-only ToolResult→numbers/cards/drillRefs. Chat history là lời kể/history, không nguồn tài chính current. Các entity DR-16…22 nhạy cảm khi real data, phải nằm privacy boundary/retention policy tương lai; hiện chỉ synthetic/history tới reset. Policy real AI conversation retention chưa chốt (OD-09), không tự giữ vô hạn/real LLM prompt.
+
+## ARCH-08 — Dữ liệu domain và forecast
+
+Freeze actual ledger/quantity/quote FX/profiles, planning revisions/all competing funding dependencies, effective+recorded cutoffs, source refs, Engine/model/seed/settings/rules version. Missing khác0, private digests không đưaOps. Forecast runs/checkpoints/pages không là actual ledger hoặc queue authority.
+
+[DB004](target-t1-domain/README.md) và [domain LLD](../domain/README.md) bổ sung fields/constraints/retention/pins/migration inputs; [30 cases](../domain/acceptance-plan.md) chưa thực thi. Không xóa history/pins để fit JSON/backup quota; resource bounds phải báo rõ hoặc page/chunk, không silently drop data.
+
+## ARCH-09 — Async data lifecycle
+
+Frozen refresh selection/rights/normalization, request-intent CAS, quota windows/cooldown, queue policy/deadline và native pending/ACK replay/quarantine có bounds. Confirmed import rows pinned, coverage snapshot control-versioned, no raw/OTP/server/model/log. Erasure inventory bao gồm mới; restore không reset quota hoặc auto repost missing receipt.
+
+[Hồ sơ async](../async/README.md), [API004](../contracts/v2-t1-r4/README.md), [DB005](target-t1-async/README.md), [ADR-016](../architecture/adr/ADR-016-postgresql-dispatch-and-explicit-sync-outcomes.md), [32 ca runtime](../async/acceptance-plan.md).
+
+## ARCH-10 — Android implementation handover
+
+Native normalized encrypted outbox/ACK journal only; raw/OTP memory-only. Eight local Room tables do not change backend DB00587tables1001columns. Private payloads/counters/keys have distinct retention.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+Quote stored scale-expanded VND/sourceUnit; source scale/time precision/rights/profile frozen private metadata. Raw upstream body/notification không persistence mặc định. License retention/backup incompatibility blocks activation, không tự xóa history.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+DB00587tables1001cols162FK unchanged. Registered private execution checkpoint/workspace usage bucket Assistant + narrow ops_quotas aggregate broker SPECIFIED; no model prompt/thinking persistence hoặc finance trong global counter.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).

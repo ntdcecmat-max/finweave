@@ -1,0 +1,35 @@
+{
+  "node": "v24.19.0",
+  "pnpm": "11.25.0",
+  "platform": "win32-x64",
+  "postgresServer": "16.14",
+  "postgresBinaryPackage": "16.14.0-beta.17",
+  "lockSha256": "8b3ab57fbe49500fdd43084e2812625cda25665ae55ab43bfd4193659cbf565f",
+  "executables": {
+    "node": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+    "postgres": "c4a6839621f230076b3347f443b3dbfb133954d695f82866ea67501290bd90d3",
+    "initdb": "2111500f1faa10211d330c2bfd88afedc00abe9caa134607c776453ff6f46f09",
+    "pg_ctl": "b6656121ef0a417ca4bd46dbe3ae50fd9ae077d8d6c06f92f9d498c224488c48"
+  },
+  "baseLockSha256": "03c70fd9a6c31fc0abe012dffad1555785363f3bfc5a9763e0758cd27c16597a",
+  "purpose": "Additive Fastify/API005 local auth runtime; historical SQL and toolchain evidence unchanged",
+  "dependencies": {
+    "@node-rs/argon2": "2.2.2",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "canonicalize": "5.1.0",
+    "fastify": "5.12.5",
+    "pg": "8.23.1",
+    "@embedded-postgres/windows-x64": "16.14.0-beta.17",
+    "@types/node": "24.19.1",
+    "@types/pg": "8.23.1",
+    "typescript": "5.9.3"
+  },
+  "runtimeSqlSha256": "1f32088cd9bc7f54d2d2643aa5d25d49f8dee4377bf5a470e7ea5a773eb0d953",
+  "runtimeMigrations": {
+    "database/runtime/001_runtime.sql": "1f32088cd9bc7f54d2d2643aa5d25d49f8dee4377bf5a470e7ea5a773eb0d953",
+    "database/runtime/002_auth_payload_expiry.sql": "ccfc801b19ed515e384a967d3fc58215044d7c4486a4f6332cc111fe1124ed77",
+    "database/runtime/003_ops_restore_gate.sql": "e6ad0c660eaed351fee4b314403c1d8ece2d5ed1f179a1ab7448daff327ceda3",
+    "database/runtime/004_job_device_fences.sql": "8e8a6df2938ba546c5e5002778519463f97f90f2cd4600fa5e9b6af094c6bb37"
+  }
+}

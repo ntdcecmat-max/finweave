@@ -1,0 +1,11 @@
+{
+  "appId": "test.finweave.prototype",
+  "appName": "FinWeave",
+  "webDir": "dist",
+  "loggingBehavior": "none",
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false,
+    "zoomEnabled": true
+  }
+}

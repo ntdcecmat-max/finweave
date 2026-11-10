@@ -1,0 +1,41 @@
+{
+  "previous": "FW-API-T1-D1J2-002",
+  "current": "FW-API-T1-D1J2-003",
+  "addedOperations": [
+    "startForecastRun",
+    "getForecastRun",
+    "cancelForecastRun",
+    "executeForecastRun"
+  ],
+  "addedSchemas": [
+    "ForecastSettings",
+    "ForecastValue",
+    "ForecastBands",
+    "ForecastGoalValue",
+    "ForecastPoint",
+    "ForecastFlow",
+    "ForecastGoalOutcome",
+    "ForecastSummary",
+    "ForecastResultPage",
+    "ForecastRun",
+    "startForecastRunInput",
+    "startForecastRunOutput",
+    "startForecastRunRequest",
+    "startForecastRunReply",
+    "getForecastRunInput",
+    "getForecastRunOutput",
+    "getForecastRunRequest",
+    "getForecastRunReply",
+    "cancelForecastRunInput",
+    "cancelForecastRunOutput",
+    "cancelForecastRunRequest",
+    "cancelForecastRunReply",
+    "executeForecastRunInput",
+    "executeForecastRunOutput",
+    "executeForecastRunRequest",
+    "executeForecastRunReply"
+  ],
+  "changedInheritedSchemas": [],
+  "headerMetadataChangesOnlyForInheritedOperations": true,
+  "consumerMigration": "NOT_IMPLEMENTED; current frontend forecasts are local, no matching network callsite"
+}

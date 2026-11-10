@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Ghi nhận, thu nạp và giao dịch
+actor "Chủ workspace" as Owner
+actor "Android OS / ứng dụng nguồn" as OS
+rectangle "FinWeave — Ghi nhận, thu nạp và giao dịch" {
+usecase "UC-MONEY-01\nGhi giao dịch thu, chi, chuyển,\nhoàn và phí" as UC_MONEY_01
+usecase "UC-TXN-01\nTra cứu và xem chi tiết giao\ndịch" as UC_TXN_01
+usecase "UC-TXN-02\nSửa giao dịch và đảo bút toán đã\nghi" as UC_TXN_02
+usecase "UC-IMPORT-01\nNhập và đối soát sao kê CSV" as UC_IMPORT_01
+usecase "UC-CAPTURE-01\nCấp quyền và cấu hình thu thập\nthông báo" as UC_CAPTURE_01
+usecase "UC-SYNC-01\nĐồng bộ hàng đợi và dữ liệu đa\nthiết bị" as UC_SYNC_01
+usecase "UC-SOURCE-01\nQuản lý nguồn dữ liệu của\nworkspace" as UC_SOURCE_01
+usecase "UC-INGEST-03\nTiếp nhận và chuẩn hóa thông báo\ntự động" as UC_INGEST_03
+}
+Owner -- UC_MONEY_01
+Owner -- UC_TXN_01
+Owner -- UC_TXN_02
+Owner -- UC_IMPORT_01
+Owner -- UC_CAPTURE_01
+Owner -- UC_SYNC_01
+Owner -- UC_SOURCE_01
+OS -- UC_INGEST_03
+OS -- UC_CAPTURE_01
+@enduml

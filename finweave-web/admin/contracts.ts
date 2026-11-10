@@ -1,0 +1,17 @@
+import { z } from 'zod';
+const text = z.string().max(500), id = z.string().min(1).max(120), version = z.number().int().positive();
+export const OpsSource = z.strictObject({ id, name: text, packageName: text, parserVersion: text, appCompatibility: text, status: z.enum(['enabled', 'disabled', 'degraded']), bindings: z.number().int().nonnegative(), version, lastSuccess: text.nullable(), errorCode: text.nullable() });
+export const OpsJob = z.strictObject({ id, type: z.enum(['price_refresh', 'ingestion', 'sync','import','forecast','agent']), state: z.enum(['queued', 'running', 'failed', 'succeeded', 'paused','cancelled']), sourceId: id, version, attempts: z.number().int(), leaseUntil: text.nullable(), requestedAt: text.nullable(), updatedAt: text.nullable(), errorCode: text.nullable(), requestId: id });
+export const OpsAccount = z.strictObject({ id, workspaceId: id, status: z.enum(['active', 'suspended']), devices: z.array(z.strictObject({ id, appVersion: text, lastSeen: text.nullable(), health: z.enum(['online', 'offline', 'unknown']) })) });
+export const OpsQuota = z.strictObject({ id, name: text, used: z.number().nonnegative(), limit: z.number().nonnegative(), resetAt: text, cooldownUntil: text.nullable() });
+export const OpsRelease = z.strictObject({ id, versionName: text, channel: text, publishedAt: text.nullable(), artifact: z.strictObject({ url: z.url(), sha256: z.string().length(64), signingFingerprint: text }).nullable(), compatibility: text, testState: z.enum(['not_run', 'passed', 'failed']) });
+export const OpsIncident = z.strictObject({ id, severity: z.enum(['info', 'warning', 'critical']), sourceId: id.nullable(), code: text, status: z.enum(['open', 'resolved']), createdAt: text });
+export const OpsAudit = z.strictObject({ id, actorId: id, action: z.enum(['retry_job', 'disable_source']), objectId: id, reason: text, fromVersion: version, toVersion: version, result: z.enum(['succeeded','accepted','applied','rejected']), requestId: id, at: text });
+export const OpsSnapshot = z.strictObject({ version, environment: z.literal('synthetic'), build: text, asOf: text, sources: z.array(OpsSource), jobs: z.array(OpsJob), accounts: z.array(OpsAccount), quotas: z.array(OpsQuota), releases: z.array(OpsRelease), incidents: z.array(OpsIncident), audit: z.array(OpsAudit) });
+export const OpsAction = z.strictObject({ action: z.enum(['retry_job', 'disable_source']), id, expectedVersion: version, reason: z.string().trim().min(3).max(300) });
+export const OpsPreview = z.strictObject({ token: id, digest: text, expiresAt: text, action: OpsAction, impact: text, snapshotVersion: version });
+export const AdminSession = z.strictObject({ id, subjectId: id, role: z.literal('admin'), expiresAt: z.number(), synthetic: z.literal(true) });
+export type OpsState = z.infer<typeof OpsSnapshot>;
+export type OpsActionInput = z.infer<typeof OpsAction>;
+export type OpsPreviewDTO = z.infer<typeof OpsPreview>;
+export type AdminSessionDTO = z.infer<typeof AdminSession>;

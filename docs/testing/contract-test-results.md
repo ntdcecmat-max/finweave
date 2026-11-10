@@ -1,3 +1,5 @@
+> Kết quả ngày 06/10 bên dưới là lịch sử v1. Các raw tên Step6 đã được chạy lại sau đó, nên số99/99 không đại diện nội dung raw hiện tại. Bản lưu trước rà soát và kết quả unit/API audit mới nằm trong [nghiệm thu frontend](frontend-acceptance-report.md). Canonical v2 là hợp đồng đích; chưa runtime conformance.
+
 # Contract Test Results — logical API 1.1.0
 
 TST-CTR-001 · v1.0 · 06/10/2026. [Raw Vitest](../execution/evidence/step6-unit-results.json) ghi **99/99** assertions PASS, 14 suites, 0failed/pending. Đây gồm domain/auth/contracts/repository/HTTP, không phải99endpointcases. [Contract audit log](../execution/evidence/step6-contracts.log) exit0 sau sửa portablebaseline path; [initial audit failure](../execution/evidence/step6-contracts-initial-failure.log) retained.

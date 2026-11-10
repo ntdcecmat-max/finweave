@@ -1,0 +1,1292 @@
+{
+  "date": "2026-10-28",
+  "groups": [
+    [
+      "Xác thực và phiên dùng chung",
+      "00-auth"
+    ],
+    [
+      "Thiết lập, tài khoản và tiền mặt",
+      "01-accounts"
+    ],
+    [
+      "Ghi nhận, thu nạp và giao dịch",
+      "02-transactions"
+    ],
+    [
+      "Tài sản đầu tư và giá thị trường",
+      "03-assets"
+    ],
+    [
+      "Báo cáo, tổng quan và rà soát",
+      "04-reports"
+    ],
+    [
+      "Kế hoạch, mục tiêu và mô phỏng",
+      "05-planning"
+    ],
+    [
+      "Trợ lý thông minh và Agent",
+      "06-assistant"
+    ],
+    [
+      "Quản trị vận hành",
+      "07-operations"
+    ]
+  ],
+  "systemCases": [
+    {
+      "id": "UC-SYS-01",
+      "name": "Thiết lập, tài khoản và tiền mặt",
+      "group": 1
+    },
+    {
+      "id": "UC-SYS-02",
+      "name": "Ghi nhận, thu nạp và giao dịch",
+      "group": 2
+    },
+    {
+      "id": "UC-SYS-03",
+      "name": "Tài sản đầu tư và giá thị trường",
+      "group": 3
+    },
+    {
+      "id": "UC-SYS-04",
+      "name": "Báo cáo, tổng quan và rà soát",
+      "group": 4
+    },
+    {
+      "id": "UC-SYS-05",
+      "name": "Kế hoạch, mục tiêu và mô phỏng",
+      "group": 5
+    },
+    {
+      "id": "UC-SYS-06",
+      "name": "Trợ lý thông minh và Agent",
+      "group": 6
+    },
+    {
+      "id": "UC-SYS-07",
+      "name": "Quản trị vận hành",
+      "group": 7
+    }
+  ],
+  "cases": [
+    {
+      "group": 0,
+      "id": "UC-AUTH-01",
+      "name": "Đăng ký và xác minh tài khoản",
+      "actor": "Người dùng chưa đăng nhập; dịch vụ email",
+      "goal": "Có danh tính chủ workspace đã xác minh.",
+      "trigger": "Chọn Đăng ký.",
+      "pre": "Chưa có phiên owner; kênh xác minh khả dụng.",
+      "steps": [
+        "Người dùng nhập email, mật khẩu và xác nhận mật khẩu.",
+        "Hệ thống kiểm tra dữ liệu, tạo yêu cầu xác minh và gửi mã qua kênh email.",
+        "Người dùng nhập mã; hệ thống kiểm thời hạn, số lần thử và mục đích mã.",
+        "Hệ thống hoàn tất danh tính/phiên theo giao thức và dẫn tới tạo hoặc chọn workspace."
+      ],
+      "alt": [
+        "Email đã tồn tại: phản hồi theo chính sách chống dò tài khoản.",
+        "Mã sai/hết hạn hoặc gửi quá nhiều: cho thử lại/gửi lại trong giới hạn; không mở phiên đã xác minh.",
+        "Email thực chưa cấu hình: báo chưa thể hoàn tất; mail sink local chỉ là công cụ thử."
+      ],
+      "post": "Danh tính hợp lệ được tạo; chưa có tài khoản tiền hoặc bút toán do đăng ký.",
+      "trace": "REQ-SURFACE-01; SRS NFR identity; identity-access-design.md",
+      "rules": "CF-01…05"
+    },
+    {
+      "group": 0,
+      "id": "UC-AUTH-02",
+      "name": "Đăng nhập chủ workspace",
+      "actor": "Chủ workspace; dịch vụ email",
+      "goal": "Truy cập đúng workspace bằng danh tính hợp lệ.",
+      "trigger": "Chọn Đăng nhập.",
+      "pre": "Danh tính đã đăng ký; browser/native dùng đúng loại credential.",
+      "steps": [
+        "Chủ workspace nhập thông tin đăng nhập.",
+        "Hệ thống kiểm credential và yêu cầu challenge theo giao thức/kênh hiện hành.",
+        "Người dùng hoàn tất challenge; hệ thống cấp phiên có phạm vi.",
+        "Người dùng chọn workspace; hệ thống tải dữ liệu được phép và phiên bản hiện hành."
+      ],
+      "alt": [
+        "Sai thông tin, khóa/tạm chặn hoặc challenge hết hạn: không cấp phiên.",
+        "Thiết bị native chưa chứng minh danh tính: không dùng đăng nhập demo thay enrollment.",
+        "Chưa có workspace: chuyển UC-SET-01; không tự đọc workspace khác."
+      ],
+      "post": "Phiên owner có hiệu lực đúng phạm vi; không thay đổi số dư.",
+      "trace": "REQ-SURFACE-01 / AC-29; identity-access-design.md",
+      "rules": "CF-01…05"
+    },
+    {
+      "group": 0,
+      "id": "UC-AUTH-03",
+      "name": "Khôi phục mật khẩu",
+      "actor": "Chủ tài khoản; dịch vụ email",
+      "goal": "Khôi phục truy cập qua kênh đã xác minh.",
+      "trigger": "Chọn Quên mật khẩu.",
+      "pre": "Có email tiếp nhận yêu cầu; không yêu cầu phiên đang đăng nhập.",
+      "steps": [
+        "Người dùng gửi yêu cầu khôi phục bằng email.",
+        "Hệ thống phản hồi theo chính sách chống dò và phát challenge có thời hạn nếu phù hợp.",
+        "Người dùng cung cấp mã/token và mật khẩu mới.",
+        "Hệ thống xác minh mục đích, cập nhật credential, thu hồi phiên theo chính sách và yêu cầu đăng nhập lại."
+      ],
+      "alt": [
+        "Token sai, hết hạn hoặc dùng lại: từ chối; không đổi mật khẩu.",
+        "Không truy cập được email: áp dụng recovery protocol được duyệt; app-admin không được tự nhập vai owner."
+      ],
+      "post": "Mật khẩu đổi một lần khi hợp lệ; credential cũ bị xử lý đúng chính sách.",
+      "trace": "identity-access-design.md; NFR-07/19",
+      "rules": "CF-01…05"
+    },
+    {
+      "group": 0,
+      "id": "UC-AUTH-04",
+      "name": "Quản lý phiên, thiết bị và đăng xuất",
+      "actor": "Chủ workspace",
+      "goal": "Kiểm soát nơi đang truy cập và thu hồi quyền.",
+      "trigger": "Mở Phiên/Thiết bị hoặc chọn Đăng xuất.",
+      "pre": "Có phiên hợp lệ; thao tác nhạy cảm có thể cần xác thực lại.",
+      "steps": [
+        "Hệ thống liệt kê phiên và thiết bị của chính người dùng với metadata tối thiểu.",
+        "Người dùng chọn đăng xuất, thu hồi phiên hoặc thu hồi thiết bị.",
+        "Hệ thống yêu cầu xác nhận/xác thực lại nếu cần và thu hồi credential tương ứng.",
+        "Client xóa cache nhạy cảm và dừng tác vụ mới; hàng đợi native không được chuyển sang owner khác."
+      ],
+      "alt": [
+        "Thiết bị offline: server vẫn chặn lần truy cập sau; không khẳng định đã xóa vật lý dữ liệu ở thiết bị.",
+        "Thu hồi phiên hiện tại: điều hướng về đăng nhập.",
+        "Timeout: kiểm tra kết quả trước khi phát yêu cầu mới."
+      ],
+      "post": "Quyền bị thu hồi đúng phạm vi; lịch sử tài chính vẫn tồn tại.",
+      "trace": "REQ-SURFACE-01 / AC-29; REQ-SYNC-01 / AC-33",
+      "rules": "CF-01…05"
+    },
+    {
+      "group": 1,
+      "id": "UC-SET-01",
+      "name": "Thiết lập mốc theo dõi và thông số",
+      "actor": "Chủ workspace",
+      "goal": "Thiết lập mốc, tiền tệ và múi giờ nhất quán.",
+      "trigger": "Khởi tạo workspace hoặc mở Thiết lập.",
+      "pre": "Phiên owner hợp lệ; scope workspace rõ.",
+      "steps": [
+        "Hệ thống hiển thị mốc theo dõi, VND và múi giờ nghiệp vụ.",
+        "Người dùng nhập mốc theo dõi và thông số được hỗ trợ.",
+        "Hệ thống kiểm hợp lệ, giải thích số dư đầu kỳ khác thu nhập; nếu đã có dữ liệu thì xem trước tác động.",
+        "Người dùng xác nhận; hệ thống lưu phiên bản thiết lập và áp dụng cùng mốc cho các màn hình."
+      ],
+      "alt": [
+        "Mốc sai hoặc không được hỗ trợ: giữ nhập liệu và chỉ rõ lỗi.",
+        "Đổi mốc sau khi có dữ liệu: không tự ghi thêm opening; cần kiểm tác động trước xác nhận."
+      ],
+      "post": "Workspace có cấu hình phiên bản mới; không sinh thu nhập.",
+      "trace": "REQ-SET-01 / AC-01",
+      "rules": "BR-01/03/04/19; CF-01…05"
+    },
+    {
+      "group": 1,
+      "id": "UC-BANK-01",
+      "name": "Tạo và quản lý tài khoản ngân hàng/ví",
+      "actor": "Chủ workspace",
+      "goal": "Theo dõi từng tài khoản tiền độc lập.",
+      "trigger": "Chọn Thêm/Sửa tài khoản ngân hàng hoặc ví.",
+      "pre": "Đã có workspace và mốc; nguồn tiền thuộc owner.",
+      "steps": [
+        "Người dùng chọn loại ngân hàng/ví, nhập tên và thông tin định danh cần thiết.",
+        "Người dùng khai báo số dư đầu kỳ và ngày, hoặc chọn chưa biết số dư.",
+        "Hệ thống kiểm dữ liệu, hiển thị nguồn tự khai báo và tác động opening.",
+        "Người dùng xác nhận; hệ thống lưu tài khoản và opening hợp lệ trong một giao dịch; sửa metadata giữ lịch sử."
+      ],
+      "alt": [
+        "Bỏ số dư: lưu unknown, không coi bằng 0.",
+        "Số 0 được nhập rõ là số dư đã khai báo; không bắt tạo ledger line bằng 0.",
+        "Trùng tên: cảnh báo, không tự gộp; đổi opening đã ghi phải qua quy trình điều chỉnh có dấu vết."
+      ],
+      "post": "Tài khoản có ID riêng; opening chỉ có hiệu lực một lần và không là income.",
+      "trace": "REQ-BANK-01 / AC-02",
+      "rules": "BR-02/04/09/20/45"
+    },
+    {
+      "group": 1,
+      "id": "UC-CASH-01",
+      "name": "Tạo và quản lý ví tiền mặt",
+      "actor": "Chủ workspace",
+      "goal": "Theo dõi tiền mặt tự khai báo tách khỏi kiểm đếm.",
+      "trigger": "Chọn Thêm/Sửa ví tiền mặt.",
+      "pre": "Workspace và mốc đã thiết lập.",
+      "steps": [
+        "Người dùng nhập tên ví, ngày và số dư tự khai báo hoặc trạng thái chưa biết.",
+        "Hệ thống kiểm dữ liệu và xem trước số dư đầu kỳ.",
+        "Người dùng xác nhận; hệ thống tạo ví cùng opening hợp lệ.",
+        "Hệ thống hiển thị số tính toán và trạng thái chưa kiểm đếm riêng."
+      ],
+      "alt": [
+        "Số dư chưa biết: không tổng hợp thành số 0 đã xác minh.",
+        "Sửa tên không đổi tiền; bổ sung opening cần kiểm phiên bản và ghi một lần."
+      ],
+      "post": "Ví tiền mặt có nguồn tự khai báo; chưa có observation kiểm đếm.",
+      "trace": "REQ-CASH-01 / AC-03",
+      "rules": "BR-02/04/14/45"
+    },
+    {
+      "group": 1,
+      "id": "UC-CASH-02",
+      "name": "Kiểm đếm và đối soát tiền mặt",
+      "actor": "Chủ workspace",
+      "goal": "Phát hiện chênh lệch giữa số đếm và số tính cùng thời điểm.",
+      "trigger": "Chọn Kiểm đếm tiền mặt.",
+      "pre": "Ví active; số tính có baseline và snapshot; thời điểm/đơn vị so sánh tương thích.",
+      "steps": [
+        "Người dùng nhập số đếm và thời điểm kiểm đếm.",
+        "Hệ thống lưu observation và so với số tính tại cùng mốc.",
+        "Hệ thống hiển thị chênh lệch cùng căn cứ, chưa thay đổi ledger.",
+        "Người dùng kiểm tra nguyên nhân; nếu có khoản quên thì ghi qua UC-MONEY-01, hoặc lựa chọn điều chỉnh qua UC-CASH-03."
+      ],
+      "alt": [
+        "Số đếm 0 hợp lệ.",
+        "Thiếu baseline hoặc lệch thời điểm: không đưa ra chênh lệch giả.",
+        "Chưa rõ nguyên nhân hoặc hủy xử lý: observation có thể giữ, tiền không tự đổi."
+      ],
+      "post": "Có biên bản kiểm đếm; ledger chỉ đổi khi một thao tác ghi tiền riêng đã xác nhận.",
+      "trace": "REQ-CASH-02 / AC-09",
+      "rules": "BR-14/21"
+    },
+    {
+      "group": 1,
+      "id": "UC-CASH-03",
+      "name": "Xác nhận điều chỉnh chênh lệch tiền mặt",
+      "actor": "Chủ workspace",
+      "goal": "Ghi nhận chênh lệch chưa xác định nguyên nhân có dấu vết.",
+      "trigger": "Trong UC-CASH-02, chọn Điều chỉnh.",
+      "pre": "Chênh lệch khác 0; observation/snapshot còn hợp lệ; có lý do.",
+      "steps": [
+        "Hệ thống nêu số tính, số đếm, phần chênh lệch và loại adjustment.",
+        "Người dùng nhập lý do; hệ thống xem trước tác động tiền và thu–chi.",
+        "Người dùng xác nhận; hệ thống ghi adjustment, liên kết observation và audit atomically.",
+        "Hệ thống cập nhật snapshot và trạng thái case."
+      ],
+      "alt": [
+        "Snapshot thay đổi: tính lại trước khi xác nhận.",
+        "Tìm ra khoản chi thật: chuyển ghi expense có căn cứ, tránh thêm cả expense lẫn adjustment."
+      ],
+      "post": "Tiền điều chỉnh một lần; không tự quy thành thu nhập hay chi tiêu sinh hoạt.",
+      "trace": "Refinement REQ-CASH-02 / AC-09",
+      "rules": "BR-14/21/46"
+    },
+    {
+      "group": 1,
+      "id": "UC-ACC-02",
+      "name": "Lưu trữ và khôi phục tài khoản",
+      "actor": "Chủ workspace",
+      "goal": "Ngừng sử dụng tài khoản mà vẫn giữ lịch sử.",
+      "trigger": "Chọn Lưu trữ/Khôi phục trong chi tiết tài khoản.",
+      "pre": "Tài khoản thuộc workspace; phiên bản hiện hành.",
+      "steps": [
+        "Hệ thống hiển thị trạng thái, ảnh hưởng tới phạm vi và liên kết đang có.",
+        "Người dùng chọn lưu trữ hoặc khôi phục nếu chính sách cho phép.",
+        "Hệ thống xem trước và yêu cầu xác nhận.",
+        "Hệ thống đổi trạng thái, lưu history; tài khoản lưu trữ vẫn tra cứu trong phạm vi lịch sử."
+      ],
+      "alt": [
+        "Liên kết hoặc nghiệp vụ còn mở: cảnh báo hoặc chặn theo quy tắc; không âm thầm xóa.",
+        "Lưu trữ không thay số dư bằng 0 và không xóa giao dịch."
+      ],
+      "post": "Trạng thái tài khoản được cập nhật; lịch sử và căn cứ giữ nguyên.",
+      "trace": "Tách từ UC-DRILL-01 cũ; REQ-DRILL-01 / AC-14",
+      "rules": "BR-19/20"
+    },
+    {
+      "group": 2,
+      "id": "UC-MONEY-01",
+      "name": "Ghi giao dịch thu, chi, chuyển, hoàn và phí",
+      "actor": "Chủ workspace",
+      "goal": "Ghi biến động tiền đúng bản chất.",
+      "trigger": "Chọn Thêm giao dịch.",
+      "pre": "Tài khoản active; workspace và VND hợp lệ; đủ căn cứ theo loại.",
+      "steps": [
+        "Người dùng chọn loại, tài khoản, số tiền, ngày và thông tin liên quan.",
+        "Với chuyển khoản, chọn hai tài khoản khác nhau; với hoàn tiền, cung cấp giao dịch/căn cứ gốc.",
+        "Hệ thống kiểm dữ liệu và xem trước các bút toán, phí, tác động tiền và thu–chi.",
+        "Người dùng xác nhận; hệ thống ghi nhóm bút toán cân bằng cùng history/idempotency trong một transaction.",
+        "Hệ thống trả kết quả và cập nhật snapshot."
+      ],
+      "alt": [
+        "Thiếu khoản gốc của refund: dùng trạng thái chưa giải quyết/Review theo policy; không tự coi income.",
+        "Transfer chỉ có một phía: dùng clearing và Review; không bịa chân còn lại.",
+        "Pending/draft không vào posted totals; phí là thành phần riêng đúng quy tắc."
+      ],
+      "post": "Giao dịch được ghi một lần hoặc bị chặn rõ ràng; chuyển nội bộ không làm tăng tổng thu/chi.",
+      "trace": "REQ-MONEY-01 / AC-08",
+      "rules": "BR-01…13/45/46"
+    },
+    {
+      "group": 2,
+      "id": "UC-TXN-01",
+      "name": "Tra cứu và xem chi tiết giao dịch",
+      "actor": "Chủ workspace",
+      "goal": "Tìm giao dịch và đọc căn cứ đầy đủ.",
+      "trigger": "Mở Giao dịch hoặc đi từ chỉ số báo cáo.",
+      "pre": "Có quyền đọc workspace; bộ lọc/phạm vi rõ.",
+      "steps": [
+        "Người dùng chọn kỳ, tài khoản, loại, danh mục và trạng thái.",
+        "Hệ thống truy vấn theo snapshot và hiển thị kết quả cùng chất lượng dữ liệu.",
+        "Người dùng mở một giao dịch; hệ thống hiện loại, posting/reconciliation, nguồn, lịch sử và liên kết.",
+        "Người dùng quay lại; hệ thống giữ ngữ cảnh lọc và kỳ."
+      ],
+      "alt": [
+        "Không có kết quả: hiển thị rỗng kèm cách đổi bộ lọc.",
+        "Lỗi truy vấn không được thay bằng danh sách rỗng; thiếu evidence phải có nhãn."
+      ],
+      "post": "Chỉ đọc; không đổi số dư, giao dịch hoặc trạng thái đối soát.",
+      "trace": "REQ-TXN-01 / AC-11",
+      "rules": "BR-03/05/12/19/20"
+    },
+    {
+      "group": 2,
+      "id": "UC-TXN-02",
+      "name": "Sửa giao dịch và đảo bút toán đã ghi",
+      "actor": "Chủ workspace",
+      "goal": "Chỉnh sai có lịch sử và giữ bất biến ledger.",
+      "trigger": "Chọn Sửa/Điều chỉnh ở giao dịch.",
+      "pre": "Đã tải giao dịch và version; posted correction có lý do.",
+      "steps": [
+        "Hệ thống phân biệt draft, sửa metadata/danh mục và sửa tác động tài chính đã posted.",
+        "Người dùng sửa phần được phép và nhập lý do.",
+        "Hệ thống xem trước; posted correction tạo reversal/replacement thay vì sửa dòng ledger cũ.",
+        "Người dùng xác nhận; hệ thống lưu toàn bộ liên kết/history/tác động trong một transaction.",
+        "Hệ thống hiển thị bản gốc, bản đảo và bản thay thế."
+      ],
+      "alt": [
+        "Giao dịch đã đảo: không đảo lần hai; mở replacement hiện hành.",
+        "Chỉ đổi danh mục: không thay tiền; nhập lại nguồn không xóa manual override."
+      ],
+      "post": "Sửa đúng delta một lần; ledger sealed giữ nguyên.",
+      "trace": "REQ-TXN-02 / AC-12",
+      "rules": "BR-05/09/12/13/46"
+    },
+    {
+      "group": 2,
+      "id": "UC-IMPORT-01",
+      "name": "Nhập và đối soát sao kê CSV",
+      "actor": "Chủ workspace",
+      "goal": "Nhập phần giao dịch hợp lệ đã xem trước.",
+      "trigger": "Chọn Nhập CSV.",
+      "pre": "Tài khoản đích active; file/profile được hỗ trợ; giới hạn theo cấu hình hiện hành.",
+      "steps": [
+        "Người dùng chọn file và tài khoản; ánh xạ cột ngày, tiền, tham chiếu, nội dung và đơn vị tiền.",
+        "Hệ thống phân tích, giữ nguồn/parser/mapping, kiểm hợp lệ và phát hiện trùng.",
+        "Hệ thống hiển thị valid/invalid/duplicate/ambiguous và tác động; người dùng chọn các dòng hợp lệ.",
+        "Người dùng xác nhận; hệ thống ghi atomic tập được chọn và tạo Review cho phần cần xử lý theo policy.",
+        "Hệ thống trả job/result/history và cập nhật dữ liệu."
+      ],
+      "alt": [
+        "CSV sai định dạng, vượt giới hạn hoặc số tiền mơ hồ: chặn hoặc chỉ rõ dòng lỗi trước commit.",
+        "Exact duplicate không ghi tiền lần hai; cùng amount chưa đủ kết luận trùng.",
+        "File/mapping/selection đổi làm preview cũ mất hiệu lực."
+      ],
+      "post": "Các dòng hợp lệ đã chọn được ghi một lần hoặc không dòng nào; phần loại trừ không âm thầm posted.",
+      "trace": "REQ-INPUT-01 / AC-06",
+      "rules": "BR-09…12/21/42"
+    },
+    {
+      "group": 2,
+      "id": "UC-CAPTURE-01",
+      "name": "Cấp quyền và cấu hình thu thập thông báo",
+      "actor": "Chủ workspace; Android OS",
+      "goal": "Cho phép thu thập đúng nguồn trên đúng thiết bị.",
+      "trigger": "Mở Kết nối thông báo Android.",
+      "pre": "APK hỗ trợ; owner/device được ràng buộc đúng; có source profile được hỗ trợ.",
+      "steps": [
+        "Hệ thống giải thích dữ liệu thu, giới hạn coverage và nguồn hỗ trợ.",
+        "Người dùng đồng ý, chọn nguồn/tài khoản trong allowlist và cấp Notification Access qua Android.",
+        "Hệ thống kiểm consent, OS permission, binding, credential và profile.",
+        "Hệ thống hiển thị trạng thái sẵn sàng hoặc phần còn thiếu; người dùng có thể tắt/thu hồi."
+      ],
+      "alt": [
+        "Deny/revoke hoặc thiếu enrollment: không báo đang thu thập đầy đủ.",
+        "Không nhận OTP/app ngoài allowlist; force-stop/gap được trình bày đúng.",
+        "Quyền phát notification thử và quyền đọc Notification Access là hai quyền khác nhau."
+      ],
+      "post": "Chỉ capture khi tất cả điều kiện cho phép; cấp quyền không tự nhập lịch sử ngân hàng.",
+      "trace": "REQ-CAPTURE-01 / AC-31; REQ-APK-01 / AC-30",
+      "rules": "BR-42/43/44"
+    },
+    {
+      "group": 2,
+      "id": "UC-INGEST-03",
+      "name": "Tiếp nhận và chuẩn hóa thông báo tự động",
+      "actor": "Android OS và ứng dụng nguồn, qua collector FinWeave",
+      "goal": "Biến observation hợp lệ thành receipt/giao dịch hoặc case cần rà soát.",
+      "trigger": "Thông báo của nguồn cho phép xuất hiện và được collector tiếp nhận.",
+      "pre": "Consent, binding và profile hợp lệ; local outbox/đồng bộ bảo đảm lưu bền.",
+      "steps": [
+        "Collector kiểm nguồn và chính sách loại trừ trước khi đọc nội dung cần thiết.",
+        "Collector chuẩn hóa bằng parser version và lưu sự kiện vào outbox mã hóa.",
+        "Backend xác thực thiết bị, ghi durable receipt rồi mới ACK việc tiếp nhận.",
+        "Worker parse/validate, kiểm transport identity và semantic duplicate, tìm cặp transfer theo evidence.",
+        "Nếu đủ căn cứ, worker ghi ledger atomic; nếu chưa đủ, tạo Review và trả trạng thái xử lý rõ."
+      ],
+      "alt": [
+        "Retry cùng eventId trả cùng receipt; hai giao dịch thật cùng amount không tự gộp.",
+        "Receipt ACK không đồng nghĩa đã posted; parser lỗi/thiếu căn cứ giữ chưa posted.",
+        "Thông báo có thể thiếu hoặc sai; không chứng minh balance hay coverage đầy đủ."
+      ],
+      "post": "Receipt có truy vết; một sự kiện không nhân posting do gửi lại.",
+      "trace": "REQ-INGEST-03 / AC-32",
+      "rules": "BR-42/43/46"
+    },
+    {
+      "group": 2,
+      "id": "UC-SYNC-01",
+      "name": "Đồng bộ hàng đợi và dữ liệu đa thiết bị",
+      "actor": "Chủ workspace; collector trên Android",
+      "goal": "Đưa dữ liệu chưa gửi lên đúng owner và làm mới các giao diện.",
+      "trigger": "Mạng trở lại, worker được lên lịch hoặc ứng dụng về foreground.",
+      "pre": "Queue có owner/device binding; credential chưa bị thu hồi.",
+      "steps": [
+        "Native worker đọc các phần tử chưa được ACK thuộc binding hiện tại.",
+        "Worker gửi với event identity ổn định; server ghi durable receipt và trả ACK.",
+        "Native chỉ đánh dấu ACK khi xác nhận receipt đúng sự kiện.",
+        "Client đọc trạng thái/snapshot mới; không để phản hồi cũ đè phiên bản mới.",
+        "Sau restart, tiếp tục phần chưa được ACK và giữ kết quả đã biết."
+      ],
+      "alt": [
+        "Offline/timeout: backoff và giữ queue; kết quả chưa rõ phải retry cùng identity.",
+        "Logout/revoke/đổi owner: chặn upload; không gửi queue A bằng credential B.",
+        "Gỡ app có thể làm mất queue local chưa sync; không cam kết tự phục hồi."
+      ],
+      "post": "Queue được tiếp tục an toàn; các client hội tụ khi làm mới, không yêu cầu push realtime.",
+      "trace": "REQ-SYNC-01 / AC-33; REQ-RECOVERY-01 / AC-41",
+      "rules": "BR-42/44"
+    },
+    {
+      "group": 2,
+      "id": "UC-SOURCE-01",
+      "name": "Quản lý nguồn dữ liệu của workspace",
+      "actor": "Chủ workspace",
+      "goal": "Biết nguồn nào đang hoạt động và có thể cập nhật gì.",
+      "trigger": "Mở Nguồn; chọn kết nối, cập nhật hoặc ngắt.",
+      "pre": "Có profile nguồn và quyền sử dụng phù hợp.",
+      "steps": [
+        "Hệ thống hiện capability, trạng thái, lastAttempt, lastSuccess, coverage và dữ liệu cần cấp quyền.",
+        "Người dùng chọn nguồn/tài khoản, cung cấp thông tin cấu hình qua kênh được phép.",
+        "Hệ thống kiểm profile/entitlement và hiển thị connecting/processing khi chưa xong.",
+        "Kết quả đi qua pipeline notification hoặc quote phù hợp; hệ thống cập nhật trạng thái và căn cứ.",
+        "Người dùng ngắt nguồn; hệ thống dừng thu/lấy mới, giữ lịch sử có nhãn."
+      ],
+      "alt": [
+        "Nguồn chưa được hỗ trợ hoặc chưa có quyền: không giả kết nối thành công.",
+        "Lỗi/429/revoked: giữ dữ liệu cũ với nhãn thời điểm; không về 0."
+      ],
+      "post": "Cấu hình và trạng thái nguồn rõ; không tự sửa holdings chỉ do kết nối.",
+      "trace": "REQ-INPUT-02 / AC-07; REQ-CAPTURE-01/PRICE-01",
+      "rules": "BR-18/19/40…44"
+    },
+    {
+      "group": 3,
+      "id": "UC-STOCK-01",
+      "name": "Khai báo và quản lý danh mục cổ phiếu",
+      "actor": "Chủ workspace",
+      "goal": "Theo dõi lượng cổ phiếu và định giá có nguồn.",
+      "trigger": "Chọn Thêm/Sửa cổ phiếu.",
+      "pre": "Workspace hợp lệ; catalog giải quyết được định danh mã/sàn.",
+      "steps": [
+        "Người dùng chọn ticker và nhập quantity, ngày; giá vốn là tùy chọn.",
+        "Hệ thống resolve instrument/sàn/đơn vị và yêu cầu xác nhận nếu còn mơ hồ.",
+        "Hệ thống dùng quote phù hợp nếu có, hiện quantityAsOf và quoteAsOf riêng.",
+        "Người dùng xác nhận; hệ thống lưu khai báo/holding/history và hiển thị định giá."
+      ],
+      "alt": [
+        "Không có quote: vẫn cho lưu khai báo hợp lệ, valuation unknown.",
+        "Thiếu giá vốn: P/L unknown, không coi cost=0.",
+        "Ticker trùng nhưng khác market: không tự gộp."
+      ],
+      "post": "Holding được lưu; khai báo không tự tạo giao dịch tiền hoặc thu nhập.",
+      "trace": "REQ-STOCK-01/02 / AC-04/34",
+      "rules": "BR-15/18/19/22/40"
+    },
+    {
+      "group": 3,
+      "id": "UC-GOLD-01",
+      "name": "Khai báo và quản lý vàng",
+      "actor": "Chủ workspace",
+      "goal": "Định giá đúng sản phẩm và đổi đơn vị nhất quán.",
+      "trigger": "Chọn Thêm/Sửa vàng hoặc đổi đơn vị hiển thị.",
+      "pre": "Gold profile gồm loại/tuổi/nguồn/side/unit được xác nhận.",
+      "steps": [
+        "Người dùng chọn profile, nhập lượng theo đơn vị hỗ trợ, ngày và cost nếu biết.",
+        "Hệ thống kiểm profile và quy đổi quantity theo đơn vị chuẩn.",
+        "Hệ thống chọn quote tương thích và trình bày nguồn/thời điểm/đơn vị.",
+        "Người dùng xác nhận; hệ thống lưu holding/history và có thể đổi cách hiển thị chỉ/lượng."
+      ],
+      "alt": [
+        "Quote khác product/purity/side/unit: không áp dụng.",
+        "Thiếu FX khi thực sự cần chuyển tiền tệ: valuation unknown hoặc partial có nhãn.",
+        "Đổi 2 chỉ thành 0,2 lượng không thay giá trị kinh tế."
+      ],
+      "post": "Holding vàng và định giá đúng compatibility; không money event từ khai báo.",
+      "trace": "REQ-GOLD-01/02 / AC-05/35",
+      "rules": "BR-15/16/18/40"
+    },
+    {
+      "group": 3,
+      "id": "UC-HOLD-01",
+      "name": "Cập nhật số lượng, giá vốn và lịch sử tài sản",
+      "actor": "Chủ workspace",
+      "goal": "Phản ánh thay đổi holding mà không nhầm với thay đổi giá.",
+      "trigger": "Chọn Cập nhật holding.",
+      "pre": "Holding thuộc owner, có version và căn cứ ngày/lý do.",
+      "steps": [
+        "Hệ thống hiển thị quantity/cost/history hiện tại.",
+        "Người dùng chọn khai báo bổ sung, sửa lượng/cost hoặc nghiệp vụ mua có thanh toán.",
+        "Hệ thống xem trước phần thay đổi và phân biệt declaration với purchase.",
+        "Người dùng xác nhận khai báo/sửa hợp lệ; mua có đủ căn cứ đi qua UC-BUY-01.",
+        "Hệ thống lưu movement/history và tính lại valuation theo quote thích hợp."
+      ],
+      "alt": [
+        "Refresh quote không được thay quantity.",
+        "Thiếu căn cứ thanh toán: chỉ ghi khai báo/điều chỉnh có nhãn; không bịa cash movement."
+      ],
+      "post": "Quantity/cost/history cập nhật nhất quán; không double-count cash và tài sản.",
+      "trace": "REQ-HOLD-01 / AC-10",
+      "rules": "BR-13/15/17/19/40/46"
+    },
+    {
+      "group": 3,
+      "id": "UC-BUY-01",
+      "name": "Liên kết mua tài sản với tài khoản thanh toán",
+      "actor": "Chủ workspace",
+      "goal": "Ghi đồng thời lượng mua và tiền thanh toán.",
+      "trigger": "Trong UC-HOLD-01, chọn Mua tài sản.",
+      "pre": "Có asset identity, tài khoản tiền active và căn cứ giao dịch.",
+      "steps": [
+        "Người dùng nhập quantity, đơn giá, ngày, phí và tài khoản trả tiền.",
+        "Hệ thống kiểm dữ liệu và xem trước movement holding cùng bút toán tiền liên kết.",
+        "Người dùng xác nhận; hệ thống ghi cash/holding/history trong cùng transaction.",
+        "Hệ thống hiện liên kết hai phía và giá vốn theo chính sách."
+      ],
+      "alt": [
+        "Không đủ dữ liệu: không tạo giao dịch mua giả từ khai báo.",
+        "Một phần ghi thất bại: rollback toàn bộ; timeout kiểm operation cũ."
+      ],
+      "post": "Mua có liên kết atomic một lần; không coi khoản đầu tư là chi sinh hoạt.",
+      "trace": "Refinement REQ-HOLD-01 / AC-10",
+      "rules": "BR-13/17/46"
+    },
+    {
+      "group": 3,
+      "id": "UC-PRICE-01",
+      "name": "Đồng bộ giá thị trường thủ công hoặc hằng ngày",
+      "actor": "Chủ workspace; nhà cung cấp giá thị trường",
+      "goal": "Cập nhật quote có quyền mà không thay lượng nắm giữ.",
+      "trigger": "Owner chọn Cập nhật hoặc bộ lập lịch nội bộ đến kỳ.",
+      "pre": "Provider/profile/entitlement hợp lệ; quota còn; instrument xác định.",
+      "steps": [
+        "Hệ thống tạo hoặc gộp yêu cầu vào job cùng khóa thị trường/kỳ phù hợp.",
+        "Market worker kiểm quyền nguồn, quota và gọi adapter provider.",
+        "Hệ thống kiểm market/product/purity/side/unit/currency/time; lưu quote hợp lệ kèm provenance.",
+        "Hệ thống tính lại valuation và công bố kết quả từng phần cùng lastAttempt/lastSuccess/quoteAsOf."
+      ],
+      "alt": [
+        "Manual trùng daily: gộp job theo policy, không gọi vô hạn.",
+        "429/timeout/partial: retry có giới hạn, giữ last-good có nhãn.",
+        "Ngày nghỉ: không sửa quoteAsOf thành hôm nay; không tự bịa lịch sử giá."
+      ],
+      "post": "Quote hợp lệ được cập nhật; quantity/cash/income giữ nguyên.",
+      "trace": "REQ-PRICE-01 / AC-36",
+      "rules": "BR-18/19/40/41"
+    },
+    {
+      "group": 3,
+      "id": "UC-REVIEW-02",
+      "name": "Kiểm tra chất lượng giá và tài sản",
+      "actor": "Chủ workspace",
+      "goal": "Biết valuation nào thiếu, cũ hoặc sai compatibility.",
+      "trigger": "Mở cảnh báo giá/holding hoặc mục Rà soát.",
+      "pre": "Có quyền đọc holding, quote và provenance.",
+      "steps": [
+        "Hệ thống liệt kê thiếu quote/cost, stale quote, mismatch và nguồn đã ngắt.",
+        "Người dùng mở case để xem quantityAsOf, quoteAsOf, profile và căn cứ.",
+        "Người dùng chọn sửa profile/khai báo hoặc yêu cầu refresh nguồn đã được phép.",
+        "Hệ thống kiểm lại chất lượng và lưu quyết định/căn cứ; chỉ áp dụng dữ liệu hợp lệ."
+      ],
+      "alt": [
+        "Không có nguồn đủ quyền: giữ unresolved/unknown.",
+        "Refresh thất bại không đổi giá về 0 và không kết luận giá đã mới."
+      ],
+      "post": "Có kết quả kiểm tra/chất lượng rõ; không tự sửa quantity hoặc cash.",
+      "trace": "REQ-REVIEW-02 / AC-16",
+      "rules": "BR-15/18/19/40/41"
+    },
+    {
+      "group": 4,
+      "id": "UC-OVERVIEW-01",
+      "name": "Xem tổng quan tài chính, dòng tiền và tài sản",
+      "actor": "Chủ workspace",
+      "goal": "Đọc số liệu tổng hợp cùng phạm vi và mức đầy đủ.",
+      "trigger": "Mở Tổng quan.",
+      "pre": "Có quyền workspace; kỳ và scope xác định.",
+      "steps": [
+        "Người dùng chọn kỳ và phạm vi tài khoản/tài sản.",
+        "Hệ thống đọc snapshot nhất quán và tổng hợp tiền, thu–chi, dòng tiền, cơ cấu tài sản.",
+        "Hệ thống hiển thị thời điểm, nguồn, phần unknown/incomplete và cảnh báo.",
+        "Người dùng có thể mở drill-down, báo cáo hoặc căn cứ của chỉ số."
+      ],
+      "alt": [
+        "Không dữ liệu khác lỗi dịch vụ; opening thiếu làm tổng chưa đầy đủ.",
+        "Transfer/opening/valuation change không bị cộng vào income."
+      ],
+      "post": "Chỉ đọc, giữ scope/version của số liệu; không thay ledger.",
+      "trace": "REQ-OVERVIEW-01 / AC-13",
+      "rules": "BR-01…04/19/24/45"
+    },
+    {
+      "group": 4,
+      "id": "UC-REPORT-01",
+      "name": "Xem báo cáo tài chính theo kỳ",
+      "actor": "Chủ workspace",
+      "goal": "So sánh và phân tích tài chính theo kỳ được chọn.",
+      "trigger": "Chọn báo cáo/tháng/quý/năm/tùy chọn trên Home.",
+      "pre": "Kỳ và scope hợp lệ; snapshot đọc nhất quán.",
+      "steps": [
+        "Người dùng chọn kỳ, chỉ tiêu và phạm vi.",
+        "Hệ thống tính số liệu theo cùng mốc, phân loại và phiên bản.",
+        "Hệ thống hiển thị bảng/biểu đồ, kỳ so sánh và coverage.",
+        "Người dùng mở drill-down hoặc evidence nếu cần."
+      ],
+      "alt": [
+        "Kỳ không có lịch sử đủ: nêu thiếu, không suy thành toàn bộ bằng 0.",
+        "Báo cáo là chức năng tích hợp Home; không bắt buộc có màn Reports riêng."
+      ],
+      "post": "Báo cáo có kỳ/scope/version rõ; chỉ đọc.",
+      "trace": "REQ-REPORT-01 / AC-20",
+      "rules": "BR-03/19/24/36"
+    },
+    {
+      "group": 4,
+      "id": "UC-DRILL-01",
+      "name": "Phân tích chi tiết và điều chỉnh phạm vi",
+      "actor": "Chủ workspace",
+      "goal": "Đi từ chỉ số tới thành phần và giao dịch cấu thành.",
+      "trigger": "Chọn một chỉ số trên Tổng quan hoặc Báo cáo.",
+      "pre": "Chỉ số gắn snapshot/kỳ/scope; owner có quyền thành phần.",
+      "steps": [
+        "Hệ thống nhận chỉ số và ngữ cảnh từ màn gốc.",
+        "Người dùng chọn chiều phân tích hoặc tài khoản/thành phần.",
+        "Hệ thống hiện breakdown và danh sách cấu thành với cùng semantics.",
+        "Người dùng mở giao dịch/evidence rồi quay lại; ngữ cảnh phân tích được giữ."
+      ],
+      "alt": [
+        "Snapshot đã thay đổi: ghi rõ và làm mới, không trộn hai version.",
+        "Chuyển scope chỉ ảnh hưởng góc nhìn, không archive hoặc xóa dữ liệu."
+      ],
+      "post": "Có phân tích chi tiết truy được về số tổng; dữ liệu nghiệp vụ không đổi.",
+      "trace": "REQ-DRILL-01 / AC-14",
+      "rules": "BR-19/20/24"
+    },
+    {
+      "group": 4,
+      "id": "UC-INSIGHT-01",
+      "name": "Đọc nhận định và phát hiện bất thường",
+      "actor": "Chủ workspace",
+      "goal": "Hiểu nhận định có căn cứ và phần còn chưa chắc.",
+      "trigger": "Mở insight/cảnh báo trên Home.",
+      "pre": "Có snapshot, coverage và bộ quy tắc/phân tích xác định.",
+      "steps": [
+        "Hệ thống phát hiện pattern từ dữ liệu được phép và có nhãn kỳ.",
+        "Hệ thống trình bày nhận định, metric, điều kiện và giới hạn coverage.",
+        "Người dùng đọc và có thể mở căn cứ hoặc yêu cầu trợ lý giải thích.",
+        "Hệ thống giữ liên kết metric về snapshot/evidence."
+      ],
+      "alt": [
+        "Thiếu dữ liệu: không khẳng định bất thường chắc chắn.",
+        "Insight không tự thay ledger hoặc active plan."
+      ],
+      "post": "Insight có căn cứ và giới hạn; không ghi actual.",
+      "trace": "REQ-INSIGHT-01 / AC-21",
+      "rules": "BR-19/25/36"
+    },
+    {
+      "group": 4,
+      "id": "UC-REVIEW-01",
+      "name": "Rà soát nghi vấn dữ liệu tiền",
+      "actor": "Chủ workspace",
+      "goal": "Xử lý các nghi vấn theo evidence mà không ghi tiền tùy tiện.",
+      "trigger": "Mở hàng đợi Review.",
+      "pre": "Case thuộc workspace; có current version.",
+      "steps": [
+        "Hệ thống liệt kê case trùng, chuyển khoản thiếu phía, refund, parse hoặc lệch tiền.",
+        "Người dùng chọn case và xem các observation, giao dịch, version và đề xuất.",
+        "Hệ thống nêu điều gì chắc chắn, còn thiếu và các quyết định cho phép.",
+        "Người dùng chọn xử lý qua UC-RESOLVE-01 hoặc để lại case chưa giải quyết."
+      ],
+      "alt": [
+        "Chỉ mở case chưa giải quyết nó.",
+        "Không đủ căn cứ: giữ open/deferred; không ép đoán để xóa cảnh báo."
+      ],
+      "post": "Case được đọc/đánh dấu phù hợp; tiền chỉ đổi qua hành động được xác nhận riêng.",
+      "trace": "REQ-REVIEW-01 / AC-15",
+      "rules": "BR-09…14/21/42"
+    },
+    {
+      "group": 4,
+      "id": "UC-RESOLVE-01",
+      "name": "Xác nhận quyết định xử lý case",
+      "actor": "Chủ workspace",
+      "goal": "Áp dụng khớp/xác nhận/bỏ qua có audit và đúng quyền.",
+      "trigger": "Trong Review, chọn một hành động xử lý.",
+      "pre": "Case/action/version hợp lệ; đủ evidence và owner confirmation.",
+      "steps": [
+        "Người dùng chọn khớp transfer, xác nhận trùng, ghi hợp lệ hoặc bỏ qua theo loại case.",
+        "Hệ thống xem trước thay đổi ledger/liên kết/trạng thái; yêu cầu lý do nếu cần.",
+        "Người dùng xác nhận; hệ thống kiểm lại quyền, version và idempotency.",
+        "Hệ thống commit atomic tác động được phép cùng history và đóng/cập nhật case."
+      ],
+      "alt": [
+        "Hai case cạnh tranh cùng giao dịch: báo conflict và tải lại.",
+        "Bỏ qua không xóa raw evidence theo cách tùy tiện; xác nhận duplicate không phát sinh lần ghi tiền thứ hai."
+      ],
+      "post": "Quyết định có trace; chỉ tác động đã duyệt được áp dụng một lần.",
+      "trace": "Refinement REQ-REVIEW-01 / AC-15",
+      "rules": "BR-09/12/21/42/46"
+    },
+    {
+      "group": 4,
+      "id": "UC-EVIDENCE-01",
+      "name": "Xem chứng từ và nguồn gốc số liệu",
+      "actor": "Chủ workspace",
+      "goal": "Truy nguyên số liệu về dữ liệu/căn cứ hình thành.",
+      "trigger": "Chọn Xem căn cứ trên chỉ số, giao dịch hoặc insight.",
+      "pre": "Có quyền đọc nguồn trong workspace; liên kết provenance có thể có.",
+      "steps": [
+        "Hệ thống nhận metric/transaction reference và version.",
+        "Hệ thống truy các receipt/file/khai báo/quote và parser/manual override liên quan.",
+        "Hệ thống trình bày nguồn, thời điểm, trạng thái và lịch sử theo quyền.",
+        "Người dùng mở thành phần hoặc quay lại ngữ cảnh trước."
+      ],
+      "alt": [
+        "Evidence thiếu/đã hết thời hạn lưu: báo rõ; không bịa reference.",
+        "Không hiển thị dữ liệu workspace khác hoặc bí mật credential."
+      ],
+      "post": "Chỉ đọc, truy nguồn có giới hạn rõ; không đổi trạng thái chỉ do xem.",
+      "trace": "Refinement REQ-TXN-01/OVERVIEW-01/INSIGHT-01",
+      "rules": "BR-19/21/36"
+    },
+    {
+      "group": 4,
+      "id": "UC-UX-01",
+      "name": "Bật hoặc tắt che thông tin tài chính",
+      "actor": "Chủ workspace",
+      "goal": "Che thông tin nhạy cảm khi xem ứng dụng.",
+      "trigger": "Chọn biểu tượng chế độ riêng tư.",
+      "pre": "Ứng dụng có phiên và preference hiện hành.",
+      "steps": [
+        "Người dùng bật chế độ che.",
+        "Hệ thống che amount/quantity ở thẻ, chart, tooltip và accessible text.",
+        "Với nội dung AI tự do có số nhạy cảm, hệ thống ẩn phần nội dung theo policy thay vì đoán bằng regex.",
+        "Người dùng tắt chế độ; hệ thống phục hồi hiển thị theo quyền."
+      ],
+      "alt": [
+        "Giữ ngữ cảnh kỳ/ngày nhưng không rò số qua nhãn hỗ trợ truy cập.",
+        "Masking là che giao diện, không thay authorization, mã hóa hoặc giá trị đã lưu."
+      ],
+      "post": "Preference được áp dụng nhất quán; số liệu gốc không đổi.",
+      "trace": "REQ-UX-01 / AC-17; NFR-12",
+      "rules": "BR-35; accessibility requirements"
+    },
+    {
+      "group": 5,
+      "id": "UC-PLAN-01",
+      "name": "Lập và điều chỉnh kế hoạch ngân sách",
+      "actor": "Chủ workspace",
+      "goal": "Có kế hoạch thu, chi và đầu tư có phiên bản.",
+      "trigger": "Mở Plan; chọn Tạo/Sửa.",
+      "pre": "Kỳ kế hoạch, workspace, baseline và giả định rõ.",
+      "steps": [
+        "Người dùng nhập các khoản dự kiến, lịch lặp, account, category và liên kết Goal nếu cần.",
+        "Hệ thống kiểm ngày, amount, recurrence và phân biệt planned với actual.",
+        "Người dùng xem trước tổng hợp và có thể chạy mô phỏng.",
+        "Người dùng xác nhận; hệ thống lưu plan/version/history cùng links hợp lệ."
+      ],
+      "alt": [
+        "Một khoản kế hoạch có thể không gắn Goal.",
+        "Đổi kế hoạch không sinh actual; conflict yêu cầu xem lại version."
+      ],
+      "post": "Active plan được lưu khi owner xác nhận; ledger/tiền hiện có không đổi.",
+      "trace": "REQ-PLAN-01 / AC-22",
+      "rules": "BR-26…29/37/38/47"
+    },
+    {
+      "group": 5,
+      "id": "UC-PLAN-02",
+      "name": "Theo dõi thực hiện kế hoạch và độ lệch",
+      "actor": "Chủ workspace",
+      "goal": "So planned với actual trên cùng phạm vi.",
+      "trigger": "Mở Theo dõi kế hoạch.",
+      "pre": "Có plan/version và actual snapshot; quy tắc ghép rõ.",
+      "steps": [
+        "Hệ thống tải kỳ, plan baseline và actual snapshot.",
+        "Hệ thống đề xuất ánh xạ giao dịch/occurrence theo quy tắc; owner xác nhận/sửa liên kết khi cần.",
+        "Hệ thống tính actual, planned và variance có signed effects của refund/reversal.",
+        "Người dùng xem phần chênh và chọn chỉnh kế hoạch thủ công hoặc yêu cầu Agent tạo amendment draft."
+      ],
+      "alt": [
+        "Một actual family không được match hai occurrences trong cùng scope qua revisions.",
+        "Actual chưa phân loại/thiếu coverage: giữ chưa ghép và nêu giới hạn."
+      ],
+      "post": "Variance/link history nhất quán; không tự sửa actual hoặc active plan.",
+      "trace": "REQ-PLAN-02 / AC-23",
+      "rules": "BR-27/29/39/48"
+    },
+    {
+      "group": 5,
+      "id": "UC-GOAL-01",
+      "name": "Thiết lập mục tiêu và phân bổ tiền",
+      "actor": "Chủ workspace",
+      "goal": "Dành nguồn tiền cho mục tiêu mà không chuyển tiền thực.",
+      "trigger": "Mở Goals; chọn Tạo/Sửa/Phân bổ.",
+      "pre": "Target, deadline, source accounts và reserve được xác định; balances có quality.",
+      "steps": [
+        "Người dùng nhập mục tiêu, số đích, hạn và ưu tiên.",
+        "Người dùng chọn nguồn tiền/phân bổ hiện có và liên kết kế hoạch dự kiến nếu cần.",
+        "Hệ thống tính allocated, funded và nguồn còn khả dụng trên tập Goal dùng chung.",
+        "Người dùng xem trước và xác nhận; hệ thống lưu Goal/allocation/version/history."
+      ],
+      "alt": [
+        "Future income/contribution chưa nhận không là funded cash.",
+        "Phân bổ trùng cùng nguồn phải kiểm tổng và reserve; số dư unknown không thành 0 chắc chắn."
+      ],
+      "post": "Mục tiêu/phân bổ được lưu; earmarking không là chuyển khoản hay chi phí.",
+      "trace": "REQ-GOAL-01 / AC-24",
+      "rules": "BR-30…32/38/49"
+    },
+    {
+      "group": 5,
+      "id": "UC-GOAL-02",
+      "name": "Theo dõi tiến độ và phát hiện hụt nguồn",
+      "actor": "Chủ workspace",
+      "goal": "Biết funded progress, allocated và shortfall riêng.",
+      "trigger": "Mở Goal Tracking hoặc làm mới sau actual thay đổi.",
+      "pre": "Có Goal, allocations và actual snapshot.",
+      "steps": [
+        "Hệ thống đọc trạng thái nguồn tiền hiện hành.",
+        "Hệ thống phân chia funding dùng chung theo policy và tính progress/shortfall.",
+        "Hệ thống hiển thị allocated khác funded, hạn và khả năng đáp ứng.",
+        "Người dùng có thể chỉnh kế hoạch, giải phóng phân bổ hoặc xác nhận lifecycle nếu đủ điều kiện."
+      ],
+      "alt": [
+        "Actual chi làm thiếu funding: không chặn sự kiện đã xảy ra và không tự xóa earmark.",
+        "Nhiều Goal thiếu chung nguồn: pro-rata và stable allocation ID rounding theo Engine.",
+        "Achieved cần actual criterion và liquidity; xác suất mô phỏng không chứng minh đạt Goal."
+      ],
+      "post": "Tiến độ/cảnh báo có căn cứ; trạng thái Goal có history, không sinh actual money.",
+      "trace": "REQ-GOAL-02 / AC-25",
+      "rules": "BR-30/31/32/49"
+    },
+    {
+      "group": 5,
+      "id": "UC-GOAL-03",
+      "name": "Giải phóng tiền đã phân bổ cho mục tiêu",
+      "actor": "Chủ workspace",
+      "goal": "Đưa phần tiền dành riêng trở lại nguồn khả dụng.",
+      "trigger": "Chọn Giải phóng trong Goal Setup/Tracking.",
+      "pre": "Có allocation hiện hành và quyền owner.",
+      "steps": [
+        "Người dùng chọn allocation và số cần giải phóng.",
+        "Hệ thống xem trước allocated/funded/available và ảnh hưởng mục tiêu.",
+        "Người dùng xác nhận; hệ thống lưu allocation revision/history.",
+        "Hệ thống tính lại funding dùng chung và tiến độ các Goal liên quan."
+      ],
+      "alt": [
+        "Vượt số đang phân bổ: báo lỗi.",
+        "Balance/version đổi: xem trước lại; không tạo giao dịch cash để giải phóng earmark."
+      ],
+      "post": "Giảm earmark đúng một lần; tổng tiền và ledger không đổi.",
+      "trace": "Refinement REQ-GOAL-01/02 / AC-24/25",
+      "rules": "BR-30/31/49"
+    },
+    {
+      "group": 5,
+      "id": "UC-SIM-01",
+      "name": "Chạy mô phỏng kịch bản tài chính",
+      "actor": "Chủ workspace; Agent qua tool được cấp quyền",
+      "goal": "So sánh phương án có điều kiện trước quyết định.",
+      "trigger": "Chọn Mô phỏng hoặc Agent gọi scenario tool.",
+      "pre": "Baseline/Plan/Goal versions, horizon và giả định được chụp.",
+      "steps": [
+        "Người dùng/Agent nhập kịch bản mua sắm, thay thu/chi, đầu tư hoặc stress-test.",
+        "Hệ thống kiểm giả định, reserve, chronology và coverage.",
+        "Hệ thống thực hiện UC-FORECAST-01 trên baseline đóng băng.",
+        "Hệ thống hiển thị kết quả cashflow/feasibility/shortfall, assumptions và phiên bản mô hình.",
+        "Người dùng so sánh/lưu scenario; quyết định nghiệp vụ khác cần thao tác riêng."
+      ],
+      "alt": [
+        "Input thiếu hoặc infeasible: giải thích, không tự tăng thu/hạ reserve để cho khả thi.",
+        "Stale baseline: đánh dấu, recompute trước preview/apply cần thiết."
+      ],
+      "post": "Có kết quả simulated có nhãn; actual/active plan không tự đổi.",
+      "trace": "REQ-SIM-01 / AC-26",
+      "rules": "BR-28/36/39/50/51"
+    },
+    {
+      "group": 5,
+      "id": "UC-FORECAST-01",
+      "name": "Tính dự báo dòng tiền và nguồn khả dụng",
+      "actor": "Chủ workspace gián tiếp qua mô phỏng",
+      "goal": "Tính projection lặp lại được từ assumptions và baseline.",
+      "trigger": "UC-SIM-01 yêu cầu Engine dự báo.",
+      "pre": "Snapshot/settings/model/RNG/seed/horizon được cố định.",
+      "steps": [
+        "Engine đọc baseline, lịch thu/chi, Goal funding và chính sách ngày.",
+        "Engine chạy bước thời gian và phân bổ nguồn dùng chung, giữ actual tách simulated.",
+        "Engine tính balances, shortfall, feasibility và thống kê khi có stochastic model.",
+        "Hệ thống lưu run/version/assumptions/quality và trả kết quả cho caller."
+      ],
+      "alt": [
+        "Thiếu đầu vào: trả partial/unknown có giải thích, không fake 100%.",
+        "Stochastic output phải có sample size, seed/model version; không hứa chắc lợi suất."
+      ],
+      "post": "Frozen run truy vết được, không ghi ledger.",
+      "trace": "Refinement REQ-SIM-01; domain forecast-model.md",
+      "rules": "BR-47/49/50/51"
+    },
+    {
+      "group": 6,
+      "id": "UC-AI-01",
+      "name": "Hỏi–đáp có căn cứ và xem lịch sử hội thoại",
+      "actor": "Chủ workspace; dịch vụ mô hình AI được phê duyệt khi bật model mode",
+      "goal": "Nhận giải thích truy được về dữ liệu được phép.",
+      "trigger": "Gửi câu hỏi hoặc mở hội thoại cũ.",
+      "pre": "Conversation đúng owner; runtime capability/model mode hiển thị rõ.",
+      "steps": [
+        "Người dùng đặt câu hỏi với captured context kỳ/scope nếu phù hợp.",
+        "Hệ thống xác định câu hỏi và gọi read tools có kiểm quyền khi cần dữ liệu.",
+        "Hệ thống lấy metric từ ToolResult/Engine, trình bày evidence, thời điểm và giới hạn.",
+        "Hệ thống lưu message/history cùng conversation; người dùng mở căn cứ hoặc hỏi tiếp."
+      ],
+      "alt": [
+        "Thiếu dữ liệu hoặc model/runtime không sẵn sàng: nói rõ, không bịa con số.",
+        "Không phải câu hỏi nào cũng cần Agent run hoặc tool call.",
+        "Input/prompt injection không cấp thêm quyền tool hay cross-workspace access."
+      ],
+      "post": "Có câu trả lời/history đúng scope; không actual write.",
+      "trace": "REQ-AI-01 / AC-27; AI-FR-001…007/009/019…021/023",
+      "rules": "BR-33…35/37"
+    },
+    {
+      "group": 6,
+      "id": "UC-AI-02",
+      "name": "Tương tác trợ lý qua linh vật theo ngữ cảnh",
+      "actor": "Chủ workspace",
+      "goal": "Mở trợ lý nhanh mà giữ cùng hội thoại/ngữ cảnh.",
+      "trigger": "Chọn linh vật trên Home, Plan, Goals hoặc khu vực khác.",
+      "pre": "UI hỗ trợ; owner có phiên; privacy/accessibility preference có hiệu lực.",
+      "steps": [
+        "Người dùng mở panel linh vật; hệ thống chụp context được phép.",
+        "Người dùng đặt câu hỏi hoặc chuyển tới full chat.",
+        "Hệ thống dùng chung conversation/history với UC-AI-01 hoặc Agent workflow phù hợp.",
+        "Người dùng đóng/mở panel; ngữ cảnh, trạng thái và focus được xử lý nhất quán."
+      ],
+      "alt": [
+        "Context cũ phải hiện nhãn; không dùng nhầm kỳ vừa thay.",
+        "Masking/reduced-motion/keyboard vẫn áp dụng cho panel và chat."
+      ],
+      "post": "Tương tác nối tiếp cùng hội thoại; linh vật là UI, không actor hay authority riêng.",
+      "trace": "REQ-AI-02 / AC-28; AI-FR-004…008/019",
+      "rules": "BR-34/35"
+    },
+    {
+      "group": 6,
+      "id": "UC-AGENT-01",
+      "name": "Yêu cầu Agent điều tra biến động tài chính",
+      "actor": "Chủ workspace; runtime AI theo mode được duyệt",
+      "goal": "Điều tra nhiều bước dựa trên evidence và nêu phần chưa xác định.",
+      "trigger": "Owner hỏi nguyên nhân biến động hoặc chọn Phân tích.",
+      "pre": "Scope/baseline rõ; bounded tools và budget được cấu hình.",
+      "steps": [
+        "Hệ thống tạo AgentRun trong cùng conversation, ghi context và giới hạn.",
+        "Agent đọc coverage/metrics và chọn bước tiếp theo từ observation.",
+        "Agent kiểm transfer/refund/duplicate/phí/variance/giá theo nhu cầu và hỏi lại khi thiếu.",
+        "Hệ thống kiểm schema/scope/budget của từng tool; Engine là nguồn tính toán.",
+        "Agent trả kết luận, evidence, điều chưa chắc và đề xuất xử lý; owner quyết định riêng."
+      ],
+      "alt": [
+        "Tối đa 8 tool calls/run, 60s active budget, 2 lượt clarification theo AC-40; chờ user không tính active time.",
+        "Thiếu coverage: kết luận giới hạn; cancel/quota/error lưu trạng thái và không ghi actual."
+      ],
+      "post": "Có investigation trace/conclusion; không tự sửa ledger, Review hoặc active plan.",
+      "trace": "REQ-AGENT-01/03 / AC-38/40; AI-SPEC INV-01",
+      "rules": "BR-33/37/39"
+    },
+    {
+      "group": 6,
+      "id": "UC-AGENT-02",
+      "name": "Yêu cầu Agent lập dự thảo Plan–Goal liên kết",
+      "actor": "Chủ workspace; runtime AI theo mode được duyệt",
+      "goal": "Có phương án dự thảo được mô phỏng trước khi áp dụng.",
+      "trigger": "Nêu mục tiêu ở Plan/Goals hoặc yêu cầu điều chỉnh theo actual.",
+      "pre": "Đúng scope; owner constraints được xác nhận; actual snapshot có quality.",
+      "steps": [
+        "Agent nhận goal-first, plan-first hoặc replan intent trong cùng hội thoại.",
+        "Agent hỏi target/deadline/reserve/income/priorities còn thiếu và đọc dữ liệu được phép.",
+        "Agent tạo/sửa GoalDraft, PlanDraft và links; không kích hoạt kế hoạch.",
+        "Agent thực hiện UC-SIM-01, so sánh phương án và giải thích tính khả thi bằng Engine output.",
+        "Owner yêu cầu sửa hoặc chuyển sang UC-DRAFT-APPLY-01 để xem trước và xác nhận."
+      ],
+      "alt": [
+        "Không khả thi: nêu nguyên nhân và lựa chọn, không tự bịa income/return.",
+        "Agent không có tool confirm/transfer/ledger; draft không là funded allocation.",
+        "Natural language chưa được model xử lý thực phải báo mode rõ, không gọi scripted flow là LLM thật."
+      ],
+      "post": "Draft/links/simulation có version; active plan/Goal và actual chưa đổi.",
+      "trace": "REQ-AGENT-02/03 / AC-39/40; AI-SPEC PG-01/02/03",
+      "rules": "BR-37/38/39"
+    },
+    {
+      "group": 6,
+      "id": "UC-DRAFT-APPLY-01",
+      "name": "Xem trước và xác nhận áp dụng dự thảo",
+      "actor": "Chủ workspace",
+      "goal": "Áp dụng bundle dự thảo đã kiểm tra bằng quyết định owner.",
+      "trigger": "Chọn Xem trước/Áp dụng cho draft đã có.",
+      "pre": "Draft tồn tại, đúng owner; snapshot/versions/digest còn hợp lệ; yêu cầu mô phỏng đã đáp ứng.",
+      "steps": [
+        "Hệ thống nạp dự thảo, kết quả mô phỏng và căn cứ version.",
+        "Hệ thống hiển thị diff Plan/Goals/links, giả định và tác động.",
+        "Owner xác nhận rõ ràng; backend kiểm quyền, preview digest và idempotency.",
+        "Backend lưu Plan/Goal/link/history và replay result trong cùng transaction.",
+        "Hệ thống trả kết quả, cập nhật active versions và hội thoại."
+      ],
+      "alt": [
+        "Stale: simulate/preview lại, không áp dụng âm thầm.",
+        "Hủy: không đổi active data. Confirm lặp cùng payload/key trả kết quả cũ.",
+        "Xác nhận dự thảo không tự tạo actual allocation, transfer hoặc ledger posting."
+      ],
+      "post": "Plan/Goal/link bundle áp dụng atomic một lần; actual không đổi.",
+      "trace": "Refinement REQ-AGENT-02 / AC-39; AI-FR-014…016/022…024",
+      "rules": "BR-37/38/39"
+    },
+    {
+      "group": 7,
+      "id": "UC-ADMIN-AUTH-01",
+      "name": "Đăng nhập và kiểm soát phiên quản trị",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Mở phiên Ops có quyền riêng và MFA.",
+      "trigger": "Mở admin console.",
+      "pre": "Admin identity được cấp; kênh admin riêng; TOTP cấu hình theo chính sách.",
+      "steps": [
+        "Admin nhập credential và mã TOTP.",
+        "Ops API xác minh danh tính/MFA, giới hạn thử và tạo phiên admin.",
+        "Hệ thống chỉ hiển thị chức năng vận hành được cấp.",
+        "Thao tác nhạy cảm cần reauthentication; logout/expiry thu hồi phiên."
+      ],
+      "alt": [
+        "Owner session gọi admin API: từ chối; admin session gọi finance API owner: từ chối.",
+        "Mất MFA: theo recovery protocol quản trị được duyệt, không bỏ qua tùy tiện."
+      ],
+      "post": "Phiên admin chỉ có operational capabilities; không có quyền xem tài chính owner.",
+      "trace": "REQ-ADMIN-01 / AC-37; REQ-SURFACE-01 / AC-29",
+      "rules": "BR-44; identity admin policy"
+    },
+    {
+      "group": 7,
+      "id": "UC-ADMIN-01",
+      "name": "Giám sát hệ thống, jobs và quota",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Biết tình trạng xử lý mà không đọc dữ liệu tài chính.",
+      "trigger": "Mở Dashboard/Jobs/Quota.",
+      "pre": "Phiên Ops hợp lệ; nguồn metadata sẵn sàng.",
+      "steps": [
+        "Admin chọn trạng thái hệ thống, jobs hoặc quota theo phạm vi cho phép.",
+        "Ops API truy metadata qua role/pool hẹp.",
+        "Hệ thống hiển thị health/readiness, job state, thời điểm, safe codes và quota.",
+        "Admin mở chi tiết vận hành hoặc yêu cầu safe action qua UC-OPS-03."
+      ],
+      "alt": [
+        "Metadata không truy được: báo unavailable, không báo khỏe chỉ từ SELECT 1.",
+        "Không trả amount/raw notification/prompt/credential qua DTO, log hay UI."
+      ],
+      "post": "Chỉ đọc operational metadata, có dấu vết truy cập phù hợp.",
+      "trace": "REQ-ADMIN-01 / AC-37",
+      "rules": "BR-44; operations-policy.json"
+    },
+    {
+      "group": 7,
+      "id": "UC-OPS-01",
+      "name": "Quản lý parser và mẫu nguồn thông báo",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Quản lý phiên bản parser và ngăn parser lỗi xử lý mới.",
+      "trigger": "Mở Parser Profiles; chọn kiểm tra/kích hoạt/vô hiệu hóa.",
+      "pre": "Phiên admin, quyền cấu hình; profile/version hợp lệ.",
+      "steps": [
+        "Hệ thống liệt kê parser, source profile, phiên bản và trạng thái an toàn.",
+        "Admin xem kết quả kiểm thử bằng fixture đã duyệt và chọn thay đổi.",
+        "Hệ thống xem trước tác động, yêu cầu lý do và reauthentication khi cần.",
+        "Admin xác nhận; hệ thống lưu configuration version/audit và áp dụng policy xử lý mới."
+      ],
+      "alt": [
+        "Vô hiệu parser không xóa receipt/evidence cũ.",
+        "Không cho admin mở raw notification người dùng để sửa parser; dùng fixture phù hợp."
+      ],
+      "post": "Cấu hình parser đổi có kiểm soát; không tự sửa ledger lịch sử.",
+      "trace": "REQ-ADMIN-01 / AC-37",
+      "rules": "BR-42/43/44"
+    },
+    {
+      "group": 7,
+      "id": "UC-OPS-02",
+      "name": "Quản lý kết nối và trạng thái nguồn giá",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Vận hành adapter/provider và quyền nguồn giá.",
+      "trigger": "Mở Providers; chọn cấu hình hoặc kiểm tra.",
+      "pre": "Ops session; credential được quản lý phía server; quyền nguồn hợp lệ.",
+      "steps": [
+        "Hệ thống hiện provider capability/profile/rights/quota/status dưới dạng metadata.",
+        "Admin chọn thay đổi được phép hoặc kiểm tra tình trạng kết nối.",
+        "Hệ thống validate cấu hình/quyền, xem trước, yêu cầu lý do khi thay đổi.",
+        "Sau xác nhận, hệ thống lưu version/audit; worker dùng cấu hình mới theo policy."
+      ],
+      "alt": [
+        "Không hiển thị secret nguyên văn.",
+        "Provider không có entitlement: giữ disabled; app-admin không cấp quyền dữ liệu chỉ bằng bật nút."
+      ],
+      "post": "Cấu hình nguồn vận hành rõ; không sửa trực tiếp quote/holding của owner.",
+      "trace": "REQ-ADMIN-01 / AC-37; REQ-PRICE-01 / AC-36",
+      "rules": "BR-41/44"
+    },
+    {
+      "group": 7,
+      "id": "UC-OPS-03",
+      "name": "Thực hiện lệnh vận hành an toàn",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Retry/pause/disable đúng giới hạn và không nhân tác động tiền.",
+      "trigger": "Chọn safe retry/pause/disable trên job hoặc parser.",
+      "pre": "Lệnh nằm trong allowlist; version/quota/state hợp lệ; có lý do.",
+      "steps": [
+        "Admin chọn operational ID và safe action.",
+        "Hệ thống xem trước tác động, kiểm quyền/state và yêu cầu reauthentication theo policy.",
+        "Admin xác nhận; Ops ghi command request/audit, không nhận finance payload tùy ý.",
+        "Worker kiểm lại capability/fence/idempotency và thực hiện hoặc từ chối.",
+        "Hệ thống hiển thị accepted khác completed và cho tra cứu outcome."
+      ],
+      "alt": [
+        "Retry job đã có result: trả kết quả tương ứng, không double-post.",
+        "Job đang lease/command stale: từ chối hoặc chờ theo policy; không cướp quyền worker.",
+        "Host backup/restore/migrate là kênh operator riêng, không tự cấp cho app-admin."
+      ],
+      "post": "Lệnh có outcome/audit; admin không trở thành proxy ghi tài chính.",
+      "trace": "REQ-ADMIN-01 / AC-37; REQ-RECOVERY-01 / AC-41",
+      "rules": "BR-44; J2 fencing/replay"
+    },
+    {
+      "group": 7,
+      "id": "UC-OPS-04",
+      "name": "Tra cứu nhật ký kiểm toán vận hành",
+      "actor": "Quản trị viên ứng dụng",
+      "goal": "Truy dấu hoạt động quản trị qua nhật ký đã lược dữ liệu.",
+      "trigger": "Mở Audit Log.",
+      "pre": "Phiên Ops còn hiệu lực; có quyền đọc audit metadata.",
+      "steps": [
+        "Admin chọn thời gian, action, operational ID và safe result.",
+        "Hệ thống truy audit theo phạm vi/retention và phân trang.",
+        "Hệ thống hiển thị actor quản trị, thời điểm, lý do, trạng thái và correlation ID đã sanitize.",
+        "Admin đối chiếu với job/command để điều tra sự cố."
+      ],
+      "alt": [
+        "Không đưa amount/raw notification/prompt/token vào log.",
+        "Log thiếu hoặc hết retention: nói rõ, không bịa sự kiện."
+      ],
+      "post": "Chỉ đọc nhật ký; không sửa/xóa lịch sử audit qua thao tác xem.",
+      "trace": "REQ-ADMIN-01 / AC-37",
+      "rules": "BR-44; logging-and-retention.md"
+    }
+  ],
+  "relations": [
+    [
+      "UC-CASH-03",
+      "UC-CASH-02",
+      "extend",
+      "có chênh lệch và owner chọn điều chỉnh",
+      "sau khi hiển thị chênh lệch"
+    ],
+    [
+      "UC-BUY-01",
+      "UC-HOLD-01",
+      "extend",
+      "chọn mua và có căn cứ thanh toán",
+      "chọn loại cập nhật holding"
+    ],
+    [
+      "UC-DRILL-01",
+      "UC-OVERVIEW-01",
+      "extend",
+      "chọn chỉ số để phân tích",
+      "sau khi xem số tổng"
+    ],
+    [
+      "UC-DRILL-01",
+      "UC-REPORT-01",
+      "extend",
+      "chọn chỉ tiêu báo cáo",
+      "sau khi xem báo cáo"
+    ],
+    [
+      "UC-EVIDENCE-01",
+      "UC-OVERVIEW-01",
+      "extend",
+      "chọn xem căn cứ",
+      "sau khi hiển thị chỉ số"
+    ],
+    [
+      "UC-EVIDENCE-01",
+      "UC-REPORT-01",
+      "extend",
+      "chọn xem căn cứ",
+      "sau khi hiển thị báo cáo"
+    ],
+    [
+      "UC-EVIDENCE-01",
+      "UC-INSIGHT-01",
+      "extend",
+      "chọn xem căn cứ",
+      "sau khi đọc nhận định"
+    ],
+    [
+      "UC-RESOLVE-01",
+      "UC-REVIEW-01",
+      "extend",
+      "owner chọn hành động xử lý",
+      "sau khi đọc case"
+    ],
+    [
+      "UC-GOAL-03",
+      "UC-GOAL-01",
+      "extend",
+      "chọn giải phóng phân bổ đã có",
+      "khi chỉnh phân bổ"
+    ],
+    [
+      "UC-GOAL-03",
+      "UC-GOAL-02",
+      "extend",
+      "chọn giải phóng nguồn",
+      "sau khi xem tiến độ"
+    ],
+    [
+      "UC-SIM-01",
+      "UC-FORECAST-01",
+      "include",
+      "",
+      ""
+    ],
+    [
+      "UC-AGENT-02",
+      "UC-SIM-01",
+      "include",
+      "",
+      ""
+    ]
+  ]
+}

@@ -1,0 +1,630 @@
+{
+  "scope": "Independent expected model-only examples; not Android/backend/SQL/crypto functions",
+  "vectors": [
+    {
+      "id": "ready_all",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": true
+    },
+    {
+      "id": "ready_denies_native",
+      "kind": "ready",
+      "input": {
+        "native": false,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_consent",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": false,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_permission",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": false,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_bound",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": false,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_vault",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": false,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_clock",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": false,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_authorization",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": false,
+        "source": true,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_source",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": false,
+        "capacity": true,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_capacity",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": false,
+        "generation": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ready_denies_generation",
+      "kind": "ready",
+      "input": {
+        "native": true,
+        "consent": true,
+        "permission": true,
+        "bound": true,
+        "vault": true,
+        "clock": true,
+        "authorization": true,
+        "source": true,
+        "capacity": true,
+        "generation": false
+      },
+      "expected": false
+    },
+    {
+      "id": "under7d",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 604799,
+        "anchor": true,
+        "sameBoot": true
+      },
+      "expected": true
+    },
+    {
+      "id": "at7d",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 604800,
+        "anchor": true,
+        "sameBoot": true
+      },
+      "expected": false
+    },
+    {
+      "id": "over7d",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 604801,
+        "anchor": true,
+        "sameBoot": true
+      },
+      "expected": false
+    },
+    {
+      "id": "unknownTime",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 3,
+        "anchor": false,
+        "sameBoot": true
+      },
+      "expected": false
+    },
+    {
+      "id": "rebootOffline",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 3,
+        "anchor": false,
+        "sameBoot": false
+      },
+      "expected": false
+    },
+    {
+      "id": "rebootReanchored",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 3,
+        "anchor": true,
+        "sameBoot": false
+      },
+      "expected": true
+    },
+    {
+      "id": "negativeAge",
+      "kind": "eligible",
+      "input": {
+        "upperAge": -1,
+        "anchor": true,
+        "sameBoot": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ageUncertaintyPastDeadline",
+      "kind": "eligible",
+      "input": {
+        "upperAge": 604801,
+        "anchor": true,
+        "sameBoot": true
+      },
+      "expected": false
+    },
+    {
+      "id": "sameScope",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "A"
+        ],
+        "workspace": [
+          "W",
+          "W"
+        ],
+        "device": [
+          "D",
+          "D"
+        ],
+        "epoch": [
+          1,
+          1
+        ],
+        "generation": [
+          2,
+          2
+        ]
+      },
+      "expected": true
+    },
+    {
+      "id": "differentOwner",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "B"
+        ],
+        "workspace": [
+          "W",
+          "W"
+        ],
+        "device": [
+          "D",
+          "D"
+        ],
+        "epoch": [
+          1,
+          1
+        ],
+        "generation": [
+          2,
+          2
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "differentWorkspace",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "A"
+        ],
+        "workspace": [
+          "W",
+          "Z"
+        ],
+        "device": [
+          "D",
+          "D"
+        ],
+        "epoch": [
+          1,
+          1
+        ],
+        "generation": [
+          2,
+          2
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "differentDevice",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "A"
+        ],
+        "workspace": [
+          "W",
+          "W"
+        ],
+        "device": [
+          "D",
+          "X"
+        ],
+        "epoch": [
+          1,
+          1
+        ],
+        "generation": [
+          2,
+          2
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "revokedEpoch",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "A"
+        ],
+        "workspace": [
+          "W",
+          "W"
+        ],
+        "device": [
+          "D",
+          "D"
+        ],
+        "epoch": [
+          1,
+          2
+        ],
+        "generation": [
+          2,
+          2
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "lateResponseGeneration",
+      "kind": "scope",
+      "input": {
+        "owner": [
+          "A",
+          "A"
+        ],
+        "workspace": [
+          "W",
+          "W"
+        ],
+        "device": [
+          "D",
+          "D"
+        ],
+        "epoch": [
+          1,
+          1
+        ],
+        "generation": [
+          1,
+          2
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "ackExact",
+      "kind": "ack",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": true,
+        "itemRevision": true,
+        "digest": true
+      },
+      "expected": true
+    },
+    {
+      "id": "ackDeny_durable",
+      "kind": "ack",
+      "input": {
+        "durable": false,
+        "scope": true,
+        "requestBound": true,
+        "itemRevision": true,
+        "digest": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ackDeny_scope",
+      "kind": "ack",
+      "input": {
+        "durable": true,
+        "scope": false,
+        "requestBound": true,
+        "itemRevision": true,
+        "digest": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ackDeny_requestBound",
+      "kind": "ack",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": false,
+        "itemRevision": true,
+        "digest": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ackDeny_itemRevision",
+      "kind": "ack",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": true,
+        "itemRevision": false,
+        "digest": true
+      },
+      "expected": false
+    },
+    {
+      "id": "ackDeny_digest",
+      "kind": "ack",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": true,
+        "itemRevision": true,
+        "digest": false
+      },
+      "expected": false
+    },
+    {
+      "id": "ackNoDigestExactRequest",
+      "kind": "ackNoDigest",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": true,
+        "itemRevision": true
+      },
+      "expected": true
+    },
+    {
+      "id": "ackNoDigestUnbound",
+      "kind": "ackNoDigest",
+      "input": {
+        "durable": true,
+        "scope": true,
+        "requestBound": false,
+        "itemRevision": true
+      },
+      "expected": false
+    },
+    {
+      "id": "batch_50_262144",
+      "kind": "batch",
+      "input": {
+        "count": 50,
+        "bytes": 262144
+      },
+      "expected": true
+    },
+    {
+      "id": "batch_51_262144",
+      "kind": "batch",
+      "input": {
+        "count": 51,
+        "bytes": 262144
+      },
+      "expected": false
+    },
+    {
+      "id": "batch_50_262145",
+      "kind": "batch",
+      "input": {
+        "count": 50,
+        "bytes": 262145
+      },
+      "expected": false
+    },
+    {
+      "id": "batch_1_1500",
+      "kind": "batch",
+      "input": {
+        "count": 1,
+        "bytes": 1500
+      },
+      "expected": true
+    },
+    {
+      "id": "batch_0_100",
+      "kind": "batch",
+      "input": {
+        "count": 0,
+        "bytes": 100
+      },
+      "expected": false
+    },
+    {
+      "id": "batch_1_0",
+      "kind": "batch",
+      "input": {
+        "count": 1,
+        "bytes": 0
+      },
+      "expected": false
+    },
+    {
+      "id": "release_all",
+      "kind": "release",
+      "input": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "expected": true
+    },
+    {
+      "id": "release_missingOrigin",
+      "kind": "release",
+      "input": [
+        true,
+        false,
+        true,
+        true,
+        true
+      ],
+      "expected": false
+    },
+    {
+      "id": "release_missingCert",
+      "kind": "release",
+      "input": [
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "expected": false
+    },
+    {
+      "id": "release_unverifiedSource",
+      "kind": "release",
+      "input": [
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "expected": false
+    }
+  ]
+}

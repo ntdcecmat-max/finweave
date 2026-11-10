@@ -1,0 +1,358 @@
+# ERD — D1 + J2 expand design
+
+70 entities; toàn bộ110 FK baseline và FK mới explicit, kể cả tenant/global/late FK. Optionality dựa nullable; child cardinality dựa PK/UNIQUE. Partial unique indexes không coi là uniqueness toàn bảng. Typed polymorphic domain references jobs/payloads/control requests không vẽ giả FK; phải kiểm bằng owner procedure. Không là bằng chứng SQL execution.
+
+```mermaid
+erDiagram
+    identities {
+        text id
+    }
+    workspaces {
+        text id
+    }
+    sessions {
+        text id
+    }
+    identity_challenges {
+        text id
+    }
+    devices {
+        text id
+    }
+    accounts {
+        text id
+    }
+    ledger_accounts {
+        text id
+    }
+    sources {
+        text id
+    }
+    instruments {
+        text id
+    }
+    gold_profiles {
+        text id
+    }
+    holdings {
+        text id
+    }
+    events {
+        text id
+    }
+    entry_groups {
+        text id
+    }
+    posting_lines {
+        text id
+    }
+    holding_movements {
+        text id
+    }
+    provider_entitlements {
+        text id
+    }
+    quote_observations {
+        text id
+    }
+    evidence {
+        text id
+    }
+    event_evidence {
+        text id
+    }
+    source_records {
+        text id
+    }
+    reviews {
+        text id
+    }
+    cash_observations {
+        text id
+    }
+    collector_bindings {
+        text id
+    }
+    ingestion_receipts {
+        text id
+    }
+    receipt_evidence {
+        text id
+    }
+    coverage_gaps {
+        text id
+    }
+    refresh_jobs {
+        text id
+    }
+    import_previews {
+        text id
+    }
+    import_jobs {
+        text id
+    }
+    snapshots {
+        text id
+    }
+    financial_plans {
+        text id
+    }
+    plan_items {
+        text id
+    }
+    actual_links {
+        text id
+    }
+    goals {
+        text id
+    }
+    plan_goal_links {
+        text id
+    }
+    goal_allocations {
+        text id
+    }
+    simulations {
+        text id
+    }
+    conversations {
+        text id
+    }
+    messages {
+        text id
+    }
+    agent_runs {
+        text id
+    }
+    planning_drafts {
+        text id
+    }
+    tool_results {
+        text id
+    }
+    version_history {
+        text id
+    }
+    proposal_previews {
+        text id
+    }
+    idempotency_records {
+        text id
+    }
+    ops_accounts {
+        text id
+    }
+    ops_sources {
+        text id
+    }
+    ops_jobs {
+        text id
+    }
+    ops_quotas {
+        text id
+    }
+    ops_releases {
+        text id
+    }
+    ops_incidents {
+        text id
+    }
+    ops_previews {
+        text id
+    }
+    ops_idempotency {
+        text id
+    }
+    ops_audit {
+        text id
+    }
+    jobs {
+        text id
+    }
+    job_attempts {
+        text id
+    }
+    scheduler_state {
+        text id
+    }
+    planning_scopes {
+        text id
+    }
+    planning_revisions {
+        text id
+    }
+    planning_revision_items {
+        text id
+    }
+    projection_cache {
+        text id
+    }
+    import_rows {
+        text id
+    }
+    admin_principals {
+        text id
+    }
+    admin_sessions {
+        text id
+    }
+    admin_mfa_factors {
+        text id
+    }
+    admin_challenges {
+        text id
+    }
+    payload_objects {
+        text id
+    }
+    recovery_journal {
+        text id
+    }
+    ops_control_requests {
+        text id
+    }
+    migration_journal {
+        text id
+    }
+    identities ||--o{ workspaces : "owner_id"
+    identities ||--o{ sessions : "subject_id"
+    identities |o--o{ identity_challenges : "subject_id"
+    identities ||--o{ devices : "owner_id"
+    workspaces ||--o{ devices : "workspace_id"
+    workspaces ||--o{ accounts : "workspace_id"
+    workspaces ||--o{ ledger_accounts : "workspace_id"
+    accounts |o--o| ledger_accounts : "workspace_id,account_id"
+    workspaces ||--o{ sources : "workspace_id"
+    instruments |o--o{ holdings : "instrument_id"
+    gold_profiles |o--o{ holdings : "gold_profile_id"
+    workspaces ||--o{ holdings : "workspace_id"
+    workspaces ||--o{ events : "workspace_id"
+    accounts ||--o{ events : "workspace_id,account_id"
+    accounts |o--o{ events : "workspace_id,to_account_id"
+    holdings |o--o{ events : "workspace_id,holding_id"
+    events |o--o{ events : "workspace_id,origin_id"
+    events |o--o| events : "workspace_id,reversal_of"
+    workspaces ||--o{ entry_groups : "workspace_id"
+    events ||--o| entry_groups : "workspace_id,event_id"
+    entry_groups |o--o| entry_groups : "workspace_id,reversal_of"
+    workspaces ||--o{ posting_lines : "workspace_id"
+    entry_groups ||--o{ posting_lines : "workspace_id,group_id"
+    ledger_accounts ||--o{ posting_lines : "workspace_id,ledger_account_id"
+    workspaces ||--o{ holding_movements : "workspace_id"
+    holdings ||--o{ holding_movements : "workspace_id,holding_id"
+    events |o--o{ holding_movements : "workspace_id,event_id"
+    workspaces ||--o{ provider_entitlements : "workspace_id"
+    workspaces ||--o{ quote_observations : "workspace_id"
+    holdings ||--o{ quote_observations : "workspace_id,holding_id"
+    provider_entitlements ||--o{ quote_observations : "workspace_id,entitlement_id"
+    workspaces ||--o{ evidence : "workspace_id"
+    sources |o--o{ evidence : "workspace_id,source_id"
+    workspaces ||--o{ event_evidence : "workspace_id"
+    events ||--o{ event_evidence : "workspace_id,event_id"
+    evidence ||--o{ event_evidence : "workspace_id,evidence_id"
+    workspaces ||--o{ source_records : "workspace_id"
+    sources ||--o{ source_records : "workspace_id,source_id"
+    evidence ||--o{ source_records : "workspace_id,evidence_id"
+    events |o--o{ source_records : "workspace_id,event_id"
+    workspaces ||--o{ reviews : "workspace_id"
+    events |o--o{ reviews : "workspace_id,event_id"
+    holdings |o--o{ reviews : "workspace_id,holding_id"
+    accounts |o--o{ reviews : "workspace_id,account_id"
+    workspaces ||--o{ cash_observations : "workspace_id"
+    accounts ||--o{ cash_observations : "workspace_id,account_id"
+    reviews |o--o{ cash_observations : "workspace_id,review_id"
+    evidence ||--o{ cash_observations : "workspace_id,evidence_id"
+    workspaces ||--o{ collector_bindings : "workspace_id"
+    devices ||--o{ collector_bindings : "workspace_id,device_id"
+    accounts ||--o{ collector_bindings : "workspace_id,account_id"
+    workspaces ||--o{ ingestion_receipts : "workspace_id"
+    devices ||--o{ ingestion_receipts : "workspace_id,device_id"
+    collector_bindings ||--o{ ingestion_receipts : "workspace_id,binding_id"
+    events |o--o{ ingestion_receipts : "workspace_id,event_id"
+    reviews |o--o{ ingestion_receipts : "workspace_id,review_id"
+    workspaces ||--o{ receipt_evidence : "workspace_id"
+    ingestion_receipts ||--o{ receipt_evidence : "workspace_id,receipt_id"
+    evidence ||--o{ receipt_evidence : "workspace_id,evidence_id"
+    workspaces ||--o{ coverage_gaps : "workspace_id"
+    accounts ||--o{ coverage_gaps : "workspace_id,account_id"
+    sources |o--o{ coverage_gaps : "workspace_id,source_id"
+    devices |o--o{ coverage_gaps : "workspace_id,device_id"
+    workspaces ||--o{ refresh_jobs : "workspace_id"
+    provider_entitlements ||--o{ refresh_jobs : "workspace_id,entitlement_id"
+    workspaces ||--o{ import_previews : "workspace_id"
+    accounts ||--o{ import_previews : "workspace_id,account_id"
+    workspaces ||--o{ import_jobs : "workspace_id"
+    import_previews ||--o| import_jobs : "workspace_id,preview_id"
+    accounts ||--o{ import_jobs : "workspace_id,account_id"
+    workspaces ||--o{ snapshots : "workspace_id"
+    workspaces ||--o{ financial_plans : "workspace_id"
+    snapshots ||--o{ financial_plans : "workspace_id,baseline_snapshot_id"
+    workspaces ||--o{ plan_items : "workspace_id"
+    financial_plans |o--o{ plan_items : "workspace_id,plan_id"
+    accounts ||--o{ plan_items : "workspace_id,account_id"
+    holdings |o--o{ plan_items : "workspace_id,holding_id"
+    workspaces ||--o{ actual_links : "workspace_id"
+    plan_items ||--o{ actual_links : "workspace_id,plan_item_id"
+    events ||--o{ actual_links : "workspace_id,event_id"
+    workspaces ||--o{ goals : "workspace_id"
+    workspaces ||--o{ plan_goal_links : "workspace_id"
+    plan_items ||--o{ plan_goal_links : "workspace_id,plan_item_id"
+    goals ||--o{ plan_goal_links : "workspace_id,goal_id"
+    workspaces ||--o{ goal_allocations : "workspace_id"
+    goals ||--o{ goal_allocations : "workspace_id,goal_id"
+    accounts ||--o{ goal_allocations : "workspace_id,account_id"
+    workspaces ||--o{ simulations : "workspace_id"
+    goals |o--o{ simulations : "workspace_id,goal_id"
+    snapshots ||--o{ simulations : "workspace_id,base_snapshot_id"
+    workspaces ||--o{ conversations : "workspace_id"
+    workspaces ||--o{ messages : "workspace_id"
+    conversations ||--o{ messages : "workspace_id,conversation_id"
+    workspaces ||--o{ agent_runs : "workspace_id"
+    conversations ||--o{ agent_runs : "workspace_id,conversation_id"
+    snapshots ||--o{ agent_runs : "workspace_id,base_snapshot_id"
+    workspaces ||--o{ planning_drafts : "workspace_id"
+    conversations ||--o{ planning_drafts : "workspace_id,conversation_id"
+    agent_runs |o--o{ planning_drafts : "workspace_id,run_id"
+    snapshots ||--o{ planning_drafts : "workspace_id,base_snapshot_id"
+    workspaces ||--o{ tool_results : "workspace_id"
+    agent_runs |o--o{ tool_results : "workspace_id,run_id"
+    messages |o--o{ tool_results : "workspace_id,message_id"
+    snapshots ||--o{ tool_results : "workspace_id,base_snapshot_id"
+    workspaces ||--o{ version_history : "workspace_id"
+    identities ||--o{ proposal_previews : "subject_id"
+    workspaces ||--o{ proposal_previews : "workspace_id"
+    workspaces ||--o{ idempotency_records : "workspace_id"
+    agent_runs |o--o{ messages : "workspace_id,agent_run_id"
+    planning_drafts |o--o{ messages : "workspace_id,planning_draft_id"
+    workspaces ||--o{ jobs : "workspace_id"
+    workspaces ||--o{ job_attempts : "workspace_id"
+    workspaces ||--o{ planning_scopes : "workspace_id"
+    workspaces ||--o{ planning_revisions : "workspace_id"
+    workspaces ||--o{ planning_revision_items : "workspace_id"
+    workspaces ||--o{ projection_cache : "workspace_id"
+    workspaces ||--o{ import_rows : "workspace_id"
+    workspaces ||--o{ payload_objects : "workspace_id"
+    workspaces |o--o{ scheduler_state : "workspace_id"
+    jobs ||--o{ job_attempts : "workspace_id,job_id"
+    financial_plans |o--o| planning_scopes : "workspace_id,plan_id"
+    planning_scopes ||--o{ planning_revisions : "workspace_id,scope_id"
+    snapshots ||--o{ planning_revisions : "workspace_id,base_snapshot_id"
+    planning_revisions ||--o{ planning_revision_items : "workspace_id,planning_revision_id"
+    plan_items ||--o{ planning_revision_items : "workspace_id,plan_item_id"
+    snapshots ||--o{ projection_cache : "workspace_id,snapshot_id"
+    payload_objects |o--o{ projection_cache : "workspace_id,result_payload_id"
+    import_previews ||--o{ import_rows : "workspace_id,preview_id"
+    planning_scopes ||--o{ plan_items : "workspace_id,scope_id"
+    planning_revisions ||--o{ actual_links : "workspace_id,planning_revision_id"
+    admin_principals ||--o{ admin_sessions : "principal_id"
+    admin_principals ||--o{ admin_mfa_factors : "principal_id"
+    admin_principals |o--o{ admin_challenges : "principal_id"
+    admin_principals ||--o{ ops_control_requests : "principal_id"
+    payload_objects |o--o{ ingestion_receipts : "workspace_id,result_payload_id"
+    payload_objects |o--o{ evidence : "workspace_id,content_payload_id"
+    payload_objects |o--o{ refresh_jobs : "workspace_id,result_payload_id"
+    payload_objects |o--o{ import_jobs : "workspace_id,result_payload_id"
+    payload_objects |o--o{ idempotency_records : "workspace_id,result_payload_id"
+    payload_objects |o--o{ tool_results : "workspace_id,result_payload_id"
+    planning_revision_items ||--o{ actual_links : "workspace_id,planning_revision_id,plan_item_id,plan_item_version"
+```

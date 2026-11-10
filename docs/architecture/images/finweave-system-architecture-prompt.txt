@@ -1,0 +1,23 @@
+Create a high-resolution landscape architecture diagram image in Vietnamese for the FinWeave personal finance system. Use an elegant clean technical infographic, white background, navy typography, teal and blue modules, purple for AI, orange for external inputs, thin orthogonal arrows with clear arrowheads, generous spacing, readable accurate Vietnamese diacritics. Wide 16:10 or similar landscape composition. Flat vector-like graphic, no decorative 3D, no invented components or logos. Title "FINWEAVE — KIẾN TRÚC HỆ THỐNG". Subtitle "Kiến trúc mục tiêu • Cập nhật 08/10/2026 • Chưa triển khai đầy đủ".
+
+Structure carefully into clearly labeled regions:
+TOP band "GIAO DIỆN": three cards "User Web", "User Android", "Admin Web". User Web and Android UI connect to a shared "API xác thực & phân quyền" gateway of the backend. Admin connects only to a separate "Ops API • Chỉ metadata" card. Under shared client gateway label "HTTPS • Snapshot có phiên bản • Fetch / polling / refresh-on-focus".
+
+LEFT input lane "THU THẬP TRÊN ANDROID": vertical chain "Thông báo ngân hàng / ví" → "Native collector" (small caption "Đồng ý • Allowlist • Lọc nhạy cảm") → "Outbox mã hóa" (small caption "Lưu bền vững • Retry") → backend "Ingestion". Label the upload arrow "Upload có xác thực". Ingestion caption "Receipt → Parser → Dedupe → Review / Posting". Label receipt as distinct from posting with small text "ACK receipt ≠ đã ghi sổ". This is notification collection, NOT direct bank API integration.
+
+CENTER largest region "MODULAR BACKEND":
+At top API gateway and separate Identity / Devices card "Phiên • Thiết bị • Consent".
+Central core card "Ledger" caption "Ghi sổ nguyên tử • Correction / Reversal"; connect Ingestion to Ledger.
+Next central card "Financial Engine" caption "Số dư • Dòng tiền • Định giá • Mô phỏng" and "Tính toán xác định • Snapshot & provenance". Ledger feeds Financial Engine; Engine supplies authorized versioned snapshots via gateway back to both user clients.
+Card "Market / Holdings" caption "Danh mục • Số lượng • Quote hợp lệ" feeds Financial Engine.
+Card "Plan / Goals" caption "Draft có phiên bản • Kiểm tra lại • Commit nguyên tử". Engine connected to Plan/Goals for simulations. Plan/Goals only commits plans/goals, NOT actual ledger entries.
+A broad purple card "ASSISTANT HỢP NHẤT" with subtitle "Hỏi–đáp • Giải thích • AI Agent đa bước" and small caption "Cùng hội thoại, ngữ cảnh, lịch sử và tools". Within card show two subparts "Điều phối Agent" → "Tools có phân quyền". Tools connect to Engine for read/simulate and to Plan/Goals for drafts. A small separate attached purple-outlined card "Model endpoint" with caption "Local PoC / Endpoint được đánh giá", connected only to Assistant. Purple text strip "Đọc snapshot → Hỏi thêm → Tạo draft → Mô phỏng → Đề xuất". Beneath it prominent short confirmation path "Người dùng xem trước & xác nhận → Plan / Goals". Explicit small guardrail "AI không ghi Ledger, không xác nhận thay người dùng". AI should not have an arrow to Ledger. Do not imply a separate AI app; both web and mobile access same backend Assistant.
+Bottom of backend region show database cylinder "PostgreSQL" with caption "Ledger • Plans / Drafts • Evidence • Quotes • Jobs". Connect backend persistence through a tidy central bus, avoid excessive crossing lines.
+
+RIGHT operational lane: "Scheduler phía server" → "Durable jobs" (caption "Lease • Retry • Catch-up") → "Provider adapter" ↔ external card "Nguồn giá được cấp quyền"; Provider adapter feeds Market/Holdings with "Quote có timestamp". Separate Ops API goes to "Vận hành & Audit" caption "Job • Quota • Parser • Phiên bản"; clearly annotate "Không đọc dữ liệu tài chính người dùng". No admin/database/ledger arrow.
+
+BOTTOM footer, distinct from all dataflow, light gray background:
+"TRIỂN KHAI ĐỀ XUẤT — SYNTHETIC-CLOUD"
+"Web: Vercel  |  API: Fastify / Render  |  DB & Cron: Supabase  |  Android: APK"
+Second footer line: "Dữ liệu thật: PROTECTED-REAL chưa giải quyết — cần trusted client, protected runtime và quản lý khóa độc lập."
+Ensure image clearly presents target design rather than already deployed architecture. Keep all labels concise as above; hierarchy strong; main flow visually readable from clients / inputs through backend to storage. No unnecessary long paragraphs, no duplicate Assistant services, no arrows from AI to Ledger, no claim conventional cloud meets anti-Ops privacy.

@@ -1,0 +1,737 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6d85d064074944ef4146bb9b0a0dba5c",
+    "entities": [
+      {
+        "tableName": "installation_meta",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `generation` INTEGER NOT NULL, `consent` TEXT, `reason` TEXT, `revokePending` INTEGER NOT NULL, `activeVault` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "generation",
+            "columnName": "generation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "consent",
+            "columnName": "consent",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "reason",
+            "columnName": "reason",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "revokePending",
+            "columnName": "revokePending",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activeVault",
+            "columnName": "activeVault",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "owner_vaults",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`vault` TEXT NOT NULL, `version` INTEGER NOT NULL, `wrapped` BLOB NOT NULL, `wrapIv` BLOB NOT NULL, `alias` TEXT NOT NULL, `prefix` BLOB NOT NULL, `counter` INTEGER NOT NULL, PRIMARY KEY(`vault`, `version`))",
+        "fields": [
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wrapped",
+            "columnName": "wrapped",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wrapIv",
+            "columnName": "wrapIv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alias",
+            "columnName": "alias",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prefix",
+            "columnName": "prefix",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "counter",
+            "columnName": "counter",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "vault",
+            "version"
+          ]
+        }
+      },
+      {
+        "tableName": "outbox_items",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_outbox_items_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_outbox_items_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_outbox_items_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_outbox_items_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "capture_identities",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_capture_identities_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_capture_identities_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_capture_identities_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_capture_identities_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "upload_batches",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_upload_batches_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_upload_batches_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_upload_batches_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_upload_batches_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ack_replay",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ack_replay_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ack_replay_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_ack_replay_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ack_replay_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "coverage_gaps",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_coverage_gaps_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_coverage_gaps_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_coverage_gaps_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_coverage_gaps_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "auth_pending",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `vault` TEXT NOT NULL, `state` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `keyVersion` INTEGER NOT NULL, `iv` BLOB NOT NULL, `cipher` BLOB NOT NULL, `expires` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`vault`, `keyVersion`) REFERENCES `owner_vaults`(`vault`, `version`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vault",
+            "columnName": "vault",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "keyVersion",
+            "columnName": "keyVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iv",
+            "columnName": "iv",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cipher",
+            "columnName": "cipher",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_auth_pending_vault_keyVersion",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "keyVersion"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_auth_pending_vault_keyVersion` ON `${TABLE_NAME}` (`vault`, `keyVersion`)"
+          },
+          {
+            "name": "index_auth_pending_vault_state_sequence",
+            "unique": false,
+            "columnNames": [
+              "vault",
+              "state",
+              "sequence"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_auth_pending_vault_state_sequence` ON `${TABLE_NAME}` (`vault`, `state`, `sequence`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "owner_vaults",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "vault",
+              "keyVersion"
+            ],
+            "referencedColumns": [
+              "vault",
+              "version"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6d85d064074944ef4146bb9b0a0dba5c')"
+    ]
+  }
+}

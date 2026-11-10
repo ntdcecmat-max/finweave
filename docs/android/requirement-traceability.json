@@ -1,0 +1,293 @@
+{
+  "parentScope": "Existing41 product AC + full21 required backlog groups unchanged; these32 Android refinements do not replace/count as new product AC",
+  "requirements": [
+    {
+      "id": "AND-01",
+      "requirement": "Build/toolchain pin and APK signature verify",
+      "screen": "UI-M-06",
+      "acceptanceId": "ANDR-01",
+      "evidenceRequired": "Signed APK, package/certificate/hash/manifest/supply-chain scan",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-02",
+      "requirement": "Bridge2 handshake/legacy strict status/browser absence",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-02",
+      "evidenceRequired": "Actual Capacitor registration and mismatch/manual behavior",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-03",
+      "requirement": "OS access grant/deny/revoke/resume",
+      "screen": "UI-M-01",
+      "acceptanceId": "ANDR-03",
+      "evidenceRequired": "System settings plus listener bound timestamps, no return=grant",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-04",
+      "requirement": "Own POST_NOTIFICATIONS denied independent access",
+      "screen": "UI-M-01",
+      "acceptanceId": "ANDR-04",
+      "evidenceRequired": "Distinct permissions/health warning",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-05",
+      "requirement": "Sideload restricted settings supported OS flow",
+      "screen": "UI-M-06",
+      "acceptanceId": "ANDR-05",
+      "evidenceRequired": "No bypass; exact country/install source/build",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-06",
+      "requirement": "Source signer/version/catalog filter",
+      "screen": "UI-M-02",
+      "acceptanceId": "ANDR-06",
+      "evidenceRequired": "Forged package/signature/unsupported app rejected",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-07",
+      "requirement": "Consent update/revoke and capture fence",
+      "screen": "UI-M-01",
+      "acceptanceId": "ANDR-07",
+      "evidenceRequired": "Old literal cannot silently accept new consent",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-08",
+      "requirement": "Multi-account bindings/version/ambiguous Review",
+      "screen": "UI-M-03",
+      "acceptanceId": "ANDR-08",
+      "evidenceRequired": "No first-account fallback or old-item retag",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-09",
+      "requirement": "Callback duplicate/update/remove/repost identity",
+      "screen": "UI-M-04",
+      "acceptanceId": "ANDR-09",
+      "evidenceRequired": "OS key reuse and weak semantic match remain Review",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-10",
+      "requirement": "OTP/group-summary/redacted/unknown privacy",
+      "screen": "UI-M-04",
+      "acceptanceId": "ANDR-10",
+      "evidenceRequired": "Disk/network/log/heap scope evidence; no raw persisted",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-11",
+      "requirement": "Main-thread bound/channel overflow/oversize",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-11",
+      "evidenceRequired": "Capture latency and explicit pause/gap, no truncation posting",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-12",
+      "requirement": "Room crash/IO/full/transaction integrity",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-12",
+      "evidenceRequired": "Before/after commit kills, WAL encrypted finance scan",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-13",
+      "requirement": "AES-GCM nonce/AAD/bitflip/cross-vault",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-13",
+      "evidenceRequired": "Nonce allocation crash/rollback; crypto library/Android vectors",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-14",
+      "requirement": "Keystore AFU screen-off/first-unlock/invalidation",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-14",
+      "evidenceRequired": "Background key usable after unlock; no DirectBoot finance",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-15",
+      "requirement": "Native ES256/JCS/SPKI cross-runtime proof",
+      "screen": "UI-M-04",
+      "acceptanceId": "ANDR-15",
+      "evidenceRequired": "Android DER↔raw64 Node verify; nonce/time/body/audience negative",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-16",
+      "requirement": "Owner refresh race/lost-reply/reuse",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-16",
+      "evidenceRequired": "Mutex durable exact replay5min wrong-reuse revoke",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-17",
+      "requirement": "Collector renewal and30d authorization",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-17",
+      "evidenceRequired": "24h renewal no owner refresh; expired ref≤7d only renewal",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-18",
+      "requirement": "Offline outbox/network recovery/WorkManager",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-18",
+      "evidenceRequired": "UI closed/restart, scoped one uploader; delays measured",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-19",
+      "requirement": "Doze/OEM/force-stop/reboot gaps",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-19",
+      "evidenceRequired": "Android13–16 plus compatibility24/29/32 candidate matrix",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-20",
+      "requirement": "Batch50/256KiB/413/retryAfter",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-20",
+      "evidenceRequired": "Actual UTF8 envelope bytes; identities immutable on split",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-21",
+      "requirement": "ACK mixed202/all422/lost/mismatch/reordering",
+      "screen": "UI-M-04",
+      "acceptanceId": "ANDR-21",
+      "evidenceRequired": "Room exact ACK journal atomic; no false posted",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-22",
+      "requirement": "Pending caps/7d+quarantine7d/ACK replay caps",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-22",
+      "evidenceRequired": "No pending silent eviction; explicit gap after journal eviction",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-23",
+      "requirement": "Clock rollback/rebootoffline/deadline access",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-23",
+      "evidenceRequired": "Upper-age bound, no decrypt/upload expired, cleanup overdue honest",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-24",
+      "requirement": "Logout offline/revoke pending/late ACK",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-24",
+      "evidenceRequired": "Old scope held, no claim remote revoked until response",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-25",
+      "requirement": "Owner A→B and same-owner revoked epoch",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-25",
+      "evidenceRequired": "Other vault inaccessible, no delete/retag/replay",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-26",
+      "requirement": "Server restore witness/epoch/reconcile missing",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-26",
+      "evidenceRequired": "New credentials; missing receipt investigation not auto ingest",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-27",
+      "requirement": "Backup/D2D/clone/reinstall/key missing",
+      "screen": "UI-M-06",
+      "acceptanceId": "ANDR-27",
+      "evidenceRequired": "Inspect all DB/WAL/WorkData/keys backup; new installation",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-28",
+      "requirement": "WebView navigation/frame/XSS/bridge capabilities",
+      "screen": "UI-M-05",
+      "acceptanceId": "ANDR-28",
+      "evidenceRequired": "No generic signing/fetch, fresh native confirmation binds input",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-29",
+      "requirement": "Same-key APK upgrade/Room migration/failure",
+      "screen": "UI-M-06",
+      "acceptanceId": "ANDR-29",
+      "evidenceRequired": "Preserve pending journal; wrong signer/version fails/no destructive path",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-30",
+      "requirement": "Download authenticity/distribution eligibility",
+      "screen": "UI-M-06",
+      "acceptanceId": "ANDR-30",
+      "evidenceRequired": "Real artifact metadata+fingerprint; optional free20-device enrollment",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-31",
+      "requirement": "TalkBack/text scale/keyboard/back/insets",
+      "screen": "UI-M-01…06",
+      "acceptanceId": "ANDR-31",
+      "evidenceRequired": "48dp, cancel/draft safe, Android system UI verified",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "AND-32",
+      "requirement": "End-to-end phone→API→ledger→web/Plan–Goals",
+      "screen": "UI-M-04",
+      "acceptanceId": "ANDR-32",
+      "evidenceRequired": "Actual integration+owner UAT, no Agent actual authority",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    }
+  ]
+}

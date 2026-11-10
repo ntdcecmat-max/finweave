@@ -1,0 +1,29 @@
+{
+  "status": "BLOCKED_SOURCE",
+  "realEnabled": false,
+  "provider": null,
+  "ownerSelectionEvidenceRef": null,
+  "rights": {
+    "automation": null,
+    "serverNonDisplay": null,
+    "ownerDisplay": null,
+    "saasRedistribution": null,
+    "cache": null,
+    "historicalRetention": null,
+    "backup": null,
+    "derivedValuation": null,
+    "forecast": null,
+    "externalModel": null
+  },
+  "rightsEvidenceRef": null,
+  "rightsVersion": null,
+  "rightsExpiry": null,
+  "credentialRef": null,
+  "quotaSemantics": null,
+  "stock": {"catalogueVersion": null, "exchange": null, "basis": null, "currency": null, "scale": null, "unit": null, "finality": null, "calendarVersion": null, "paging": null},
+  "gold": {"product": null, "brand": null, "purity": null, "region": null, "side": null, "currency": null, "unit": null, "scale": null, "timestampSemantics": null},
+  "collector": {"package": null, "signerLineage": null, "appVersion": null, "deviceEvidenceRef": null, "sampleConsentRef": null, "parserVersion": null, "templateIds": [], "accountBindingVersion": null, "finalityRules": null},
+  "sampleCorpusDigest": null,
+  "samplesStoredOutsidePublicEvidence": true,
+  "expectedClasses": ["incoming", "outgoing", "refund", "transfer", "update", "missing_reference", "duplicate_amount", "multiple_accounts", "pending_final", "OTP_discard", "unknown_review"]
+}

@@ -1,0 +1,117 @@
+{
+  "status": "PROCEDURES_SPECIFIED_NOT_REHEARSED",
+  "runbooks": [
+    {
+      "id": "RB-01",
+      "name": "Khởi động và reboot",
+      "preconditions": "Operator có release đã kiểm, khóa và đúng volume mã hóa.",
+      "steps": "Giữ cổng công khai đóng. Mở khóa và xác minh mount; kiểm cấu hình, quyền file và secrets. Khởi động PG, kiểm schema/grants/recovery gate; sau đó API riêng, workers, scheduler và reverse proxy.",
+      "stopConditions": "Sai mount/khóa/schema, recovery còn khóa hoặc chưa biết writer cũ đã dừng. Không tạo thư mục plaintext thay mount.",
+      "evidence": "Mount identity, phiên bản, kết quả readiness và kiểm tra bị từ chối; không xuất secret."
+    },
+    {
+      "id": "RB-02",
+      "name": "Phát hành có bảo trì",
+      "preconditions": "Release operator có artifact đã kiểm/ký, ma trận tương thích, backup và witness hợp lệ.",
+      "steps": "Giữ deploy lock; bật maintenance; chặn enqueue/claim mới. Drain hoặc fence worker cũ. Chạy migration; kiểm readiness và smoke riêng; bật workers/scheduler rồi mở cổng.",
+      "stopConditions": "Checksum, migration, quyền hoặc smoke sai. Chỉ quay lại code trước nếu đã chứng minh tương thích dữ liệu hiện tại.",
+      "evidence": "Hash source/image/migration, từng gate, thời gian bảo trì và bằng chứng fence."
+    },
+    {
+      "id": "RB-03",
+      "name": "Migration lỗi và rollback",
+      "preconditions": "Một migrator giữ lock, có journal và quyền xem catalog.",
+      "steps": "Giữ maintenance. Phân biệt DDL có transaction và phase ngoài transaction; kiểm trạng thái catalog thực. Sửa đúng phase hoặc forward fix, giữ ID/checksum; chạy lại kiểm tra liên quan.",
+      "stopConditions": "Không sửa checksum đã applied, reset journal, tự down-migrate hay restore dump để quay phiên bản.",
+      "evidence": "Phase, index không hợp lệ, schema/grants/invariants và release sửa lỗi."
+    },
+    {
+      "id": "RB-04",
+      "name": "Job kẹt hoặc worker chết",
+      "preconditions": "Operator đúng capability dùng procedure có scope.",
+      "steps": "Kiểm lease, policy, deadline, quyền hiện tại và quota. Fence attempt cũ; reaper/retry cùng job khi còn đủ điều kiện. Tra marker để xác định effect có COMMIT hay chưa.",
+      "stopConditions": "Không tạo key/job mới cho outcome chưa biết, không reset attempts/budgets. Lỗi vĩnh viễn phải quarantine.",
+      "evidence": "Trạng thái job/profile, marker và kết quả fault/replay; không đưa body tài chính vào Ops."
+    },
+    {
+      "id": "RB-05",
+      "name": "Nguồn giá hoặc notification lỗi",
+      "preconditions": "Source operator có profile, quyền nguồn và quota đã xác nhận.",
+      "steps": "Tạm dừng profile bị ảnh hưởng. Giữ giá tốt cuối với nhãn stale; báo coverage cho owner. Kiểm phiên bản, binding, đơn vị, thời điểm; chỉ bật lại sau regression phù hợp.",
+      "stopConditions": "Không scrape nguồn khác hoặc bật parser chưa được phép. Không thu raw/OTP để debug; mơ hồ chuyển Review.",
+      "evidence": "Phiên bản/profile, quyền nguồn, lỗi tổng hợp; bằng chứng riêng của owner giữ trong phạm vi riêng."
+    },
+    {
+      "id": "RB-06",
+      "name": "Model chậm, injection hoặc hết quota",
+      "preconditions": "Assistant operator có artifact/schema/policy đã pin.",
+      "steps": "Cancel/fence run và chặn kết quả đến muộn. Kiểm quyết định và guard bằng bằng chứng an toàn. Dùng fallback rõ nhãn; sửa runtime và chạy evaluation trước bật lại.",
+      "stopConditions": "Không tự chuyển cloud, tăng quyền tool, reset giới hạn 8 hành động/60 giây hoặc tự ghi actual.",
+      "evidence": "Trạng thái run trong phạm vi riêng, metrics đã lọc, phiên bản model và kết quả evaluation."
+    },
+    {
+      "id": "RB-07",
+      "name": "Cạn disk, pool, RAM hoặc quota",
+      "preconditions": "Infrastructure operator có metrics và dung lượng dự phòng.",
+      "steps": "Chặn thêm import/forecast/inference nặng; backpressure ingress. Giữ denial/witness/erasure hoạt động. Chỉ tăng tài nguyên trong quyền và ngân sách đã được duyệt.",
+      "stopConditions": "Không xóa ledger hoặc backup tốt cuối để cứu dung lượng; không tự chọn VM tính phí. Đóng finance nếu ghi tiếp không an toàn.",
+      "evidence": "Dung lượng, pools, queue age, quota và phương án capacity; không chứa số tài chính."
+    },
+    {
+      "id": "RB-08",
+      "name": "Backup, destination hoặc prune lỗi",
+      "preconditions": "Backup writer và custodian độc lập có catalog tin cậy.",
+      "steps": "Giữ bản tốt cuối. Kiểm export, snapshot start, capsule, destination receipt, lock và scratch cho repack. Retry đúng identity; báo lỗi qua kênh ngoài host.",
+      "stopConditions": "Age vượt 24 giờ là fail RPO target. Snapshot quá 34 ngày hoặc pack chưa purge sau 24 giờ là sự cố retention; không sửa timestamp để che lỗi.",
+      "evidence": "Catalog/receipt, inventory, mã lỗi và kết quả restore drill."
+    },
+    {
+      "id": "RB-09",
+      "name": "Mất host hoặc database",
+      "preconditions": "Recovery operator có witness, khóa và backup độc lập.",
+      "steps": "Fence host cũ. Restore cô lập, khóa mặc định; kiểm schema/data; lấy latest witness head và áp denies. Vô hiệu credentials; đối chiếu jobs/quotas; smoke có kiểm soát rồi mới mở.",
+      "stopConditions": "Thiếu fresh head, khóa, denied scan hoặc bằng chứng writer cũ đã dừng: giữ LOCKED. Báo rõ dữ liệu mất hoặc chưa xác định.",
+      "evidence": "Snapshot lower bound, timeline, fence, witness head, invariants và RPO/RTO thực đo."
+    },
+    {
+      "id": "RB-10",
+      "name": "Secret lộ hoặc host bị chiếm",
+      "preconditions": "Incident operator có kênh điều khiển độc lập.",
+      "steps": "Cô lập host/egress. Deny và anchor revoke; giữ bằng chứng đã lọc. Rotate đúng phạm vi, build host/release sạch và dùng quy trình restore khóa mặc định.",
+      "stopConditions": "Không cấp root qua Ops UI. Lộ repository master key cần repo/key mới và backup sạch; đổi password wrapper không đủ.",
+      "evidence": "Purpose/key version, custody, revocation và khôi phục; không dump secrets/finance vào báo cáo."
+    },
+    {
+      "id": "RB-11",
+      "name": "Erase, revoke hoặc witness lỗi",
+      "preconditions": "Profile recovery/erase đã được ủy quyền giữ identity của yêu cầu gốc.",
+      "steps": "Deny local ngay. Retry đúng deny event tới witness; giữ deadline và danh sách children đã freeze. Purge active data và mọi bản sao đã kiểm kê; xác minh trước completion.",
+      "stopConditions": "Không bỏ deny để lấy availability, không reset mốc 35 ngày, không nhận hoàn tất khi pack còn dữ liệu.",
+      "evidence": "Deadline gốc, receipt đã anchor, inventory/purge và giới hạn với thiết bị ngoài kiểm soát server."
+    },
+    {
+      "id": "RB-12",
+      "name": "TLS, DNS, clock hoặc alerts lỗi",
+      "preconditions": "Infrastructure operator có domain/trust đã xác minh.",
+      "steps": "Đóng các luồng auth không an toàn. Sửa thời gian/cert/origin bằng nguồn tin cậy; kiểm truy cập ngoài và cảnh báo; đánh giá lại sessions/jobs đã hết hạn.",
+      "stopConditions": "Không tắt TLS/CSRF, kéo TTL, tin witness head cũ hoặc dùng domain mẫu làm domain thật.",
+      "evidence": "Cert/time/origin và kết quả timeout, delivery, recovery của receiver."
+    },
+    {
+      "id": "RB-13",
+      "name": "APK không tương thích, update hoặc queue gap",
+      "preconditions": "Release/native support có channel và signing continuity đúng.",
+      "steps": "Kiểm signer/hash/support; hướng dẫn update. Giữ identity queue; từ chối revision không hỗ trợ trước ACK. Re-enroll qua luồng owner, thể hiện khoảng trống dữ liệu.",
+      "stopConditions": "Không gán item cũ cho owner mới, phát debug APK thật, dùng remote URL tùy ý hoặc ép cài ngoài quyền OS. Không hứa cứu dữ liệu mất Keystore.",
+      "evidence": "Thiết bị/OS/app versions, cài/update và các trường hợp gap bằng dữ liệu thử."
+    },
+    {
+      "id": "RB-14",
+      "name": "Đóng sự cố và mở lại",
+      "preconditions": "Incident operator có nguyên nhân đã sửa và kiểm tra mọi gate bị ảnh hưởng.",
+      "steps": "Kiểm lại correctness/auth/replay/recovery; mở lại từng phần có kiểm soát. Ghi postmortem an toàn, bổ sung regression và cập nhật runbook.",
+      "stopConditions": "Critical chưa rõ, cross-tenant leak, sai sổ hoặc rủi ro erasure: giữ halted. Không nhận PASS vượt phạm vi đã thử.",
+      "evidence": "Phạm vi/thời gian ảnh hưởng, dữ liệu mất/chưa biết, hành động sửa và evidence."
+    }
+  ]
+}

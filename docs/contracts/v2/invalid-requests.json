@@ -1,0 +1,120 @@
+[
+  {
+    "operationId": "createEvent",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createEvent",
+      "input": {
+        "kind": "expense",
+        "amount": {
+          "value": "1e6",
+          "currency": "VND"
+        },
+        "date": "2026-10-03",
+        "accountId": "A-CASH",
+        "description": "Ăn trưa giả lập",
+        "category": "Ăn uống",
+        "posting": "posted",
+        "reference": null
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "expected": "schema rejection; no backend execution"
+  },
+  {
+    "operationId": "createAccount",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "createAccount",
+      "input": {
+        "name": "Ngân hàng giả lập",
+        "kind": "bank",
+        "opening": {
+          "value": "20000000",
+          "currency": "VND"
+        },
+        "openingDate": "2026-10-01",
+        "unknownField": true
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "TOKEN_SYNTHETIC_01"
+      }
+    },
+    "expected": "schema rejection; no backend execution"
+  },
+  {
+    "operationId": "ingestNotifications",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "ingestNotifications",
+      "input": {
+        "deviceId": "D_A",
+        "items": [
+          {
+            "eventKey": "SYNTHETIC_01",
+            "bindingId": "BIND_A",
+            "bindingVersion": 0,
+            "sourceKey": "test_bank",
+            "revision": 0,
+            "observedAt": "2026-10-08T11:00:00+07:00",
+            "parserVersion": "SYNTHETIC_BANK_V1",
+            "payloadDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "normalizedEvidence": {
+              "amount": "100000",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "****0001",
+              "transactionRef": "SYNTH_TXN_01",
+              "sourceOccurredAt": "2026-10-08T11:00:00+07:00",
+              "ruleStatus": "complete"
+            },
+            "rawNotification": "OTP 123456"
+          }
+        ]
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "expected": "schema rejection; no backend execution"
+  },
+  {
+    "operationId": "confirmPlanningDraft",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "confirmPlanningDraft",
+      "input": {
+        "id": "SYNTHETIC_01",
+        "expectedVersion": 0,
+        "token": "SYNTHETIC_01",
+        "digest": "not-a-digest"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_01"
+      }
+    },
+    "expected": "schema rejection; no backend execution"
+  }
+]

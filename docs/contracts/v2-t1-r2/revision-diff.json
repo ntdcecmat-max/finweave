@@ -1,0 +1,39 @@
+{
+  "from": "FW-API-T1-D1J2-001",
+  "to": "FW-API-T1-D1J2-002",
+  "addedOperations": [
+    "requestOwnerReauthentication",
+    "verifyOwnerReauthentication",
+    "adminReauthenticate",
+    "rotateOwnerRecoveryCodes",
+    "redeemOwnerRecoveryCode",
+    "renewCollectorCredential"
+  ],
+  "changedSchemas": [
+    "getSessionOutput",
+    "signInInput",
+    "signInOutput",
+    "registerIdentityInput",
+    "registerIdentityOutput",
+    "verifyIdentityChallengeOutput",
+    "resetIdentityPasswordInput",
+    "renewSessionOutput",
+    "registerDeviceInput",
+    "requestDeviceEnrollmentOutput",
+    "adminSignInInput",
+    "verifyNativeIdentityChallengeOutput",
+    "renewNativeSessionOutput",
+    "requestCollectorCredentialChallengeOutput",
+    "issueCollectorCredentialInput",
+    "issueCollectorCredentialOutput"
+  ],
+  "changedWirePolicies": [
+    "host-prefixed cookies",
+    "15-character passwords",
+    "installationPublicKey and nonce/channel",
+    "native proof header",
+    "native-only collector enrollment",
+    "5 reauth/recovery operations plus collector-key renewal"
+  ],
+  "published": false
+}

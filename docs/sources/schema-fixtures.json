@@ -1,0 +1,2003 @@
+{
+  "scope": "Synthetic schema examples; fabricated amounts/references/rights, not bank templates or vendor grants; placeholder digest strings not crypto vectors",
+  "fixtures": [
+    {
+      "id": "ParserProfile_valid",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": false,
+        "signerCertificates": [],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "VND",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": true
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "QuoteProfileSnapshot_valid",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "EntitlementSnapshot_valid",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "SAAS_DISPLAY",
+        "grantedCapabilities": [
+          "automation",
+          "serverNonDisplay",
+          "cache",
+          "historicalRetention",
+          "backup",
+          "derivedValuation",
+          "saasRedistribution"
+        ],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": null,
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": true,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "derived_time_with_pinned_calendar",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "session_bound",
+        "timeSemantics": "VERIFIED_SESSION_FINAL_BOUND",
+        "sourceBusinessDate": "2026-10-08",
+        "calendarVersion": "fictional-calendar1",
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "parser_no_signer",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": true,
+        "signerCertificates": [],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "VND",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": true
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "parser_raw",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": false,
+        "signerCertificates": [],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "VND",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": true,
+        "rawText": "forbidden"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "parser_full_account",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": false,
+        "signerCertificates": [],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "VND",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": false
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "parser_invalid_cert",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": false,
+        "signerCertificates": [
+          "guess"
+        ],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "VND",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": true
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "parser_extra_currency",
+      "family": "private",
+      "definition": "ParserProfile",
+      "value": {
+        "id": "synthetic_parser1",
+        "packageName": "test.finweave.bank",
+        "version": "fixture1",
+        "supportedReal": false,
+        "signerCertificates": [],
+        "appVersions": [],
+        "templateIds": [],
+        "deviceEvidenceRefs": [],
+        "currency": "USD",
+        "locale": "vi-VN",
+        "economicKeyVersion": "fixture1",
+        "finalityVerified": false,
+        "privacyPassed": false,
+        "sourceAccountMaskOnly": true
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_no_finality",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": false,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_bad_unit",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "oz",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_wrong_canonical",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "share",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_wrong_side",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "sell",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_fetched_mode",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "FETCHED_AT",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "quote_unknown_scale",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "unknown",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "SOURCE_DATETIME",
+        "sourceBusinessDate": null,
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "session_no_calendar",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "session_bound",
+        "timeSemantics": "VERIFIED_SESSION_FINAL_BOUND",
+        "sourceBusinessDate": "2026-10-08",
+        "calendarVersion": null,
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "session_invalid_date",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "session_bound",
+        "timeSemantics": "VERIFIED_SESSION_FINAL_BOUND",
+        "sourceBusinessDate": "2026-02-29",
+        "calendarVersion": "fictional-calendar1",
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "session_wrong_precision",
+      "family": "private",
+      "definition": "QuoteProfileSnapshot",
+      "value": {
+        "sourceId": "synthetic-market",
+        "adapterVersion": "fixture1",
+        "instrumentOrGoldProfileId": "fixture-gold1",
+        "profileVersion": "fixture1",
+        "rightsVersion": "fixture-rights1",
+        "rightsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceCurrency": "VND",
+        "sourceUnit": "luong",
+        "canonicalUnit": "chi",
+        "priceScale": "1000",
+        "side": "buy",
+        "basis": "RETAIL_PRODUCT_BUY",
+        "locale": "vi-VN",
+        "timePrecision": "source_datetime",
+        "timeSemantics": "VERIFIED_SESSION_FINAL_BOUND",
+        "sourceBusinessDate": "2026-10-08",
+        "calendarVersion": "fictional-calendar1",
+        "finalityVerified": true,
+        "sourceTimeZone": "Asia/Ho_Chi_Minh",
+        "normalizationVersion": "FW-SOURCE-NORMALIZATION-001"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "rights_no_redistribution",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "SAAS_DISPLAY",
+        "grantedCapabilities": [],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": null,
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": true,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "rights_storage_incompatible",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "SAAS_DISPLAY",
+        "grantedCapabilities": [
+          "automation",
+          "serverNonDisplay",
+          "cache",
+          "historicalRetention",
+          "backup",
+          "derivedValuation",
+          "saasRedistribution"
+        ],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": null,
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": false,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "rights_bad_expiry",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "SAAS_DISPLAY",
+        "grantedCapabilities": [
+          "automation",
+          "serverNonDisplay",
+          "cache",
+          "historicalRetention",
+          "backup",
+          "derivedValuation",
+          "saasRedistribution"
+        ],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": "yesterday",
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": true,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "rights_external_model_not_granted",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "EXTERNAL_MODEL",
+        "grantedCapabilities": [
+          "automation",
+          "serverNonDisplay",
+          "cache",
+          "historicalRetention",
+          "backup",
+          "derivedValuation",
+          "saasRedistribution"
+        ],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": null,
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": true,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "rights_raw_credential",
+      "family": "private",
+      "definition": "EntitlementSnapshot",
+      "value": {
+        "id": "fixture-grant",
+        "providerId": "synthetic-market",
+        "rightsVersion": "fixture-rights1",
+        "evidenceRef": "fabricated-not-vendor-grant",
+        "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "use": "SAAS_DISPLAY",
+        "grantedCapabilities": [
+          "automation",
+          "serverNonDisplay",
+          "cache",
+          "historicalRetention",
+          "backup",
+          "derivedValuation",
+          "saasRedistribution"
+        ],
+        "approvedAt": "2026-10-09T08:00:00Z",
+        "approvedBy": "fixture-only",
+        "expiresAt": null,
+        "cacheScope": "WORKSPACE",
+        "storageCompatible": true,
+        "quotaConfigVersion": "fixture1",
+        "configDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "token": "forbidden"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "normalized_notification",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "bound_incomplete_review",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": null,
+              "currency": "VND",
+              "direction": "unknown",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "incomplete"
+            }
+          }
+        ]
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "real_candidates_supported_false",
+      "family": "api",
+      "definition": "listSourceSupportOutput",
+      "value": {
+        "items": [
+          {
+            "packageName": "com.VCB",
+            "name": "vcb-digibank",
+            "parserProfileId": "vcb_digibank_candidate1",
+            "supported": false,
+            "reason": "SOURCE_POC_NOT_RUN"
+          },
+          {
+            "packageName": "com.mservice.momotransfer",
+            "name": "momo",
+            "parserProfileId": "momo_candidate1",
+            "supported": false,
+            "reason": "SOURCE_POC_NOT_RUN"
+          }
+        ],
+        "nextCursor": null,
+        "snapshotVersion": 1,
+        "totalCount": 2
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "manual_luong_no_double_divide",
+      "family": "api",
+      "definition": "recordPriceQuoteInput",
+      "value": {
+        "holdingId": "fixture-holding",
+        "price": {
+          "value": "12345000",
+          "currency": "VND",
+          "per": "luong"
+        },
+        "at": "2026-10-09T08:00:00Z",
+        "sourceId": "owner-manual",
+        "fxVndPerUsd": null,
+        "fxAt": null,
+        "compatible": true
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "unbound_null",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": null,
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "missing_binding",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "raw_forbidden",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete",
+              "rawText": "forbidden"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "lifecycle_field_not_on_wire",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete",
+              "status": "pending"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "formatted_amount_forbidden",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100.123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "negative_amount_forbidden",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "-1",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "non_vnd",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "USD",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "fees_field_not_on_wire",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete",
+              "fee": "1"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "unknown_bank_time_not_fabricated",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": "unknown",
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "batch_too_large",
+      "family": "api",
+      "definition": "ingestNotificationsInput",
+      "value": {
+        "deviceId": "fixture-device",
+        "deviceEpoch": 1,
+        "recoveryEpoch": 1,
+        "items": [
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          },
+          {
+            "eventKey": "fixture-event",
+            "bindingId": "fixture-binding",
+            "bindingVersion": 1,
+            "sourceKey": "synthetic_bank",
+            "revision": 0,
+            "observedAt": "2026-10-09T08:00:00Z",
+            "parserVersion": "fixture1",
+            "payloadDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "normalizedEvidence": {
+              "amount": "100123",
+              "currency": "VND",
+              "direction": "income",
+              "sourceAccountRef": "fixture-mask-01",
+              "transactionRef": "fabricated-ref-01",
+              "sourceOccurredAt": null,
+              "ruleStatus": "complete"
+            }
+          }
+        ]
+      },
+      "expectedValid": false
+    }
+  ]
+}

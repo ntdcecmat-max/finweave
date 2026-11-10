@@ -1,0 +1,76 @@
+{
+  "asOf": "2026-10-09",
+  "type": "official primary documentation read; no account or provider calls",
+  "sources": [
+    {
+      "id": "CAP8",
+      "url": "https://capacitorjs.com/docs/updating/8-0",
+      "finding": "Capacitor8: Node22+, minSDK24, compile/target36; guide toolchain starting values, not installed/latest patch"
+    },
+    {
+      "id": "PLUGIN",
+      "url": "https://capacitorjs.com/docs/plugins/creating-plugins",
+      "finding": "Native plugin integration requires actual Android project and registration; legacy proxy is not native implementation"
+    },
+    {
+      "id": "NLS",
+      "url": "https://developer.android.com/reference/android/service/notification/NotificationListenerService",
+      "finding": "System-bound listener, API24+ callbacks main thread; managed/low-RAM limitations"
+    },
+    {
+      "id": "OTP15",
+      "url": "https://developer.android.com/about/versions/15/behavior-changes-all",
+      "finding": "Android15 can redact OTP from untrusted notification listeners"
+    },
+    {
+      "id": "WM",
+      "url": "https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started/define-work",
+      "finding": "Periodic minimum15min; constraints/OS affect timing"
+    },
+    {
+      "id": "KEYSTORE",
+      "url": "https://developer.android.com/privacy-and-security/keystore",
+      "finding": "Non-exportable keys; hardware optional; compromised process may use keys"
+    },
+    {
+      "id": "WEBVIEW",
+      "url": "https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges",
+      "finding": "Native bridge attack surface; restrict loading and capabilities"
+    },
+    {
+      "id": "BACKUP",
+      "url": "https://developer.android.com/identity/data/autobackup",
+      "finding": "allowBackup=false alone insufficient on some OEM D2D; noBackupFilesDir excluded; per-mode extraction rules"
+    },
+    {
+      "id": "BOOT",
+      "url": "https://developer.android.com/privacy-and-security/direct-boot",
+      "finding": "Credential-encrypted storage unavailable before first unlock"
+    },
+    {
+      "id": "PACKAGES",
+      "url": "https://developer.android.com/training/package-visibility/declaring",
+      "finding": "Targeted package queries; no broad inventory requirement"
+    },
+    {
+      "id": "RESTRICTED",
+      "url": "https://support.google.com/android/answer/12623953?hl=en",
+      "finding": "Sideloaded apps may encounter restricted settings; user-controlled OS handoff"
+    },
+    {
+      "id": "VERIFY",
+      "url": "https://developer.android.com/developer-verification",
+      "finding": "Sept30,2026 initial listed regions; wider rollout2027, recheck before distribution"
+    },
+    {
+      "id": "LIMITED",
+      "url": "https://developer.android.com/developer-verification/guides/limited-distribution",
+      "finding": "Free limited distribution≤20 explicitly authorized devices; account/2SV/payments-profile/contact requirements; personal/learning use"
+    },
+    {
+      "id": "REGISTER",
+      "url": "https://developer.android.com/developer-verification/guides/android-developer-console",
+      "finding": "Package name/certificate ownership registration, no universal unlimited free distribution promise"
+    }
+  ]
+}

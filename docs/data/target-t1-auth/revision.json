@@ -1,0 +1,10 @@
+{
+  "id": "FW-PHYS-T1-AUTH-002",
+  "status": "EXPAND_DESIGN_SQL_NOT_RUN",
+  "tables": 82,
+  "columns": 921,
+  "foreignKeys": 153,
+  "newTables": 12,
+  "changedTables": 19,
+  "targetModelSha256": "461ef34bd27a3a51952a3d7cc6d286b207486a724549b5137682d84b2eb29ad2"
+}

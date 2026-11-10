@@ -1,0 +1,1508 @@
+{
+  "status": "ILLUSTRATIVE_NOT_RUNTIME",
+  "cases": [
+    {
+      "id": "RuntimeConfig-valid-example",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": true
+    },
+    {
+      "id": "ReleaseManifest-valid-example",
+      "definition": "ReleaseManifest",
+      "input": {
+        "id": "EXAMPLE-NOT-DEPLOYED",
+        "status": "DESIGN_TEMPLATE",
+        "source": {
+          "kind": "WORKING_TREE_ARCHIVE",
+          "head": null,
+          "contentSha256": null,
+          "includesUntrackedAndDeletions": true
+        },
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "configSha256": null,
+        "artifacts": [
+          {
+            "kind": "user_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "admin_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "backend_amd64",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "apk",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "migration_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "policy_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          }
+        ],
+        "compatibility": {
+          "previousCodeSupportsCurrentDatabase": false,
+          "jobPolicies": [],
+          "payloadKinds": [],
+          "installedNativeRevisions": [
+            "FW-NATIVE-BRIDGE-003"
+          ]
+        },
+        "gates": {
+          "G-ARTIFACT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DB": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DOMAIN": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AUTH": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-J2": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-CONSUMERS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-NATIVE": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SOURCE": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AGENT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SEC-T1": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-OPS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-UAT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          }
+        },
+        "signature": {
+          "tool": null,
+          "trustedKeyId": null,
+          "detachedSignatureRef": null,
+          "verified": false
+        },
+        "runtime": "NOT_RUN"
+      },
+      "valid": true
+    },
+    {
+      "id": "ReleaseCheckpoint-valid-example",
+      "definition": "ReleaseCheckpoint",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "prepared",
+        "deployLockHeld": false,
+        "maintenance": true,
+        "oldWriterFenced": false,
+        "noActiveClaims": false,
+        "schemaChecksumsMatch": false,
+        "grantsVerified": false,
+        "registryCompatible": false,
+        "recoveryGateOpen": false,
+        "smokePassed": false,
+        "backupVerified": false,
+        "pendingDeniesAnchored": false,
+        "priorCodeCompatible": false
+      },
+      "valid": true
+    },
+    {
+      "id": "OperationalLog-valid-example",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC"
+      },
+      "valid": true
+    },
+    {
+      "id": "ExternalAlert-valid-example",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "valid": true
+    },
+    {
+      "id": "config-secret-inline",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false,
+        "dbPassword": "example-do-not-store"
+      },
+      "valid": false
+    },
+    {
+      "id": "config-unknown-env",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "PROD_AUTO",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-paid",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 1000,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-fallback",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": true
+      },
+      "valid": false
+    },
+    {
+      "id": "config-real-label-synthetic",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": true,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-revision",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-004",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-backup-age",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 35,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-purge",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 25,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-erase",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 36,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-tick",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 0,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "config-secretref",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://127.0.0.1:4182",
+        "adminOrigin": "http://127.0.0.1:4183",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "password-not-path",
+            "keyVersion": "v1"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "real-shaped-not-startup-authorized",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "REAL_T1",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "https://app.example.invalid",
+        "adminOrigin": "https://admin.example.invalid",
+        "dataMode": "REAL",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": true,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": true
+    },
+    {
+      "id": "real-http",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "REAL_T1",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "http://app.example.invalid",
+        "adminOrigin": "https://admin.example.invalid",
+        "dataMode": "REAL",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": true,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "real-mount",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "REAL_T1",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "https://app.example.invalid",
+        "adminOrigin": "https://admin.example.invalid",
+        "dataMode": "REAL",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": false,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "real-fixtures",
+      "definition": "RuntimeConfig",
+      "input": {
+        "environmentClass": "REAL_T1",
+        "environmentId": "example-local-synthetic-only",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "userOrigin": "https://app.example.invalid",
+        "adminOrigin": "https://admin.example.invalid",
+        "dataMode": "SYNTHETIC",
+        "realEnabled": false,
+        "modelEnabled": false,
+        "sourcesEnabled": false,
+        "externalBudgetVnd": 0,
+        "encryptedMountRequired": true,
+        "secretRefs": [
+          {
+            "purpose": "owner_api",
+            "fileRef": "/run/secrets/example_synthetic_owner",
+            "keyVersion": "example-not-created"
+          }
+        ],
+        "backupIntervalHours": 12,
+        "backupSnapshotMaxAgeDays": 34,
+        "packPurgeMaxHours": 24,
+        "erasureMaxDays": 35,
+        "hostTickSeconds": 60,
+        "newJobsEnabled": false,
+        "maintenance": true,
+        "autoPaidFallback": false
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-body",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "body": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-headers",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "headers": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-token",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "token": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-amount",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "amount": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-workspaceId",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "workspaceId": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-prompt",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "prompt": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-sqlParameters",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "sqlParameters": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-rawNotification",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "rawNotification": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "log-reject-payloadDigest",
+      "definition": "OperationalLog",
+      "input": {
+        "requestId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operationClass": "dispatch",
+        "statusClass": "denied",
+        "safeCode": "WORKER_FENCED",
+        "latencyBucket": "lt100ms",
+        "profile": "agent",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "payloadDigest": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "alert-reject-email",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "email": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "alert-reject-deviceId",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "deviceId": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "alert-reject-amount",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "amount": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "alert-reject-prompt",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "prompt": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "alert-reject-rawUrl",
+      "definition": "ExternalAlert",
+      "input": {
+        "safeCode": "BACKUP_OVERDUE",
+        "environmentClass": "LOCAL_SYNTHETIC",
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "profile": "backup",
+        "severity": "critical",
+        "at": "2026-10-09T00:00:00Z",
+        "incidentRef": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "rawUrl": "example-forbidden"
+      },
+      "valid": false
+    },
+    {
+      "id": "unbuilt-not-candidate",
+      "definition": "ReleaseManifest",
+      "input": {
+        "id": "EXAMPLE-NOT-DEPLOYED",
+        "status": "VERIFIED_CANDIDATE",
+        "source": {
+          "kind": "WORKING_TREE_ARCHIVE",
+          "head": null,
+          "contentSha256": null,
+          "includesUntrackedAndDeletions": true
+        },
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "configSha256": null,
+        "artifacts": [
+          {
+            "kind": "user_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "admin_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "backend_amd64",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "apk",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "migration_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "policy_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          }
+        ],
+        "compatibility": {
+          "previousCodeSupportsCurrentDatabase": false,
+          "jobPolicies": [],
+          "payloadKinds": [],
+          "installedNativeRevisions": [
+            "FW-NATIVE-BRIDGE-003"
+          ]
+        },
+        "gates": {
+          "G-ARTIFACT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DB": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DOMAIN": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AUTH": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-J2": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-CONSUMERS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-NATIVE": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SOURCE": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AGENT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SEC-T1": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-OPS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-UAT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          }
+        },
+        "signature": {
+          "tool": null,
+          "trustedKeyId": null,
+          "detachedSignatureRef": null,
+          "verified": false
+        },
+        "runtime": "NOT_RUN"
+      },
+      "valid": false
+    },
+    {
+      "id": "no-evidence-not-pass",
+      "definition": "GateEvidence",
+      "input": {
+        "status": "PASS",
+        "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "evidenceRef": null,
+        "executedAt": null,
+        "scope": "DESIGN_ONLY"
+      },
+      "valid": false
+    },
+    {
+      "id": "illustrative-gate-structure",
+      "definition": "GateEvidence",
+      "input": {
+        "status": "PASS",
+        "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "evidenceRef": "synthetic-example-not-executed",
+        "executedAt": "2026-10-09T00:00:00Z",
+        "scope": "SYNTHETIC"
+      },
+      "valid": true
+    },
+    {
+      "id": "unknown-phase",
+      "definition": "ReleaseCheckpoint",
+      "input": {
+        "releaseId": "EXAMPLE-NOT-DEPLOYED",
+        "phase": "zero_downtime_ready",
+        "deployLockHeld": false,
+        "maintenance": true,
+        "oldWriterFenced": false,
+        "noActiveClaims": false,
+        "schemaChecksumsMatch": false,
+        "grantsVerified": false,
+        "registryCompatible": false,
+        "recoveryGateOpen": false,
+        "smokePassed": false,
+        "backupVerified": false,
+        "pendingDeniesAnchored": false,
+        "priorCodeCompatible": false
+      },
+      "valid": false
+    },
+    {
+      "id": "missing-gate",
+      "definition": "ReleaseManifest",
+      "input": {
+        "id": "EXAMPLE-NOT-DEPLOYED",
+        "status": "DESIGN_TEMPLATE",
+        "source": {
+          "kind": "WORKING_TREE_ARCHIVE",
+          "head": null,
+          "contentSha256": null,
+          "includesUntrackedAndDeletions": true
+        },
+        "pins": {
+          "apiRevision": "FW-API-T1-D1J2-005",
+          "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+          "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+          "databaseSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+          "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+          "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+        },
+        "configSha256": null,
+        "artifacts": [
+          {
+            "kind": "user_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "admin_web",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "backend_amd64",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "apk",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "migration_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          },
+          {
+            "kind": "policy_set",
+            "pathOrDigestRef": null,
+            "sha256": null,
+            "status": "NOT_BUILT"
+          }
+        ],
+        "compatibility": {
+          "previousCodeSupportsCurrentDatabase": false,
+          "jobPolicies": [],
+          "payloadKinds": [],
+          "installedNativeRevisions": [
+            "FW-NATIVE-BRIDGE-003"
+          ]
+        },
+        "gates": {
+          "G-ARTIFACT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DB": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-DOMAIN": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AUTH": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-J2": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-CONSUMERS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SOURCE": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-AGENT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-SEC-T1": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-OPS": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          },
+          "G-UAT": {
+            "status": "NOT_RUN",
+            "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "configSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "evidenceRef": null,
+            "executedAt": null,
+            "scope": "DESIGN_ONLY"
+          }
+        },
+        "signature": {
+          "tool": null,
+          "trustedKeyId": null,
+          "detachedSignatureRef": null,
+          "verified": false
+        },
+        "runtime": "NOT_RUN"
+      },
+      "valid": false
+    },
+    {
+      "id": "wrong-hash",
+      "definition": "Pins",
+      "input": {
+        "apiRevision": "FW-API-T1-D1J2-005",
+        "apiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+        "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+        "databaseSha256": "not-a-hash",
+        "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+        "nativeBridgeSha256": "ed1cc91f2201fa7bcc3e7d56ff75651deee1a5d3839743799f5b28021ef97c66"
+      },
+      "valid": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Trợ lý thông minh và Agent
+actor "Chủ workspace" as Owner
+actor "Dịch vụ mô hình AI\n(khi bật model mode)" as Model
+rectangle "FinWeave — Trợ lý thông minh và Agent" {
+usecase "UC-AI-01\nHỏi–đáp có căn cứ và xem lịch sử\nhội thoại" as UC_AI_01
+usecase "UC-AI-02\nTương tác trợ lý qua linh vật\ntheo ngữ cảnh" as UC_AI_02
+usecase "UC-AGENT-01\nYêu cầu Agent điều tra biến động\ntài chính" as UC_AGENT_01
+usecase "UC-AGENT-02\nYêu cầu Agent lập dự thảo\nPlan–Goal liên kết" as UC_AGENT_02
+usecase "UC-DRAFT-APPLY-01\nXem trước và xác nhận áp dụng dự\nthảo" as UC_DRAFT_APPLY_01
+usecase "UC-SIM-01\nChạy mô phỏng kịch bản (dùng\nchung phân hệ 5)" as UC_SIM_01
+}
+Owner -- UC_AI_01
+Owner -- UC_AI_02
+Owner -- UC_AGENT_01
+Owner -- UC_AGENT_02
+Owner -- UC_DRAFT_APPLY_01
+Model -- UC_AI_01
+Model -- UC_AGENT_01
+Model -- UC_AGENT_02
+UC_AGENT_02 ..> UC_SIM_01 : <<include>>
+@enduml

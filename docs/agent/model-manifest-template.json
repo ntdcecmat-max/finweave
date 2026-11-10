@@ -1,0 +1,18 @@
+{
+  "status": "UNPINNED_MODEL_DISABLED",
+  "runtimeVersion": null,
+  "runtimeImageDigest": null,
+  "modelOrigin": "https://huggingface.co/Qwen/Qwen3-4B",
+  "modelRevision": null,
+  "weightsDigest": null,
+  "quantization": null,
+  "tokenizerDigest": null,
+  "chatTemplateDigest": null,
+  "licenseDigest": null,
+  "promptVersion": "FW-AGENT-PROMPT-001",
+  "promptHash": "9f20dbcdf3731363116b0d2a0b4c742df13e6a85ec5a75e9ffffa68ff22149fb",
+  "toolRegistryHash": "653747425c2886821fa1a3fdfca104368b37f256019b8b6e25413e825d1e4315",
+  "decisionSchemaHash": "60c54d88db9265a0cb896ba19f3a4494b7ad4ab1b6c8407ff946fd8ccb3237be",
+  "engineVersion": "FW-ENGINE-DESIGN-001; implementation pin missing",
+  "runtimePoc": "NOT_RUN"
+}

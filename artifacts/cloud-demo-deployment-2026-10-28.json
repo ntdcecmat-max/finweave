@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-28",
+  "url": "https://finweave-demo.pastelvale3.chatgpt.site",
+  "public": true,
+  "project_id": "appgprj_6ae20ebb73208191acdbf47e316f132c",
+  "version": 1,
+  "deployment_id": "appgdep_6ae2141d98448191aa02f123411a689d",
+  "source": "6f10d7aefc78b97559f530ea2fe93c5824af0eb7",
+  "mode": "cloud-demo",
+  "database": "Cloudflare D1",
+  "retentionDays": 7,
+  "credentials": "Demo account only: use Điền thông tin mẫu / Đăng nhập demo and code 123456",
+  "localVerification": "11 HTTP checks passed: health, deep links, login, commit, idempotency, reload persistence, concurrency, visitor isolation, cross-visitor rejection, logout persistence and origin rejection",
+  "limitations": "Synthetic data and scripted assistant; real PostgreSQL runtime, financial providers, Android collection and local LLM are not part of the hosted demo."
+}

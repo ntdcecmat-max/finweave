@@ -1,0 +1,27 @@
+{
+  "revision": "FW-MIGRATIONS-LOCAL-001",
+  "targetRevision": "FW-PHYS-T1-ASYNC-005",
+  "status": "PARTIAL_FOUNDATION_NOT_TARGET_PARITY",
+  "migrations": [
+    {
+      "id": "001",
+      "path": "docs/data/physical/migrations/001_synthetic_tables.sql",
+      "sha256": "7bed3059294692a4a9a5fd49ca23c46883ea0cb7cf649e5ef13c9a33a47d13c3"
+    },
+    {
+      "id": "002",
+      "path": "docs/data/physical/migrations/002_guards_and_boundaries.sql",
+      "sha256": "6d6eb18c60f087cbc55583752bf422970a19a7f0387eea574fd3d18b40f0e0e7"
+    },
+    {
+      "id": "003",
+      "path": "docs/data/physical/migrations/003_mutable_and_immutable_triggers.sql",
+      "sha256": "2bb83a72ddb675b1f8bd9459c4a2c14d4aa0d85682b568d0b20dc616402f8d3a"
+    },
+    {
+      "id": "004",
+      "path": "finweave-backend/database/migrations/004_ledger_seals.sql",
+      "sha256": "9e6543471ffab442fde840c5fe668c294061d1a846237a91b52bab55ef4a1ab6"
+    }
+  ]
+}

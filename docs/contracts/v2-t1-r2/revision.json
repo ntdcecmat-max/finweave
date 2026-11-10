@@ -1,0 +1,11 @@
+{
+  "revision": "FW-API-T1-D1J2-002",
+  "contractVersion": "2.0.0",
+  "status": "ACCEPTED_DESIGN_NOT_IMPLEMENTED",
+  "openapiSha256": "2b7727363508ecf7e805e96838c3d478d211d6fa4a461210d111ad3fee8d3578",
+  "previousOpenapiSha256": "a2f2c20ac316b5eb7efddcf5936b8bcbd70abd3430fe88f85f261dff1e278c0c",
+  "operations": 147,
+  "schemas": 600,
+  "permissionRows": 147,
+  "previous": "../v2-t1/revision.json"
+}

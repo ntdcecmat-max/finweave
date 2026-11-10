@@ -1,0 +1,33 @@
+requirement,description,document,backend,parentAC,runtimeCase,status
+ASY-01,Sole J2 authority,queue-protocol.md,BE-17,AC-36/37,ASN-01,SPECIFIED_RUNTIME_NOT_RUN
+ASY-02,Atomic domain acceptance/enqueue,queue-protocol.md,BE-08/09/17,AC-15/16/36,ASN-02,SPECIFIED_RUNTIME_NOT_RUN
+ASY-03,Typed capability/ticket,queue-protocol.md,BE-17/18,AC-36/37/41,ASN-03,SPECIFIED_RUNTIME_NOT_RUN
+ASY-04,Workspace-before-job lock order,queue-protocol.md,BE-17/18,AC-36/41,ASN-04,SPECIFIED_RUNTIME_NOT_RUN
+ASY-05,DB wall-clock/live lease,queue-protocol.md,BE-17,AC-36/37,ASN-05,SPECIFIED_RUNTIME_NOT_RUN
+ASY-06,Heartbeat and immutable deadlines,queue-protocol.md,BE-17,AC-36/37,ASN-06,SPECIFIED_RUNTIME_NOT_RUN
+ASY-07,Atomic effect/result/replay,queue-protocol.md,BE-03/08/09/17,AC-08/15/16/36,ASN-07,SPECIFIED_RUNTIME_NOT_RUN
+ASY-08,Bounded retry and floors,queue-protocol.md,BE-17,AC-36/37,ASN-08,SPECIFIED_RUNTIME_NOT_RUN
+ASY-09,Capacity/pause/fairness,queue-protocol.md,BE-16/17,AC-37/41,ASN-09,SPECIFIED_RUNTIME_NOT_RUN
+ASY-10,Supported cancellation races,queue-protocol.md,BE-15/17,AC-28/38/39/40,ASN-10,SPECIFIED_RUNTIME_NOT_RUN
+ASY-11,Native immutable identity/digest,notification-sync.md,BE-08/19,AC-36,ASN-11,SPECIFIED_RUNTIME_NOT_RUN
+ASY-12,ACK pairing and mixed rejection,notification-sync.md,BE-08/19,AC-36,ASN-12,SPECIFIED_RUNTIME_NOT_RUN
+ASY-13,Transport vs semantic dedupe,notification-sync.md,BE-03/08/09,AC-15/16/36,ASN-13,SPECIFIED_RUNTIME_NOT_RUN
+ASY-14,Current epoch/binding/consent,notification-sync.md,BE-08/18/19,AC-36/41,ASN-14,SPECIFIED_RUNTIME_NOT_RUN
+ASY-15,Bounded encrypted pending/replay/quarantine,notification-sync.md,BE-18/19,AC-36,ASN-15,SPECIFIED_RUNTIME_NOT_RUN
+ASY-16,Native background independent WebView,notification-sync.md,BE-19,AC-36,ASN-16,SPECIFIED_RUNTIME_NOT_RUN
+ASY-17,Restore missing fail-closed,notification-sync.md,BE-18/19/21,AC-36/41,ASN-17,SPECIFIED_RUNTIME_NOT_RUN
+ASY-18,Daily server scheduler,price-scheduler.md,BE-06/07/17,AC-34/35,ASN-18,SPECIFIED_RUNTIME_NOT_RUN
+ASY-19,Frozen refresh and exact coalesce,price-scheduler.md,BE-06/07/17,AC-34/35,ASN-19,SPECIFIED_RUNTIME_NOT_RUN
+ASY-20,Persistent shared quota/cooldown,price-scheduler.md,BE-06/07/17/18,AC-34/35/41,ASN-20,SPECIFIED_RUNTIME_NOT_RUN
+ASY-21,Partial/last-good/fenced publish,price-scheduler.md,BE-05/06/07,AC-34/35,ASN-21,SPECIFIED_RUNTIME_NOT_RUN
+ASY-22,Watermark and bounded catch-up,price-scheduler.md,BE-17,AC-34/35,ASN-22,SPECIFIED_RUNTIME_NOT_RUN
+ASY-23,Atomic selected import/pins,workflow-lifecycles.md,BE-09,AC-16/17/18,ASN-23,SPECIFIED_RUNTIME_NOT_RUN
+ASY-24,Inherited Assistant/message work,workflow-lifecycles.md,BE-15/17,AC-27/28,ASN-24,SPECIFIED_RUNTIME_NOT_RUN
+ASY-25,Agent continuation/cumulative budget,workflow-lifecycles.md,BE-15/17,AC-38/39/40,ASN-25,SPECIFIED_RUNTIME_NOT_RUN
+ASY-26,Forecast compute/checkpoint/publication,workflow-lifecycles.md,BE-13/14/17,AC-21/24/26/39,ASN-26,SPECIFIED_RUNTIME_NOT_RUN
+ASY-27,Ops safe control/global retention,workflow-lifecycles.md,BE-16/18/21,AC-37/41,ASN-27,SPECIFIED_RUNTIME_NOT_RUN
+ASY-28,Bounded typed polling,client-sync.md,BE-19,AC-28/34/35/36,ASN-28,SPECIFIED_RUNTIME_NOT_RUN
+ASY-29,Session/recovery/control version ordering,client-sync.md,BE-02/12/19,AC-20/36/41,ASN-29,SPECIFIED_RUNTIME_NOT_RUN
+ASY-30,Unknown command outcome,client-sync.md,BE-02/19,AC-08/36/39,ASN-30,SPECIFIED_RUNTIME_NOT_RUN
+ASY-31,CSV selectors and paged coverage wire,contract-storage-addendum.md,BE-09/19/20,AC-16/36,ASN-31,SPECIFIED_RUNTIME_NOT_RUN
+ASY-32,Preservation and truthful evidence,acceptance-plan.md,BE-20/21,AC-01…41,ASN-32,SPECIFIED_RUNTIME_NOT_RUN

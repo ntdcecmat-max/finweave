@@ -1,0 +1,26 @@
+{
+  "id": "FW-DOMAIN-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-003",
+  "apiSha256": "4066610aa7ea310023a107621f200a7fd9b47c3d3c10505f3155841a37c3c0db",
+  "databaseRevision": "FW-PHYS-T1-DOMAIN-004",
+  "databaseModelSha256": "2e38cc77e8581f7578224e90808ac9cd0b9acd47f844e5701a43f11d6655c6a3",
+  "enginePolicy": "FW-ENGINE-DOMAIN-001",
+  "enginePolicySha256": "2cd8171dde4c324e5408f0e3f354f48fb5b9c402213c4529e87e17f8da3d53aa",
+  "securityProfile": "FW-SEC-T1-001",
+  "securityPolicySha256": "f02497dc8584babf6aa6a27f3302198abc675ca407becee0a35f46075291ae97",
+  "identityPolicy": "ARCH06 inherited mechanisms; operation matrix extended in ARCH08",
+  "runtime": "NOT_RUN",
+  "securityBindingAddendum": {
+    "baseApiRevision": "FW-API-T1-D1J2-002",
+    "currentApiRevision": "FW-API-T1-D1J2-003",
+    "currentApiSha256": "4066610aa7ea310023a107621f200a7fd9b47c3d3c10505f3155841a37c3c0db",
+    "baseDatabaseRevision": "FW-PHYS-T1-SECURITY-003",
+    "currentDatabaseRevision": "FW-PHYS-T1-DOMAIN-004",
+    "operationOverlaySha256": "6af24140c588a986d8dbbcfb957decd7bc0d02be58287daa0628f0728519ba1e",
+    "tableClassificationSha256": "f2db2f5c36e4fa9a5d37a2b45ef82445e169283169b4addc09709cf81feab1c5",
+    "permissionMatrixSha256": "d59e491cb05210adc1f7ca246dacd7af95ec7c62b0bc1665c61e64cea370f2d8",
+    "baseSecurityControlsUnchanged": true,
+    "newProfile": "ForecastWorker: compute-only; no actual/active-plan/Agent/ingestion authority"
+  }
+}

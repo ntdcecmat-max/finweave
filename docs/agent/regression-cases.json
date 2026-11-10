@@ -1,0 +1,107 @@
+{
+  "scope": "Capability regression design, historical synthetic frontend results not rerun here",
+  "cases": [
+    {
+      "id": "ARG-01",
+      "task": "Q&A balance/source/coverage",
+      "requirements": [
+        "AI-FR-001",
+        "AI-FR-002"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-02",
+      "task": "Stock/gold valuation vs income",
+      "requirements": [
+        "AI-FR-002"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-03",
+      "task": "Goals/Plan/simulation explanation",
+      "requirements": [
+        "AI-FR-003"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-04",
+      "task": "Fullchat↔panel same identity",
+      "requirements": [
+        "AI-FR-004",
+        "AI-FR-005"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-05",
+      "task": "History pagination/context freeze",
+      "requirements": [
+        "AI-FR-005",
+        "AI-FR-006"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-06",
+      "task": "Evidence drill rights/stale",
+      "requirements": [
+        "AI-FR-007"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-07",
+      "task": "Mascot focus/keyboard/reducedmotion",
+      "requirements": [
+        "AI-FR-008"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-08",
+      "task": "Simple routing no forced Agent",
+      "requirements": [
+        "AI-FR-009"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-09",
+      "task": "Manual/draft handoff with model off",
+      "requirements": [
+        "AI-FR-024"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-10",
+      "task": "Owner preview/confirm atomic no actual",
+      "requirements": [
+        "AI-FR-015",
+        "AI-FR-023"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-11",
+      "task": "Cancelled/timeout/no-data truthful states",
+      "requirements": [
+        "AI-FR-019",
+        "AI-FR-021"
+      ],
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ARG-12",
+      "task": "Mask narrative/cards/history/accessibility",
+      "requirements": [
+        "AI-FR-007",
+        "AI-FR-008"
+      ],
+      "runtime": "NOT_RUN"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+import {randomBytes,createHash} from 'node:crypto';
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve} from 'node:path';
+import {instance} from './cases.ts';
+const dir=resolve(process.argv[2]!);mkdirSync(dir,{recursive:true});
+if(process.platform==='win32')execFileSync('icacls',[dir,'/inheritance:r','/grant:r',`${process.env.USERDOMAIN}\\${process.env.USERNAME}:(OI)(CI)F`],{windowsHide:true,stdio:'ignore'});
+const seed=randomBytes(32),cases=Array.from({length:12},(_,index)=>{const entropy=createHash('sha256').update(seed).update(String(index)).digest();return instance(index,[1000+entropy.readUInt16BE(0),1+entropy.readUInt16BE(2)%900,entropy[4]!,1+entropy[5]!]);});
+const bytes=JSON.stringify({seed:seed.toString('hex'),cases});writeFileSync(resolve(dir,'heldout.json'),bytes,{flag:'wx'});
+process.stdout.write(JSON.stringify({digest:createHash('sha256').update(bytes).digest('hex'),instances:cases.length,generator:'SEPARATE_PROCESS_CRYPTO_RANDOM',restrictedScope:true}));

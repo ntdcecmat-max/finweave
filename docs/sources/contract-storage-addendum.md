@@ -1,0 +1,23 @@
+# API/storage/consumer addendum
+
+**Không thay wire API004, DB005, Android bridge2.** [Machine mapping](contract-storage-map.json) có operation/field/table ownership chính xác; [bundle](implementation-bundle.json) pin hashes. Consumer migration cần implementation riêng, không mặc định frontend hybrid1.1/2.0 đã nối API004.
+
+## Notification mapping và hai giới hạn phải xử lý đúng
+
+`bindCollector` owner-only → collector_bindings workspace/account/device/package/parser/expectedVersion; sourceAccount discriminator được native owner setup giữ encrypted private local config, **không nhét field mới vào bindCollector**. Server cũng kiểm caller owns device/account và source support; disabled/revoked/old epochs reject. `listCollectorBindings`, `disableCollectorBinding`, `listSourceSupport` projection đúng schema. Profile IDs opaque stable versioned (<=80ASCII), không executable code download.
+
+`ingestNotifications`: DeviceBearer+proof+epochs+exact allowed normalizedEvidence → durable ingestion_receipts → J2 `processIngestionReceipt` → Engine validation/Review/posting UoW. ACK≠posted. bindingId mandatory: unbound/ambiguous account chỉ native warning/gap, chưa có cloud Review/receipt; bound incomplete vào server Review. Không gán fake account để làm schema pass. API không lifecycle/reason/fee, không suy ra từ raw đã xóa; nhu cầu preserve mới phải version wire trước.
+
+DB `sources.kind` nhận bank/wallet/price/manual/csv, nhưng API `listSources` hiện chỉ bank/price. **Compatibility projection**: DB bank/wallet→wire bank (legacy financial-source group), DB price→price; manual/csv không xuất qua endpoint hai-kind này, vẫn có feature/ports manual/import riêng. Source name/support profile và private registry phân biệt wallet. Không gửi enum wallet vào API004; nếu cần public subtype/filter riêng tạo revision. Ops source health tương tự chỉ allowed projection, không private finance. connection=connected chỉ trạng thái kết nối, không supported/licensed/fullcoverage.
+
+## Market/storage ownership
+
+Market sở hữu instruments, gold_profiles, provider_entitlements, quote_observations và adapter/profile registry. Collector parser catalog do Ingestion/native build versioned; binding/source_records do Ingestion; Engine là authority actual/correction. `requestPriceRefresh` owner input holdingIds → frozen scope/rights/profile/request_payload_id; host scheduler internal enqueue cùng semantics; `executePriceRefresh` worker only. `listPriceQuotes` owner query, `recordPriceQuote` manual owner command validatecompatibility/time/positive/range server-side; client `compatible=true` không bỏ gate.
+
+Registry phân hai lớp: (1) global non-secret versioned release config: public source identity/templates/unit/calendar/rights-policy schema, no workspace/accounts/token/private license attachment; (2) tenant private entitlement snapshot có evidenceRef/rightsVersion/config digest trong registered `payload_objects` kind `market_entitlement_snapshot`, owner_module Market, schema pin, bounded <=256KiB, immutable object identity/version theo existing registry rules. Đây là **registry addendum SPECIFIED**, không genericCRUD/newtable/migration; refs lifecycle/retention phải validate runtime. `rights_version` resolves exact private snapshot, credential_ref chỉ secret reference. Không globalize finance/private license vì cùng provider.
+
+Quote `profile_snapshot` chứa bounded typed source/normalization/instrument-or-gold profile/calendar/timePrecision/rights version+digest và basis; new [schemas](profile-schemas.json) là private metadata validators cho candidate VN/VND, **không public API fields** và không xóa manual USD+FX port đã có. Stored price là scale-expanded VND/sourceUnit (share/chi/luong), canonical chi chỉ ở exact valuation; scale gốc trong snapshot là provenance, không multiplier áp lại vào stored price. `quote_as_of`/`fetched_at` giữ source semantics; quality derived read asOf. DB numeric28,8 rộng hơn API18integer+8fraction: reject overflow trước insert/publication để không row impossible-to-serialize. Preserve immutable previous history; no arbitrary source body payload. New config reference/kind phải được registered domain capability validation trước implementation pass.
+
+## Không đổi schema để che tính chưa biết
+
+Mọi actual write qua Engine exact commands, role grants/UoW/replay theo ARCH06–09. Source parser không bypass authorization hay lấy app-admin làm owner. Unknown time/finality/unit/quota/rights/source-signature gate REAL closed. Nếu source cụ thể đòi raw retention, lifecycle ngoài DTO, account mapping public fields hoặc license short-history không tương thích, báo finding + tạo versioned contract/schema migration trước activate, không sửa package niêm phong. None of these are SQL/runtime acceptance.

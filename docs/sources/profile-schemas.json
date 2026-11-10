@@ -1,0 +1,636 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.finweave.invalid/source-profiles-001",
+  "$defs": {
+    "ParserProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,80}$"
+        },
+        "packageName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "supportedReal": {
+          "type": "boolean"
+        },
+        "signerCertificates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "maxItems": 16
+        },
+        "appVersions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "maxItems": 100
+        },
+        "templateIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "maxItems": 100
+        },
+        "deviceEvidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "maxItems": 100
+        },
+        "currency": {
+          "const": "VND"
+        },
+        "locale": {
+          "enum": [
+            "vi-VN",
+            "en-US"
+          ]
+        },
+        "economicKeyVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "finalityVerified": {
+          "type": "boolean"
+        },
+        "privacyPassed": {
+          "type": "boolean"
+        },
+        "sourceAccountMaskOnly": {
+          "const": true
+        }
+      },
+      "required": [
+        "id",
+        "packageName",
+        "version",
+        "supportedReal",
+        "signerCertificates",
+        "appVersions",
+        "templateIds",
+        "deviceEvidenceRefs",
+        "currency",
+        "locale",
+        "economicKeyVersion",
+        "finalityVerified",
+        "privacyPassed",
+        "sourceAccountMaskOnly"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "supportedReal": {
+                "const": true
+              }
+            },
+            "required": [
+              "supportedReal"
+            ]
+          },
+          "then": {
+            "properties": {
+              "signerCertificates": {
+                "minItems": 1
+              },
+              "appVersions": {
+                "minItems": 1
+              },
+              "templateIds": {
+                "minItems": 1
+              },
+              "deviceEvidenceRefs": {
+                "minItems": 1
+              },
+              "finalityVerified": {
+                "const": true
+              },
+              "privacyPassed": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "QuoteProfileSnapshot": {
+      "type": "object",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "instrumentOrGoldProfileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "profileVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "rightsVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "rightsDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sourceCurrency": {
+          "const": "VND"
+        },
+        "sourceUnit": {
+          "enum": [
+            "share",
+            "chi",
+            "luong"
+          ]
+        },
+        "canonicalUnit": {
+          "enum": [
+            "share",
+            "chi"
+          ]
+        },
+        "priceScale": {
+          "enum": [
+            "1",
+            "1000"
+          ]
+        },
+        "side": {
+          "enum": [
+            "buy",
+            "sell",
+            "close"
+          ]
+        },
+        "basis": {
+          "enum": [
+            "UNADJUSTED_CLOSE",
+            "RETAIL_PRODUCT_BUY",
+            "RETAIL_PRODUCT_SELL",
+            "OWNER_MANUAL"
+          ]
+        },
+        "locale": {
+          "enum": [
+            "vi-VN",
+            "en-US"
+          ]
+        },
+        "timePrecision": {
+          "enum": [
+            "source_datetime",
+            "session_bound"
+          ]
+        },
+        "timeSemantics": {
+          "enum": [
+            "SOURCE_DATETIME",
+            "VERIFIED_SESSION_FINAL_BOUND"
+          ]
+        },
+        "sourceBusinessDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "calendarVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "finalityVerified": {
+          "const": true
+        },
+        "sourceTimeZone": {
+          "const": "Asia/Ho_Chi_Minh"
+        },
+        "normalizationVersion": {
+          "const": "FW-SOURCE-NORMALIZATION-001"
+        }
+      },
+      "required": [
+        "sourceId",
+        "adapterVersion",
+        "instrumentOrGoldProfileId",
+        "profileVersion",
+        "rightsVersion",
+        "rightsDigest",
+        "sourceCurrency",
+        "sourceUnit",
+        "canonicalUnit",
+        "priceScale",
+        "side",
+        "basis",
+        "locale",
+        "timePrecision",
+        "timeSemantics",
+        "sourceBusinessDate",
+        "calendarVersion",
+        "finalityVerified",
+        "sourceTimeZone",
+        "normalizationVersion"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "timeSemantics": {
+                "const": "VERIFIED_SESSION_FINAL_BOUND"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "timePrecision": {
+                "const": "session_bound"
+              },
+              "calendarVersion": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceBusinessDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "timePrecision": {
+                "const": "source_datetime"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceUnit": {
+                "const": "share"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "canonicalUnit": {
+                "const": "share"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "canonicalUnit": {
+                "const": "chi"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "side": {
+                "const": "close"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "UNADJUSTED_CLOSE",
+                  "OWNER_MANUAL"
+                ]
+              },
+              "canonicalUnit": {
+                "const": "share"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "side": {
+                "const": "buy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "RETAIL_PRODUCT_BUY",
+                  "OWNER_MANUAL"
+                ]
+              },
+              "canonicalUnit": {
+                "const": "chi"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "side": {
+                "const": "sell"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "RETAIL_PRODUCT_SELL",
+                  "OWNER_MANUAL"
+                ]
+              },
+              "canonicalUnit": {
+                "const": "chi"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EntitlementSnapshot": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "providerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "rightsVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "evidenceRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "evidenceDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "use": {
+          "enum": [
+            "OWNER_DISPLAY",
+            "SAAS_DISPLAY",
+            "FORECAST",
+            "EXTERNAL_MODEL"
+          ]
+        },
+        "grantedCapabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "automation",
+              "serverNonDisplay",
+              "ownerDisplay",
+              "saasRedistribution",
+              "cache",
+              "historicalRetention",
+              "backup",
+              "derivedValuation",
+              "forecast",
+              "externalModel"
+            ]
+          },
+          "maxItems": 10
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "cacheScope": {
+          "enum": [
+            "WORKSPACE",
+            "ENTITLEMENT"
+          ]
+        },
+        "storageCompatible": {
+          "const": true
+        },
+        "quotaConfigVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "configDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "providerId",
+        "rightsVersion",
+        "evidenceRef",
+        "evidenceDigest",
+        "use",
+        "grantedCapabilities",
+        "approvedAt",
+        "approvedBy",
+        "expiresAt",
+        "cacheScope",
+        "storageCompatible",
+        "quotaConfigVersion",
+        "configDigest"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "automation"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "serverNonDisplay"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "cache"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "historicalRetention"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "backup"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "grantedCapabilities": {
+              "contains": {
+                "const": "derivedValuation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "use": {
+                "const": "OWNER_DISPLAY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "grantedCapabilities": {
+                "contains": {
+                  "const": "ownerDisplay"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "use": {
+                "const": "SAAS_DISPLAY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "grantedCapabilities": {
+                "contains": {
+                  "const": "saasRedistribution"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "use": {
+                "const": "FORECAST"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "grantedCapabilities": {
+                "contains": {
+                  "const": "forecast"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "use": {
+                "const": "EXTERNAL_MODEL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "grantedCapabilities": {
+                "contains": {
+                  "const": "externalModel"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -125,3 +125,22 @@ D-38 · 06/10/2026: AI history qua cursor/pageSize10, automatic page đến ph�
 D-45 · 06/10/2026: Manual prompt “mô phỏng mục tiêu” exposed scripted intent priority; explicit simulation now precedes portfolio/plans/goals after denial/fault guards. Two independent unit oracles and E11 check simulated labels/actual separation and all tied spending leaders; final8-case AI regression PASS on final dist.
 
 D-46 · 06/10/2026: Gate M2 PASS_FRONTEND_SYNTHETIC_MOCK from99unit, full54+AI8=55distinct and72axe renders. Self-review only; real-data integration BLOCKED_SECURITY_POC, P3bundle backlog. Evidence manifests/history preserved; stop M2, no Step7–9.
+
+## D-47…52 — Rà soát sản phẩm 07–08/10/2026
+
+- D-47: User yêu cầu kiểm chứng/sửa PRD, SRS, stack và architecture; sau đó giới hạn rõ **chỉ sửa docs**, không frontend. Các thay đổi frontend có sẵn được giữ nguyên.
+- D-48: Scope-v3 tách mục tiêu vận hành ba giao diện khỏi bằng chứng M2 synthetic. Giữ28 AC lịch sử; thêm AC-29…41 và NFR-16…21 chưa kiểm thử.
+- D-49: React/Vite được giữ; Capacitor+Kotlin collector là hướng thiết kế có điều kiện native PoC, không đã cài/build. Admin tách quyền/build, một backend/ledger.
+- D-50: Daily/manual prices và notification ingestion/sync là pipeline xác định; provider rights, support matrix, jobs/recovery/cost được đặc tả, chưa claim free live provider.
+- D-51: User yêu cầu Agent tích hợp Plan/Goals. Agent tạo/sửa linked drafts, hỏi ràng buộc và gọi Engine simulate; user preview/confirm riêng để áp dụng. Bổ sung BR-37…44 và API/data/test delta. Không chỉ nâng tên scripted chat thành Agent.
+- D-52: Giữ yêu cầu anti-Ops hiện có; conventional cloud chỉ synthetic. TRUSTED-SERVER là phương án chưa chọn cho real data; PROTECTED-REAL cần PoC/budget. Không tự giảm bảo mật, không deploy/paid registration/model calls.
+
+[Audit](product-realignment-audit.md), [RTM v3](realignment-traceability.md), [ADR005](../architecture/adr/ADR-005-android-and-three-surfaces.md), [ADR006](../architecture/adr/ADR-006-deployment-trust-profiles.md). Các lịch sử D-01…46 giữ nguyên; PASS cũ không áp vào requirements mới.
+
+## D-AI-UNIFY-001 — 08/10/2026
+
+User yêu cầu tích hợp/kế thừa/phát triển trợ lý cũ và Agent mới, hợp nhất đặc tả với requirement IDs cụ thể. [AI-SPEC-001 v1.0](../product/ai-agent-specification.md) trở thành nguồn AI chi tiết duy nhất:24 AI-FR,8 AI-NFR,7 journeys; giữ REQ-AI-01/02/REQ-AGENT-01/02/03 và AC-27/28/38…40 để truy vết. SRS/PRD/UC/RTM/API/data/design/test references đồng bộ; script adapter giữ synthetic baseline, capability hỏi–đáp/history/mascot tiếp tục là tính năng sản phẩm. Draft confirmation/actual write boundary giữ nguyên. Không sửa code frontend, không chạy model hoặc công bố Agent mới đã implement.
+
+## D-UI-DOC-001 — 08/10/2026
+
+User đồng ý phương hướng trước khi thực hiện chi tiết UI/UX docs. Đưa UI delta vào bộ đặc tả chính; giữ5 user navigation và mọi capability tài chính/Plan/Goals/Q&A/chat/history/mascot hiện có, bổ sung Android native, admin operational và Agent draft/run/confirm. Không sửa frontend code, không sinh schema v2 hoặc claim UI mới đã được render/test. Screen/flow/component/UI-AC IDs là refinement truy vết, không tăng41 parent AC. [UI index](../design/README.md), [thay đổi và kiểm tra](ui-documentation-update.md) ghi trạng thái và snapshot lịch sử; security/native/UAT gates giữ nguyên.

@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-28",
+  "scope": "Documentation only; not backend/native/model acceptance",
+  "checks": [
+    "50 unique detailed UC IDs; 7 system summaries",
+    "12 relationships: valid endpoints; all extend conditions/extension points present",
+    "92 local Markdown links checked",
+    "11 SVGs decoded and PNG exports present",
+    "9 PlantUML files: model/envelope checks only; PlantUML engine render NOT RUN"
+  ],
+  "issues": []
+}

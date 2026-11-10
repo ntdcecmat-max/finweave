@@ -1,0 +1,218 @@
+{
+  "previousModelSha256": "8ef456f46c2c86c6ed7bde7e7995e052df22d2681f7f7234971766a99fbd81bd",
+  "status": "DESIGN_NOT_SQL",
+  "changes": [
+    {
+      "table": "identities",
+      "addedColumns": [
+        "auth_epoch",
+        "email_verified_at"
+      ],
+      "targetRules": [
+        "auth_epoch>=0",
+        "State expands to pending_verification active suspended deleted; pending registration cannot access workspaces",
+        "Only password PHC Argon2id hash in credential_hash; admin authority prohibited"
+      ]
+    },
+    {
+      "table": "sessions",
+      "addedColumns": [
+        "kind",
+        "installation_id",
+        "auth_epoch",
+        "last_user_activity_at",
+        "absolute_expires_at",
+        "reauthenticated_at",
+        "refresh_generation",
+        "csrf_key_ref",
+        "revoke_reason"
+      ],
+      "targetRules": [
+        "role=owner only; no legacy admin session migrated into customer authority",
+        "kind=native iff installation_id IS NOT NULL; sessions.device_id deprecated legacy alias, never FK to collector",
+        "Unique(id,subject_id); last_user_activity_at<=absolute_expires_at; generation>=0",
+        "Legacy token_digest no longer authorization for native; all legacy sessions revoked at cutover"
+      ]
+    },
+    {
+      "table": "identity_challenges",
+      "addedColumns": [
+        "flow_purpose",
+        "bound_session_id",
+        "client_key_digest",
+        "nonce_digest",
+        "nonce_value",
+        "auth_epoch",
+        "workspace_id",
+        "device_id",
+        "device_epoch",
+        "recovery_epoch",
+        "state"
+      ],
+      "targetRules": [
+        "purpose legacy enum expands collector_token and reauth; flow_purpose controls verifier and channel",
+        "5 attempts maximum,5min expiry; reset high-entropy token15min; consume+session issue/epoch update atomic",
+        "bound_session_id references sessions; scoped collector device FK(workspace_id,device_id); subject owner match verified under lock"
+      ]
+    },
+    {
+      "table": "devices",
+      "addedColumns": [
+        "signing_algorithm",
+        "public_key_format",
+        "credential_epoch",
+        "installation_id",
+        "authorized_until"
+      ],
+      "targetRules": [
+        "Stored public_key validated SPKI P-256; key_digest=SHA256 decoded DER; no arbitrary PEM/key type",
+        "device revoke increments credential_epoch and owner_epoch; session_credentials owner/workspace/device must match devices"
+      ]
+    },
+    {
+      "table": "admin_principals",
+      "addedColumns": [
+        "password_hash"
+      ],
+      "targetRules": [
+        "mfa_required=true; no owner identity FK/grants; auth_ref controlled local identifier, not automatic external IdP"
+      ]
+    },
+    {
+      "table": "admin_sessions",
+      "addedColumns": [
+        "last_user_activity_at",
+        "absolute_expires_at",
+        "csrf_key_ref",
+        "reauthenticated_at",
+        "revoke_reason"
+      ],
+      "targetRules": [
+        "UNIQUE(id,principal_id); epoch/current active MFA checked each request"
+      ]
+    },
+    {
+      "table": "admin_mfa_factors",
+      "addedColumns": [
+        "key_version",
+        "secret_ciphertext"
+      ],
+      "targetRules": [
+        "method=totp_sha1_6_30; counter is largest accepted RFC6238 time-step, transactional compare/update; decrypt OpsIdentity only"
+      ]
+    },
+    {
+      "table": "auth_client_instances",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(id,subject_id)",
+        "UNIQUE(subject_id,key_digest)",
+        "State/revoked_at coherent; key possession at first verify; no financial/collector authority"
+      ]
+    },
+    {
+      "table": "session_credentials",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(key_version,audience,token_digest)",
+        "UNIQUE(session_id,audience,generation) for owner credentials",
+        "UNIQUE(workspace_id,device_id,audience,generation) for collector credentials",
+        "Exactly collector branch has workspace/device/epochs and null session_id; owner branches inverse",
+        "Composite FK(session_id,subject_id) and collector owner match by checked transaction; random token32bytes"
+      ]
+    },
+    {
+      "table": "auth_replays",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(principal_id,authority_ref,operation_id,key_digest)",
+        "Owner API only; no generic90day result payload; AEAD AAD includes scope/op/key/epoch"
+      ]
+    },
+    {
+      "table": "ops_auth_replays",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(principal_id,authority_ref,operation_id,key_digest)",
+        "Ops process only; no customer rows; no customer FK"
+      ]
+    },
+    {
+      "table": "auth_rate_buckets",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(bucket_digest,purpose,window_start)",
+        "Atomic counter; minimum limit enforced across API replicas; fail closed if unavailable"
+      ]
+    },
+    {
+      "table": "ops_auth_rate_buckets",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(bucket_digest,purpose,window_start)",
+        "Ops counters/credentials separate; fail closed"
+      ]
+    },
+    {
+      "table": "owner_recovery_codes",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(key_version,code_digest)",
+        "10 codes per active batch; rotate requires fresh owner reauth; code alone is powerful recovery secret"
+      ]
+    },
+    {
+      "table": "service_principals",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(name)",
+        "Ops/API/worker profile is not caller-supplied role; private TLS authenticated; no secrets in table"
+      ]
+    },
+    {
+      "table": "service_nonces",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(principal_id,nonce_digest)",
+        "Atomic insert before acceptance; bounded clock skew60s; replays denied"
+      ]
+    },
+    {
+      "table": "native_proof_nonces",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(installation_id,nonce_digest)",
+        "First native verify uses one-time identity challenge before instance exists; subsequent proofs use this store",
+        "Separate from service nonce privileges"
+      ]
+    },
+    {
+      "table": "collector_proof_nonces",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(workspace_id,device_id,nonce_digest)",
+        "Scoped collector proof store, not owner/service nonce authority"
+      ]
+    },
+    {
+      "table": "security_audit_events",
+      "new": true,
+      "targetRules": [
+        "PRIMARY KEY(id)",
+        "Append-only narrow writer, no finance/email/IP/code/secret/body fields",
+        "Ops reads aggregate/sanitized subset only; no user session tracking query"
+      ]
+    }
+  ]
+}

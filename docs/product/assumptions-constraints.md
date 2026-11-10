@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Assumptions và Constraints
 
 Ngày 05/10/2026, v2.0, scope-v2. Nguồn quyết định: [decisions](../execution/decisions.md); nguồn phạm vi: [scope](scope.md). Constraints là điều phải giữ; assumptions là điều chưa có bằng chứng, không biến thành yêu cầu user đã duyệt. D-13…18 là assumptions dẫn xuất cho analysis-v2 (kế thừa analysis-v1), xem quyết định và tác động đầy đủ tại decisions.

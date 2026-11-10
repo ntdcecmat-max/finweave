@@ -1,3 +1,7 @@
+> **03/11/2026 — Nhập giao dịch bằng ảnh:** phương thức nhập chính chuyển sang người dùng chọn/chụp ảnh, OCR tách từng giao dịch và tự lưu khi đủ thông tin; trường thiếu chờ kiểm tra. Notification Android là tùy chọn. [Yêu cầu và thiết kế hiện hành](screenshot-transaction-entry.md). Các mô tả collector bắt buộc bên dưới là lịch sử phương án trước thay đổi này.
+
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Use Cases
 
 ID REQ-UC-001 · v2.0 · analysis-v2/scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. Nguồn [SRS](../requirements/srs.md), [Rules](business-rules.md), [Data](../data/data-requirements.md), [Scenarios](operational-scenarios.md). Mọi luồng M1 là mô phỏng synthetic, chưa chạy prototype. M2 yêu cầu request/API/mock; M3 quyền/transaction/ledger thật; hậu điều kiện hiện là đặc tả, không evidence persistence.
@@ -273,21 +277,13 @@ Business rules: BR-28/30/31/32/36. Dữ liệu liên quan: DR-17/19/20. Postcond
 
 ## UC-AI-01 — Hỏi–đáp có căn cứ và xem lịch sử
 
-Actor: C — chủ workspace demo. Mục tiêu: hiểu tài chính từ kết quả đọc được phép. Trigger: gửi câu hỏi hoặc mở lịch sử. Precondition: chỉ synthetic; context/versions chụp rõ, whitelist tools, không model/key thật.
-
-Luồng chính: (1) C hỏi chi tháng10, thấy context chip/processing. (2) Demo chọn report tool và kiểm tra workspace/object. (3) Engine fixture trả gross1,1m/refund200k/net900k/refs. (4) Hiện lời giải thích scripted, cards và drill links từ result, không tự cộng sổ. (5) Hỏi food/giá/Plan hoặc mở history; message giữ context/time và nhãn stale khi căn cứ đổi.
-
-Alternative/error flows: No-data/tool-error/timeout/quota: CF-02 nêu giới hạn, không bịa0/số hoặc paid fallback. SQL/write/trade từ prompt/source/model bị từ chối. CF-03 deny/redact result khác workspace/mất quyền. CF-04 response giữ context cũ; muốn hiện tại phải refresh. Cancel câu hỏi không ghi tài chính; chat text là dữ liệu, không cấp quyền. Real-data AI cần gate riêng.
-
-Business rules: BR-27/33/34/35/36. Dữ liệu liên quan: DR-14/16/17/18/19/20/21/22. Postcondition: có authorized result hoặc giới hạn rõ, history dùng chung, không actual/Plan mutation/trade. Truy vết: REQ-AI-01, AC-27, SCN-AI-01/X13.
+Use case được kế thừa thành tính năng sản phẩm và hợp nhất vào [AI-SPEC-001§6](ai-agent-specification.md#6-hành-trình-hợp-nhất), UC-AI-01. Nguồn chi tiết hiện hành: AI-FR-001…007/009/019…021/023 và AI-NFR-001…006; REQ-AI-01/AC-27 giữ nguyên. Chat/read explanations/history/evidence vẫn cần có khi bổ sung Agent đa bước. Các fixture/demo oracle ở SCN-AI-01/X13 tiếp tục làm regression, không là spec runtime thật thứ hai.
 
 ## UC-AI-02 — Chat qua linh vật ở mọi khu vực
 
-Actor: C — chủ workspace demo. Mục tiêu: hỏi theo ngữ cảnh trang đang xem. Trigger: click/focus/Enter icon linh vật ở một trong 5 navigation. Precondition: shared conversation/session; route/period/scope/object hợp lệ, masking rõ.
+Use case được kế thừa và hợp nhất vào [AI-SPEC-001§6](ai-agent-specification.md#6-hành-trình-hợp-nhất), UC-AI-02. Nguồn chi tiết hiện hành: AI-FR-004…008/019 và AI-NFR-002/007; REQ-AI-02/AC-28 giữ nguyên. Linh vật/full chat/panel/history dùng chung conversation, context, masking và accessibility. Notes animation cụ thể là implementation references, không thay nguồn chức năng hợp nhất.
 
-Luồng chính: (1) C mở panel có context chip và hội thoại hiện có. (2) Kiểm tra context rồi gửi câu hỏi qua UC-AI-01. (3) Cards/refs/câu trả lời đồng bộ trang AI đầy đủ, không tạo conversation lặp. (4) Điều hướng khi chờ response: message giữ context cũ, trang mới có nhãn context riêng. (5) Escape/close trả focus và giữ history; Reset xóa chat/context/results.
+## Use cases AI phát triển thêm
 
-Alternative/error flows: Object sai/xóa/denied: CF-01/03, không chuyển dữ liệu qua workspace khác. Loading/error: CF-02 có text accessible. Race/stale: CF-04 không giả dữ liệu cũ là current. Mobile không che form/confirm. Mask structured numbers và ẩn free-text/narrative/history ở cả panel/full chat/tooltips/accessible text. Close không xóa chat hoặc tự writes; tôn trọng reduced motion.
-
-Business rules: BR-25/33/34/35/36. Dữ liệu liên quan: DR-15/16/22. Postcondition: hội thoại/context rõ ở 5 navigation, masking/reset/bàn phím nhất quán, không tác động tài chính. Truy vết: REQ-AI-02, AC-28, SCN-AI-02.
+UC-AI-03 (PG-01) tạo từ Goal; UC-AI-04 (PG-02) tạo từ Plan; UC-AI-05 (PG-03) điều chỉnh theo actual; UC-AI-06 (INV-01) điều tra; UC-AI-07 chuyển tiếp Q&A→Agent trong cùng hội thoại. Toàn bộ preconditions/flows/failure branches/requirements được duy trì tại [AI-SPEC-001](ai-agent-specification.md), tránh hai bộ đặc tả AI độc lập. Đây là documentation mới, chưa thực thi tests hợp nhất hoặc thay frontend.
 

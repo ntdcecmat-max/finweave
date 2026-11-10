@@ -1,0 +1,135 @@
+{
+  "id": "FW-ANDROID-LOCAL-001",
+  "status": "ROOM_DESIGN_NOT_EXECUTABLE",
+  "postgresChanges": false,
+  "tables": [
+    {
+      "name": "installation_meta",
+      "columns": [
+        "id",
+        "local_schema_version",
+        "generation",
+        "encrypted_state",
+        "updated_at"
+      ],
+      "purpose": "Installation/key alias references and trusted clock anchors; no owner finance in clear"
+    },
+    {
+      "name": "owner_vaults",
+      "columns": [
+        "id",
+        "scope_hmac",
+        "state",
+        "key_version",
+        "wrapped_dek",
+        "nonce_prefix",
+        "nonce_counter",
+        "iv",
+        "encrypted_state"
+      ],
+      "purpose": "Owner/workspace/device/capture epoch and credentials inside ciphertext; distinct DEK per vault; durable nonce counter outside ciphertext"
+    },
+    {
+      "name": "outbox_items",
+      "columns": [
+        "id",
+        "vault_id",
+        "state",
+        "sequence",
+        "key_version",
+        "iv",
+        "encrypted_payload",
+        "eligible_until",
+        "bytes"
+      ],
+      "purpose": "Immutable normalized observation/binding/parser/event/revision/digest; local dates inside ciphertext authoritative"
+    },
+    {
+      "name": "capture_identities",
+      "columns": [
+        "id",
+        "vault_id",
+        "lookup_hmac",
+        "key_version",
+        "iv",
+        "encrypted_state",
+        "expires_at"
+      ],
+      "purpose": "OS occurrence and last digest/revision; bounded index, not reliable bank identity"
+    },
+    {
+      "name": "upload_batches",
+      "columns": [
+        "id",
+        "vault_id",
+        "state",
+        "generation",
+        "key_version",
+        "iv",
+        "encrypted_manifest"
+      ],
+      "purpose": "Immutable ordered item IDs/revisions/digests + exact semantic command; no retag after split/retry"
+    },
+    {
+      "name": "ack_replay",
+      "columns": [
+        "id",
+        "vault_id",
+        "key_version",
+        "iv",
+        "encrypted_payload",
+        "expires_at",
+        "bytes"
+      ],
+      "purpose": "Bounded normalized observation+durable ACK identity; never converted to pending automatically"
+    },
+    {
+      "name": "coverage_gaps",
+      "columns": [
+        "id",
+        "vault_id",
+        "reason",
+        "key_version",
+        "iv",
+        "encrypted_detail",
+        "expires_at"
+      ],
+      "purpose": "No raw/money/source text; local uncertainty interval pending explicit server mapping"
+    },
+    {
+      "name": "auth_pending",
+      "columns": [
+        "id",
+        "vault_id",
+        "purpose",
+        "state",
+        "key_version",
+        "iv",
+        "encrypted_command",
+        "expires_at"
+      ],
+      "purpose": "Rotation/revoke pending intent plus exact idempotency binding; replay lifetime from ARCH06"
+    }
+  ],
+  "constraints": [
+    "FK vault_id RESTRICT for every scoped table; explicit atomic vault delete only after cancellation/drain fence",
+    "UNIQUE vault_id+lookup_hmac for capture identity",
+    "UNIQUE vault_id+sequence for outbox; immutable encrypted observation tuple",
+    "AEAD nonce uniqueness per DEK enforced across all encrypted tables via repository nonce reservation; not merely table-local unique",
+    "Single batch transition/ACK transaction removes pending row only after valid durable ACK plus journal policy; lost ACK retries same semantic IDs",
+    "Indexes vault_id/state/sequence, expiration metadata, lookup_hmac; no financial plaintext indexes",
+    "Auth secrets are ciphertext; no automatic destructive Room migrations; versioned export schema + migration tests"
+  ],
+  "limits": {
+    "unackedPendingAndQuarantineItems": 1000,
+    "unackedPendingAndQuarantineBytes": 8388608,
+    "pendingItems": 1000,
+    "pendingBytes": 8388608,
+    "captureIndexItems": 2000,
+    "localGapItems": 256,
+    "activeUploadBatchesPerVault": 1,
+    "ackReplayItems": 1000,
+    "ackReplayBytes": 8388608
+  },
+  "runtime": "NOT_RUN"
+}

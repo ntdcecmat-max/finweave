@@ -1,0 +1,31 @@
+{
+  "id": "FW-BUSINESS-001",
+  "status": "LOCAL_API_DATABASE_TESTED_PASS",
+  "at": "2026-10-10T08:10:17.130Z",
+  "operations": 49,
+  "schemas": 223,
+  "parentACMapped": 41,
+  "fullProductACAccepted": 0,
+  "unitTests": 47,
+  "businessGroups": 23,
+  "financeGroups": 19,
+  "asyncGroups": 17,
+  "runtimeSecurityGroups": 19,
+  "evidence": {
+    "business": "evidence/backend-business-local-2026-10-10/business-1791619660758.json",
+    "finance": "evidence/backend-finance-local-2026-10-09/finance-1791619659004.json",
+    "async": "evidence/backend-async-local-2026-10-09/async-1791619651582.json",
+    "auth": "evidence/backend-auth-local-2026-10-09/runtime-1791619655376.json",
+    "checks": "evidence/backend-business-local-2026-10-10/checks-1791619599417.json",
+    "smoke": "evidence/backend-business-local-2026-10-10/local-smoke-1791619730403.json"
+  },
+  "scope": [
+    "BE-05",
+    "BE-09",
+    "BE-10",
+    "BE-11",
+    "BE-12",
+    "BE-13"
+  ],
+  "noSeparateReportScreen": true
+}

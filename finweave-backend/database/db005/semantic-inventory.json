@@ -1,0 +1,406 @@
+[
+  {
+    "table": "identities",
+    "rule": "auth_epoch>=0"
+  },
+  {
+    "table": "identities",
+    "rule": "State expands to pending_verification active suspended deleted; pending registration cannot access workspaces"
+  },
+  {
+    "table": "identities",
+    "rule": "Only password PHC Argon2id hash in credential_hash; admin authority prohibited"
+  },
+  {
+    "table": "identities",
+    "rule": "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes"
+  },
+  {
+    "table": "identities",
+    "rule": "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+  },
+  {
+    "table": "identities",
+    "rule": "Old password PHC cannot authorize sign-in while recovery_reset_required; no fallback to old backup credentials"
+  },
+  {
+    "table": "workspaces",
+    "rule": "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes"
+  },
+  {
+    "table": "workspaces",
+    "rule": "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+  },
+  {
+    "table": "workspaces",
+    "rule": "Every finance query/mutation/worker rechecks workspace access_state; erasing cannot reactivate through ordinary owner/admin operation"
+  },
+  {
+    "table": "sessions",
+    "rule": "role=owner only; no legacy admin session migrated into customer authority"
+  },
+  {
+    "table": "sessions",
+    "rule": "kind=native iff installation_id IS NOT NULL; sessions.device_id deprecated legacy alias, never FK to collector"
+  },
+  {
+    "table": "sessions",
+    "rule": "Unique(id,subject_id); last_user_activity_at<=absolute_expires_at; generation>=0"
+  },
+  {
+    "table": "sessions",
+    "rule": "Legacy token_digest no longer authorization for native; all legacy sessions revoked at cutover"
+  },
+  {
+    "table": "identity_challenges",
+    "rule": "purpose legacy enum expands collector_token and reauth; flow_purpose controls verifier and channel"
+  },
+  {
+    "table": "identity_challenges",
+    "rule": "5 attempts maximum,5min expiry; reset high-entropy token15min; consume+session issue/epoch update atomic"
+  },
+  {
+    "table": "identity_challenges",
+    "rule": "bound_session_id references sessions; scoped collector device FK(workspace_id,device_id); subject owner match verified under lock"
+  },
+  {
+    "table": "devices",
+    "rule": "Stored public_key validated SPKI P-256; key_digest=SHA256 decoded DER; no arbitrary PEM/key type"
+  },
+  {
+    "table": "devices",
+    "rule": "device revoke increments credential_epoch and owner_epoch; session_credentials owner/workspace/device must match devices"
+  },
+  {
+    "table": "devices",
+    "rule": "UNIQUE(recovery_token); no regeneration on backup/restore; typed target_kind separates scopes"
+  },
+  {
+    "table": "devices",
+    "rule": "recovery_control_epoch>=0; lock target anchor before allocating event epoch; do not replace domain auth/device/recovery epoch with this counter"
+  },
+  {
+    "table": "accounts",
+    "rule": "Opening is posted once through opening event/equity group; declaration column is not added again"
+  },
+  {
+    "table": "accounts",
+    "rule": "Missing opening or unresolved coverage cannot become known zero; current createAccount requires an explicit owner declaration, otherwise source remains unbound/needs_setup"
+  },
+  {
+    "table": "ledger_accounts",
+    "rule": "Internal account_id NULL accounts use unique purpose kind within workspace; no retarget after posted use"
+  },
+  {
+    "table": "entry_groups",
+    "rule": "Deferred commit guard rejects building groups, empty groups and nonzero sum; sealed groups reject balanced append as well as update/delete"
+  },
+  {
+    "table": "entry_groups",
+    "rule": "Reversal mirrors every original ledger account/currency/amount exactly once; lineage and replacement written atomically"
+  },
+  {
+    "table": "holding_movements",
+    "rule": "Order by business_date then immutable sequence_no for equal-date facts; historical rebuild applies set versus delta, never sums quantity after-values"
+  },
+  {
+    "table": "holding_movements",
+    "rule": "Retroactive correction revalidates every later quantity state; cannot create negative quantities or mutate a frozen old snapshot"
+  },
+  {
+    "table": "refresh_jobs",
+    "rule": "request payload typed Market refresh_input bound to job/workspace; no live holdings re-selection or silent cross-entitlement coalescing"
+  },
+  {
+    "table": "snapshots",
+    "rule": "Freeze effective business cutoff AND recorded knowledge version, scope, quote/FX/profile/quantity refs, settings/model/rules versions"
+  },
+  {
+    "table": "snapshots",
+    "rule": "A run freezes all competing goals/allocations and account funding dependencies, not only selected output goalIds"
+  },
+  {
+    "table": "actual_links",
+    "rule": "No event family linked to two active occurrences in the same planning scope, including different revisions; old revision history remains immutable"
+  },
+  {
+    "table": "actual_links",
+    "rule": "Current projection resolves signed reversal/refund/replacement lineage without duplicating cash or actual matching"
+  },
+  {
+    "table": "agent_runs",
+    "rule": "Reserve active_millis/tool_calls before model/tool call under live run ticket; crash/unknown reservations are not refunded; clarification waits release lease"
+  },
+  {
+    "table": "jobs",
+    "rule": "generation>=0; 0<=attempt_count<=max_attempts; max_attempts>0"
+  },
+  {
+    "table": "jobs",
+    "rule": "Lease fields both present iff running; bounded counters"
+  },
+  {
+    "table": "jobs",
+    "rule": "domain reference validated by typed registry in same UnitOfWork; no arbitrary JSON payload"
+  },
+  {
+    "table": "jobs",
+    "rule": "Register typed forecast_run domain kind + forecast job_type; ForecastWorker compute-only capability; same J2 authority"
+  },
+  {
+    "table": "jobs",
+    "rule": "Known policy_version; deadline_at>created_at; max_attempts bounded by pinned profile and authorized retry cycles"
+  },
+  {
+    "table": "jobs",
+    "rule": "Claim/finalize lock workspace authorization/recovery anchor before jobs row; recheck DB wall time after locks"
+  },
+  {
+    "table": "jobs",
+    "rule": "Successful checkpoints/heartbeat keep attempt_count unchanged; attempts increment on claim only"
+  },
+  {
+    "table": "jobs",
+    "rule": "Reaper invalidates old ticket, finalizes prior attempt, clears both lease fields atomically; no direct dispatcher finance SELECT"
+  },
+  {
+    "table": "job_attempts",
+    "rule": "Append attempt; finalize once under matching generation; times ordered"
+  },
+  {
+    "table": "scheduler_state",
+    "rule": "Workspace schedules require matching workspace reference; global schedules use explicit global scope"
+  },
+  {
+    "table": "scheduler_state",
+    "rule": "Only scheduler role; catch-up bounded and coalesced"
+  },
+  {
+    "table": "planning_scopes",
+    "rule": "CHECK kind=plan iff plan_id IS NOT NULL; exactly one standalone scope per workspace"
+  },
+  {
+    "table": "planning_revisions",
+    "rule": "Immutable; revision_no>0; bounded typed source refs"
+  },
+  {
+    "table": "planning_revision_items",
+    "rule": "Immutable; no hard delete of referenced current item"
+  },
+  {
+    "table": "projection_cache",
+    "rule": "Discard cache without deleting pinned facts/history"
+  },
+  {
+    "table": "import_rows",
+    "rule": "row_number>0; bounded row payload; redacted payload must be NULL"
+  },
+  {
+    "table": "import_rows",
+    "rule": "Confirmed selected rows pinned atomically until import terminal/replay policy; 24h preview cleanup cannot destroy pending selected work"
+  },
+  {
+    "table": "admin_principals",
+    "rule": "No customer identity grants; auth mechanism decided ARCH-06"
+  },
+  {
+    "table": "admin_principals",
+    "rule": "mfa_required=true; no owner identity FK/grants; auth_ref controlled local identifier, not automatic external IdP"
+  },
+  {
+    "table": "admin_sessions",
+    "rule": "Expiry and epoch checked on every request"
+  },
+  {
+    "table": "admin_sessions",
+    "rule": "UNIQUE(id,principal_id); epoch/current active MFA checked each request"
+  },
+  {
+    "table": "admin_mfa_factors",
+    "rule": "Counter nonnegative; method-specific validation ARCH-06; no raw secret in JSON"
+  },
+  {
+    "table": "admin_mfa_factors",
+    "rule": "method=totp_sha1_6_30; counter is largest accepted RFC6238 time-step, transactional compare/update; decrypt OpsIdentity only"
+  },
+  {
+    "table": "admin_challenges",
+    "rule": "Bounded attempts, expiry, consume once atomically"
+  },
+  {
+    "table": "payload_objects",
+    "rule": "No generic cross-module CRUD; domain registry validates reference"
+  },
+  {
+    "table": "payload_objects",
+    "rule": "Redacted content must be NULL; digest must not contain raw PII; no OTP/raw bank notification"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "UNIQUE(workspace_token,epoch)"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "Append only; deliberately no FK to workspace; must outlive erased DB row"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "Local copy is not independent recovery authority"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "workspace_token is legacy-named opaque target_token, no workspace FK"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "UNIQUE(scope_kind,workspace_token,epoch) replaces legacy two-column unique at cutover"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "Append only; event body stored in delivery state must hash exactly to event_digest"
+  },
+  {
+    "table": "recovery_journal",
+    "rule": "epoch comes from target.recovery_control_epoch; auth/device/domain epochs remain distinct; deny events only"
+  },
+  {
+    "table": "ops_control_requests",
+    "rule": "No arbitrary workspace/finance payload; dispatcher rechecks safe action and revocation"
+  },
+  {
+    "table": "auth_client_instances",
+    "rule": "State/revoked_at coherent; key possession at first verify; no financial/collector authority"
+  },
+  {
+    "table": "session_credentials",
+    "rule": "UNIQUE(session_id,audience,generation) for owner credentials"
+  },
+  {
+    "table": "session_credentials",
+    "rule": "UNIQUE(workspace_id,device_id,audience,generation) for collector credentials"
+  },
+  {
+    "table": "session_credentials",
+    "rule": "Exactly collector branch has workspace/device/epochs and null session_id; owner branches inverse"
+  },
+  {
+    "table": "session_credentials",
+    "rule": "Composite FK(session_id,subject_id) and collector owner match by checked transaction; random token32bytes"
+  },
+  {
+    "table": "auth_replays",
+    "rule": "Owner API only; no generic90day result payload; AEAD AAD includes scope/op/key/epoch"
+  },
+  {
+    "table": "ops_auth_replays",
+    "rule": "Ops process only; no customer rows; no customer FK"
+  },
+  {
+    "table": "auth_rate_buckets",
+    "rule": "Atomic counter; minimum limit enforced across API replicas; fail closed if unavailable"
+  },
+  {
+    "table": "ops_auth_rate_buckets",
+    "rule": "Ops counters/credentials separate; fail closed"
+  },
+  {
+    "table": "owner_recovery_codes",
+    "rule": "10 codes per active batch; rotate requires fresh owner reauth; code alone is powerful recovery secret"
+  },
+  {
+    "table": "service_principals",
+    "rule": "Ops/API/worker profile is not caller-supplied role; private TLS authenticated; no secrets in table"
+  },
+  {
+    "table": "service_nonces",
+    "rule": "Atomic insert before acceptance; bounded clock skew60s; replays denied"
+  },
+  {
+    "table": "native_proof_nonces",
+    "rule": "First native verify uses one-time identity challenge before instance exists; subsequent proofs use this store"
+  },
+  {
+    "table": "native_proof_nonces",
+    "rule": "Separate from service nonce privileges"
+  },
+  {
+    "table": "collector_proof_nonces",
+    "rule": "Scoped collector proof store, not owner/service nonce authority"
+  },
+  {
+    "table": "security_audit_events",
+    "rule": "Append-only narrow writer, no finance/email/IP/code/secret/body fields"
+  },
+  {
+    "table": "security_audit_events",
+    "rule": "Ops reads aggregate/sanitized subset only; no user session tracking query"
+  },
+  {
+    "table": "recovery_delivery_state",
+    "rule": "Anchored/applied require verified witness receipt matching event digest/environment/target"
+  },
+  {
+    "table": "recovery_delivery_state",
+    "rule": "No update to original journal to fill checkpoint_ref; acknowledgment lives here"
+  },
+  {
+    "table": "recovery_delivery_state",
+    "rule": "Recovery coordinator only; jobs table not duplicated; no finance dispatch claim"
+  },
+  {
+    "table": "erasure_requests",
+    "rule": "Completed requires checkpoint+active purge+all copy inventories verified; not deadline alone"
+  },
+  {
+    "table": "erasure_requests",
+    "rule": "Identity parent completes only after every frozen workspace child completes; no cascade to erased owner"
+  },
+  {
+    "table": "erasure_requests",
+    "rule": "Parent, when present, must be an identity request; child must be a workspace request; identity parent has no parent; no self-link or cycles"
+  },
+  {
+    "table": "erasure_requests",
+    "rule": "Child inherits the original parent deadline; frozen inventory must contain every owned workspace under ownership locks"
+  },
+  {
+    "table": "erasure_requests",
+    "rule": "No financial body/email/raw/free text; target tombstone survives workspace deletion"
+  },
+  {
+    "table": "forecast_runs",
+    "rule": "Inputs immutable after enqueue; no partial run probability published"
+  },
+  {
+    "table": "forecast_runs",
+    "rule": "J2 jobs owns dispatch/lease/generation, not this table"
+  },
+  {
+    "table": "forecast_runs",
+    "rule": "Result expiry preserves run/input digest tombstone; pinned history cannot be silently purged"
+  },
+  {
+    "table": "forecast_result_pages",
+    "rule": "Immutable pages; staged pages cannot be served until run succeeded"
+  },
+  {
+    "table": "forecast_result_pages",
+    "rule": "Page bytes<=262144; max12 chronological rows, max50 selected output goals; no silent truncation"
+  },
+  {
+    "table": "provider_quota_buckets",
+    "rule": "window_end>window_start; 0<=reserved_count<=limit_value; version>0"
+  },
+  {
+    "table": "provider_quota_buckets",
+    "rule": "Reserve all applicable shared-credential and entitlement buckets atomically in stable namespace order"
+  },
+  {
+    "table": "provider_quota_buckets",
+    "rule": "Namespace and approved window/quota resolved by trusted MarketQuota port, not caller input"
+  },
+  {
+    "table": "provider_quota_buckets",
+    "rule": "No owner/admin/Agent/dispatcher direct SELECT; sanitized aggregate export only"
+  }
+]

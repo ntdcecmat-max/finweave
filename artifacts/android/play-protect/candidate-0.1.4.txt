@@ -1,0 +1,13 @@
+FULL CANDIDATE — DEVICE TEST AND GOOGLE REVIEW NOT RUN
+Package: test.finweave.prototype
+Version: 0.1.4-pilot (5)
+APK SHA-256: 73560e83dc32573f2f40de670632af3b8e8fb2e37f411ac66024cfe34f710639
+Certificate SHA-256: 734a9b3d80c66eacd6515b0250c2ef0aad6fff0b7ddb45d9bfaad20616ce7286
+
+This APK preserves all existing collector and application code. The supplied screenshot predates this candidate; do not claim that this version was blocked until it has been tested. If this version is blocked, use this exact APK and hash with the new evidence.
+
+FinWeave is a personal-finance prototype whose intended core feature is to record transactions from notifications from bank or wallet apps explicitly selected by the user. NotificationListenerService is intentionally declared for this purpose; removing it would remove the core feature.
+
+The in-app setup explains the data access and asks for affirmative consent before opening Android notification-access settings. The native bridge checks the consent version. Capture requires a verified source profile, source signer/version, account binding and native enrollment. The prototype currently has no live source profiles or connected native enrollment/backend, so real capture is not activated. No bank login credentials are requested. The parser rejects OTP content and retains only minimized financial evidence. Collector code uses an encrypted Room/Android Keystore outbox and a WorkManager uploader for a future authorized backend connection.
+
+The app does not declare READ_SMS, RECEIVE_SMS, an accessibility service, QUERY_ALL_PACKAGES or REQUEST_INSTALL_PACKAGES. It does not hide notification access or ask users to turn off Play Protect. Please review whether the classification is appropriate for this declared, consent-based personal-finance use case. We understand that approval is not guaranteed and this request is not a request for advice on a future implementation.

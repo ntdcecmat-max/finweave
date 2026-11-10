@@ -1,0 +1,190 @@
+{
+  "apiRevision": "FW-API-T1-D1J2-004",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "wireChanges": false,
+  "postgresChanges": false,
+  "operations": [
+    {
+      "operationId": "bindCollector",
+      "actor": "owner",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "collector_bindings"
+      ],
+      "exactInputFields": [
+        "deviceId",
+        "packageName",
+        "accountId",
+        "parserProfileId",
+        "expectedVersion"
+      ],
+      "rule": "No extra account discriminator wire field"
+    },
+    {
+      "operationId": "listCollectorBindings",
+      "actor": "owner",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "collector_bindings"
+      ],
+      "exactInputFields": null,
+      "rule": "Owner scoped exact versioned bindings"
+    },
+    {
+      "operationId": "disableCollectorBinding",
+      "actor": "owner",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "collector_bindings"
+      ],
+      "exactInputFields": null,
+      "rule": "Captured old versions never retagged"
+    },
+    {
+      "operationId": "listSourceSupport",
+      "actor": "owner",
+      "ownerModule": "Ingestion",
+      "tables": [],
+      "exactInputFields": null,
+      "rule": "Versioned public support registry; no cert/package guess"
+    },
+    {
+      "operationId": "ingestNotifications",
+      "actor": "device",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "ingestion_receipts"
+      ],
+      "exactInputFields": [
+        "deviceId",
+        "items",
+        "deviceEpoch",
+        "recoveryEpoch"
+      ],
+      "rule": "Mandatory binding; no lifecycle/raw/fee fields"
+    },
+    {
+      "operationId": "processIngestionReceipt",
+      "actor": "worker",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "ingestion_receipts",
+        "source_records"
+      ],
+      "exactInputFields": null,
+      "rule": "ACK not posted; Engine UoW authority"
+    },
+    {
+      "operationId": "listSources",
+      "actor": "owner",
+      "ownerModule": "Ingestion",
+      "tables": [
+        "sources"
+      ],
+      "exactInputFields": null,
+      "rule": "DB wallet maps to legacy bank group; manual/csv excluded here"
+    },
+    {
+      "operationId": "requestPriceRefresh",
+      "actor": "owner",
+      "ownerModule": "Market",
+      "tables": [
+        "refresh_jobs",
+        "jobs"
+      ],
+      "exactInputFields": [
+        "holdingIds"
+      ],
+      "rule": "Frozen rights/profile/basis"
+    },
+    {
+      "operationId": "executePriceRefresh",
+      "actor": "worker",
+      "ownerModule": "Market",
+      "tables": [
+        "refresh_jobs",
+        "quote_observations",
+        "provider_quota_buckets"
+      ],
+      "exactInputFields": null,
+      "rule": "Shared-key quota before every HTTP"
+    },
+    {
+      "operationId": "listPriceQuotes",
+      "actor": "owner",
+      "ownerModule": "Market",
+      "tables": [
+        "quote_observations"
+      ],
+      "exactInputFields": null,
+      "rule": "Derived quality at asOf"
+    },
+    {
+      "operationId": "recordPriceQuote",
+      "actor": "owner",
+      "ownerModule": "Market",
+      "tables": [
+        "quote_observations"
+      ],
+      "exactInputFields": [
+        "holdingId",
+        "price",
+        "at",
+        "sourceId",
+        "fxVndPerUsd",
+        "fxAt",
+        "compatible"
+      ],
+      "rule": "Manual; compatible client flag is not authority"
+    },
+    {
+      "operationId": "opsListSources",
+      "actor": "admin",
+      "ownerModule": "Ops",
+      "tables": [
+        "sources"
+      ],
+      "exactInputFields": null,
+      "rule": "Authorized health projection only, no private finance"
+    }
+  ],
+  "privatePayloadRegistryAddendum": {
+    "objectKind": "market_entitlement_snapshot",
+    "ownerModule": "Market",
+    "schemaFile": "docs/sources/profile-schemas.json",
+    "schemaDef": "EntitlementSnapshot",
+    "maxBytes": 262144,
+    "genericCrud": false,
+    "runtime": "NOT_RUN"
+  },
+  "metadataMappings": [
+    {
+      "table": "quote_observations",
+      "column": "profile_snapshot",
+      "schemaDef": "QuoteProfileSnapshot",
+      "wireFieldAdded": false
+    },
+    {
+      "table": "provider_entitlements",
+      "column": "rights_version",
+      "resolves": "Exact tenant entitlement snapshot plus configDigest; not public grant"
+    },
+    {
+      "table": "collector_bindings",
+      "column": "parser_profile_id",
+      "resolves": "Exact built-in parser metadata/version"
+    }
+  ],
+  "walletProjection": {
+    "bank": "bank",
+    "wallet": "bank",
+    "price": "price",
+    "manual": null,
+    "csv": null
+  },
+  "unbound": {
+    "uploadable": false,
+    "serverReceiptCreated": false,
+    "nativeOutcome": "LOCAL_WARNING_AND_GAP_NO_UPLOAD"
+  }
+}

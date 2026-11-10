@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Quản trị vận hành
+actor "Quản trị viên ứng dụng" as Owner
+rectangle "FinWeave — Quản trị vận hành" {
+usecase "UC-ADMIN-AUTH-01\nĐăng nhập và kiểm soát phiên\nquản trị" as UC_ADMIN_AUTH_01
+usecase "UC-ADMIN-01\nGiám sát hệ thống, jobs và quota" as UC_ADMIN_01
+usecase "UC-OPS-01\nQuản lý parser và mẫu nguồn\nthông báo" as UC_OPS_01
+usecase "UC-OPS-02\nQuản lý kết nối và trạng thái\nnguồn giá" as UC_OPS_02
+usecase "UC-OPS-03\nThực hiện lệnh vận hành an toàn" as UC_OPS_03
+usecase "UC-OPS-04\nTra cứu nhật ký kiểm toán vận\nhành" as UC_OPS_04
+}
+Owner -- UC_ADMIN_AUTH_01
+Owner -- UC_ADMIN_01
+Owner -- UC_OPS_01
+Owner -- UC_OPS_02
+Owner -- UC_OPS_03
+Owner -- UC_OPS_04
+@enduml

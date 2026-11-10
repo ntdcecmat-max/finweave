@@ -1,0 +1,453 @@
+{
+  "id": "FW-AGENT-RTM-001",
+  "productSource": "AI-SPEC-001",
+  "parentAcCount": 41,
+  "requirements": [
+    {
+      "id": "ART-01",
+      "description": "Routing simple vs adaptive, không forced Agent",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-001",
+        "AI-FR-009"
+      ],
+      "acceptanceId": "ARTR-01",
+      "procedure": "Câu hỏi balance đơn giản rồi request mở lập plan",
+      "expected": "Read nhanh không draft; task mở dùng adaptive steps có nhãn thật",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-02",
+      "description": "Kế thừa chat/panel/history/mascot",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-004",
+        "AI-FR-005",
+        "AI-FR-008",
+        "AI-FR-022",
+        "AI-NFR-007"
+      ],
+      "acceptanceId": "ARTR-02",
+      "procedure": "Gửi ởpanel, mởfullchat/history rồi Plan/Goals",
+      "expected": "Cùng conversation/message/run refs, focus/motion/state đúng",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-03",
+      "description": "Frozen context và dependency closure",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-006",
+        "AI-FR-020",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-03",
+      "procedure": "Đổi route/scope/period trong lúc chờ và có nhiều Goal allocations",
+      "expected": "Oldresult giữ snapshot, complete closure hoặc partial rõ",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-04",
+      "description": "Mask/citations/drill không leak",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-007",
+        "AI-FR-008",
+        "AI-NFR-002",
+        "AI-NFR-007"
+      ],
+      "acceptanceId": "ARTR-04",
+      "procedure": "Bậtmask rồi đọc answer/history/accessibletext vàdrill stale ref",
+      "expected": "Không finance narrative leak, rights recheck, unavailable refs thật",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-05",
+      "description": "Goal-first draft đầy đủ",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-010",
+        "AI-FR-011",
+        "AI-FR-012",
+        "AI-FR-022"
+      ],
+      "acceptanceId": "ARTR-05",
+      "procedure": "Goal-first có target/deadline/reserve/competinggoals",
+      "expected": "Draft có versions/assumptions/links, funded/actual không tăng",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-06",
+      "description": "Plan-first và standalone",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-012",
+        "AI-FR-022"
+      ],
+      "acceptanceId": "ARTR-06",
+      "procedure": "Owner lập6tháng chưaGoal, itemkhôngsupportsGoal",
+      "expected": "Plan-only hợp lệ, không buộc tạoGoal/nhâncontribution",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-07",
+      "description": "Actual replanning",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-016",
+        "AI-FR-020"
+      ],
+      "acceptanceId": "ARTR-07",
+      "procedure": "Actual overspend/incomechanged trongkhi activePlan cũ",
+      "expected": "Amendment đúng evidence/constraints, activegiữ tớiownerconfirm",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-08",
+      "description": "Investigation theo evidence/counterevidence",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-002",
+        "AI-FR-017",
+        "AI-FR-018"
+      ],
+      "acceptanceId": "ARTR-08",
+      "procedure": "Mixedtransfer/valuation/duplicate/gap rồi cleanset",
+      "expected": "Chọnbước phùhợp, partial khi thiếu, không tự sửa ledger",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-09",
+      "description": "Clarification và hardconstraints",
+      "spec": "execution-and-recovery.md",
+      "requirements": [
+        "AI-FR-010",
+        "AI-FR-019"
+      ],
+      "acceptanceId": "ARTR-09",
+      "procedure": "Reserve thiếu rồi owneranswer; model tựhạreserve",
+      "expected": "Hỏi khônglặp, max2; constraintweakening không được coi feasible",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-10",
+      "description": "Pure exact simulation/compare",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-013",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-10",
+      "procedure": "Tốiđa3candidates có skip/monthly/oneoff/investment",
+      "expected": "Engine oracle exact, no hiddenmodelcalls/actual, caps truthful",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-11",
+      "description": "Funding/allocations không double count",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-012",
+        "AI-FR-013",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-11",
+      "procedure": "HaiGoals cùngcash, stockvaluation vàfutureincome",
+      "expected": "Đủ closure, eligiblecash/reserve đúng, không giả funding",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-12",
+      "description": "PlanGoalLink khác ActualLink",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-011",
+        "AI-FR-012",
+        "AI-FR-015",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-12",
+      "procedure": "Save/confirmdraft cósupportslinks/earmarks",
+      "expected": "Không tạoactual/allocate tiền/achieved từ draft/simulated",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-13",
+      "description": "Revision từchat/form invalidate sim",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-014",
+        "AI-FR-020"
+      ],
+      "acceptanceId": "ARTR-13",
+      "procedure": "Form/chat cùng sửa draft revision/skipMonths",
+      "expected": "ExpectedversionsCAS, oldsimulation stale, một authority",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-14",
+      "description": "Ownerconfirm riêng và atomic",
+      "spec": "contract-storage-addendum.md",
+      "requirements": [
+        "AI-FR-015",
+        "AI-FR-023",
+        "AI-NFR-003"
+      ],
+      "acceptanceId": "ARTR-14",
+      "procedure": "Modelgọi confirm/chatđồngý/retryownerconfirm",
+      "expected": "Modeldenied; ownerbundleatomic/idempotent, noactual",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-15",
+      "description": "Strict decisions/refusal/repair",
+      "spec": "model-provider-design.md",
+      "requirements": [
+        "AI-FR-021",
+        "AI-NFR-004"
+      ],
+      "acceptanceId": "ARTR-15",
+      "procedure": "JSONlỗi/2actions/unsupportedtool/refusal/truncated",
+      "expected": "Noexecute trướcvalidate, boundedrepair, no fake success",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-16",
+      "description": "Aliases/principal/nestedauthorization",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-023",
+        "AI-NFR-003"
+      ],
+      "acceptanceId": "ARTR-16",
+      "procedure": "AliasA/modelinputworkspaceB/collector/adminattempt",
+      "expected": "Servercontextauthority, no crosstenant/activewrites",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-17",
+      "description": "Paging/context bounds trung thực",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-006",
+        "AI-FR-017",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-17",
+      "procedure": "Read>50rows/moreevidence/closure quáctx",
+      "expected": "Nextcursor/partial vàchargedactions, khôngsubset complete",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-18",
+      "description": "Source rights cho model/derived",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-002",
+        "AI-FR-021",
+        "AI-NFR-002",
+        "AI-NFR-006"
+      ],
+      "acceptanceId": "ARTR-18",
+      "procedure": "Licenseownerdisplay-only/expired/externaldenied",
+      "expected": "No egress ngoài rights, localnon-display cũngcheck",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-19",
+      "description": "Groundedrender không modelmoney",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-002",
+        "AI-FR-007",
+        "AI-FR-013",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-19",
+      "procedure": "Model bịa amount dạng số/chữ/refinvalid",
+      "expected": "Factual clauses dùng Engine ToolResult verified; không free prose factual",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-20",
+      "description": "Privacy/thinking/logging",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-005",
+        "AI-NFR-002"
+      ],
+      "acceptanceId": "ARTR-20",
+      "procedure": "InputrawOTP/token/fullaccount vàmodelthinkingdebug",
+      "expected": "No raw/thinking persistent/egress/log, explicit intake/retention",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-21",
+      "description": "Prompt injection không đổi authority",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-023",
+        "AI-NFR-004"
+      ],
+      "acceptanceId": "ARTR-21",
+      "procedure": "Evidence/Goalname/usertext chứa overridepolicy",
+      "expected": "Denytoolpermissions/schema/scope, không SQL/HTTP/trade/payment",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-22",
+      "description": "Drafttool replay atomic",
+      "spec": "execution-and-recovery.md",
+      "requirements": [
+        "AI-FR-011",
+        "AI-FR-012",
+        "AI-FR-014",
+        "AI-NFR-003"
+      ],
+      "acceptanceId": "ARTR-22",
+      "procedure": "Crash trước/sau draftcommit, sameactionchangedargs",
+      "expected": "Không duplicate draft/effect, conflictinput, resultlookup",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-23",
+      "description": "Budget cộngdồn và unknownmodelcalls",
+      "spec": "execution-and-recovery.md",
+      "requirements": [
+        "AI-FR-019",
+        "AI-FR-021",
+        "AI-NFR-005"
+      ],
+      "acceptanceId": "ARTR-23",
+      "procedure": "Timeout/crash/restart/continuation gần8actions/60s",
+      "expected": "Reservation charged, khôngreset/refundunknown, partialtruthful",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-24",
+      "description": "Cancel/stale/livefences",
+      "spec": "execution-and-recovery.md",
+      "requirements": [
+        "AI-FR-019",
+        "AI-FR-020",
+        "AI-NFR-003"
+      ],
+      "acceptanceId": "ARTR-24",
+      "procedure": "Cancel/logout/erase/restore khi modelreplymuộn",
+      "expected": "No revive/publish/writenewowner, oldcommitteddraft notapplied",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-25",
+      "description": "Question CAS/resume",
+      "spec": "execution-and-recovery.md",
+      "requirements": [
+        "AI-FR-010",
+        "AI-FR-019",
+        "AI-NFR-005"
+      ],
+      "acceptanceId": "ARTR-25",
+      "procedure": "Haianswers/replayquestion/staleanswer/expiredpayload",
+      "expected": "Mộtcontinuation, releaselease/userwait khôngactive, no guessedanswer",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-26",
+      "description": "Admission atomic global/tenant",
+      "spec": "contract-storage-addendum.md",
+      "requirements": [
+        "AI-FR-021",
+        "AI-NFR-003",
+        "AI-NFR-006"
+      ],
+      "acceptanceId": "ARTR-26",
+      "procedure": "Concurrentroot/continuation/sharedcaps/restorebucket",
+      "expected": "Correct10/50startingcaps, onecharge, denyunknownusage",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-27",
+      "description": "Localmodel pins/isolation/egress",
+      "spec": "model-provider-design.md",
+      "requirements": [
+        "AI-FR-009",
+        "AI-NFR-006"
+      ],
+      "acceptanceId": "ARTR-27",
+      "procedure": "Unpinnedmodel/cloudfallback/publicOllama/adminroute",
+      "expected": "Disabledgates; no paid/external/pull exposure, measuredhardwarebeforeenable",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-28",
+      "description": "API005 modes/counters/inputs",
+      "spec": "contract-storage-addendum.md",
+      "requirements": [
+        "AI-FR-009",
+        "AI-FR-019",
+        "AI-NFR-001"
+      ],
+      "acceptanceId": "ARTR-28",
+      "procedure": "Cả5resultprojections vàAgentcounter bounds/header",
+      "expected": "Mode truthful, no004forrealmodel, inputs/roles unchanged",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-29",
+      "description": "Native003 handshake/consumers",
+      "spec": "contract-storage-addendum.md",
+      "requirements": [
+        "AI-FR-022",
+        "AI-FR-024",
+        "AI-NFR-003"
+      ],
+      "acceptanceId": "ARTR-29",
+      "procedure": "Nativecapability002/API004 cùng005server",
+      "expected": "Mismatchexplicit, migrate003 handshake không sửalegacybằngnói",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-30",
+      "description": "History/retention/erase",
+      "spec": "tools-and-context.md",
+      "requirements": [
+        "AI-FR-004",
+        "AI-FR-005",
+        "AI-NFR-002"
+      ],
+      "acceptanceId": "ARTR-30",
+      "procedure": "Expiredcheckpoint/draft/history/source-rights + backuprestore",
+      "expected": "History unavailable thật, confirmedfacts giữpins, erasurewitness",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-31",
+      "description": "Agent benefit/baselines/heldout",
+      "spec": "evaluation-plan.md",
+      "requirements": [
+        "AI-FR-009",
+        "AI-NFR-008"
+      ],
+      "acceptanceId": "ARTR-31",
+      "procedure": "30publiccases + freshheldout, A/B/C,3repeats",
+      "expected": "No fabricatedbenchmark; safest/bestbaseline, measurements vàuncertainty",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "ART-32",
+      "description": "Manualfallback/regression fullscope",
+      "spec": "roles-and-workflows.md",
+      "requirements": [
+        "AI-FR-003",
+        "AI-FR-021",
+        "AI-FR-024",
+        "AI-NFR-007",
+        "AI-NFR-008"
+      ],
+      "acceptanceId": "ARTR-32",
+      "procedure": "Modeloff/quota/outage và chuyểnmanualform/chat",
+      "expected": "Giữ tấtcảcapability/41AC, nhãnmode thật vàdraft/evidence khôngmất",
+      "runtime": "NOT_RUN"
+    }
+  ]
+}

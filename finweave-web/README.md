@@ -1,4 +1,8 @@
-# FinWeave frontend — M2 synthetic mock
+# FinWeave frontend
+
+**Hiện hành 03/11/2026:** hỗ trợ backend local API005, admin và Android native bridge003. Chạy `Start-FinWeave.cmd` từ root; xem [hướng dẫn](../docs/LOCAL-QUICKSTART.md) và [kết quả nghiệm thu local](../docs/execution/completion-2026-11-03.md). APK minh họa và APK debug nối local được bàn giao riêng. Không bật nguồn tài chính thật.
+
+## Lịch sử M2 synthetic mock
 
 Cùng app React/Router/Vite/TypeScript bước3–5; 21 exact pins giữ lock. Gate bước6 **PASS_FRONTEND_SYNTHETIC_MOCK**, real-data integration **BLOCKED_SECURITY_POC**. Không backend/provider/real keys.
 

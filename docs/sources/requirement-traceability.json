@@ -1,0 +1,326 @@
+{
+  "id": "FW-SOURCES-RTM-001",
+  "scope": "Adds source detail without replacing parent41 AC",
+  "requirements": [
+    {
+      "id": "SRC-01",
+      "description": "Không cắt feature; synthetic/manual riêng live",
+      "spec": "source-options-and-decisions.md",
+      "acceptanceId": "SRCR-01",
+      "procedure": "Rà inventory user/admin/mobile, chạy synthetic và manual/CSV khi mọi nguồn thật bị disable.",
+      "expectedRuntimeOutcome": "Đủ tính năng và41 AC vẫn trong backlog; UI báo synthetic/manual, không gọi hoặc gắn nhãn nguồn thật.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-02",
+      "description": "Provider/app/device thực chưa tự chọn thay owner",
+      "spec": "source-options-and-decisions.md",
+      "acceptanceId": "SRCR-02",
+      "procedure": "Chưa chọn app/thiết bị rồi nhập một app khác shortlist; kiểm profile và setup.",
+      "expectedRuntimeOutcome": "Không tự enable VCB/MoMo, không quét rộng app; only selected/consented source đủ gates mới bật.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-03",
+      "description": "Package + signer lineage/set, không package-only",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-03",
+      "procedure": "Synthetic cùng package nhưng sai signer; kiểm rotation hợp lệ, unknown rotation và multi-signer thêm cert.",
+      "expectedRuntimeOutcome": "Signer giả/lineage chưa duyệt/multi-set sai đều bị chặn trước extract; phiên bản API24–27 có evidence riêng.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-04",
+      "description": "Exact tested app/OS/OEM/template/version support",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-04",
+      "procedure": "Đổi appVersion/template/OEM/OS ra ngoài matrix đã kiểm; thử callback và source config cũ.",
+      "expectedRuntimeOutcome": "Pause profile không hỗ trợ, gap/reason có nhãn; source support chỉ true đúng matrix, không fallback regex chung.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-05",
+      "description": "Raw/OTP không disk/server/log/chat/model",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-05",
+      "procedure": "Phát synthetic notification chứa OTP/full account/memo; inspect Room/WAL/WorkData/log/crash/network/export sau crash và reboot.",
+      "expectedRuntimeOutcome": "Không raw/OTP/identity ngoài allowlist; chỉ masked normalized evidence encrypted được giữ đúng retention.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-06",
+      "description": "Ambiguous/unbound local warning không fake binding",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-06",
+      "procedure": "Hai bindings cùng masked suffix hoặc không binding; sửa mapping khi queue cũ vẫn có dữ liệu.",
+      "expectedRuntimeOutcome": "Local warning+gap, không HTTP ingest/sentinel account; mapping mới không retag old items hoặc tạo cloud receipt giả.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-07",
+      "description": "Bound incomplete/redacted exact DTO→Review",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-07",
+      "procedure": "Binding hợp lệ nhưng masked/redacted/incomplete template; gửi đúng DTO và poll receipt/Review.",
+      "expectedRuntimeOutcome": "amount null/direction unknown khi thiếu; durable ACK có thể có nhưng actual không tự post; owner Review rõ.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-08",
+      "description": "Pending/failed không auto actual",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-08",
+      "procedure": "Pending→settled/failed, OS key thay/reuse, repeated final; include pending có debit source nhưng chưa credit destination.",
+      "expectedRuntimeOutcome": "Pending không actual; final chỉ đủ profile semantics mới Engine xử lý đúng một lần, failure/uncertain Review, không giả wire status.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-09",
+      "description": "Locale/amount/direction/fee/FX conservative parse",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-09",
+      "procedure": "Số dùng separator sai locale, nhiều amount/net/fee, non-VND, balance-only, missing source time.",
+      "expectedRuntimeOutcome": "Không đoán tiền/phí/FX/số dư; unsupported/incomplete hoặc discard đúng profile, sourceOccurredAt null khác observedAt.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-10",
+      "description": "Transport identity khác economic identity",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-10",
+      "procedure": "Replay event/digest rồi gửi same amount/time nhưng different trusted reference hoặc revision.",
+      "expectedRuntimeOutcome": "Transport repeat không tác động lại; weak amount/time không suppress economic event; revisions không overwrite actual.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-11",
+      "description": "Cross-device/manual/CSV dedupe có trusted evidence",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-11",
+      "procedure": "Cùng movement từ hai devices rồi manual/CSV với trusted same reference; thêm record ref namespace khác.",
+      "expectedRuntimeOutcome": "Chỉ proven same economic identity link provenance delta0; namespace/weak match vào Review, không tự xóa event khác.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-12",
+      "description": "Internal transfer/clearing/fee/refund correction",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-12",
+      "procedure": "Owner transfer bank→wallet hai legs đến đảo thứ tự, duplicate, delay; thêm fee/refund/correction.",
+      "expectedRuntimeOutcome": "Clearing/settlement/fee đúng một lần theo Engine; full-scope không double income/expense; immutable reversal+replacement khi sửa.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-13",
+      "description": "No complete coverage/bank proof claim",
+      "spec": "collector-profiles.md",
+      "acceptanceId": "SRCR-13",
+      "procedure": "Tắt quyền/force-stop/app không phát external notification; đối chiếu owner statement có giao dịch bị thiếu.",
+      "expectedRuntimeOutcome": "Hiện coverage gap/unknown, không suy đầy đủ từ lastSuccess hoặc activeNotifications; manual/CSV reconcile được.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-14",
+      "description": "SSI V3 read-only không V2/new trading",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-14",
+      "procedure": "Authorized stub/PoC kiểm V3 paths/scopes; cố gọi trading/V2/redirect khác origin.",
+      "expectedRuntimeOutcome": "Read-only routes đúng version; không order/trading/V2 fallback, key không đi client; upstream V3 không đổi FinWeave v2.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-15",
+      "description": "Instrument/exchange/listing/type identity",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-15",
+      "procedure": "Catalogue ticker trùng sàn/tái niêm yết, CW/future, suspended/delisted và unknown symbol.",
+      "expectedRuntimeOutcome": "Đúng instrument/exchange/lifecycle; không auto cash-stock cho mọi securities, không xóa quantity/history hoặc định giá0.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-16",
+      "description": "Price basis unadjusted/corporate actions separate",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-16",
+      "procedure": "Nguồn trả adjusted close/corporate action, volume và quote close với cùng symbol.",
+      "expectedRuntimeOutcome": "Chỉ verified unadjusted close được chọn basis tương ứng; price job không sửa shares/cash hoặc suy dividend tự động.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-17",
+      "description": "Exact numeric range/locale/precision",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-17",
+      "procedure": "Giá fraction8/9digits, quá18integer, zero/NaN/exponent/HTMLerrorbody, grouping locale ambiguous.",
+      "expectedRuntimeOutcome": "Exact lexical/range trước cast; không round/clamp/Number; reject sai và giữ last-good, không insert row không serialize được.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-18",
+      "description": "Gold scale1000/lượng10/purity/profile/side",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-18",
+      "procedure": "Hai synthetic bảng nghìnVND/chỉ và nghìnVND/lượng cùng giá quy đổi; đổi purity/brand/region/side.",
+      "expectedRuntimeOutcome": "Stored scale-expanded/sourceUnit đúng; valuation chia10 đúng một lần và không nhân purity; profile/side khác không tự tương thích.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-19",
+      "description": "quoteAsOf/fetchedAt/recordedAt distinct",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-19",
+      "procedure": "Fetch lại quote cũ sau thời gian dài và đọc sealed snapshot trước correction mới.",
+      "expectedRuntimeOutcome": "quoteAsOf không thay fetchedAt; read quality stale đúng elapsed; snapshot/cutoff frozen không đổi theo quote/rights/profile mới.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-20",
+      "description": "Date-only/finality/calendar gate, no fake time",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-20",
+      "procedure": "Date-only final bar với/không verified calendar, quote tương lai, gold update time trống và session chưa đóng.",
+      "expectedRuntimeOutcome": "Chưa final/time mapping thì không publish; session-bound có provenance derived rõ, không bịa timestamp từ fetch hoặc weekday heuristic.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-21",
+      "description": "Stale24h/versioned history/corrections",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-21",
+      "procedure": "Clock synthetic tại24h và24h+1s, weekend/suspension; provider correction sau snapshot.",
+      "expectedRuntimeOutcome": "Đúng24h chưa stale, hơn ngưỡng stale; marketClosed không reset age, correction append không sửa sealed history.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-22",
+      "description": "Fallback compatibility/provenance",
+      "spec": "market-normalization.md",
+      "acceptanceId": "SRCR-22",
+      "procedure": "Primary lỗi rồi fallback khác provider nhưng cùng profile; thử PNJ ring→SJC bar hoặc entitlement khác scope.",
+      "expectedRuntimeOutcome": "Chỉ explicit compatible rights/profile/basis/time mới fallback; provenance mới rõ, không cross-tenant cache hoặc thay quote history.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-23",
+      "description": "Access/redisplay/derived/LLM rights distinct",
+      "spec": "entitlements-and-egress.md",
+      "acceptanceId": "SRCR-23",
+      "procedure": "Grant owner display nhưng không SaaS/export/derived/model; gọi các consumers tương ứng.",
+      "expectedRuntimeOutcome": "Mỗi use kiểm grant riêng; deny unknown/ngoài quyền trước egress/display; Agent không gửi licensed values/refs bí mật khi bị chặn.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-24",
+      "description": "Retention/backup/history compatibility before activation",
+      "spec": "entitlements-and-egress.md",
+      "acceptanceId": "SRCR-24",
+      "procedure": "Entitlement TTL/history/backup không tương thích DB hiện hành; expiry/revoke khi snapshots/backups còn refs.",
+      "expectedRuntimeOutcome": "Không activate incompatible source; retention/purge quyết định bao phủ mọi copies, không xóa quote rồi vẫn leak qua history/export/forecast.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-25",
+      "description": "Credential read-only/private and allowlisted egress",
+      "spec": "entitlements-and-egress.md",
+      "acceptanceId": "SRCR-25",
+      "procedure": "Inject symbol/URL/query/nextPage trỏ metadata/private IP; redirect, TLS lỗi; inspect client APK/admin bundle/logs.",
+      "expectedRuntimeOutcome": "Allowlisted HTTPS routes/schema/public destination only; reject SSRF/redirect, không upstream secret/errorbody/raw trên clients/logs.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-26",
+      "description": "Shared-key quota/header semantics/restore",
+      "spec": "entitlements-and-egress.md",
+      "acceptanceId": "SRCR-26",
+      "procedure": "Concurrent tenants chung credential, pagination/retry/unknowntimeout,429 Retry-After, restore bucket/key rotation.",
+      "expectedRuntimeOutcome": "Reserve mọi quota window atomically trước call, unknown charged, Retry-After floor giữ, restore/unknown reset semantics chặn egress; không vượt shared cap.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-27",
+      "description": "Exact API/DB/storage/private registry mappings",
+      "spec": "contract-storage-addendum.md",
+      "acceptanceId": "SRCR-27",
+      "procedure": "Serialize API004 requests/replies và private metadata; test extra lifecycle/raw/account fields, tenant ref sai.",
+      "expectedRuntimeOutcome": "Exact schemas/owner refs reject; private registry bounded/capability-specific; không thêm table/column/field ngầm để qua test.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-28",
+      "description": "Wallet DB→legacy bank wire projection",
+      "spec": "contract-storage-addendum.md",
+      "acceptanceId": "SRCR-28",
+      "procedure": "Sources DB bank/wallet/price/manual/csv qua user/Ops list endpoints.",
+      "expectedRuntimeOutcome": "bank/wallet→legacy bank, price→price; manual/CSV dùng ports riêng, no enum wallet public; Ops không finance payload.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-29",
+      "description": "Daily/manual source-independent scheduler honest",
+      "spec": "operational-policy.md",
+      "acceptanceId": "SRCR-29",
+      "procedure": "Đóng mọi clients, chạy daily18h rồi stop host/miss days/manual doubleclick/cooldown.",
+      "expectedRuntimeOutcome": "Host enqueue durable jobs ngoài browser; catch-up latest eligible only, coalesce đúng scope, không đảm bảo price fresh khi provider chưa ready.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-30",
+      "description": "Partial failure/last-good/typed error no raw logs",
+      "spec": "operational-policy.md",
+      "acceptanceId": "SRCR-30",
+      "procedure": "Batch nhiều holdings có success/schema error/timeout/noquote; poll job và portfolio totals.",
+      "expectedRuntimeOutcome": "Per-item outcomes/partial/unknown honest, last-good từng holding; không allfresh từ HTTP200 hoặc fulltotal giả khi thiếu dữ liệu.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-31",
+      "description": "Support drift/revoke/restore/health projections",
+      "spec": "operational-policy.md",
+      "acceptanceId": "SRCR-31",
+      "procedure": "Profile/source revoke hoặc format drift trong offline queue; restore oldDB với witness và missing receipts.",
+      "expectedRuntimeOutcome": "Live fences kiểm trước commit/egress; olditems không retag, missing receipt investigation; admin health only, source resume cần current rights/config.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SRC-32",
+      "description": "Free-first no unapproved fee/account/vendor calls",
+      "spec": "source-options-and-decisions.md",
+      "acceptanceId": "SRCR-32",
+      "procedure": "Cạn free quota/nguồn đòi trả phí/chưa có account, theo dõi external access và billing config.",
+      "expectedRuntimeOutcome": "Budget0 fail closed, không signup/pay/fallback né giới hạn; synthetic toàn feature vẫn chạy và real gates chưa được tính PASS.",
+      "status": "SPECIFIED",
+      "runtime": "NOT_RUN"
+    }
+  ]
+}

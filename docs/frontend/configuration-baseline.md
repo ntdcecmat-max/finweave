@@ -1,4 +1,10 @@
-# Configuration Baseline — bước 5 kế thừa / bước 6 hiện hành
+> Rà frontend 08/10/2026 dùng [runner/evidence mới](../testing/integration-handover.md), catalogue50 IDs và runtime core1.1 + operational prototype2.0 khác canonical. Không chạy generator/runner Step6 dưới đây để chốt nghiệm thu hiện hành.
+
+> Trạng thái08/10/2026: [hồ sơ bàn giao](../handover/README.md), [UI đã triển khai](../execution/ui-implementation-2026-10-08.md) và [RTM41 AC](../execution/realignment-traceability.md) là điểm vào hiện hành. Phần Step4–6 bên dưới giữ lịch sử M2; không chứng minh UI mới/backend/native/security và chưa chạy lại trong lượt bàn giao.
+
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
+# Configuration Baseline — lịch sử bước 5–6
 
 CFG-S5-001 · v0.2 · 06/10/2026 · frontend mock local. Tái dùng ADR-001…003; wiring/read-model quyết định ở ADR-004.
 

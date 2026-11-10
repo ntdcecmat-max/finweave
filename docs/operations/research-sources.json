@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-09",
+  "basis": "Official documentation checked; project choices and thresholds are design decisions, not vendor guarantees",
+  "sources": [
+    {
+      "id": "PG-DUMP",
+      "url": "https://www.postgresql.org/docs/16/app-pgdump.html",
+      "finding": "Consistent single-DB export; roles/other assets separate; version-aware tools and scope."
+    },
+    {
+      "id": "PG-RESTORE",
+      "url": "https://www.postgresql.org/docs/16/app-pgrestore.html",
+      "finding": "Archive execution is a trust boundary; data-only does not make hostile archive safe."
+    },
+    {
+      "id": "PG-INDEX",
+      "url": "https://www.postgresql.org/docs/16/sql-createindex.html",
+      "finding": "CONCURRENTLY cannot run inside a transaction block; failed builds can leave invalid indexes."
+    },
+    {
+      "id": "SYSTEMD",
+      "url": "https://github.com/systemd/systemd/blob/main/man/systemd.timer.xml",
+      "finding": "Persistent applies to OnCalendar; a missed activation does not replay every logical business occurrence."
+    },
+    {
+      "id": "COMPOSE-SECRETS",
+      "url": "https://docs.docker.com/compose/how-tos/use-secrets/",
+      "finding": "Per-service mounted files; file bind mount does not supply encryption-at-rest or custody."
+    },
+    {
+      "id": "COMPOSE-HEALTH",
+      "url": "https://docs.docker.com/compose/how-tos/startup-order/",
+      "finding": "Health-based startup ordering does not prove application invariants or recovery readiness."
+    },
+    {
+      "id": "DOCKER-SOCKET",
+      "url": "https://docs.docker.com/engine/security/protect-access/",
+      "finding": "Daemon access is privileged; application, Ops UI and untrusted CI get no Docker socket."
+    },
+    {
+      "id": "ACTIONS-SECURITY",
+      "url": "https://docs.github.com/en/actions/reference/security/secure-use",
+      "finding": "Least privilege, untrusted event handling, reviewed actions pinned to full SHA."
+    },
+    {
+      "id": "ACTIONS-BILLING",
+      "url": "https://docs.github.com/en/billing/concepts/product-billing/github-actions",
+      "finding": "Private hosted minutes/storage quotas and paid overage; do not promise all CI free."
+    },
+    {
+      "id": "RESTIC-RETENTION",
+      "url": "https://restic.readthedocs.io/en/stable/060_forget.html",
+      "finding": "Forget versus prune, OR retention counts, append-only malicious labels, repack scratch space."
+    }
+  ]
+}

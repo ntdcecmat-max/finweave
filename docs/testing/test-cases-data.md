@@ -1,3 +1,5 @@
+> Hiện hành 08/10: suite67 ca (59 kế thừa +8 operational); xem [báo cáo](frontend-acceptance-report.md) và [UI RTM](../design/ui-requirement-traceability.md). Số54+8/55 ca và các raw Step6 dưới đây là lịch sử06/10, không inventory hoặc kết luận hiện hành.
+
 # Test Cases và Data — M2
 
 TST-CASE-001 · v1.0 · 06/10/2026. [28 REQ/AC runtime matrix](../execution/evidence/step6-runtime-coverage.md) và [13 module/86 actions](../execution/evidence/step6-action-coverage.md) là index scope; raw JSON ghi từng assertion thực chạy. Không claim exhaustive mọi tổ hợp của 86 actions.

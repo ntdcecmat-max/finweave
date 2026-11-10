@@ -1,0 +1,28 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import {contract,revision} from '../src/runtime/contracts.ts';
+import {userOperations,opsOperations} from '../src/runtime/app.ts';
+import {interfaceCatalogue} from '../../finweave-web/src/contracts/interface-catalogue.ts';
+import {screenCatalogue} from '../../finweave-web/src/contracts/surface-catalogue.ts';
+const sha=(s:Buffer|string)=>createHash('sha256').update(s).digest('hex');
+const root=resolve('..'),checks=process.argv.includes('--check');
+async function put(path:string,value:string){const target=resolve(root,path);if(checks){if(await readFile(target,'utf8')!==value)throw Error('BE19_PIN_DRIFT:'+path);}else{await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,value);}}
+const sourcePaths=['docs/contracts/v2-t1-r5/openapi.json','finweave-backend/src/runtime/contracts.ts','finweave-backend/src/runtime/business-contract.ts','finweave-backend/src/runtime/ops-contract.ts','finweave-backend/src/runtime/screenshot-contract.ts'];
+const hashes=Object.fromEntries(await Promise.all(sourcePaths.map(async p=>[p,sha(await readFile(resolve(root,p)))])));
+const canonicalHash=hashes[sourcePaths[0]!];if(canonicalHash!=='35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802')throw Error('API005_PIN_MISMATCH');
+const bytes=JSON.stringify({revision,contract});
+await put('finweave-web/src/contracts/api005.generated.json',bytes);
+await put('finweave-web/android/app/src/main/assets/api005.json',bytes);
+const nativeMap=JSON.parse(await readFile(resolve(root,'docs/android/consumer-operation-map.json'),'utf8'));
+nativeMap.apiRevision=revision;nativeMap.nativeBridgeRevision='FW-NATIVE-BRIDGE-003';
+nativeMap.ownerBroker=[...new Set([...nativeMap.ownerBroker,'createWorkspace','listWorkspaces','getPlanningSimulation','getAgentEvidence','scanScreenshot','saveScreenshot'])];
+await put('finweave-web/android/app/src/main/assets/consumer-operation-map.json',JSON.stringify(nativeMap));
+const derived:any={getState:['listDevices','listCollectorBindings','listSourceSupport','listReceipts','listRefreshJobs','listConversations','listAgentRuns','listPlanningDrafts'],registerExampleDevice:[],testCollector:[],reviseDraft:['reviseDraft'],answerAgentRun:['answerAgentRun','getPlanningDraft']};
+const allActions=interfaceCatalogue.flatMap(m=>m.actions.flatMap(a=>a.operations.map(op=>({module:m.id,action:a.id,consumerOperation:op,canonicalOperation:op.replace(/^identity:/,'')}))));
+const operations=Object.entries(contract.paths).map(([route,p]:any)=>({operation:p.post.operationId,route,request:p.post.operationId+'Request',reply:p.post.operationId+'Reply',profile:opsOperations.includes(p.post.operationId)?'ops':userOperations.includes(p.post.operationId)?'user':null,implemented:userOperations.includes(p.post.operationId)||opsOperations.includes(p.post.operationId)}));
+await put('docs/frontend/be19-consumer-mapping.json',JSON.stringify({revision,nativeRevision:'FW-NATIVE-BRIDGE-003',extensions:['FW-BUSINESS-001','FW-ASSISTANT-002','FW-OPS-001','FW-SCREENSHOT-001'],source:hashes,effectiveContractSha256:sha(bytes),dataProfile:'synthetic-local',operations,consumerActions:allActions,derivedOperations:derived,unimplementedConsumerOperations:allActions.filter(a=>!operations.some(o=>o.operation===a.canonicalOperation&&o.implemented)),status:'ADAPTER_IMPLEMENTED_SEE_EVIDENCE_FOR_TESTED_SUBSET'},null,2)+'\n');
+const rtm=['screen,surface,route,source,parentAC,transport,evidenceScope'];
+for(const s of screenCatalogue)rtm.push([s.id,s.surface,s.route??'',s.source,s.parentAC.join('|'),s.surface==='admin'?'Ops_API005':s.surface==='android'?'native003_pending_device':'User_API005','docs/frontend/be19-report.md'].map(v=>'"'+String(v).replaceAll('"','""')+'"').join(','));
+await put('docs/frontend/be19-rtm.csv',rtm.join('\n')+'\n');
+console.log(checks?'BE19 pins/mapping verified':'BE19 pinned schemas, native assets, consumer mapping and RTM generated');

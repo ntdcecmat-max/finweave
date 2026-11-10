@@ -1,0 +1,13 @@
+{
+  "status": "PASS_BUILD_AND_JVM_NOT_DEVICE_ACCEPTANCE",
+  "apk": "artifacts/android/screenshots/FinWeave-multi-bank-local-debug.apk",
+  "sha256": "d2417bfa9629396fad3eedcd196bed20714789468c232cf6260a0086b1e6d374",
+  "signing": "ANDROID_DEBUG_NOT_PILOT_RELEASE",
+  "backend": "Windows local http://127.0.0.1:4310",
+  "parser": "fields-v2 on backend",
+  "jvmTests": 44,
+  "failures": 0,
+  "signature": "PASS",
+  "contract": "PASS",
+  "physicalDevice": "NOT_RUN"
+}

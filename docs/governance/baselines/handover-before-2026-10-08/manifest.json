@@ -1,0 +1,62 @@
+[
+  {
+    "original": "README.md",
+    "sha256": "fca1f4955655b8dc9ce0c5c577b889fc0e73f423af1a5fcee7aad5fa53c9a940"
+  },
+  {
+    "original": "docs/contracts/README.md",
+    "sha256": "80b05ea94e45dc12e10de85af3f1963071b724b395ce88f9a739c1ac22315910"
+  },
+  {
+    "original": "docs/contracts/operational-api-spec.md",
+    "sha256": "17f3364f10ce79b07aea24f702463148e6ba6d1d70063e239da5fd37200e7138"
+  },
+  {
+    "original": "docs/design/interface-catalogue.md",
+    "sha256": "cd1f7010ed3f17aa0256f4576e2b3f02ed3baec82c49679bee4770b879079b2a"
+  },
+  {
+    "original": "docs/design/README.md",
+    "sha256": "00fcbc81f4e89836637b22e86403bcdccebc178e96b9c23b89614f7616b6c3a8"
+  },
+  {
+    "original": "docs/execution/progress.md",
+    "sha256": "ead15d3b17d8448c9cf812bebd9e14e4969d0cf5046de1827238e10cd6aa809c"
+  },
+  {
+    "original": "docs/execution/realignment-traceability.md",
+    "sha256": "04ae0739513758dbbb74199406bc8286b68049dd829332d596f56abfac53081e"
+  },
+  {
+    "original": "docs/security/security-design.md",
+    "sha256": "a511ca9870174af442ccf5440526211c8502236297fb5b8a9e24432638883f6e"
+  },
+  {
+    "original": "docs/architecture/high-level-design.md",
+    "sha256": "17108186518b25d82c03089aa7a2277990febbd6bf1a6751471dfb7be18840e7"
+  },
+  {
+    "original": "docs/architecture/README.md",
+    "sha256": "3ec3e3bdd3f844d5e40f47a46ddac1f8c8218f2bb69dc633651f37b9a703e416"
+  },
+  {
+    "original": "docs/data/logical-data-model.md",
+    "sha256": "3164fa8a4d78593cb4526d5090d451668a69f5a3578cbb2e3f654b3132b4a455"
+  },
+  {
+    "original": "docs/architecture/deployment-topology.md",
+    "sha256": "372321a4676ae5b645b15a5a80b884e3571147c7954439f89db27aec6c3dfb23"
+  },
+  {
+    "original": "docs/product/cost-model.md",
+    "sha256": "71524ae174b3775786c99d3962477729312a959bd2878fb2eb7f2abd564d1919"
+  },
+  {
+    "original": "docs/testing/integration-handover.md",
+    "sha256": "baea27d3703cb9c2a3aa95e0b6503006a0a940a016f6e5ccbf2e68fa8e5c32b7"
+  },
+  {
+    "original": "docs/governance/artifact-register.md",
+    "sha256": "f606ef1a9e4e2df6f83dcc7b5d24c6bb62806f765c31382f32ff76a61545973a"
+  }
+]

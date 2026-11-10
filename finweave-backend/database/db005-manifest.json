@@ -1,0 +1,89 @@
+{
+  "revision": "FW-DB005-LOCAL-001",
+  "targetRevision": "FW-PHYS-T1-ASYNC-005",
+  "status": "EXECUTABLE_LOCAL_REQUIRES_SEMANTIC_REVIEW",
+  "migrations": [
+    {
+      "id": "001",
+      "path": "docs/data/physical/migrations/001_synthetic_tables.sql",
+      "sha256": "7bed3059294692a4a9a5fd49ca23c46883ea0cb7cf649e5ef13c9a33a47d13c3"
+    },
+    {
+      "id": "002",
+      "path": "docs/data/physical/migrations/002_guards_and_boundaries.sql",
+      "sha256": "6d6eb18c60f087cbc55583752bf422970a19a7f0387eea574fd3d18b40f0e0e7"
+    },
+    {
+      "id": "003",
+      "path": "docs/data/physical/migrations/003_mutable_and_immutable_triggers.sql",
+      "sha256": "2bb83a72ddb675b1f8bd9459c4a2c14d4aa0d85682b568d0b20dc616402f8d3a"
+    },
+    {
+      "id": "004",
+      "path": "finweave-backend/database/migrations/004_ledger_seals.sql",
+      "sha256": "9e6543471ffab442fde840c5fe668c294061d1a846237a91b52bab55ef4a1ab6"
+    },
+    {
+      "id": "005",
+      "path": "finweave-backend/database/db005/005_expand.sql",
+      "sha256": "bb96770092d5052b4c004a31dd4045bed679f1ad07859187f8409ff83b2fae98"
+    },
+    {
+      "id": "006",
+      "path": "finweave-backend/database/db005/006_backfill_infrastructure.sql",
+      "sha256": "28b7f92f2eec9a5aeb5b45c5275093a20404390f36779fbef5ce65183d802167"
+    },
+    {
+      "id": "007",
+      "path": "finweave-backend/database/db005/007_constraints.sql",
+      "sha256": "82b6f37e44ee7bbe4c2db597be230916c97d3e611cdc73ca9343ec5f79b2ba62"
+    },
+    {
+      "id": "008",
+      "path": "finweave-backend/database/db005/008_guards_and_capabilities.sql",
+      "sha256": "e10a85ea879861e5548b20a9739759711088ca9f9ba03a9752e1829681561727"
+    },
+    {
+      "id": "009",
+      "path": "finweave-backend/database/db005/009_db005_due.sql",
+      "sha256": "cf784e0fd496a009d1dc0fe15129292c597eb2763d48ff5e1dc6bc943522c5e8",
+      "concurrentIndex": {
+        "name": "fw.db005_due",
+        "definition": "CREATE INDEX db005_due ON fw.jobs USING btree (job_type, next_attempt_at, created_at, workspace_id, id) WHERE (state = 'queued'::text)"
+      }
+    },
+    {
+      "id": "010",
+      "path": "finweave-backend/database/db005/010_db005_reaper.sql",
+      "sha256": "988506b0c2ba946ec51c8d23f494732ba99fdd1e9b8ec9b028ee028ea14d9424",
+      "concurrentIndex": {
+        "name": "fw.db005_reaper",
+        "definition": "CREATE INDEX db005_reaper ON fw.jobs USING btree (lease_until, workspace_id, id) WHERE (state = 'running'::text)"
+      }
+    },
+    {
+      "id": "011",
+      "path": "finweave-backend/database/db005/011_db005_quota.sql",
+      "sha256": "4cdf4d8888c0ddd08ceb5c44d699892b505a4b7cdafdd26313cba6a1ada7a1b2",
+      "concurrentIndex": {
+        "name": "fw.db005_quota",
+        "definition": "CREATE UNIQUE INDEX db005_quota ON fw.provider_quota_buckets USING btree (namespace_digest, window_start, window_end)"
+      }
+    },
+    {
+      "id": "012",
+      "path": "finweave-backend/database/db005/012_domain_ports.sql",
+      "sha256": "a2ac74aaa8b59c2c48a9a0f41e82f73032bc333b5996a99993949a8a4323ad85"
+    },
+    {
+      "id": "013",
+      "path": "finweave-backend/database/db005/013_job_registry.sql",
+      "sha256": "4bff7873593634c9775e840c89e117e292787c3bebb2b24569fdd657fca0a3ae"
+    },
+    {
+      "id": "014",
+      "path": "finweave-backend/database/db005/014_job_ticket_ports.sql",
+      "sha256": "d13d97a54f4a7953e9da4ebc622d913ab5a9222d730c7036e407c2516587ad54"
+    }
+  ]
+}

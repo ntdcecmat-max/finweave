@@ -1,0 +1,24 @@
+{
+  "id": "FW-ASYNC-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-004",
+  "apiSha256": "c873127da5b4680dfd2535f518c09807532c47eef88d6b0d3a8fed1bc7bc1ca6",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "databaseModelSha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424",
+  "asyncPolicy": "FW-ASYNC-J2-001",
+  "asyncPolicySha256": "d22d1b0bc0a52c93b273bf46006fa2ddf69a9edf77e9c85969f90845f956239b",
+  "registrySha256": "07c9f4e3b7924e77e0aef3929239a392e2974c4f5232d41d954d74c15dc49b46",
+  "engineBundleSha256": "cf6dae353303bf770a742dbbf41d6f620a8b4d4590fb06ac2aec8d8a3f65b940",
+  "securityPolicySha256": "f02497dc8584babf6aa6a27f3302198abc675ca407becee0a35f46075291ae97",
+  "securityBindingAddendum": {
+    "baseDomainDatabaseRevision": "FW-PHYS-T1-DOMAIN-004",
+    "currentDatabaseRevision": "FW-PHYS-T1-ASYNC-005",
+    "baseApiRevision": "FW-API-T1-D1J2-003",
+    "currentApiRevision": "FW-API-T1-D1J2-004",
+    "permissionMatrixSha256": "ab14811a3424b5f77eff74d17195752658e2ac8982d08eab74a7e26bc1f05551",
+    "operationOverlaySha256": "69e3f74cceb5a92b521916abae5d42d77e715b9a5e38401e8d231d158f409606",
+    "tableClassificationSha256": "874e7a54c0a6b8f5cb03fffad3cbc2c4bf8f006acaabd32372b4559818157814",
+    "newQuotaAccess": "MarketQuota narrow broker only; API Ops cannot select private bucket rows"
+  },
+  "runtime": "NOT_RUN"
+}

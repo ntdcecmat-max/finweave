@@ -1,0 +1,85 @@
+{
+  "id": "FW-AGENT-POLICY-001",
+  "date": "2026-10-09",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-005",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+  "productSpec": "AI-SPEC-001",
+  "parentAcCount": 41,
+  "modelEnabled": false,
+  "externalBudgetVnd": 0,
+  "hostedFallback": false,
+  "budget": {
+    "acceptedActions": 8,
+    "activeMillis": 60000,
+    "clarifications": 2,
+    "modelRounds": 12,
+    "repairPerResponse": 1,
+    "resetOnResume": false,
+    "askAndFinishCountAsActions": true
+  },
+  "modelCandidate": {
+    "runtime": "Ollama local-only",
+    "model": "Qwen/Qwen3-4B",
+    "runtimePin": null,
+    "weightsDigest": null,
+    "quantization": null,
+    "tokenizerDigest": null,
+    "chatTemplateDigest": null,
+    "license": "Apache-2.0 candidate card, actual artifact review pending",
+    "benchmark": "NOT_RUN"
+  },
+  "limits": {
+    "contextTokens": 8192,
+    "outputTokens": 1024,
+    "promptBytes": 49152,
+    "responseBytes": 65536,
+    "inferenceConcurrency": 1,
+    "generationTimeoutSeconds": 25,
+    "compareCandidates": 3,
+    "readPageSize": 50,
+    "evidenceRefs": 20
+  },
+  "admission": {
+    "workspaceModelInteractionsPerUtcDay": 10,
+    "globalPerUtcDay": 50,
+    "continuationNewAdmission": false,
+    "unit": "ROOT_ID_AND_UTC_DAY",
+    "dailyReservationRecheckedOnResume": true,
+    "unknownUsage": "DENY_UNTIL_TRUSTED_RESET"
+  },
+  "forbidden": [
+    "confirmPlanningDraft",
+    "postDraft",
+    "recordIncome",
+    "recordExpense",
+    "recordTransfer",
+    "allocateGoal",
+    "markGoalAchieved",
+    "executeSql",
+    "fetchUrl",
+    "sendEmail",
+    "trade",
+    "payment",
+    "impersonate"
+  ],
+  "authority": {
+    "financialCalculations": "ENGINE_ONLY",
+    "actualWrites": false,
+    "activePlanGoalWrites": false,
+    "draftWrites": true,
+    "ownerConfirmSeparate": true
+  },
+  "privacy": {
+    "rawNotificationToModel": false,
+    "otpToModel": false,
+    "credentialsToModel": false,
+    "accountRefToModel": false,
+    "transactionRefToModel": false,
+    "thinkingPersisted": false,
+    "rawModelReplyPublished": false,
+    "unverifiedNumericNarrative": false
+  },
+  "runtime": "NOT_RUN"
+}

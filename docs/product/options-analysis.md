@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Options Analysis
 
 Ngày 05/10/2026; version2.0, scope-v2. So sánh định tính để chọn cách đạt M1; suy luận từ yêu cầu/playbook, chưa có benchmark hay báo giá. Các phương án không đổi bốn nhóm/phạm vi chức năng.

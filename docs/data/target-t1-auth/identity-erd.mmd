@@ -1,0 +1,13 @@
+erDiagram
+  identities ||--o{ auth_client_instances : subject_id
+  auth_client_instances ||--o{ sessions : installation_id_subject_id
+  identities ||--o{ session_credentials : subject_id
+  sessions ||--o{ session_credentials : session_id_subject_id
+  devices ||--o{ session_credentials : workspace_id_device_id
+  identities ||--o{ owner_recovery_codes : subject_id
+  sessions ||--o{ identity_challenges : bound_session_id
+  devices ||--o{ identity_challenges : workspace_id_device_id
+  auth_client_instances ||--o{ native_proof_nonces : installation_id
+  devices ||--o{ collector_proof_nonces : workspace_id_device_id
+  auth_client_instances ||--o{ devices : installation_id_owner_id
+  service_principals ||--o{ service_nonces : principal_id

@@ -1,3 +1,7 @@
+> **Chỉ dẫn hiện hành — 08/10/2026:** triển khai đầy đủ mọi tính năng frontend và yêu cầu đã chọn; không dùng P0/P1/P2 hoặc giới hạn MVP để bỏ tính năng. Đọc [backlog backend đầy đủ](backend-backlog.md), [roadmap](roadmap.md), [agenda kiến trúc](../architecture/architecture-decision-agenda.md) và [thử nghiệm rủi ro](../testing/technical-spikes.md). AI phân rã, đề xuất, code, test và sửa; chủ sản phẩm cung cấp ý tưởng/phản hồi và quyết định thay yêu cầu, quyền hoặc ngân sách. Thứ tự công việc là phụ thuộc kỹ thuật, không phải cắt phạm vi.
+
+> **Lịch sử bên dưới:** các nhãn M1/M2, P0/P1/P2, “chưa được giao”, “Android ngoài phạm vi” mô tả mốc cũ, không là backlog hiện hành. Giữ mã BL/FUT/EXT/DEP để truy vết. Nghiệp vụ theo [PRD](prd.md), [SRS](../requirements/srs.md) và [AI-SPEC](ai-agent-specification.md); không phục hồi chức năng đã chủ động thay thế, ví dụ trang Báo cáo riêng.
+
 # FinWeave — Backlog từ phạm vi M1
 
 Baseline `scope-v2`, version 2.1, 06/10/2026. Nguồn: [scope](scope.md), Playbook bước 1–3; nhiệm vụ bước3 tới M1 theo D-23, giữ D-19 scope. P0 = bắt buộc cho mốc tương ứng; P1 = hỗ trợ/giảm rủi ro; P2 = mở rộng chưa chọn. Bước3 đã thực hiện; dừngM1. M2/M3 chưa được giao.

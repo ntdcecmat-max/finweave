@@ -1,0 +1,17 @@
+id,threat,control,runtimeCases,residual,status
+TH-01,Cross-tenant/object access,Application auth/object scope+RLS/FX refs,"SEC-01,SEC-02",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-02,App-admin reads finance or impersonates,Separate Ops pool/DTO and denied DB grants,"SEC-03,SEC-04",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-03,RCE/SQL injection in user API,Patch/parameterization/process hardening; user API compromise may affect multiple tenants,"SEC-05,SEC-06",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-04,Worker/Agent privilege escalation,Per-profile grants; typed tickets; no active-plan confirm/actual tools,"SEC-07,SEC-08",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-05,Native raw bank data/OTP leakage,Memory filter + normalized allowlist; no server raw capture,"SEC-09,SEC-10",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-06,Native key/token loss or account switch,Keystore and owner-bound quarantine; no WebView secrets,"SEC-11,SEC-12",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-07,Browser CSRF/XSS/supply-chain script,Cookie/CSRF/CSP/dependency/release tests,"SEC-13,SEC-14",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-08,Credential/secret exposure via config/logs,"Purpose-isolated files, no VITE/env dumps/traces","SEC-15,SEC-16",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-09,Disk/dump/backup theft or corruption,Encrypted volume/dump/repository/key capsule; restore integrity checks,"SEC-17,SEC-18",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-10,Ransomware or source host deletes backups,"Off-host append-only writer, offline pruning credential","SEC-19,SEC-20",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-11,Stale restore resurrects deletes/revokes,Independent latest signed deny witness + locked restore,"SEC-21,SEC-22",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-12,Crash/ACK/replay ambiguity around security mutation,"Deny locally first, anchor before success, exact-key resume","SEC-23,SEC-24",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-13,Retention overrun/unsafe erasure,"Hard age cutoff, prune verification, copy inventory","SEC-25,SEC-26",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-14,Provider/model egress or prompt injection,Default-deny per adapter/class and scoped tool registry,"SEC-27,SEC-28",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-15,Split-brain restore or environment confusion,"Fence old host, pin env/API/schema/policy/key manifests","SEC-29,SEC-30",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN
+TH-16,Trusted root/provider/DBA sees plaintext,"Explicit T1 trust limit, access auditing; no anti-root-Ops claim","SEC-31,SEC-32",See threat-model.md; not eliminated by a static check,DESIGN_SPECIFIED_RUNTIME_NOT_RUN

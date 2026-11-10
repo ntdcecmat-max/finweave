@@ -1,0 +1,104 @@
+[
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "REPLAY_EXPIRED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "committed",
+      "resultRef": "RESULT_SYNTHETIC"
+    },
+    "valid": true,
+    "scope": "Shape only; outcome condition must be runtime-proven"
+  },
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "RECOVERY_FENCE",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "unknown",
+      "resultRef": null
+    },
+    "valid": true,
+    "scope": "Shape only; outcome condition must be runtime-proven"
+  },
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "REAUTH_REQUIRED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed",
+      "resultRef": null
+    },
+    "valid": true,
+    "scope": "Shape only; outcome condition must be runtime-proven"
+  },
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "REFRESH_REUSE",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed",
+      "resultRef": null
+    },
+    "valid": true,
+    "scope": "Shape only; outcome condition must be runtime-proven"
+  },
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "UNSUPPORTED_MEDIA_TYPE",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed",
+      "resultRef": null
+    },
+    "valid": true,
+    "scope": "Shape only; outcome condition must be runtime-proven"
+  },
+  {
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC",
+      "workspaceVersion": null,
+      "code": "VALIDATION",
+      "message": "Synthetic batch rejected",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed",
+      "itemErrors": [
+        {
+          "eventKey": "EVENT_SYNTHETIC",
+          "revision": 0,
+          "errorCode": "PARSER_UNSUPPORTED"
+        }
+      ]
+    },
+    "valid": true,
+    "scope": "All-rejected item identities structural shape only; server pairing/atomicity NOT RUN"
+  }
+]

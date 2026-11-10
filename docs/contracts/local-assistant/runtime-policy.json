@@ -1,0 +1,102 @@
+{
+  "id": "FW-ASSISTANT-002",
+  "baseRevision": "FW-API-T1-D1J2-005",
+  "baseSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+  "subsetSha256": "5ef6ef918d8d69a1eb3c16f1a315b3bd7cb2f9509f2c27b8740f9dac75ca0263",
+  "operations": [
+    "listConversations",
+    "createConversation",
+    "getConversation",
+    "listMessages",
+    "sendAssistantMessage",
+    "getAssistantMessage",
+    "cancelAssistantMessage",
+    "startAgentRun",
+    "answerAgentRun",
+    "cancelAgentRun",
+    "getAgentRun",
+    "listAgentRuns",
+    "getPlanningDraft",
+    "listPlanningDrafts",
+    "createPlanningDraft",
+    "reviseDraft",
+    "reviseDraftByMessage",
+    "refreshDraft",
+    "previewPlanningDraft",
+    "confirmPlanningDraft",
+    "discardPlanningDraft",
+    "simulatePlanningDraft",
+    "getPlanningSimulation",
+    "getAgentEvidence",
+    "getToolResult"
+  ],
+  "extensionOperations": [
+    "getPlanningSimulation",
+    "getAgentEvidence"
+  ],
+  "changes": {
+    "planOnlySimulation": {
+      "goalId": "nullable",
+      "goalVersion": "nullable",
+      "amount": "zero allowed for proposed contribution only"
+    },
+    "typedIntent": [
+      "startAgentRun.proposalBody",
+      "startAgentRun.draftId",
+      "startAgentRun.reserveConfirmed",
+      "answerAgentRun.proposalBody",
+      "answerAgentRun.reserveConfirmed",
+      "answerAgentRun.settings"
+    ],
+    "errors": [
+      "PRIVACY_REPHRASE",
+      "MODEL_UNAVAILABLE",
+      "HISTORY_UNAVAILABLE",
+      "CONTEXT_LIMIT",
+      "QUESTION_CONFLICT"
+    ]
+  },
+  "modelEnabled": false,
+  "mode": "deterministic",
+  "agentLimits": {
+    "actions": 8,
+    "activeMilliseconds": 60000,
+    "reservationMilliseconds": 25000,
+    "clarifications": 2,
+    "modelRounds": 12,
+    "rootInputTokens": 32768,
+    "rootOutputTokens": 4096,
+    "promptBytes": 49152,
+    "responseBytes": 65536,
+    "contextTokens": 8192,
+    "outputTokensPerRound": 1024,
+    "scenarioCount": 3,
+    "simulationMonths": 24,
+    "inputBytes": 524288,
+    "checkpointBytes": 49152
+  },
+  "admission": {
+    "workspacePerUtcDay": 10,
+    "globalPerUtcDay": 50,
+    "concurrency": 1,
+    "continuations": "same root; current day rechecked",
+    "unknownReservation": "full charge"
+  },
+  "databaseMigrations": [
+    "database/runtime/008_assistant_planning.sql",
+    "database/runtime/009_agent_runtime.sql"
+  ],
+  "retentionDays": {
+    "messages": 90,
+    "runs": 90,
+    "drafts": 30
+  },
+  "ownerEffects": "Plan + Goal + support links only; no ledger or funded allocations",
+  "unsupported": [
+    "reviseDraftByMessage natural language requires a selected model and intent adapter",
+    "real Ollama/Qwen model pins and hardware/safety/benefit evaluation",
+    "full natural-language/formula/transaction-filter coverage",
+    "frontend API005/auth integration BE19",
+    "production/real-data activation"
+  ]
+}

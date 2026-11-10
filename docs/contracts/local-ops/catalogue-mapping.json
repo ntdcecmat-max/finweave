@@ -1,0 +1,162 @@
+{
+  "revision": "FW-OPS-001",
+  "baseRevision": "FW-API-T1-D1J2-005",
+  "baseSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+  "contractSha256": "9b7b6a0f2d3f073361727415d1d10de9a8bc3c0fb4a580536a9833e5768620f3",
+  "frontendChanged": false,
+  "frontendIntegration": "BE19_PENDING",
+  "catalogue": [
+    {
+      "screenId": "ADMIN-AUTH",
+      "route": "/admin",
+      "actions": [
+        "signIn",
+        "signOut",
+        "reauthenticate"
+      ],
+      "operations": [
+        "adminSignIn",
+        "adminSignOut",
+        "adminReauthenticate"
+      ],
+      "service": "src/runtime/ops.ts"
+    },
+    {
+      "screenId": "UI-ADM-01",
+      "route": "/admin/overview",
+      "actions": [
+        "snapshot",
+        "refresh",
+        "retry failed job"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsPreviewAction",
+        "opsConfirmAction",
+        "opsGetCommandOutcome"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-02",
+      "route": "/admin/accounts",
+      "actions": [
+        "list",
+        "exact opaque account/workspace search",
+        "device metadata"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListAccounts"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-03",
+      "route": "/admin/sources",
+      "actions": [
+        "list",
+        "filter",
+        "disable with reason/preview/confirm"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListSources",
+        "opsPreviewAction",
+        "opsConfirmAction",
+        "opsGetCommandOutcome"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-04",
+      "route": "/admin/jobs",
+      "actions": [
+        "list",
+        "filter",
+        "metadata detail",
+        "bounded retry"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListJobs",
+        "opsPreviewAction",
+        "opsConfirmAction",
+        "opsGetCommandOutcome"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-05",
+      "route": "/admin/quotas",
+      "actions": [
+        "read usage/limit/reset/cooldown"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListQuotas"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-06",
+      "route": "/admin/releases",
+      "actions": [
+        "read published verified artifact metadata"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListReleases"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    },
+    {
+      "screenId": "UI-ADM-07",
+      "route": "/admin/incidents",
+      "actions": [
+        "read incidents",
+        "read append-only audit and control disposition"
+      ],
+      "operations": [
+        "opsStatus",
+        "opsListIncidents",
+        "opsListAudit",
+        "opsGetCommandOutcome"
+      ],
+      "service": "src/runtime/ops-business.ts"
+    }
+  ],
+  "denied": [
+    "finance",
+    "private prompts/evidence",
+    "owner impersonation/reset",
+    "credentials",
+    "force success",
+    "quota increase/provider purchase",
+    "deploy",
+    "migrate",
+    "restore",
+    "prune",
+    "root"
+  ],
+  "databaseProfiles": {
+    "auth": "fw_runtime_ops",
+    "metadata": "fw_runtime_ops_business",
+    "broker": [
+      "fw_runtime_ingestion",
+      "fw_runtime_market"
+    ]
+  },
+  "reasonCodes": [
+    "SOURCE_DEGRADED",
+    "PARSER_UNSUPPORTED",
+    "TRANSIENT_FAILURE",
+    "USER_REPORTED_GAP",
+    "MAINTENANCE"
+  ],
+  "tests": [
+    "tests/ops.ts",
+    "tests/ops-outcome.test.ts"
+  ],
+  "migration": "database/runtime/010_ops_services.sql"
+}

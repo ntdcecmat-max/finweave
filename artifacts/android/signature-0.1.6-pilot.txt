@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=FinWeave Synthetic Pilot, OU=Local Testing
+Signer #1 certificate SHA-256 digest: 734a9b3d80c66eacd6515b0250c2ef0aad6fff0b7ddb45d9bfaad20616ce7286
+Signer #1 certificate SHA-1 digest: 082a38465ad641cf1f38e73c120dde2eb037c312
+Signer #1 certificate MD5 digest: 7267c102f9c4ee7f3ff0e6ae2e8468fa
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: c7a17044bbec68963747eabb420043ee88bace5f41f95dd372607b36a0a6a7a5
+Signer #1 public key SHA-1 digest: ba522503e27a41b119af362605f8cf4b76d29ac9
+Signer #1 public key MD5 digest: 05ebac8de5399fa976b708b79e6bf17a

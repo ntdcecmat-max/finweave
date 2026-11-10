@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
 # FinWeave — Kế hoạch execution bước 3–5
 
 EXE-PLAN-001 · v2.2 · 06/10/2026 · scope-v2 / analysis-v2; M1-v0.1 · in-review. Owner AG; PO formal review pending. D-23 thay giới hạn nhiệm vụ bước 2 cũ; scope, 28 REQ/AC và oracle hiện hành giữ nguyên.

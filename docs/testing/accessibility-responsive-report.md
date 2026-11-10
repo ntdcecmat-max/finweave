@@ -1,3 +1,13 @@
+# Responsive và accessibility — rà frontend08/10/2026
+
+Kết quả hiện hành theo [nghiệm thu](frontend-acceptance-report.md): B12 chạy17đường dẫn×3width (51renders); AUTH-UI07 chạy7auth×3 (21renders); OP06 chạy7admin×3 (21renders). Tổng93lần render tự động, không phải93màn duy nhất hoặc kiểm mọi dialog/state. Native/TalkBack/zoom/screen reader/cross-browser/manual visual/UAT chưa chạy mới.
+
+B12/admin chặn serious/critical; auth chặn tất cả axe violations. JSON giữ cả mức nhỏ hơn nếu có. [User1440](../execution/evidence/frontend-review-2026-10-08/acceptance-2-accessibility-1440.json), [390](../execution/evidence/frontend-review-2026-10-08/acceptance-2-accessibility-390.json), [360](../execution/evidence/frontend-review-2026-10-08/acceptance-2-accessibility-360.json), [auth](../execution/evidence/frontend-review-2026-10-08/acceptance-2-auth-accessibility.json), [admin](../execution/evidence/frontend-review-2026-10-08/acceptance-2-admin-accessibility.json), [ảnh](../execution/evidence/frontend-review-2026-10-08/acceptance-2-screenshots/). Raw chỉ có giá trị khi ca tương ứng PASS; xem JSON browser cùng lượt.
+
+Sửa tương phản cashflow, forecast, Goal templates và secondary text admin; không tắt color-contrast. B11/B13/PET tiếp tục kiểm keyboard/focus/no-overlap/reduced-motion/mask. Không có manual review mới, không coi screenshot đã chụp là đã thẩm định pixel.
+
+## Báo cáo06/10 giữ làm lịch sử (không phải kết luận hiện hành)
+
 # Accessibility, Responsive và Visual Report — M2
 
 TST-ACC-001 · v1.0 · 06/10/2026. Agent review + Chrome automation; không WCAG certification/screen reader audit, không thiết bị mobile thật hay participant research. Kết quả cuối phải đọc cùng [Acceptance](frontend-acceptance-report.md); reports/screenshot lịch sử không bị thay thành PASS.

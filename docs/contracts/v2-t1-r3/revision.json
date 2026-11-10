@@ -1,0 +1,17 @@
+{
+  "revision": "FW-API-T1-D1J2-003",
+  "contractVersion": "2.0.0",
+  "status": "ACCEPTED_DESIGN_NOT_IMPLEMENTED",
+  "openapiSha256": "4066610aa7ea310023a107621f200a7fd9b47c3d3c10505f3155841a37c3c0db",
+  "previousOpenapiSha256": "2b7727363508ecf7e805e96838c3d478d211d6fa4a461210d111ad3fee8d3578",
+  "operations": 151,
+  "schemas": 626,
+  "inheritedSchemasUnchanged": 600,
+  "newOperations": [
+    "startForecastRun",
+    "getForecastRun",
+    "cancelForecastRun",
+    "executeForecastRun"
+  ],
+  "previous": "../v2-t1-r2/revision.json"
+}

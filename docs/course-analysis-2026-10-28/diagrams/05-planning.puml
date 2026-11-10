@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Kế hoạch, mục tiêu và mô phỏng
+actor "Chủ workspace" as Owner
+rectangle "FinWeave — Kế hoạch, mục tiêu và mô phỏng" {
+usecase "UC-PLAN-01\nLập và điều chỉnh kế hoạch ngân\nsách" as UC_PLAN_01
+usecase "UC-PLAN-02\nTheo dõi thực hiện kế hoạch và\nđộ lệch" as UC_PLAN_02
+usecase "UC-GOAL-01\nThiết lập mục tiêu và phân bổ\ntiền" as UC_GOAL_01
+usecase "UC-GOAL-02\nTheo dõi tiến độ và phát hiện\nhụt nguồn" as UC_GOAL_02
+usecase "UC-SIM-01\nChạy mô phỏng kịch bản tài chính" as UC_SIM_01
+usecase "UC-GOAL-03\nGiải phóng tiền đã phân bổ cho\nmục tiêu" as UC_GOAL_03
+usecase "UC-FORECAST-01\nTính dự báo dòng tiền và nguồn\nkhả dụng" as UC_FORECAST_01
+}
+Owner -- UC_PLAN_01
+Owner -- UC_PLAN_02
+Owner -- UC_GOAL_01
+Owner -- UC_GOAL_02
+Owner -- UC_GOAL_03
+Owner -- UC_SIM_01
+UC_GOAL_03 ..> UC_GOAL_01 : <<extend>>\n[chọn giải phóng phân bổ đã có]
+note on link
+  Extension point: khi chỉnh phân bổ
+end note
+UC_GOAL_03 ..> UC_GOAL_02 : <<extend>>\n[chọn giải phóng nguồn]
+note on link
+  Extension point: sau khi xem tiến độ
+end note
+UC_SIM_01 ..> UC_FORECAST_01 : <<include>>
+@enduml

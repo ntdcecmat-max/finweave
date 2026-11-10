@@ -1,0 +1,25 @@
+import {test,expect} from '@playwright/test';
+import {mkdirSync} from 'node:fs';
+import {resolve} from 'node:path';
+test('Android synthetic bootstrap works without Service Worker; login, shared UI, local commands and logout',async({page})=>{
+ const errors:string[]=[],mockRequests:string[]=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.url().includes('/__mock/'))mockRequests.push(r.url());});
+ await page.addInitScript(()=>{(window as any).CapacitorCustomPlatform={name:'android'};Object.defineProperty(navigator,'serviceWorker',{value:undefined,configurable:true});});
+ await page.goto('/auth/login');await page.getByRole('button',{name:'Điền thông tin mẫu',exact:true}).click();await page.getByRole('button',{name:'Đăng nhập demo',exact:true}).click();await page.getByLabel('Mã xác thực demo').fill('123456');await page.getByRole('button',{name:'Xác nhận mã demo',exact:true}).click();await expect(page.locator('#main h1')).toBeVisible();
+  const read=await page.evaluate(async()=>{const u=JSON.parse(sessionStorage.getItem('fw:synthetic-session')!);return (await fetch('/__mock/v1/logical/getWorkspace',{method:'POST',headers:{'Content-Type':'application/json','X-FinWeave-Synthetic':'true','X-FinWeave-Mock-Session':u.sessionId},body:JSON.stringify({contractVersion:'1.1.0',requestId:crypto.randomUUID(),workspaceId:'W-DEMO',operationId:'getWorkspace',input:{},mutation:null})})).json();});expect(read.data?.synthetic,JSON.stringify(read)).toBe(true);
+ await page.goto('/plan/goals');await expect(page.locator('#main h1')).toBeVisible();await page.goto('/data/android');
+ await expect(page.getByRole('heading',{name:'Hai nguồn demo đã chọn',exact:true})).toBeVisible();
+ await expect(page.getByText('Vietcombank (VCB)',{exact:true})).toBeVisible();await expect(page.getByText('ZaloPay',{exact:true})).toBeVisible();
+ await expect(page.getByText('Chưa bật · chờ xác minh',{exact:true})).toHaveCount(2);
+ await expect(page.getByText('MoMo',{exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Mở cài đặt quyền Android',exact:true})).toHaveCount(0);
+ await expect(page.getByText('APK có collector native để tự động ghi nhận giao dịch.',{exact:false})).toBeVisible();
+ await page.getByLabel('Tôi hiểu dữ liệu được xử lý và muốn thiết lập nguồn do tôi chọn.').check();
+ await page.getByLabel('Trải nghiệm luồng bằng thiết bị và thông báo minh họa').check();
+ await page.getByRole('button',{name:'Bắt đầu bản minh họa',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Chọn ứng dụng được hỗ trợ',exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Gắn tài khoản',exact:true})).toBeDisabled();await expect(page.locator('.op-source-select input')).toHaveCount(0);
+ mkdirSync(resolve('../docs/execution/evidence/android-collector-2026-10-12'),{recursive:true});await page.screenshot({path:resolve('../docs/execution/evidence/android-collector-2026-10-12/android-setup-390.png'),fullPage:true});
+ const unauthorized=await page.evaluate(async()=>{const r=await fetch('/__mock/v1/logical/getWorkspace',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});return r.status;});expect(unauthorized).toBe(403);
+ await page.getByRole('button',{name:'Thiết lập và demo',exact:true}).click();await page.getByRole('button',{name:'Đăng xuất demo',exact:true}).click();await expect(page.getByRole('button',{name:'Đăng nhập demo',exact:true})).toBeVisible();expect(mockRequests).toEqual([]);expect(errors).toEqual([]);
+});

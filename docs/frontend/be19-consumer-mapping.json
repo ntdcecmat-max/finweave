@@ -1,0 +1,1917 @@
+{
+  "revision": "FW-API-T1-D1J2-005",
+  "nativeRevision": "FW-NATIVE-BRIDGE-003",
+  "extensions": [
+    "FW-BUSINESS-001",
+    "FW-ASSISTANT-002",
+    "FW-OPS-001",
+    "FW-SCREENSHOT-001"
+  ],
+  "source": {
+    "docs/contracts/v2-t1-r5/openapi.json": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+    "finweave-backend/src/runtime/contracts.ts": "293c661ee506e9dafdf46f350baa28f7927eb5857b41e97b37ea9a32bdb0816f",
+    "finweave-backend/src/runtime/business-contract.ts": "f16ab020328c0beea35f7ca5f320c89afca8f77bac27aaea71030acad407e294",
+    "finweave-backend/src/runtime/ops-contract.ts": "967bac0890703ff9b11670c35097fb1c1fe568a386e5348d02e5ac324f9dde17",
+    "finweave-backend/src/runtime/screenshot-contract.ts": "07973cdf84d3619a431f7dcffbb529970dac3e192329a423d6de490ff6e013c5"
+  },
+  "effectiveContractSha256": "42b8c0883ffbf4db50f026c8241afb06b16755f17ce81fc4a8bc65e66addff0f",
+  "dataProfile": "synthetic-local",
+  "operations": [
+    {
+      "operation": "getPresentationSnapshot",
+      "route": "/v2/operations/getPresentationSnapshot",
+      "request": "getPresentationSnapshotRequest",
+      "reply": "getPresentationSnapshotReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getImportTemplate",
+      "route": "/v2/operations/getImportTemplate",
+      "request": "getImportTemplateRequest",
+      "reply": "getImportTemplateReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "ingestSourceEvidence",
+      "route": "/v2/operations/ingestSourceEvidence",
+      "request": "ingestSourceEvidenceRequest",
+      "reply": "ingestSourceEvidenceReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "reviseSourceRecord",
+      "route": "/v2/operations/reviseSourceRecord",
+      "request": "reviseSourceRecordRequest",
+      "reply": "reviseSourceRecordReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "getSession",
+      "route": "/v2/operations/getSession",
+      "request": "getSessionRequest",
+      "reply": "getSessionReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getWorkspace",
+      "route": "/v2/operations/getWorkspace",
+      "request": "getWorkspaceRequest",
+      "reply": "getWorkspaceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateTrackingSettings",
+      "route": "/v2/operations/updateTrackingSettings",
+      "request": "updateTrackingSettingsRequest",
+      "reply": "updateTrackingSettingsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listAccounts",
+      "route": "/v2/operations/listAccounts",
+      "request": "listAccountsRequest",
+      "reply": "listAccountsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getAccount",
+      "route": "/v2/operations/getAccount",
+      "request": "getAccountRequest",
+      "reply": "getAccountReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createAccount",
+      "route": "/v2/operations/createAccount",
+      "request": "createAccountRequest",
+      "reply": "createAccountReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "archiveAccount",
+      "route": "/v2/operations/archiveAccount",
+      "request": "archiveAccountRequest",
+      "reply": "archiveAccountReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listHoldings",
+      "route": "/v2/operations/listHoldings",
+      "request": "listHoldingsRequest",
+      "reply": "listHoldingsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getHolding",
+      "route": "/v2/operations/getHolding",
+      "request": "getHoldingRequest",
+      "reply": "getHoldingReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createHolding",
+      "route": "/v2/operations/createHolding",
+      "request": "createHoldingRequest",
+      "reply": "createHoldingReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateHoldingQuantity",
+      "route": "/v2/operations/updateHoldingQuantity",
+      "request": "updateHoldingQuantityRequest",
+      "reply": "updateHoldingQuantityReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateHoldingCost",
+      "route": "/v2/operations/updateHoldingCost",
+      "request": "updateHoldingCostRequest",
+      "reply": "updateHoldingCostReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listHoldingMovements",
+      "route": "/v2/operations/listHoldingMovements",
+      "request": "listHoldingMovementsRequest",
+      "reply": "listHoldingMovementsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listPriceQuotes",
+      "route": "/v2/operations/listPriceQuotes",
+      "request": "listPriceQuotesRequest",
+      "reply": "listPriceQuotesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "recordPriceQuote",
+      "route": "/v2/operations/recordPriceQuote",
+      "request": "recordPriceQuoteRequest",
+      "reply": "recordPriceQuoteReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listTransactions",
+      "route": "/v2/operations/listTransactions",
+      "request": "listTransactionsRequest",
+      "reply": "listTransactionsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getTransaction",
+      "route": "/v2/operations/getTransaction",
+      "request": "getTransactionRequest",
+      "reply": "getTransactionReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createEvent",
+      "route": "/v2/operations/createEvent",
+      "request": "createEventRequest",
+      "reply": "createEventReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateDraft",
+      "route": "/v2/operations/updateDraft",
+      "request": "updateDraftRequest",
+      "reply": "updateDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "correctPostedEvent",
+      "route": "/v2/operations/correctPostedEvent",
+      "request": "correctPostedEventRequest",
+      "reply": "correctPostedEventReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateCategory",
+      "route": "/v2/operations/updateCategory",
+      "request": "updateCategoryRequest",
+      "reply": "updateCategoryReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "postDraft",
+      "route": "/v2/operations/postDraft",
+      "request": "postDraftRequest",
+      "reply": "postDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "linkRefund",
+      "route": "/v2/operations/linkRefund",
+      "request": "linkRefundRequest",
+      "reply": "linkRefundReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "recordCashCount",
+      "route": "/v2/operations/recordCashCount",
+      "request": "recordCashCountRequest",
+      "reply": "recordCashCountReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getOverview",
+      "route": "/v2/operations/getOverview",
+      "request": "getOverviewRequest",
+      "reply": "getOverviewReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getSpendingReport",
+      "route": "/v2/operations/getSpendingReport",
+      "request": "getSpendingReportRequest",
+      "reply": "getSpendingReportReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getPortfolio",
+      "route": "/v2/operations/getPortfolio",
+      "request": "getPortfolioRequest",
+      "reply": "getPortfolioReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getInsights",
+      "route": "/v2/operations/getInsights",
+      "request": "getInsightsRequest",
+      "reply": "getInsightsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listSources",
+      "route": "/v2/operations/listSources",
+      "request": "listSourcesRequest",
+      "reply": "listSourcesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "refreshSource",
+      "route": "/v2/operations/refreshSource",
+      "request": "refreshSourceRequest",
+      "reply": "refreshSourceReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "disconnectSource",
+      "route": "/v2/operations/disconnectSource",
+      "request": "disconnectSourceRequest",
+      "reply": "disconnectSourceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "reconnectSource",
+      "route": "/v2/operations/reconnectSource",
+      "request": "reconnectSourceRequest",
+      "reply": "reconnectSourceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "previewImport",
+      "route": "/v2/operations/previewImport",
+      "request": "previewImportRequest",
+      "reply": "previewImportReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "confirmImport",
+      "route": "/v2/operations/confirmImport",
+      "request": "confirmImportRequest",
+      "reply": "confirmImportReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getImportJob",
+      "route": "/v2/operations/getImportJob",
+      "request": "getImportJobRequest",
+      "reply": "getImportJobReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listImportJobs",
+      "route": "/v2/operations/listImportJobs",
+      "request": "listImportJobsRequest",
+      "reply": "listImportJobsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listReviewCases",
+      "route": "/v2/operations/listReviewCases",
+      "request": "listReviewCasesRequest",
+      "reply": "listReviewCasesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getReviewCase",
+      "route": "/v2/operations/getReviewCase",
+      "request": "getReviewCaseRequest",
+      "reply": "getReviewCaseReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "resolveReviewCase",
+      "route": "/v2/operations/resolveReviewCase",
+      "request": "resolveReviewCaseRequest",
+      "reply": "resolveReviewCaseReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listPlanItems",
+      "route": "/v2/operations/listPlanItems",
+      "request": "listPlanItemsRequest",
+      "reply": "listPlanItemsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createPlanItem",
+      "route": "/v2/operations/createPlanItem",
+      "request": "createPlanItemRequest",
+      "reply": "createPlanItemReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updatePlanItem",
+      "route": "/v2/operations/updatePlanItem",
+      "request": "updatePlanItemRequest",
+      "reply": "updatePlanItemReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "archivePlanItem",
+      "route": "/v2/operations/archivePlanItem",
+      "request": "archivePlanItemRequest",
+      "reply": "archivePlanItemReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getPlanForecast",
+      "route": "/v2/operations/getPlanForecast",
+      "request": "getPlanForecastRequest",
+      "reply": "getPlanForecastReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "linkPlanActual",
+      "route": "/v2/operations/linkPlanActual",
+      "request": "linkPlanActualRequest",
+      "reply": "linkPlanActualReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "unlinkPlanActual",
+      "route": "/v2/operations/unlinkPlanActual",
+      "request": "unlinkPlanActualRequest",
+      "reply": "unlinkPlanActualReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listGoals",
+      "route": "/v2/operations/listGoals",
+      "request": "listGoalsRequest",
+      "reply": "listGoalsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getGoalProgress",
+      "route": "/v2/operations/getGoalProgress",
+      "request": "getGoalProgressRequest",
+      "reply": "getGoalProgressReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createGoal",
+      "route": "/v2/operations/createGoal",
+      "request": "createGoalRequest",
+      "reply": "createGoalReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "updateGoal",
+      "route": "/v2/operations/updateGoal",
+      "request": "updateGoalRequest",
+      "reply": "updateGoalReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "allocateGoal",
+      "route": "/v2/operations/allocateGoal",
+      "request": "allocateGoalRequest",
+      "reply": "allocateGoalReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "releaseGoalAllocation",
+      "route": "/v2/operations/releaseGoalAllocation",
+      "request": "releaseGoalAllocationRequest",
+      "reply": "releaseGoalAllocationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "markGoalAchieved",
+      "route": "/v2/operations/markGoalAchieved",
+      "request": "markGoalAchievedRequest",
+      "reply": "markGoalAchievedReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "archiveGoal",
+      "route": "/v2/operations/archiveGoal",
+      "request": "archiveGoalRequest",
+      "reply": "archiveGoalReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "simulateGoalOutcome",
+      "route": "/v2/operations/simulateGoalOutcome",
+      "request": "simulateGoalOutcomeRequest",
+      "reply": "simulateGoalOutcomeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listSimulations",
+      "route": "/v2/operations/listSimulations",
+      "request": "listSimulationsRequest",
+      "reply": "listSimulationsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getSimulation",
+      "route": "/v2/operations/getSimulation",
+      "request": "getSimulationRequest",
+      "reply": "getSimulationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listConversations",
+      "route": "/v2/operations/listConversations",
+      "request": "listConversationsRequest",
+      "reply": "listConversationsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createConversation",
+      "route": "/v2/operations/createConversation",
+      "request": "createConversationRequest",
+      "reply": "createConversationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getConversation",
+      "route": "/v2/operations/getConversation",
+      "request": "getConversationRequest",
+      "reply": "getConversationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listMessages",
+      "route": "/v2/operations/listMessages",
+      "request": "listMessagesRequest",
+      "reply": "listMessagesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "sendAssistantMessage",
+      "route": "/v2/operations/sendAssistantMessage",
+      "request": "sendAssistantMessageRequest",
+      "reply": "sendAssistantMessageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getAssistantMessage",
+      "route": "/v2/operations/getAssistantMessage",
+      "request": "getAssistantMessageRequest",
+      "reply": "getAssistantMessageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "cancelAssistantMessage",
+      "route": "/v2/operations/cancelAssistantMessage",
+      "request": "cancelAssistantMessageRequest",
+      "reply": "cancelAssistantMessageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getEvidence",
+      "route": "/v2/operations/getEvidence",
+      "request": "getEvidenceRequest",
+      "reply": "getEvidenceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "previewMutation",
+      "route": "/v2/operations/previewMutation",
+      "request": "previewMutationRequest",
+      "reply": "previewMutationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "signIn",
+      "route": "/v2/identity/signIn",
+      "request": "signInRequest",
+      "reply": "signInReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "registerIdentity",
+      "route": "/v2/identity/registerIdentity",
+      "request": "registerIdentityRequest",
+      "reply": "registerIdentityReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "verifyIdentityChallenge",
+      "route": "/v2/identity/verifyIdentityChallenge",
+      "request": "verifyIdentityChallengeRequest",
+      "reply": "verifyIdentityChallengeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "requestPasswordReset",
+      "route": "/v2/identity/requestPasswordReset",
+      "request": "requestPasswordResetRequest",
+      "reply": "requestPasswordResetReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "resetIdentityPassword",
+      "route": "/v2/identity/resetIdentityPassword",
+      "request": "resetIdentityPasswordRequest",
+      "reply": "resetIdentityPasswordReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "signOut",
+      "route": "/v2/identity/signOut",
+      "request": "signOutRequest",
+      "reply": "signOutReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "searchInstruments",
+      "route": "/v2/operations/searchInstruments",
+      "request": "searchInstrumentsRequest",
+      "reply": "searchInstrumentsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getGoldProfiles",
+      "route": "/v2/operations/getGoldProfiles",
+      "request": "getGoldProfilesRequest",
+      "reply": "getGoldProfilesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "previewHolding",
+      "route": "/v2/operations/previewHolding",
+      "request": "previewHoldingRequest",
+      "reply": "previewHoldingReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "confirmHolding",
+      "route": "/v2/operations/confirmHolding",
+      "request": "confirmHoldingRequest",
+      "reply": "confirmHoldingReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "requestPriceRefresh",
+      "route": "/v2/operations/requestPriceRefresh",
+      "request": "requestPriceRefreshRequest",
+      "reply": "requestPriceRefreshReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "bindCollector",
+      "route": "/v2/operations/bindCollector",
+      "request": "bindCollectorRequest",
+      "reply": "bindCollectorReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "revokeDevice",
+      "route": "/v2/operations/revokeDevice",
+      "request": "revokeDeviceRequest",
+      "reply": "revokeDeviceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "startAgentRun",
+      "route": "/v2/operations/startAgentRun",
+      "request": "startAgentRunRequest",
+      "reply": "startAgentRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "answerAgentRun",
+      "route": "/v2/operations/answerAgentRun",
+      "request": "answerAgentRunRequest",
+      "reply": "answerAgentRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "cancelAgentRun",
+      "route": "/v2/operations/cancelAgentRun",
+      "request": "cancelAgentRunRequest",
+      "reply": "cancelAgentRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "reviseDraft",
+      "route": "/v2/operations/reviseDraft",
+      "request": "reviseDraftRequest",
+      "reply": "reviseDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "reviseDraftByMessage",
+      "route": "/v2/operations/reviseDraftByMessage",
+      "request": "reviseDraftByMessageRequest",
+      "reply": "reviseDraftByMessageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "refreshDraft",
+      "route": "/v2/operations/refreshDraft",
+      "request": "refreshDraftRequest",
+      "reply": "refreshDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "previewPlanningDraft",
+      "route": "/v2/operations/previewPlanningDraft",
+      "request": "previewPlanningDraftRequest",
+      "reply": "previewPlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "confirmPlanningDraft",
+      "route": "/v2/operations/confirmPlanningDraft",
+      "request": "confirmPlanningDraftRequest",
+      "reply": "confirmPlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listSessions",
+      "route": "/v2/identity/listSessions",
+      "request": "listSessionsRequest",
+      "reply": "listSessionsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "renewSession",
+      "route": "/v2/identity/renewSession",
+      "request": "renewSessionRequest",
+      "reply": "renewSessionReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "revokeSession",
+      "route": "/v2/identity/revokeSession",
+      "request": "revokeSessionRequest",
+      "reply": "revokeSessionReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listWorkspaces",
+      "route": "/v2/identity/listWorkspaces",
+      "request": "listWorkspacesRequest",
+      "reply": "listWorkspacesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createWorkspace",
+      "route": "/v2/identity/createWorkspace",
+      "request": "createWorkspaceRequest",
+      "reply": "createWorkspaceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "registerDevice",
+      "route": "/v2/operations/registerDevice",
+      "request": "registerDeviceRequest",
+      "reply": "registerDeviceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "requestDeviceEnrollment",
+      "route": "/v2/operations/requestDeviceEnrollment",
+      "request": "requestDeviceEnrollmentRequest",
+      "reply": "requestDeviceEnrollmentReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listDevices",
+      "route": "/v2/operations/listDevices",
+      "request": "listDevicesRequest",
+      "reply": "listDevicesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listCollectorBindings",
+      "route": "/v2/operations/listCollectorBindings",
+      "request": "listCollectorBindingsRequest",
+      "reply": "listCollectorBindingsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "disableCollectorBinding",
+      "route": "/v2/operations/disableCollectorBinding",
+      "request": "disableCollectorBindingRequest",
+      "reply": "disableCollectorBindingReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listSourceSupport",
+      "route": "/v2/operations/listSourceSupport",
+      "request": "listSourceSupportRequest",
+      "reply": "listSourceSupportReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "ingestNotifications",
+      "route": "/v2/operations/ingestNotifications",
+      "request": "ingestNotificationsRequest",
+      "reply": "ingestNotificationsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getReceipt",
+      "route": "/v2/operations/getReceipt",
+      "request": "getReceiptRequest",
+      "reply": "getReceiptReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listReceipts",
+      "route": "/v2/operations/listReceipts",
+      "request": "listReceiptsRequest",
+      "reply": "listReceiptsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getSyncState",
+      "route": "/v2/operations/getSyncState",
+      "request": "getSyncStateRequest",
+      "reply": "getSyncStateReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getRefreshJob",
+      "route": "/v2/operations/getRefreshJob",
+      "request": "getRefreshJobRequest",
+      "reply": "getRefreshJobReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listRefreshJobs",
+      "route": "/v2/operations/listRefreshJobs",
+      "request": "listRefreshJobsRequest",
+      "reply": "listRefreshJobsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getAgentRun",
+      "route": "/v2/operations/getAgentRun",
+      "request": "getAgentRunRequest",
+      "reply": "getAgentRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listAgentRuns",
+      "route": "/v2/operations/listAgentRuns",
+      "request": "listAgentRunsRequest",
+      "reply": "listAgentRunsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getPlanningDraft",
+      "route": "/v2/operations/getPlanningDraft",
+      "request": "getPlanningDraftRequest",
+      "reply": "getPlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listPlanningDrafts",
+      "route": "/v2/operations/listPlanningDrafts",
+      "request": "listPlanningDraftsRequest",
+      "reply": "listPlanningDraftsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "createPlanningDraft",
+      "route": "/v2/operations/createPlanningDraft",
+      "request": "createPlanningDraftRequest",
+      "reply": "createPlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "discardPlanningDraft",
+      "route": "/v2/operations/discardPlanningDraft",
+      "request": "discardPlanningDraftRequest",
+      "reply": "discardPlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "simulatePlanningDraft",
+      "route": "/v2/operations/simulatePlanningDraft",
+      "request": "simulatePlanningDraftRequest",
+      "reply": "simulatePlanningDraftReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getToolResult",
+      "route": "/v2/operations/getToolResult",
+      "request": "getToolResultRequest",
+      "reply": "getToolResultReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "adminSignIn",
+      "route": "/v2/admin/adminSignIn",
+      "request": "adminSignInRequest",
+      "reply": "adminSignInReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "adminSignOut",
+      "route": "/v2/admin/adminSignOut",
+      "request": "adminSignOutRequest",
+      "reply": "adminSignOutReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsStatus",
+      "route": "/v2/admin/opsStatus",
+      "request": "opsStatusRequest",
+      "reply": "opsStatusReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListAccounts",
+      "route": "/v2/admin/opsListAccounts",
+      "request": "opsListAccountsRequest",
+      "reply": "opsListAccountsReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListSources",
+      "route": "/v2/admin/opsListSources",
+      "request": "opsListSourcesRequest",
+      "reply": "opsListSourcesReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListJobs",
+      "route": "/v2/admin/opsListJobs",
+      "request": "opsListJobsRequest",
+      "reply": "opsListJobsReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListQuotas",
+      "route": "/v2/admin/opsListQuotas",
+      "request": "opsListQuotasRequest",
+      "reply": "opsListQuotasReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListReleases",
+      "route": "/v2/admin/opsListReleases",
+      "request": "opsListReleasesRequest",
+      "reply": "opsListReleasesReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListIncidents",
+      "route": "/v2/admin/opsListIncidents",
+      "request": "opsListIncidentsRequest",
+      "reply": "opsListIncidentsReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsListAudit",
+      "route": "/v2/admin/opsListAudit",
+      "request": "opsListAuditRequest",
+      "reply": "opsListAuditReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsPreviewAction",
+      "route": "/v2/admin/opsPreviewAction",
+      "request": "opsPreviewActionRequest",
+      "reply": "opsPreviewActionReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "opsConfirmAction",
+      "route": "/v2/admin/opsConfirmAction",
+      "request": "opsConfirmActionRequest",
+      "reply": "opsConfirmActionReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "dispatchJobs",
+      "route": "/internal/v2/dispatchJobs",
+      "request": "dispatchJobsRequest",
+      "reply": "dispatchJobsReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "processIngestionReceipt",
+      "route": "/internal/v2/processIngestionReceipt",
+      "request": "processIngestionReceiptRequest",
+      "reply": "processIngestionReceiptReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "executePriceRefresh",
+      "route": "/internal/v2/executePriceRefresh",
+      "request": "executePriceRefreshRequest",
+      "reply": "executePriceRefreshReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "executeAgentStep",
+      "route": "/internal/v2/executeAgentStep",
+      "request": "executeAgentStepRequest",
+      "reply": "executeAgentStepReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "purgeExpiredData",
+      "route": "/internal/v2/purgeExpiredData",
+      "request": "purgeExpiredDataRequest",
+      "reply": "purgeExpiredDataReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "verifyNativeIdentityChallenge",
+      "route": "/v2/identity/verifyNativeIdentityChallenge",
+      "request": "verifyNativeIdentityChallengeRequest",
+      "reply": "verifyNativeIdentityChallengeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "renewNativeSession",
+      "route": "/v2/identity/renewNativeSession",
+      "request": "renewNativeSessionRequest",
+      "reply": "renewNativeSessionReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "requestCollectorCredentialChallenge",
+      "route": "/v2/operations/requestCollectorCredentialChallenge",
+      "request": "requestCollectorCredentialChallengeRequest",
+      "reply": "requestCollectorCredentialChallengeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "issueCollectorCredential",
+      "route": "/v2/operations/issueCollectorCredential",
+      "request": "issueCollectorCredentialRequest",
+      "reply": "issueCollectorCredentialReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getCommandOutcome",
+      "route": "/v2/operations/getCommandOutcome",
+      "request": "getCommandOutcomeRequest",
+      "reply": "getCommandOutcomeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "opsGetCommandOutcome",
+      "route": "/v2/admin/opsGetCommandOutcome",
+      "request": "opsGetCommandOutcomeRequest",
+      "reply": "opsGetCommandOutcomeReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "reconcileReceipts",
+      "route": "/v2/operations/reconcileReceipts",
+      "request": "reconcileReceiptsRequest",
+      "reply": "reconcileReceiptsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "executeImportJob",
+      "route": "/internal/v2/executeImportJob",
+      "request": "executeImportJobRequest",
+      "reply": "executeImportJobReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "requestOwnerReauthentication",
+      "route": "/v2/identity/requestOwnerReauthentication",
+      "request": "requestOwnerReauthenticationRequest",
+      "reply": "requestOwnerReauthenticationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "verifyOwnerReauthentication",
+      "route": "/v2/identity/verifyOwnerReauthentication",
+      "request": "verifyOwnerReauthenticationRequest",
+      "reply": "verifyOwnerReauthenticationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "adminReauthenticate",
+      "route": "/v2/admin/adminReauthenticate",
+      "request": "adminReauthenticateRequest",
+      "reply": "adminReauthenticateReply",
+      "profile": "ops",
+      "implemented": true
+    },
+    {
+      "operation": "rotateOwnerRecoveryCodes",
+      "route": "/v2/identity/rotateOwnerRecoveryCodes",
+      "request": "rotateOwnerRecoveryCodesRequest",
+      "reply": "rotateOwnerRecoveryCodesReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "redeemOwnerRecoveryCode",
+      "route": "/v2/identity/redeemOwnerRecoveryCode",
+      "request": "redeemOwnerRecoveryCodeRequest",
+      "reply": "redeemOwnerRecoveryCodeReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "renewCollectorCredential",
+      "route": "/v2/identity/renewCollectorCredential",
+      "request": "renewCollectorCredentialRequest",
+      "reply": "renewCollectorCredentialReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "startForecastRun",
+      "route": "/v2/operations/startForecastRun",
+      "request": "startForecastRunRequest",
+      "reply": "startForecastRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getForecastRun",
+      "route": "/v2/operations/getForecastRun",
+      "request": "getForecastRunRequest",
+      "reply": "getForecastRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "cancelForecastRun",
+      "route": "/v2/operations/cancelForecastRun",
+      "request": "cancelForecastRunRequest",
+      "reply": "cancelForecastRunReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "executeForecastRun",
+      "route": "/internal/v2/executeForecastRun",
+      "request": "executeForecastRunRequest",
+      "reply": "executeForecastRunReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "listCoverage",
+      "route": "/v2/operations/listCoverage",
+      "request": "listCoverageRequest",
+      "reply": "listCoverageReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "listCoverageGaps",
+      "route": "/v2/operations/listCoverageGaps",
+      "request": "listCoverageGapsRequest",
+      "reply": "listCoverageGapsReply",
+      "profile": null,
+      "implemented": false
+    },
+    {
+      "operation": "retryImportJob",
+      "route": "/v2/business/retryImportJob",
+      "request": "retryImportJobRequest",
+      "reply": "retryImportJobReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getBusinessHistory",
+      "route": "/v2/business/getBusinessHistory",
+      "request": "getBusinessHistoryRequest",
+      "reply": "getBusinessHistoryReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "compareSimulations",
+      "route": "/v2/business/compareSimulations",
+      "request": "compareSimulationsRequest",
+      "reply": "compareSimulationsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listForecastRuns",
+      "route": "/v2/business/listForecastRuns",
+      "request": "listForecastRunsRequest",
+      "reply": "listForecastRunsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getForecastInputs",
+      "route": "/v2/business/getForecastInputs",
+      "request": "getForecastInputsRequest",
+      "reply": "getForecastInputsReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "setFinancialCoverage",
+      "route": "/v2/business/setFinancialCoverage",
+      "request": "setFinancialCoverageRequest",
+      "reply": "setFinancialCoverageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "listFinancialCoverage",
+      "route": "/v2/business/listFinancialCoverage",
+      "request": "listFinancialCoverageRequest",
+      "reply": "listFinancialCoverageReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getPlanningSimulation",
+      "route": "/v2/assistant/getPlanningSimulation",
+      "request": "getPlanningSimulationRequest",
+      "reply": "getPlanningSimulationReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "getAgentEvidence",
+      "route": "/v2/assistant/getAgentEvidence",
+      "request": "getAgentEvidenceRequest",
+      "reply": "getAgentEvidenceReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "scanScreenshot",
+      "route": "/v2/screenshots/scanScreenshot",
+      "request": "scanScreenshotRequest",
+      "reply": "scanScreenshotReply",
+      "profile": "user",
+      "implemented": true
+    },
+    {
+      "operation": "saveScreenshot",
+      "route": "/v2/screenshots/saveScreenshot",
+      "request": "saveScreenshotRequest",
+      "reply": "saveScreenshotReply",
+      "profile": "user",
+      "implemented": true
+    }
+  ],
+  "consumerActions": [
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH01",
+      "consumerOperation": "identity:signIn",
+      "canonicalOperation": "signIn"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH02",
+      "consumerOperation": "identity:registerIdentity",
+      "canonicalOperation": "registerIdentity"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH03",
+      "consumerOperation": "identity:verifyIdentityChallenge",
+      "canonicalOperation": "verifyIdentityChallenge"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH04",
+      "consumerOperation": "identity:requestPasswordReset",
+      "canonicalOperation": "requestPasswordReset"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH05",
+      "consumerOperation": "identity:resetIdentityPassword",
+      "canonicalOperation": "resetIdentityPassword"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH06",
+      "consumerOperation": "identity:signOut",
+      "canonicalOperation": "signOut"
+    },
+    {
+      "module": "MOD-AUTH",
+      "action": "AUTH10",
+      "consumerOperation": "getSession",
+      "canonicalOperation": "getSession"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getPresentationSnapshot",
+      "canonicalOperation": "getPresentationSnapshot"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getWorkspace",
+      "canonicalOperation": "getWorkspace"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getOverview",
+      "canonicalOperation": "getOverview"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getSpendingReport",
+      "canonicalOperation": "getSpendingReport"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getPortfolio",
+      "canonicalOperation": "getPortfolio"
+    },
+    {
+      "module": "MOD-HOME",
+      "action": "HOME01",
+      "consumerOperation": "getInsights",
+      "canonicalOperation": "getInsights"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC01",
+      "consumerOperation": "listAccounts",
+      "canonicalOperation": "listAccounts"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC01",
+      "consumerOperation": "getAccount",
+      "canonicalOperation": "getAccount"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC02",
+      "consumerOperation": "createAccount",
+      "canonicalOperation": "createAccount"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC03",
+      "consumerOperation": "archiveAccount",
+      "canonicalOperation": "archiveAccount"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC04",
+      "consumerOperation": "updateTrackingSettings",
+      "canonicalOperation": "updateTrackingSettings"
+    },
+    {
+      "module": "MOD-ACCOUNT",
+      "action": "ACC05",
+      "consumerOperation": "recordCashCount",
+      "canonicalOperation": "recordCashCount"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD01",
+      "consumerOperation": "listHoldings",
+      "canonicalOperation": "listHoldings"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD01",
+      "consumerOperation": "getHolding",
+      "canonicalOperation": "getHolding"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD01",
+      "consumerOperation": "listHoldingMovements",
+      "canonicalOperation": "listHoldingMovements"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD01",
+      "consumerOperation": "listPriceQuotes",
+      "canonicalOperation": "listPriceQuotes"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD02",
+      "consumerOperation": "createHolding",
+      "canonicalOperation": "createHolding"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD03",
+      "consumerOperation": "updateHoldingQuantity",
+      "canonicalOperation": "updateHoldingQuantity"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD04",
+      "consumerOperation": "updateHoldingCost",
+      "canonicalOperation": "updateHoldingCost"
+    },
+    {
+      "module": "MOD-HOLDING",
+      "action": "HOLD05",
+      "consumerOperation": "recordPriceQuote",
+      "canonicalOperation": "recordPriceQuote"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX01",
+      "consumerOperation": "listTransactions",
+      "canonicalOperation": "listTransactions"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX01",
+      "consumerOperation": "getTransaction",
+      "canonicalOperation": "getTransaction"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX02",
+      "consumerOperation": "createEvent",
+      "canonicalOperation": "createEvent"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX03",
+      "consumerOperation": "updateCategory",
+      "canonicalOperation": "updateCategory"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX04",
+      "consumerOperation": "updateDraft",
+      "canonicalOperation": "updateDraft"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX04",
+      "consumerOperation": "correctPostedEvent",
+      "canonicalOperation": "correctPostedEvent"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX05",
+      "consumerOperation": "postDraft",
+      "canonicalOperation": "postDraft"
+    },
+    {
+      "module": "MOD-TXN",
+      "action": "TX07",
+      "consumerOperation": "getEvidence",
+      "canonicalOperation": "getEvidence"
+    },
+    {
+      "module": "MOD-TRANSFER",
+      "action": "MOVE01",
+      "consumerOperation": "createEvent",
+      "canonicalOperation": "createEvent"
+    },
+    {
+      "module": "MOD-TRANSFER",
+      "action": "MOVE02",
+      "consumerOperation": "linkRefund",
+      "canonicalOperation": "linkRefund"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC01",
+      "consumerOperation": "listSources",
+      "canonicalOperation": "listSources"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC01",
+      "consumerOperation": "getImportTemplate",
+      "canonicalOperation": "getImportTemplate"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC02",
+      "consumerOperation": "refreshSource",
+      "canonicalOperation": "refreshSource"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC03",
+      "consumerOperation": "disconnectSource",
+      "canonicalOperation": "disconnectSource"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC03",
+      "consumerOperation": "reconnectSource",
+      "canonicalOperation": "reconnectSource"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "IMP02",
+      "consumerOperation": "previewImport",
+      "canonicalOperation": "previewImport"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "IMP03",
+      "consumerOperation": "confirmImport",
+      "canonicalOperation": "confirmImport"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "IMP04",
+      "consumerOperation": "getImportJob",
+      "canonicalOperation": "getImportJob"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "IMP04",
+      "consumerOperation": "listImportJobs",
+      "canonicalOperation": "listImportJobs"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC04",
+      "consumerOperation": "ingestSourceEvidence",
+      "canonicalOperation": "ingestSourceEvidence"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC04",
+      "consumerOperation": "reviseSourceRecord",
+      "canonicalOperation": "reviseSourceRecord"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV01",
+      "consumerOperation": "listReviewCases",
+      "canonicalOperation": "listReviewCases"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV01",
+      "consumerOperation": "getReviewCase",
+      "canonicalOperation": "getReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV01",
+      "consumerOperation": "getEvidence",
+      "canonicalOperation": "getEvidence"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV02",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV03",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV04",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV05",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV06",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV07",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV08",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV09",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV10",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV11",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV12",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-REVIEW",
+      "action": "REV13",
+      "consumerOperation": "resolveReviewCase",
+      "canonicalOperation": "resolveReviewCase"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN01",
+      "consumerOperation": "listPlanItems",
+      "canonicalOperation": "listPlanItems"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN01",
+      "consumerOperation": "getPlanForecast",
+      "canonicalOperation": "getPlanForecast"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN02",
+      "consumerOperation": "createPlanItem",
+      "canonicalOperation": "createPlanItem"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN02",
+      "consumerOperation": "updatePlanItem",
+      "canonicalOperation": "updatePlanItem"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN03",
+      "consumerOperation": "archivePlanItem",
+      "canonicalOperation": "archivePlanItem"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN04",
+      "consumerOperation": "linkPlanActual",
+      "canonicalOperation": "linkPlanActual"
+    },
+    {
+      "module": "MOD-PLAN",
+      "action": "PLAN04",
+      "consumerOperation": "unlinkPlanActual",
+      "canonicalOperation": "unlinkPlanActual"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL01",
+      "consumerOperation": "listGoals",
+      "canonicalOperation": "listGoals"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL01",
+      "consumerOperation": "getGoalProgress",
+      "canonicalOperation": "getGoalProgress"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL02",
+      "consumerOperation": "createGoal",
+      "canonicalOperation": "createGoal"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL02",
+      "consumerOperation": "updateGoal",
+      "canonicalOperation": "updateGoal"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL03",
+      "consumerOperation": "allocateGoal",
+      "canonicalOperation": "allocateGoal"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL04",
+      "consumerOperation": "releaseGoalAllocation",
+      "canonicalOperation": "releaseGoalAllocation"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL04",
+      "consumerOperation": "markGoalAchieved",
+      "canonicalOperation": "markGoalAchieved"
+    },
+    {
+      "module": "MOD-GOAL",
+      "action": "GOAL04",
+      "consumerOperation": "archiveGoal",
+      "canonicalOperation": "archiveGoal"
+    },
+    {
+      "module": "MOD-SIM",
+      "action": "SIM01",
+      "consumerOperation": "simulateGoalOutcome",
+      "canonicalOperation": "simulateGoalOutcome"
+    },
+    {
+      "module": "MOD-SIM",
+      "action": "SIM02",
+      "consumerOperation": "listSimulations",
+      "canonicalOperation": "listSimulations"
+    },
+    {
+      "module": "MOD-SIM",
+      "action": "SIM02",
+      "consumerOperation": "getSimulation",
+      "canonicalOperation": "getSimulation"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI01",
+      "consumerOperation": "listConversations",
+      "canonicalOperation": "listConversations"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI01",
+      "consumerOperation": "getConversation",
+      "canonicalOperation": "getConversation"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI01",
+      "consumerOperation": "listMessages",
+      "canonicalOperation": "listMessages"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI02",
+      "consumerOperation": "createConversation",
+      "canonicalOperation": "createConversation"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI03",
+      "consumerOperation": "sendAssistantMessage",
+      "canonicalOperation": "sendAssistantMessage"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI04",
+      "consumerOperation": "getAssistantMessage",
+      "canonicalOperation": "getAssistantMessage"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI05",
+      "consumerOperation": "cancelAssistantMessage",
+      "canonicalOperation": "cancelAssistantMessage"
+    },
+    {
+      "module": "MOD-AI",
+      "action": "AI07",
+      "consumerOperation": "sendAssistantMessage",
+      "canonicalOperation": "sendAssistantMessage"
+    },
+    {
+      "module": "MOD-SYSTEM",
+      "action": "SYS05",
+      "consumerOperation": "previewMutation",
+      "canonicalOperation": "previewMutation"
+    }
+  ],
+  "derivedOperations": {
+    "getState": [
+      "listDevices",
+      "listCollectorBindings",
+      "listSourceSupport",
+      "listReceipts",
+      "listRefreshJobs",
+      "listConversations",
+      "listAgentRuns",
+      "listPlanningDrafts"
+    ],
+    "registerExampleDevice": [],
+    "testCollector": [],
+    "reviseDraft": [
+      "reviseDraft"
+    ],
+    "answerAgentRun": [
+      "answerAgentRun",
+      "getPlanningDraft"
+    ]
+  },
+  "unimplementedConsumerOperations": [
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC02",
+      "consumerOperation": "refreshSource",
+      "canonicalOperation": "refreshSource"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC04",
+      "consumerOperation": "ingestSourceEvidence",
+      "canonicalOperation": "ingestSourceEvidence"
+    },
+    {
+      "module": "MOD-SOURCE",
+      "action": "SRC04",
+      "consumerOperation": "reviseSourceRecord",
+      "canonicalOperation": "reviseSourceRecord"
+    }
+  ],
+  "status": "ADAPTER_IMPLEMENTED_SEE_EVIDENCE_FOR_TESTED_SUBSET"
+}

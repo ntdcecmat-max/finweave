@@ -1,0 +1,11 @@
+{
+  "id": "FW-PHYS-T1-DOMAIN-004",
+  "status": "EXPAND_DESIGN_SQL_NOT_RUN",
+  "tables": 86,
+  "columns": 988,
+  "foreignKeys": 161,
+  "newTables": 2,
+  "addedExistingColumns": 0,
+  "modelSha256": "2e38cc77e8581f7578224e90808ac9cd0b9acd47f844e5701a43f11d6655c6a3",
+  "previousModelSha256": "099b7a1c3ecb8cdb53ec430d6ee278b6ff58bd6a9ecda700b4894b55dd60c876"
+}

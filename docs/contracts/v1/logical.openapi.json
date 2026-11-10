@@ -24056,6 +24056,14 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 31
+          },
+          "skipMonths": {
+            "maxItems": 360,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+            }
           }
         },
         "required": [
@@ -24134,6 +24142,14 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 31
+                  },
+                  "skipMonths": {
+                    "maxItems": 360,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                    }
                   }
                 },
                 "required": [
@@ -24148,6 +24164,65 @@
                 "type": "null"
               }
             ]
+          },
+          "projection": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "type": "string",
+                "enum": [
+                  "savings",
+                  "assets",
+                  "independence"
+                ]
+              },
+              "profile": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "balanced",
+                  "growth"
+                ]
+              },
+              "targetBasis": {
+                "type": "string",
+                "enum": [
+                  "nominal",
+                  "today"
+                ]
+              },
+              "expenseMultiple": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "liquidMonths": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 24
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "target",
+                  "house",
+                  "shield",
+                  "travel",
+                  "flag",
+                  "graduation",
+                  "retirement"
+                ]
+              }
+            },
+            "required": [
+              "criterion",
+              "profile",
+              "targetBasis",
+              "expenseMultiple",
+              "liquidMonths",
+              "icon"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -24235,6 +24310,11 @@
           },
           "active": {
             "type": "boolean"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
           }
         },
         "required": [
@@ -24317,6 +24397,14 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 31
+                  },
+                  "skipMonths": {
+                    "maxItems": 360,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                    }
                   }
                 },
                 "required": [
@@ -24331,6 +24419,65 @@
                 "type": "null"
               }
             ]
+          },
+          "projection": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "type": "string",
+                "enum": [
+                  "savings",
+                  "assets",
+                  "independence"
+                ]
+              },
+              "profile": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "balanced",
+                  "growth"
+                ]
+              },
+              "targetBasis": {
+                "type": "string",
+                "enum": [
+                  "nominal",
+                  "today"
+                ]
+              },
+              "expenseMultiple": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "liquidMonths": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 24
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "target",
+                  "house",
+                  "shield",
+                  "travel",
+                  "flag",
+                  "graduation",
+                  "retirement"
+                ]
+              }
+            },
+            "required": [
+              "criterion",
+              "profile",
+              "targetBasis",
+              "expenseMultiple",
+              "liquidMonths",
+              "icon"
+            ],
+            "additionalProperties": false
           },
           "id": {
             "type": "string",
@@ -24427,6 +24574,11 @@
                 },
                 "active": {
                   "type": "boolean"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                 }
               },
               "required": [
@@ -33980,6 +34132,11 @@
                           "amount": {
                             "type": "string",
                             "pattern": "^-?\\d+(\\.\\d+)?$"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                           }
                         },
                         "required": [
@@ -33989,6 +34146,61 @@
                         ],
                         "additionalProperties": false
                       }
+                    },
+                    "projection": {
+                      "type": "object",
+                      "properties": {
+                        "criterion": {
+                          "type": "string",
+                          "enum": [
+                            "savings",
+                            "assets",
+                            "independence"
+                          ]
+                        },
+                        "profile": {
+                          "type": "string",
+                          "enum": [
+                            "cash",
+                            "balanced",
+                            "growth"
+                          ]
+                        },
+                        "targetBasis": {
+                          "type": "string",
+                          "enum": [
+                            "nominal",
+                            "today"
+                          ]
+                        },
+                        "expenseMultiple": {
+                          "type": "number"
+                        },
+                        "liquidMonths": {
+                          "type": "number"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "enum": [
+                            "target",
+                            "house",
+                            "shield",
+                            "travel",
+                            "flag",
+                            "graduation",
+                            "retirement"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "criterion",
+                        "profile",
+                        "targetBasis",
+                        "expenseMultiple",
+                        "liquidMonths",
+                        "icon"
+                      ],
+                      "additionalProperties": false
                     },
                     "contributionSchedule": {
                       "type": "object",
@@ -34010,6 +34222,13 @@
                           "type": "integer",
                           "minimum": -9007199254740991,
                           "maximum": 9007199254740991
+                        },
+                        "skipMonths": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "maxLength": 65536
+                          }
                         }
                       },
                       "required": [
@@ -34036,6 +34255,32 @@
                     "status",
                     "allocations",
                     "history"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "planningLinks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "goalId": {
+                      "type": "string",
+                      "maxLength": 65536
+                    },
+                    "planId": {
+                      "type": "string",
+                      "maxLength": 65536
+                    },
+                    "relation": {
+                      "type": "string",
+                      "const": "supports"
+                    }
+                  },
+                  "required": [
+                    "goalId",
+                    "planId",
+                    "relation"
                   ],
                   "additionalProperties": false
                 }
@@ -35020,6 +35265,11 @@
                           "amount": {
                             "type": "string",
                             "pattern": "^-?\\d+(\\.\\d+)?$"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                           }
                         },
                         "required": [
@@ -35029,6 +35279,61 @@
                         ],
                         "additionalProperties": false
                       }
+                    },
+                    "projection": {
+                      "type": "object",
+                      "properties": {
+                        "criterion": {
+                          "type": "string",
+                          "enum": [
+                            "savings",
+                            "assets",
+                            "independence"
+                          ]
+                        },
+                        "profile": {
+                          "type": "string",
+                          "enum": [
+                            "cash",
+                            "balanced",
+                            "growth"
+                          ]
+                        },
+                        "targetBasis": {
+                          "type": "string",
+                          "enum": [
+                            "nominal",
+                            "today"
+                          ]
+                        },
+                        "expenseMultiple": {
+                          "type": "number"
+                        },
+                        "liquidMonths": {
+                          "type": "number"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "enum": [
+                            "target",
+                            "house",
+                            "shield",
+                            "travel",
+                            "flag",
+                            "graduation",
+                            "retirement"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "criterion",
+                        "profile",
+                        "targetBasis",
+                        "expenseMultiple",
+                        "liquidMonths",
+                        "icon"
+                      ],
+                      "additionalProperties": false
                     },
                     "contributionSchedule": {
                       "type": "object",
@@ -35050,6 +35355,13 @@
                           "type": "integer",
                           "minimum": -9007199254740991,
                           "maximum": 9007199254740991
+                        },
+                        "skipMonths": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "maxLength": 65536
+                          }
                         }
                       },
                       "required": [
@@ -35076,6 +35388,32 @@
                     "status",
                     "allocations",
                     "history"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "planningLinks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "goalId": {
+                      "type": "string",
+                      "maxLength": 65536
+                    },
+                    "planId": {
+                      "type": "string",
+                      "maxLength": 65536
+                    },
+                    "relation": {
+                      "type": "string",
+                      "const": "supports"
+                    }
+                  },
+                  "required": [
+                    "goalId",
+                    "planId",
+                    "relation"
                   ],
                   "additionalProperties": false
                 }
@@ -36109,6 +36447,11 @@
                               "amount": {
                                 "type": "string",
                                 "pattern": "^-?\\d+(\\.\\d+)?$"
+                              },
+                              "date": {
+                                "type": "string",
+                                "format": "date",
+                                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                               }
                             },
                             "required": [
@@ -36118,6 +36461,61 @@
                             ],
                             "additionalProperties": false
                           }
+                        },
+                        "projection": {
+                          "type": "object",
+                          "properties": {
+                            "criterion": {
+                              "type": "string",
+                              "enum": [
+                                "savings",
+                                "assets",
+                                "independence"
+                              ]
+                            },
+                            "profile": {
+                              "type": "string",
+                              "enum": [
+                                "cash",
+                                "balanced",
+                                "growth"
+                              ]
+                            },
+                            "targetBasis": {
+                              "type": "string",
+                              "enum": [
+                                "nominal",
+                                "today"
+                              ]
+                            },
+                            "expenseMultiple": {
+                              "type": "number"
+                            },
+                            "liquidMonths": {
+                              "type": "number"
+                            },
+                            "icon": {
+                              "type": "string",
+                              "enum": [
+                                "target",
+                                "house",
+                                "shield",
+                                "travel",
+                                "flag",
+                                "graduation",
+                                "retirement"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "criterion",
+                            "profile",
+                            "targetBasis",
+                            "expenseMultiple",
+                            "liquidMonths",
+                            "icon"
+                          ],
+                          "additionalProperties": false
                         },
                         "contributionSchedule": {
                           "type": "object",
@@ -36139,6 +36537,13 @@
                               "type": "integer",
                               "minimum": -9007199254740991,
                               "maximum": 9007199254740991
+                            },
+                            "skipMonths": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 65536
+                              }
                             }
                           },
                           "required": [
@@ -36165,6 +36570,32 @@
                         "status",
                         "allocations",
                         "history"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "planningLinks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "goalId": {
+                          "type": "string",
+                          "maxLength": 65536
+                        },
+                        "planId": {
+                          "type": "string",
+                          "maxLength": 65536
+                        },
+                        "relation": {
+                          "type": "string",
+                          "const": "supports"
+                        }
+                      },
+                      "required": [
+                        "goalId",
+                        "planId",
+                        "relation"
                       ],
                       "additionalProperties": false
                     }
@@ -69617,6 +70048,14 @@
                           "type": "integer",
                           "minimum": 1,
                           "maximum": 31
+                        },
+                        "skipMonths": {
+                          "maxItems": 360,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                          }
                         }
                       },
                       "required": [
@@ -69631,6 +70070,65 @@
                       "type": "null"
                     }
                   ]
+                },
+                "projection": {
+                  "type": "object",
+                  "properties": {
+                    "criterion": {
+                      "type": "string",
+                      "enum": [
+                        "savings",
+                        "assets",
+                        "independence"
+                      ]
+                    },
+                    "profile": {
+                      "type": "string",
+                      "enum": [
+                        "cash",
+                        "balanced",
+                        "growth"
+                      ]
+                    },
+                    "targetBasis": {
+                      "type": "string",
+                      "enum": [
+                        "nominal",
+                        "today"
+                      ]
+                    },
+                    "expenseMultiple": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 100
+                    },
+                    "liquidMonths": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 24
+                    },
+                    "icon": {
+                      "type": "string",
+                      "enum": [
+                        "target",
+                        "house",
+                        "shield",
+                        "travel",
+                        "flag",
+                        "graduation",
+                        "retirement"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "criterion",
+                    "profile",
+                    "targetBasis",
+                    "expenseMultiple",
+                    "liquidMonths",
+                    "icon"
+                  ],
+                  "additionalProperties": false
                 },
                 "id": {
                   "type": "string",
@@ -69727,6 +70225,11 @@
                       },
                       "active": {
                         "type": "boolean"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                       }
                     },
                     "required": [
@@ -70174,6 +70677,14 @@
                               "type": "integer",
                               "minimum": 1,
                               "maximum": 31
+                            },
+                            "skipMonths": {
+                              "maxItems": 360,
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                              }
                             }
                           },
                           "required": [
@@ -70188,6 +70699,65 @@
                           "type": "null"
                         }
                       ]
+                    },
+                    "projection": {
+                      "type": "object",
+                      "properties": {
+                        "criterion": {
+                          "type": "string",
+                          "enum": [
+                            "savings",
+                            "assets",
+                            "independence"
+                          ]
+                        },
+                        "profile": {
+                          "type": "string",
+                          "enum": [
+                            "cash",
+                            "balanced",
+                            "growth"
+                          ]
+                        },
+                        "targetBasis": {
+                          "type": "string",
+                          "enum": [
+                            "nominal",
+                            "today"
+                          ]
+                        },
+                        "expenseMultiple": {
+                          "type": "number",
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "liquidMonths": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 24
+                        },
+                        "icon": {
+                          "type": "string",
+                          "enum": [
+                            "target",
+                            "house",
+                            "shield",
+                            "travel",
+                            "flag",
+                            "graduation",
+                            "retirement"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "criterion",
+                        "profile",
+                        "targetBasis",
+                        "expenseMultiple",
+                        "liquidMonths",
+                        "icon"
+                      ],
+                      "additionalProperties": false
                     },
                     "id": {
                       "type": "string",
@@ -70284,6 +70854,11 @@
                           },
                           "active": {
                             "type": "boolean"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                           }
                         },
                         "required": [
@@ -70653,6 +71228,14 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 31
+                  },
+                  "skipMonths": {
+                    "maxItems": 360,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                    }
                   }
                 },
                 "required": [
@@ -70667,6 +71250,65 @@
                 "type": "null"
               }
             ]
+          },
+          "projection": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "type": "string",
+                "enum": [
+                  "savings",
+                  "assets",
+                  "independence"
+                ]
+              },
+              "profile": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "balanced",
+                  "growth"
+                ]
+              },
+              "targetBasis": {
+                "type": "string",
+                "enum": [
+                  "nominal",
+                  "today"
+                ]
+              },
+              "expenseMultiple": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "liquidMonths": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 24
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "target",
+                  "house",
+                  "shield",
+                  "travel",
+                  "flag",
+                  "graduation",
+                  "retirement"
+                ]
+              }
+            },
+            "required": [
+              "criterion",
+              "profile",
+              "targetBasis",
+              "expenseMultiple",
+              "liquidMonths",
+              "icon"
+            ],
+            "additionalProperties": false
           },
           "id": {
             "type": "string",
@@ -70763,6 +71405,11 @@
                 },
                 "active": {
                   "type": "boolean"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                 }
               },
               "required": [
@@ -71133,6 +71780,14 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 31
+                      },
+                      "skipMonths": {
+                        "maxItems": 360,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                        }
                       }
                     },
                     "required": [
@@ -71147,6 +71802,65 @@
                     "type": "null"
                   }
                 ]
+              },
+              "projection": {
+                "type": "object",
+                "properties": {
+                  "criterion": {
+                    "type": "string",
+                    "enum": [
+                      "savings",
+                      "assets",
+                      "independence"
+                    ]
+                  },
+                  "profile": {
+                    "type": "string",
+                    "enum": [
+                      "cash",
+                      "balanced",
+                      "growth"
+                    ]
+                  },
+                  "targetBasis": {
+                    "type": "string",
+                    "enum": [
+                      "nominal",
+                      "today"
+                    ]
+                  },
+                  "expenseMultiple": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  "liquidMonths": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 24
+                  },
+                  "icon": {
+                    "type": "string",
+                    "enum": [
+                      "target",
+                      "house",
+                      "shield",
+                      "travel",
+                      "flag",
+                      "graduation",
+                      "retirement"
+                    ]
+                  }
+                },
+                "required": [
+                  "criterion",
+                  "profile",
+                  "targetBasis",
+                  "expenseMultiple",
+                  "liquidMonths",
+                  "icon"
+                ],
+                "additionalProperties": false
               },
               "id": {
                 "type": "string",
@@ -71243,6 +71957,11 @@
                     },
                     "active": {
                       "type": "boolean"
+                    },
+                    "date": {
+                      "type": "string",
+                      "format": "date",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
                     }
                   },
                   "required": [
@@ -71559,6 +72278,14 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 31
+                  },
+                  "skipMonths": {
+                    "maxItems": 360,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                    }
                   }
                 },
                 "required": [
@@ -71573,6 +72300,65 @@
                 "type": "null"
               }
             ]
+          },
+          "projection": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "type": "string",
+                "enum": [
+                  "savings",
+                  "assets",
+                  "independence"
+                ]
+              },
+              "profile": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "balanced",
+                  "growth"
+                ]
+              },
+              "targetBasis": {
+                "type": "string",
+                "enum": [
+                  "nominal",
+                  "today"
+                ]
+              },
+              "expenseMultiple": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "liquidMonths": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 24
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "target",
+                  "house",
+                  "shield",
+                  "travel",
+                  "flag",
+                  "graduation",
+                  "retirement"
+                ]
+              }
+            },
+            "required": [
+              "criterion",
+              "profile",
+              "targetBasis",
+              "expenseMultiple",
+              "liquidMonths",
+              "icon"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -71715,6 +72501,14 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 31
+                      },
+                      "skipMonths": {
+                        "maxItems": 360,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                        }
                       }
                     },
                     "required": [
@@ -71729,6 +72523,65 @@
                     "type": "null"
                   }
                 ]
+              },
+              "projection": {
+                "type": "object",
+                "properties": {
+                  "criterion": {
+                    "type": "string",
+                    "enum": [
+                      "savings",
+                      "assets",
+                      "independence"
+                    ]
+                  },
+                  "profile": {
+                    "type": "string",
+                    "enum": [
+                      "cash",
+                      "balanced",
+                      "growth"
+                    ]
+                  },
+                  "targetBasis": {
+                    "type": "string",
+                    "enum": [
+                      "nominal",
+                      "today"
+                    ]
+                  },
+                  "expenseMultiple": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  "liquidMonths": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 24
+                  },
+                  "icon": {
+                    "type": "string",
+                    "enum": [
+                      "target",
+                      "house",
+                      "shield",
+                      "travel",
+                      "flag",
+                      "graduation",
+                      "retirement"
+                    ]
+                  }
+                },
+                "required": [
+                  "criterion",
+                  "profile",
+                  "targetBasis",
+                  "expenseMultiple",
+                  "liquidMonths",
+                  "icon"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
@@ -71939,6 +72792,14 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 31
+                      },
+                      "skipMonths": {
+                        "maxItems": 360,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                        }
                       }
                     },
                     "required": [
@@ -71953,6 +72814,65 @@
                     "type": "null"
                   }
                 ]
+              },
+              "projection": {
+                "type": "object",
+                "properties": {
+                  "criterion": {
+                    "type": "string",
+                    "enum": [
+                      "savings",
+                      "assets",
+                      "independence"
+                    ]
+                  },
+                  "profile": {
+                    "type": "string",
+                    "enum": [
+                      "cash",
+                      "balanced",
+                      "growth"
+                    ]
+                  },
+                  "targetBasis": {
+                    "type": "string",
+                    "enum": [
+                      "nominal",
+                      "today"
+                    ]
+                  },
+                  "expenseMultiple": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  "liquidMonths": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 24
+                  },
+                  "icon": {
+                    "type": "string",
+                    "enum": [
+                      "target",
+                      "house",
+                      "shield",
+                      "travel",
+                      "flag",
+                      "graduation",
+                      "retirement"
+                    ]
+                  }
+                },
+                "required": [
+                  "criterion",
+                  "profile",
+                  "targetBasis",
+                  "expenseMultiple",
+                  "liquidMonths",
+                  "icon"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
@@ -72115,6 +73035,14 @@
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 31
+                          },
+                          "skipMonths": {
+                            "maxItems": 360,
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                            }
                           }
                         },
                         "required": [
@@ -72129,6 +73057,65 @@
                         "type": "null"
                       }
                     ]
+                  },
+                  "projection": {
+                    "type": "object",
+                    "properties": {
+                      "criterion": {
+                        "type": "string",
+                        "enum": [
+                          "savings",
+                          "assets",
+                          "independence"
+                        ]
+                      },
+                      "profile": {
+                        "type": "string",
+                        "enum": [
+                          "cash",
+                          "balanced",
+                          "growth"
+                        ]
+                      },
+                      "targetBasis": {
+                        "type": "string",
+                        "enum": [
+                          "nominal",
+                          "today"
+                        ]
+                      },
+                      "expenseMultiple": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 100
+                      },
+                      "liquidMonths": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 24
+                      },
+                      "icon": {
+                        "type": "string",
+                        "enum": [
+                          "target",
+                          "house",
+                          "shield",
+                          "travel",
+                          "flag",
+                          "graduation",
+                          "retirement"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "criterion",
+                      "profile",
+                      "targetBasis",
+                      "expenseMultiple",
+                      "liquidMonths",
+                      "icon"
+                    ],
+                    "additionalProperties": false
                   }
                 },
                 "required": [
@@ -72819,6 +73806,59 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 500
+          },
+          "assessment": {
+            "type": "object",
+            "properties": {
+              "monthlyExpense": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "pattern": "^(0|[1-9]\\d{0,17})$"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "const": "VND"
+                  }
+                },
+                "required": [
+                  "value",
+                  "currency"
+                ],
+                "additionalProperties": false
+              },
+              "debt": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "pattern": "^(0|[1-9]\\d{0,17})$"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "const": "VND"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "currency"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "monthlyExpense",
+              "debt"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -72903,6 +73943,59 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 500
+              },
+              "assessment": {
+                "type": "object",
+                "properties": {
+                  "monthlyExpense": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "pattern": "^(0|[1-9]\\d{0,17})$"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "const": "VND"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "currency"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "debt": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^(0|[1-9]\\d{0,17})$"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "const": "VND"
+                          }
+                        },
+                        "required": [
+                          "value",
+                          "currency"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "monthlyExpense",
+                  "debt"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [

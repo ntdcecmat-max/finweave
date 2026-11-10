@@ -1,0 +1,189 @@
+[
+  {
+    "operationId": "listCoverage",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYN_REQ_listCoverage",
+      "workspaceId": "SYN_WS",
+      "operationId": "listCoverage",
+      "input": {
+        "accountIds": null,
+        "page": {
+          "cursor": null,
+          "pageSize": 50
+        }
+      },
+      "mutation": null
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYN_REQ_listCoverage",
+      "workspaceVersion": 7,
+      "data": {
+        "items": [
+          {
+            "accountId": "SYN_ACCOUNT",
+            "trackingStart": "2026-10-01",
+            "lastObserved": "2026-10-09T09:00:00Z",
+            "lastAck": null,
+            "gapCount": 1,
+            "hasOpenGap": true
+          }
+        ],
+        "page": {
+          "nextCursor": null,
+          "snapshotId": "SYN_COVERAGE_SNAPSHOT",
+          "asOf": "2026-10-09T10:00:00Z",
+          "coverageVersion": 8,
+          "recoveryEpoch": 2
+        }
+      }
+    }
+  },
+  {
+    "operationId": "listCoverageGaps",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYN_REQ_listCoverageGaps",
+      "workspaceId": "SYN_WS",
+      "operationId": "listCoverageGaps",
+      "input": {
+        "accountIds": null,
+        "page": {
+          "cursor": null,
+          "pageSize": 50
+        },
+        "periodStart": null,
+        "periodEndExclusive": null
+      },
+      "mutation": null
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "SYN_REQ_listCoverageGaps",
+      "workspaceVersion": 7,
+      "data": {
+        "items": [
+          {
+            "id": "SYN_GAP",
+            "accountId": "SYN_ACCOUNT",
+            "sourceId": "SYN_SOURCE",
+            "deviceId": null,
+            "start": "2026-10-09T09:00:00Z",
+            "end": null,
+            "reason": "NETWORK_GAP"
+          }
+        ],
+        "page": {
+          "nextCursor": null,
+          "snapshotId": "SYN_COVERAGE_SNAPSHOT",
+          "asOf": "2026-10-09T10:00:00Z",
+          "coverageVersion": 8,
+          "recoveryEpoch": 2
+        }
+      }
+    }
+  },
+  {
+    "operationId": "getSyncState",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "getSyncState",
+      "input": {
+        "lastKnownVersion": 0
+      },
+      "mutation": null
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": 0,
+      "data": {
+        "workspaceVersion": 0,
+        "asOf": "2026-10-08",
+        "changed": true,
+        "deviceIds": [],
+        "coverage": [],
+        "recoveryEpoch": 0,
+        "coverageComplete": true,
+        "deviceIdsComplete": true
+      }
+    },
+    "scope": "SYNTHETIC SHAPE ONLY; signatures/password/code are NOT live credentials or security vectors"
+  },
+  {
+    "operationId": "previewImport",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "previewImport",
+      "input": {
+        "accountId": "A-BANK",
+        "fileName": "synthetic.csv",
+        "csv": "date,amount,description,reference\n2026-10-12,100000,Thu khác,DEMO-NEW",
+        "mapping": {
+          "date": "Date",
+          "amount": "Amount",
+          "description": "Description",
+          "reference": "Reference",
+          "dateFormat": "yyyy-MM-dd",
+          "amountFormat": "signed_integer_vnd",
+          "encoding": "UTF-8"
+        },
+        "expectedWorkspaceVersion": 10
+      },
+      "mutation": null
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": 0,
+      "data": {
+        "id": "IP-01",
+        "previewToken": "PT-import-01",
+        "expiresAt": "2026-10-31T18:10:00+07:00",
+        "workspaceVersion": 10,
+        "fileDigest": "1054b9980b433f94ff46a22632dbfdcc0a23f6127d6c37905f3268ae0729496b",
+        "mappingDigest": "482a2ebd55f761e3142f48828cdd3f550816af6a56ed0f96071afc7116ac6533",
+        "profileVersion": "csv-demo-v1",
+        "mappingVersion": 1,
+        "accountId": "A-BANK",
+        "rows": [
+          {
+            "id": "ROW-01",
+            "index": 1,
+            "rawEvidenceId": "EV-raw-01",
+            "status": "valid",
+            "normalized": {
+              "kind": "income",
+              "amount": {
+                "value": "100000",
+                "currency": "VND"
+              },
+              "date": "2026-10-12",
+              "accountId": "A-BANK",
+              "description": "Ăn trưa giả lập",
+              "category": "Thu khác",
+              "posting": "posted",
+              "reference": null
+            },
+            "errors": [],
+            "matchedEventId": null
+          }
+        ],
+        "quality": {
+          "status": "complete",
+          "sourceIds": [
+            "S-BANK"
+          ],
+          "asOf": "2026-10-31T18:00:00+07:00",
+          "reasons": []
+        }
+      }
+    },
+    "scope": "SYNTHETIC SHAPE ONLY; signatures/password/code are NOT live credentials or security vectors"
+  }
+]

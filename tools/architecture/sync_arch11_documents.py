@@ -1,0 +1,59 @@
+"""Sync current overview docs. Never alter prior sealed packages or runtime source."""
+from pathlib import Path
+import json, os, re
+R=Path(__file__).resolve().parents[2]
+E=R/'docs/execution/evidence/arch-11-sources-2026-10-09'
+
+def link(p,n):return os.path.relpath(R/n,p.parent).replace('\\','/')
+def main():
+    names=json.loads((R/'docs/execution/evidence/arch-10-android-2026-10-09/current-documents.json').read_text(encoding='utf-8'))['files']+['docs/handover/operational-decisions.md']
+    sections={
+      'README.md':'Nguồn thật chưa activate. Giữ mọi feature; synthetic/manual/CSV là baseline. SSI V3 read-only là ứng viên PoC, VCB/MoMo chưa owner-selected, PNJ/SJC chưa xác minh automation/license. Không runtime frontend/backend/native change.',
+      'docs/architecture/README.md':'ARCH11 source architecture SPECIFIED với32 requirements/32 runtime cases NOT RUN; ARCH12 Agent tiếp theo, ARCH13 vận hành. Provider shortlist không phải live support hoặc owner entitlement.',
+      'docs/architecture/architecture-decision-agenda.md':'ARCH-11 ACCEPTED SOURCE INTEGRATION DESIGN trong hướng đã duyệt; real provider/app/device/rights/quota còn gates. ARCH-12…13 REVIEW PENDING.',
+      'docs/architecture/android-collector.md':'App signer/version/template/finality phải verified trước supported=true. Unbound/ambiguous không upload fake binding: local warning+gap; bound incomplete đúng DTO đi server Review. Raw/OTP không disk/server/model/chat.',
+      'docs/architecture/deployment-topology.md':'Market worker chỉ egress read-only provider origin/routes đã duyệt; no provider secret trong web/APK/admin. Public gold page không tự là API. Host timer không hứa source ready hoặc total fee0.',
+      'docs/architecture/environment-matrix.md':'I0 synthetic không calls; REAL source cần access/rights/quota/units/basis/time/retention/native PoC evidence. Không auto production fallback khi SSI UAT chưa available; account/key/endpoint chưa provision.',
+      'docs/architecture/high-level-design.md':'Ingestion/native parser normalize và giữ provenance; server Engine actual authority. Market adapter/quota/entitlement isolate khỏi clients; stock/gold quote không ghi cash/quantity. Source coverage không là bank statement.',
+      'docs/architecture/low-level-design.md':'Source registry/profile/rights snapshots versioned, private metadata schemas; scaled VND/sourceUnit stored, exact canonical valuation trong Engine. Missing time/finality/unit reject new quote, last-good giữ nguyên. API no lifecycle field, không fabricate.',
+      'docs/architecture/module-high-level-design.md':'Market owns quote/profile/entitlement adapters; Ingestion owns support/bindings/source records; Engine owns posting/correction. Private entitlement registered payload Market, no genericCRUD/cross-module bypass.',
+      'docs/architecture/tech-stack.md':'Fastify TS provider adapters + built-in Kotlin parser. SSI V3 candidate, không V2 SDK baseline. Vnstock optional connector chưa cài/chọn, software license khác data rights. Không thêm Python sidecar/dependency ở task này.',
+      'docs/architecture/views/architecture-views.md':'Notification→native profile/binding→normalized receipt→Engine/Review; provider→MarketQuota/rights→quote observation→valuation snapshot→user. Admin chỉ health projection; Agent chỉ scoped allowed derived fields theo cả privacy và source license.',
+      'docs/contracts/README.md':'API004153operations634schemas giữ nguyên; upstream SSI V3 không đổi FinWeave API v2.0.0. DB wallet→wire legacy bank grouping. Unbound no receipt; extra lifecycle/public subtype cần revision trước implementation.',
+      'docs/data/data-requirements.md':'Quote stored scale-expanded VND/sourceUnit; source scale/time precision/rights/profile frozen private metadata. Raw upstream body/notification không persistence mặc định. License retention/backup incompatibility blocks activation, không tự xóa history.',
+      'docs/data/logical-data-model.md':'DB00587tables1001cols162FK giữ nguyên; Market entitlement private payload registry addendum và quote profile_snapshot schemas SPECIFIED. Native masked discriminator không phải field mới trên collector_bindings wire.',
+      'docs/governance/artifact-register.md':'Register FW-SOURCES-DESIGN-001 / FW-SOURCES-POLICY-001 / FW-SOURCE-REGISTRY-001 / FW-SOURCES-RTM-001 / ADR018; source implementation bundle pins API004/DB005/Android. Prior manifests remain immutable historical evidence.',
+      'docs/handover/README.md':'Bổ sung Sources package và32 source runtime gates NOT RUN. Provider shortlist/read public docs không là actual integration hoặc rights approval. Giữ r1/r2 snapshots và lịch sử kết quả trước.',
+      'docs/product/ai-agent-specification.md':'ARCH12 sẽ chốt Agent. Hiện source derived data/forecast/model egress cần entitlement use-specific; raw/OTP/transactionRef/accountRef/provider secrets không gửi model. Thiếu live data trả unavailable và assumptions có nhãn; Agent chỉ Plan–Goals draft/apply được owner xác nhận, không actual.',
+      'docs/product/backend-backlog.md':'Giữ toàn bộ feature và 41 AC; thêm SRC-01…SRC-32 cho source adapters/support/finality/binding/economic dedupe/unit/time/rights/quota/fallback/restore. Không drop feature khi real source gate chưa đủ; build synthetic ports trước.',
+      'docs/product/business-rules.md':'SRC-06/08/10/12: unbound local warning, pending không actual, transport≠economic dedupe, internal transfer không expense+income double count. SRC-18…SRC-26: exact unit/profile/time/rights/quota; client compatible không authority.',
+      'docs/product/cost-model.md':'External budget vẫn0. SSI currently API fee0 theo FAQ09/10 không chứng minh total SaaS cost0 hoặc redisplay license; PNJ/SJC rights/quota chưa biết. Vnstock phần mềm/nguồn upstream tách phí/quyền. Không signup/buy/call real.',
+      'docs/requirements/context-model.md':'Bank/wallet app external notifications là observed evidence, không full statement/cryptographic bank verification. Market provider là external licensed read-only source; owner/source selection/consent/rights là gates riêng.',
+      'docs/requirements/srs.md':'SRC-01…SRC-32 giữ mọi feature và 41 AC gốc; hỗ trợ thật phải package/signer/template/device+finality verified. Daily job attempt khác giá fresh daily; missing/failure giữ last-good/Review/gap thay zero hoặc simulated live.',
+      'docs/security/security-design.md':'T1 giữ nguyên. Source egress default deny, read-only secrets, shared-key quota, no raw/error-body log. Rights/history/backup/LLM use-specific; native signature không bank proof. Private refs không app-admin.',
+      'docs/testing/integration-handover.md':'Consumer source mapping exact API004/DB005 thêm schemas private metadata; runtime frontend hybrid cần adapter riêng. 32 source cases NOT RUN; không suy source support từ historical67browser/131unit.',
+      'docs/testing/technical-spikes.md':'Source PoC: local synthetic listener→receipt, owner-selected app/device finality/multi-account, authorized SSI scale/time/paging/quota, authorized gold unit/profile/time, rights/history/model/backup + restore. Chưa gọi provider hay dùng dữ liệu thật.',
+      'docs/design/android-ui-specification.md':'UI-M phải phân source supported/permission/binding/coverage; ambiguous/unbound local warning chưa có cloud receipt. Pending/incomplete có binding dùng Review; không tự hiển thị lifecycle subtype API không trả. Không sửa màn UI/runtime trong task này.',
+      'docs/handover/operational-decisions.md':'Cập nhật source desk review09/10: SSI FastConnect V3 là current candidate (V2 references lịch sử). Fee API hiện0 theo FAQ, rights SaaS/quota/scale/time thực chưa verified. VCB/MoMo candidate supported=false; source lựa chọn/app/device/entitlement chưa chốt.',
+    }
+    assert set(names)==set(sections)
+    for name in names:
+        p=R/name;s=p.read_text(encoding='utf-8')
+        # Rerunnable only our exact newest notice/section; historical ARCH05–10 stays.
+        s=re.sub(r'^> \*\*ARCH-11 hiện hành[^\n]*\n\n','',s)
+        s=re.sub(r'\n## ARCH-11 — Source integration handover\n.*\Z','',s,flags=re.S)
+        notice=f'> **ARCH-11 hiện hành — 09/10/2026:** [Sources]({link(p,"docs/sources/README.md")}), [ADR018]({link(p,"docs/architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md")}) và [bundle pin]({link(p,"docs/sources/implementation-bundle.json")}). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.\n\n'
+        if name=='docs/architecture/architecture-decision-agenda.md':
+            s=s.replace('ARCH-10 ACCEPTED ANDROID DESIGN; ARCH-11…13 REVIEW PENDING','ARCH-10 ACCEPTED ANDROID DESIGN; ARCH-11 ACCEPTED SOURCE INTEGRATION DESIGN; ARCH-12…13 REVIEW PENDING',1)
+            s=s.replace('| ARCH-11 Sources | App ngân hàng/ví thực dùng; stock/gold license/profile/side/unit/time/cache | Mẫu có consent, parser/version/quota; quyền automation/redistribution | Provider/collector specs |','| ARCH-11 Sources — ACCEPTED INTEGRATION DESIGN | Versioned parser/binding/finality, market units/time/rights/quota, exact API004/DB005 mappings |32source cases NOT RUN; provider/app/device/entitlement real unverified, không auto activate |[Sources](../sources/README.md)/[ADR018](adr/ADR-018-verified-source-profiles-and-market-entitlements.md)/[report](ARCH-11-change-report.md) |')
+        if name=='docs/handover/operational-decisions.md':
+            s=s.replace('| Cổ phiếu VN | SSI FastConnect Data là ứng viên đầu tiên cho catalogue/quote authorized; trước đó synthetic catalogue FPT/VCB/HPG có nhãn giả. Fallback owner manual dated quote, không tự gọi scrape/Yahoo không rõ quyền | API cần ConsumerID/secret; phí, rate limits, redistribution/cache entitlement chưa xác minh công khai đủ cho FinWeave. Credential để trống, external calls0 cho tới terms được duyệt; source429 backoff và giữ last-good | **Cần entitlement + PoC**, chưa live supported |',
+              '| Cổ phiếu VN | SSI FastConnect **V3 read-only** là ứng viên đầu tiên; không dùng V2 làm adapter mới. Synthetic/manual vẫn baseline | SSI FAQ09/10 ghi hiện không phí API và cần tài khoản SSI; quota thực/rights SaaS/cache/history/scale/time chưa xác minh. Keys để trống, external calls0; không trading hoặc tự đăng ký | **Cần entitlement + PoC**, chưa live supported |')
+            s=s.replace('Nguồn thị trường: [SSI kết nối](https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-data/huong-dan-ket-noi) xác nhận API và credentials, chưa xác nhận quyền tái phân phối/fee/rate limit cho dự án; [PNJ bảng giá](https://www.pnj.com.vn/blog/gia-vang/) xác nhận có công bố giá, không API license. Không copy bảng giá live vào fixtures trong lượt này.',
+              'Nguồn thị trường cập nhật09/10: [SSI V3 overview](https://developers.ssi.com.vn/docs/faq/service-overview), [V2→V3](https://developers.ssi.com.vn/docs/faq/v2-to-v3-migration) và [research sources](../sources/research-sources.json). V2 guide là lịch sử; fee API hiện0 chưa là grant SaaS/retention. [PNJ](https://www.pnj.com.vn/blog/gia-vang/) công bố giá, không chứng minh public API/license. Không copy giá live làm fixtures.')
+        s=notice+s.rstrip()+'\n\n## ARCH-11 — Source integration handover\n\n'+sections[name]+f'\n\n[Source design]({link(p,"docs/sources/README.md")}) · [Acceptance32 NOT RUN]({link(p,"docs/sources/acceptance-plan.md")}) · [Báo cáo ARCH11]({link(p,"docs/architecture/ARCH-11-change-report.md")}).\n'
+        p.write_text(s,encoding='utf-8')
+    (E/'current-documents.json').write_text(json.dumps({'date':'2026-10-09','files':names},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps({'currentDocuments':len(names),'runtime':'NOT_RUN'}))
+
+if __name__=='__main__':main()

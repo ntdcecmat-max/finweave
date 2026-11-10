@@ -1,0 +1,8 @@
+{
+  "id": "FW-API-T1-D1J2-005",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "operations": 153,
+  "schemas": 634,
+  "openapiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+  "previousOpenapiSha256": "c873127da5b4680dfd2535f518c09807532c47eef88d6b0d3a8fed1bc7bc1ca6"
+}

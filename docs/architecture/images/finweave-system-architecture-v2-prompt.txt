@@ -1,0 +1,57 @@
+Generate a NEW, complete, technically precise Vietnamese system architecture infographic for FinWeave, replacing an earlier incomplete architecture illustration. Use-case: infographic-diagram. A large high-resolution landscape or near-square canvas approximately 2400x1900, white background, dark navy headings, crisp sans-serif Vietnamese with accurate diacritics, subtle blue/teal group backgrounds, purple AI lane, orange external sources, orthogonal arrows. Readability and explicit arrow endpoints are critical. No vague spaghetti diagram. Use labeled horizontal swimlanes with generous whitespace. Repeated names such as Financial Engine, API and Snapshot represent the SAME shared logical components across lanes, not different services; include a small legend "Tên module lặp lại = cùng một thành phần dùng chung". Do not add unrelated modules.
+
+TITLE "FINWEAVE — KIẾN TRÚC & LUỒNG DỮ LIỆU"
+Subtitle "Bản cập nhật 08/10/2026 • Thiết kế mục tiêu, chưa triển khai đầy đủ"
+
+TOP STRIP: three large surface cards.
+"USER WEB" with short caption "React / Vite • 5 mục điều hướng • Nhập tay / CSV • Chat & Plan/Goals".
+"USER ANDROID" with caption "React + Capacitor • APK ký số • UI tài chính đầy đủ".
+"ADMIN WEB" with caption "Ứng dụng, phiên và quyền riêng".
+Web and Android each have double-headed short arrows to a shared horizontal blue bar "USER API — Xác thực • Phân quyền theo chủ sở hữu • Identity / Devices • Consent".
+Admin has a separate short double-headed arrow to an independent bar "OPS API — Chỉ metadata vận hành".
+Clearly show backend boundary below with label "BACKEND MODULAR MONOLITH — Các module dùng chung".
+Do not cram all below connections through these top gateway cards; each lane explicitly labels API access locally.
+
+LANE 1, largest, teal/orange, heading "01  THEO DÕI GIÁ CỔ PHIẾU & VÀNG".
+Use TWO clean rows:
+First row left-to-right:
+Two small stacked trigger boxes "Lịch hằng ngày" and "User bấm cập nhật → User API", both converge on "Durable jobs" caption "Quota • Lease • Retry", then arrow "yêu cầu" to "Provider adapter", then double-headed arrow to TWO external stacked cards "API giá cổ phiếu" and "API giá vàng". Label arrow toward external API "HTTPS request" and response arrow returning to adapter "Giá + thời điểm + đơn vị". External APIs are orange and explicitly outside the backend boundary or in a labeled external region "Nguồn ngoài • Chưa chốt nhà cung cấp". Adapter must visibly call BOTH APIs and receive their response; never leave external cards disconnected. API keys live server-side, caption "Khóa API ở server".
+Second row:
+From Provider adapter draw a clearly traceable downward arrow to "Kiểm tra & chuẩn hóa" caption "Mã / loại vàng • Đơn vị • Nguồn • quoteAsOf", then arrow to "Kho giá & lịch sử" caption "Giữ giá hợp lệ gần nhất", then arrow to "Financial Engine" caption "Định giá tài sản", then arrow to "Snapshot / User API", then arrow to "WEB + ANDROID" caption "Giá • Giá trị • Lịch sử • Trạng thái cập nhật".
+A small input box adjacent below Engine "Holdings" caption "Cổ phiếu: mã + số lượng | Vàng: loại + số chỉ" with incoming short arrow labeled "User API" from a small "Người dùng nhập" tag, and arrow Holdings → Engine labeled "Số lượng nắm giữ". Clearly show Engine receives both prices AND holdings. This is portfolio tracking, no broker/trading/order API.
+Footnote inside this lane "Lỗi nguồn: giữ giá cũ, báo thời điểm / thiếu giá • Giá thay đổi không tạo giao dịch Ledger".
+
+LANE 2, blue, heading "02  GIAO DỊCH & ĐỒNG BỘ ANDROID".
+Main row:
+"Thông báo ngân hàng / ví" → "Kotlin collector" caption "Quyền OS • Allowlist • Gắn tài khoản • Lọc nhạy cảm" → "Outbox mã hóa" caption "Keystore • Lưu bền vững" → "WorkManager" caption "Gửi nền • Offline / Retry" → "Ingestion API" caption "Receipt • Parser • Chống trùng" → "Ledger" caption "Ghi sổ nguyên tử" → "Financial Engine → Snapshot / API → Web + Android".
+Include a small "Review → User xác nhận" branch from Ingestion, rejoining validated posting before Ledger.
+Include secondary input box "Nhập tay / CSV qua User API" connecting through "Kiểm tra / Review" into Ledger. No bypass validation.
+Small bottom lane note "Collector độc lập WebView • ACK receipt ≠ đã ghi sổ • Device API: kết nối, coverage, thu hồi".
+No fake bank API connection. Notification is observed Android data.
+
+LANE 3, purple, heading "03  ASSISTANT HỢP NHẤT & PLAN / GOALS".
+Main row left-to-right:
+"Web / Android" caption "Chat • Lịch sử • Linh vật • Plan/Goals" → "User API" → "Assistant" caption "Hỏi–đáp + Agent đa bước" → "Tools có phân quyền" → "Engine & Draft" caption "Đọc snapshot • Hỏi thêm • Mô phỏng • So sánh".
+Attach separate small card "Model endpoint" below Assistant with double-headed arrow to Assistant only. Caption "Local PoC / Endpoint được đánh giá".
+Next clear continuation row "Đề xuất bản nháp" → "Người dùng xem trước & xác nhận" → "Plan / Goals service" caption "Kiểm tra lại phiên bản • Commit nguyên tử" → "Snapshot / API → Web + Android".
+Small note "AI chỉ tạo draft; không ghi Ledger hoặc xác nhận thay người dùng • Model lỗi: vẫn dùng kế hoạch thủ công".
+
+LANE 4, gray/blue, heading "04  VẬN HÀNH & QUẢN TRỊ".
+"Admin Web" → "Ops API" → wide box "Nguồn / Parser • Jobs & Retry • Quota • Thiết bị (metadata) • Phiên bản APK • Sự cố & Audit".
+Short arrow from this operational box to a small "Điều khiển job / nguồn" card, labeled "Retry / Tạm ngừng + Audit".
+Bold restriction "Không đọc số dư, giao dịch riêng, chat, thông báo thô; không đăng nhập thay user".
+Do not connect Admin or Ops directly to Ledger or financial storage.
+
+BOTTOM SHARED PERSISTENCE BAR with database cylinder:
+"POSTGRESQL — DỮ LIỆU DÙNG CHUNG" caption "Identity / Devices • Ledger • Holdings • Quotes / History • Plans / Drafts • Conversations • Jobs / Receipts • Audit".
+Use a single connection labeled "Các module backend đọc / ghi theo quyền" from backend outline down to persistence. Do not draw a network of tangled crossing storage arrows.
+Below storage a small thin bar "Đồng bộ client: snapshot có phiên bản • polling khi foreground • refresh-on-focus • báo dữ liệu cũ / khoảng trống".
+
+FOOTER with concise deployment choices and reasons in FOUR small cells:
+"Vercel — User Web + Admin Web | Phân phối giao diện tĩnh"
+"Render / Fastify — API + xử lý job | Tập trung nghiệp vụ"
+"Supabase — PostgreSQL + Cron | Giao dịch & lịch bền vững"
+"Android — Capacitor + Kotlin | UI dùng lại & thu thập native"
+Final line "Cloud đề xuất chỉ cho dữ liệu giả lập. Dữ liệu thật còn chờ giải quyết PROTECTED-REAL, phân phối client tin cậy và quản lý khóa."
+
+Accuracy above all: external stock and gold APIs must have explicit request/response connection to adapter; adapter response validation to persistent quotes to Engine to user interfaces must be complete. User holdings and market prices are separate inputs. Manual and scheduled refresh share jobs. No arrow AI→Ledger. Admin only operational metadata. Show this as logical target, not deployed real services. Keep fonts large and all content within canvas.

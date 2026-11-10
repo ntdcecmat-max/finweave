@@ -1,0 +1,749 @@
+{
+  "scope": "48 manually expected specification decisions; no DB/device/provider/worker execution",
+  "cases": [
+    {
+      "id": "AM-01",
+      "kind": "fence",
+      "case": "live exact ticket",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": true
+    },
+    {
+      "id": "AM-02",
+      "kind": "fence",
+      "case": "equality is expired",
+      "input": {
+        "now": 101,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-03",
+      "kind": "fence",
+      "case": "expired",
+      "input": {
+        "now": 102,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-04",
+      "kind": "fence",
+      "case": "stale generation",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 1,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-05",
+      "kind": "fence",
+      "case": "wrong token",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_OLD",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-06",
+      "kind": "fence",
+      "case": "restore epoch",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 3,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-07",
+      "kind": "fence",
+      "case": "wrong domain",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_OTHER",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-08",
+      "kind": "fence",
+      "case": "wrong workspace",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_OTHER",
+        "profile": "ForecastWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-09",
+      "kind": "fence",
+      "case": "wrong capability",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "AgentWorker",
+        "authorized": true,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-10",
+      "kind": "fence",
+      "case": "revoked access",
+      "input": {
+        "now": 100,
+        "leaseUntil": 101,
+        "generation": 2,
+        "token": "SYN_T",
+        "epoch": 4,
+        "domain": "SYN_D",
+        "workspace": "SYN_W",
+        "profile": "ForecastWorker",
+        "authorized": false,
+        "expectedGeneration": 2,
+        "expectedToken": "SYN_T",
+        "expectedEpoch": 4,
+        "expectedDomain": "SYN_D",
+        "expectedWorkspace": "SYN_W",
+        "expectedProfile": "ForecastWorker"
+      },
+      "expected": false
+    },
+    {
+      "id": "AM-11",
+      "kind": "retry",
+      "case": "first equal-jitter lower",
+      "input": {
+        "attempt": 1,
+        "u": "0",
+        "retryFloorMs": 0,
+        "deadlineMs": 10000
+      },
+      "expected": 2500
+    },
+    {
+      "id": "AM-12",
+      "kind": "retry",
+      "case": "first equal-jitter upper",
+      "input": {
+        "attempt": 1,
+        "u": "1",
+        "retryFloorMs": 0,
+        "deadlineMs": 10000
+      },
+      "expected": 5000
+    },
+    {
+      "id": "AM-13",
+      "kind": "retry",
+      "case": "exponential capped",
+      "input": {
+        "attempt": 20,
+        "u": "1",
+        "retryFloorMs": 0,
+        "deadlineMs": 1000000
+      },
+      "expected": 900000
+    },
+    {
+      "id": "AM-14",
+      "kind": "retry",
+      "case": "provider floor exceeds cap",
+      "input": {
+        "attempt": 20,
+        "u": "0",
+        "retryFloorMs": 3600000,
+        "deadlineMs": 4000000
+      },
+      "expected": 3600000
+    },
+    {
+      "id": "AM-15",
+      "kind": "retry",
+      "case": "floor beyond deadline fails",
+      "input": {
+        "attempt": 1,
+        "u": "0",
+        "retryFloorMs": 60000,
+        "deadlineMs": 50000
+      },
+      "expected": null
+    },
+    {
+      "id": "AM-16",
+      "kind": "ack",
+      "case": "durable matching ACK",
+      "input": {
+        "request": [
+          "A",
+          "B"
+        ],
+        "reply": [
+          [
+            "A",
+            "durable"
+          ],
+          [
+            "B",
+            "rejected"
+          ]
+        ],
+        "bound": true
+      },
+      "expected": [
+        "A"
+      ]
+    },
+    {
+      "id": "AM-17",
+      "kind": "ack",
+      "case": "all rejected not ACK",
+      "input": {
+        "request": [
+          "A"
+        ],
+        "reply": [
+          [
+            "A",
+            "rejected"
+          ]
+        ],
+        "bound": true
+      },
+      "expected": []
+    },
+    {
+      "id": "AM-18",
+      "kind": "ack",
+      "case": "missing identity retains whole uncertain batch",
+      "input": {
+        "request": [
+          "A",
+          "B"
+        ],
+        "reply": [
+          [
+            "A",
+            "durable"
+          ]
+        ],
+        "bound": true
+      },
+      "expected": []
+    },
+    {
+      "id": "AM-19",
+      "kind": "ack",
+      "case": "duplicate ACK identity",
+      "input": {
+        "request": [
+          "A",
+          "B"
+        ],
+        "reply": [
+          [
+            "A",
+            "durable"
+          ],
+          [
+            "A",
+            "durable"
+          ]
+        ],
+        "bound": true
+      },
+      "expected": []
+    },
+    {
+      "id": "AM-20",
+      "kind": "ack",
+      "case": "foreign identity",
+      "input": {
+        "request": [
+          "A"
+        ],
+        "reply": [
+          [
+            "B",
+            "durable"
+          ]
+        ],
+        "bound": true
+      },
+      "expected": []
+    },
+    {
+      "id": "AM-21",
+      "kind": "ack",
+      "case": "reply from wrong in-flight payload",
+      "input": {
+        "request": [
+          "A"
+        ],
+        "reply": [
+          [
+            "A",
+            "durable"
+          ]
+        ],
+        "bound": false
+      },
+      "expected": []
+    },
+    {
+      "id": "AM-22",
+      "kind": "dedupe",
+      "case": "same transport and digest",
+      "input": {
+        "sameTransport": true,
+        "sameDigest": true,
+        "trustedRef": false
+      },
+      "expected": "REPLAY"
+    },
+    {
+      "id": "AM-23",
+      "kind": "dedupe",
+      "case": "same transport different digest",
+      "input": {
+        "sameTransport": true,
+        "sameDigest": false,
+        "trustedRef": true
+      },
+      "expected": "CONFLICT"
+    },
+    {
+      "id": "AM-24",
+      "kind": "dedupe",
+      "case": "equal amount/time weak identity",
+      "input": {
+        "sameTransport": false,
+        "sameDigest": true,
+        "trustedRef": false
+      },
+      "expected": "REVIEW"
+    },
+    {
+      "id": "AM-25",
+      "kind": "dedupe",
+      "case": "cross-device trusted reference",
+      "input": {
+        "sameTransport": false,
+        "sameDigest": false,
+        "trustedRef": true
+      },
+      "expected": "LINK_EXISTING"
+    },
+    {
+      "id": "AM-26",
+      "kind": "quota",
+      "case": "reserve shared and entitlement",
+      "input": {
+        "used": [
+          1,
+          2
+        ],
+        "limits": [
+          3,
+          5
+        ],
+        "now": 100,
+        "cooldown": 0
+      },
+      "expected": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "AM-27",
+      "kind": "quota",
+      "case": "one bucket full denies all",
+      "input": {
+        "used": [
+          1,
+          5
+        ],
+        "limits": [
+          3,
+          5
+        ],
+        "now": 100,
+        "cooldown": 0
+      },
+      "expected": null
+    },
+    {
+      "id": "AM-28",
+      "kind": "quota",
+      "case": "cooldown survives restart",
+      "input": {
+        "used": [
+          0
+        ],
+        "limits": [
+          5
+        ],
+        "now": 100,
+        "cooldown": 101
+      },
+      "expected": null
+    },
+    {
+      "id": "AM-29",
+      "kind": "quota",
+      "case": "license quota0 denies",
+      "input": {
+        "used": [
+          0
+        ],
+        "limits": [
+          0
+        ],
+        "now": 100,
+        "cooldown": 0
+      },
+      "expected": null
+    },
+    {
+      "id": "AM-30",
+      "kind": "quota",
+      "case": "unknown prior call remains charged",
+      "input": {
+        "used": [
+          4
+        ],
+        "limits": [
+          5
+        ],
+        "now": 100,
+        "cooldown": 0
+      },
+      "expected": [
+        5
+      ]
+    },
+    {
+      "id": "AM-31",
+      "kind": "schedule",
+      "case": "before local18",
+      "input": {
+        "now": "2026-10-09T10:59:59+00:00"
+      },
+      "expected": "2026-10-08"
+    },
+    {
+      "id": "AM-32",
+      "kind": "schedule",
+      "case": "at local18",
+      "input": {
+        "now": "2026-10-09T11:00:00+00:00"
+      },
+      "expected": "2026-10-09"
+    },
+    {
+      "id": "AM-33",
+      "kind": "schedule",
+      "case": "outage latest only",
+      "input": {
+        "now": "2026-10-16T11:00:00+00:00"
+      },
+      "expected": "2026-10-16"
+    },
+    {
+      "id": "AM-34",
+      "kind": "sync",
+      "case": "new financial version same epoch",
+      "input": {
+        "localGeneration": 2,
+        "responseGeneration": 2,
+        "localEpoch": 4,
+        "responseEpoch": 4,
+        "localVersion": 7,
+        "responseVersion": 8
+      },
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "AM-35",
+      "kind": "sync",
+      "case": "older financial",
+      "input": {
+        "localGeneration": 2,
+        "responseGeneration": 2,
+        "localEpoch": 4,
+        "responseEpoch": 4,
+        "localVersion": 7,
+        "responseVersion": 6
+      },
+      "expected": "DROP"
+    },
+    {
+      "id": "AM-36",
+      "kind": "sync",
+      "case": "old owner session",
+      "input": {
+        "localGeneration": 2,
+        "responseGeneration": 1,
+        "localEpoch": 4,
+        "responseEpoch": 4,
+        "localVersion": 7,
+        "responseVersion": 8
+      },
+      "expected": "DROP"
+    },
+    {
+      "id": "AM-37",
+      "kind": "sync",
+      "case": "old restore epoch",
+      "input": {
+        "localGeneration": 2,
+        "responseGeneration": 2,
+        "localEpoch": 4,
+        "responseEpoch": 3,
+        "localVersion": 7,
+        "responseVersion": 8
+      },
+      "expected": "DROP"
+    },
+    {
+      "id": "AM-38",
+      "kind": "sync",
+      "case": "new epoch even financial version may fall",
+      "input": {
+        "localGeneration": 2,
+        "responseGeneration": 2,
+        "localEpoch": 4,
+        "responseEpoch": 5,
+        "localVersion": 7,
+        "responseVersion": 8
+      },
+      "expected": "RECOVERY_GATE"
+    },
+    {
+      "id": "AM-39",
+      "kind": "cancel",
+      "case": "finish already won",
+      "input": {
+        "state": "succeeded",
+        "mode": "forecast"
+      },
+      "expected": "succeeded"
+    },
+    {
+      "id": "AM-40",
+      "kind": "cancel",
+      "case": "running forecast request",
+      "input": {
+        "state": "running",
+        "mode": "forecast"
+      },
+      "expected": "cancel_requested"
+    },
+    {
+      "id": "AM-41",
+      "kind": "cancel",
+      "case": "queued forecast",
+      "input": {
+        "state": "queued",
+        "mode": "forecast"
+      },
+      "expected": "cancelled"
+    },
+    {
+      "id": "AM-42",
+      "kind": "cancel",
+      "case": "Agent terminal cancel",
+      "input": {
+        "state": "running",
+        "mode": "agent"
+      },
+      "expected": "cancelled"
+    },
+    {
+      "id": "AM-43",
+      "kind": "native_capacity",
+      "case": "last free item slot",
+      "input": {
+        "items": 999,
+        "bytes": 0,
+        "newBytes": 100,
+        "ageDays": 0
+      },
+      "expected": "ENQUEUE"
+    },
+    {
+      "id": "AM-44",
+      "kind": "native_capacity",
+      "case": "bytes exhausted",
+      "input": {
+        "items": 1,
+        "bytes": 8388608,
+        "newBytes": 1,
+        "ageDays": 0
+      },
+      "expected": "PAUSE_GAP"
+    },
+    {
+      "id": "AM-45",
+      "kind": "native_capacity",
+      "case": "7day deadline",
+      "input": {
+        "items": 1,
+        "bytes": 100,
+        "newBytes": 0,
+        "ageDays": 7
+      },
+      "expected": "QUARANTINE"
+    },
+    {
+      "id": "AM-46",
+      "kind": "outcome",
+      "case": "committed",
+      "input": {
+        "state": "committed"
+      },
+      "expected": "READ_TYPED_STATUS"
+    },
+    {
+      "id": "AM-47",
+      "kind": "outcome",
+      "case": "not_found",
+      "input": {
+        "state": "not_found"
+      },
+      "expected": "RETRY_SAME_KEY"
+    },
+    {
+      "id": "AM-48",
+      "kind": "outcome",
+      "case": "unknown",
+      "input": {
+        "state": "unknown"
+      },
+      "expected": "INVESTIGATE_KEEP_IDENTITY"
+    }
+  ]
+}

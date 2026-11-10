@@ -1,0 +1,15 @@
+from,event,to,guard
+queued,claim,running,due + capacity + current authority + attempts<max + deadline
+running,heartbeat,running,exact live ticket; no resurrection; within attempt deadline
+running,checkpoint,running,same live ticket + input/model digest; no public result
+running,domain_committed,succeeded,domain result/marker already durable; no duplicate effect
+running,transient_failure,queued,remaining attempts and deadline; clear lease; set next_attempt_at
+running,lease_expired,queued,invalidate ticket; remaining budget; no claim until capacity
+running,budget_exhausted,failed,clear lease; allowlisted safe error
+running,permanent_failure,failed,clear lease; never broaden capability
+queued,cancel_before_claim,cancelled,authorized supported cancellation; no committed effect
+running,cancel_requested,running,persist cancellation; block new work/publication; committed result wins
+running,cancel_ack,cancelled,live fenced ticket; no domain commit already won
+failed,manual_retry,queued,current safe policy + transient + max2cycles + same identity/deadline
+queued,deadline_exceeded,failed,no new attempt; preserves domain identity
+running,deadline_exceeded,failed,fence publication; no rollback of previously committed facts

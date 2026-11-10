@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Xác thực và phiên dùng chung
+actor "Người dùng / Chủ workspace" as Owner
+rectangle "FinWeave — Xác thực và phiên dùng chung" {
+usecase "UC-AUTH-01\nĐăng ký và xác minh tài khoản" as UC_AUTH_01
+usecase "UC-AUTH-02\nĐăng nhập chủ workspace" as UC_AUTH_02
+usecase "UC-AUTH-03\nKhôi phục mật khẩu" as UC_AUTH_03
+usecase "UC-AUTH-04\nQuản lý phiên, thiết bị và đăng\nxuất" as UC_AUTH_04
+}
+Owner -- UC_AUTH_01
+Owner -- UC_AUTH_02
+Owner -- UC_AUTH_03
+Owner -- UC_AUTH_04
+@enduml

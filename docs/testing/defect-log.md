@@ -1,3 +1,22 @@
+# Defect log — rà frontend08/10/2026
+
+[35ca baseline](../execution/evidence/frontend-review-2026-10-08/acceptance-2/failure-investigation.json) và [mọi lỗi diagnostic](../execution/evidence/frontend-review-2026-10-08/acceptance-2/diagnostic-investigation.json) giữ nguyên thông báo lỗi, nguyên nhân, cách sửa, expected oracle và trạng thái regression. Kết luận chỉ theo [nghiệm thu hiện hành](frontend-acceptance-report.md).
+
+| ID | Lỗi sản phẩm phát hiện trong rà soát | Sửa và regression |
+|---|---|---|
+| FR-D01 | Mất entry mô phỏng thủ công sau gộp Goals | Entry kịch bản tiền hiện có; B09/B20/S6-E11 |
+| FR-D02 | Mất retry completed CSV cùng request/key | Entry completed job dùng yêu cầu gốc; N03/B04 |
+| FR-D03 | Mất công cụ source kế thừa | SourceControls với nhãn synthetic và preview/confirm; B04/B05/B15/B16 |
+| FR-D04 | Goal UI thiếu cảnh báo backing khi actual giảm | Hiện actual.shortfall, không chặn ghi actual; B08 giữ60→50%, thiếu500k |
+| FR-D05 | Cashflow/forecast/Goal/admin chữ không đủ tương phản | Sửa foreground, giữ axe nguyên; B12 vàOP06 |
+| FR-D06 | Bảng kết quả kịch bản mất chi gộp/ròng lũy kế | Khôi phục trước/sau từ baseGross/baseNet + simulated delta; B09 giữ6.1m |
+
+Test lỗi thời được sửa theo UI đã được người dùng thay đổi: nhãn, dấu chấm tiền, collapsed filters/details, catalog/profile, scoped selectors và app/navigation readiness. B02/B07 chuyển riêng oracle số đã bỏ khỏi UI sang API đọc, có ghi rõ lớp kiểm; không đổi expected balance. OP01 dùng quantities đúng DTO; không sửa contract cho hợp test. Các lỗi test không được đếm thành lỗi sản phẩm.
+
+Môi trường diagnostic-2: 20 ca có HTTP 504 Outdated Optimize Dep do cache Vite dùng chung, một ca có ERR_NETWORK_CHANGED chưa xác định nguyên nhân mạng sâu hơn; cả 21 dừng ở auth fixture. [Điều tra từng ca](../execution/evidence/frontend-review-2026-10-08/acceptance-2/aborted-cases-investigation.json) giữ trace; đã tách cache user/admin/preview và chạy lại. Lượt bị dừng không chốt nghiệp vụ hoặc bị biến thành PASS. Ngưỡng performance, axe và0retry giữ nguyên.
+
+## Hồ sơ Step6 ngày06/10 (lịch sử, không phải kết luận hiện hành)
+
 # Defect Log — bước 6
 
 TST-DEF-001 · v1.0 · 06/10/2026. Các lỗi ảnh hưởng scope frontend mock đã sửa và regression. Raw failures/ảnh trước sửa giữ nguyên. [Acceptance](frontend-acceptance-report.md) chốt gate với giới hạn nghiên cứu/security riêng.

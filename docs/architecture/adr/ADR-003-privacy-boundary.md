@@ -1,3 +1,5 @@
+> Cập nhật 08/10/2026: **ARCH-01 A + T1 đã được owner chọn** tại [ADR-008](ADR-008-modular-backend-trusted-server.md). Target real hiện hành là TRUSTED-SERVER; phần bắt buộc anti-Ops/protected-only/ciphertext-only dưới đây được supersede cho T1. Giữ nội dung cũ để truy lịch sử; logical DTO/transport separation, auth/tenant/admin isolation và no fake crypto vẫn áp dụng. Current frontend fail-closed transport không đổi và chưa có real-data acceptance.
+
 # ADR-003 — Logical DTO độc lập transport; dữ liệu thật blocked
 
 ARC-ADR-003 · 06/10/2026 · accepted adapter boundary; candidate protected deployment chưa selected/verified. Nguồn: Ideas §15–16; NFR-07/08/15, DEP-04/FUT-02. Không hạ yêu cầu chống Ops để đạt M2.

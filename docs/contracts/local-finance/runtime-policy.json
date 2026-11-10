@@ -1,0 +1,95 @@
+{
+  "id": "FW-BE-FINANCE-LOCAL-001",
+  "revision": "FW-API-T1-D1J2-005",
+  "inheritedOpenapiSha256": "35ebbbabd8d6dbc6f19cc9a123c2c6c2df3e1d0a3046c16d795adc9ed8b81802",
+  "subsetSha256": "b250cb25860436adbb30d192749c0cd2e643bb35607fc2c0e814a365645d56a5",
+  "operationCount": 33,
+  "operations": [
+    "archiveAccount",
+    "confirmHolding",
+    "correctPostedEvent",
+    "createAccount",
+    "createEvent",
+    "createHolding",
+    "createWorkspace",
+    "getAccount",
+    "getCommandOutcome",
+    "getGoldProfiles",
+    "getHolding",
+    "getReviewCase",
+    "getTransaction",
+    "getWorkspace",
+    "linkRefund",
+    "listAccounts",
+    "listHoldingMovements",
+    "listHoldings",
+    "listPriceQuotes",
+    "listReviewCases",
+    "listTransactions",
+    "postDraft",
+    "previewHolding",
+    "previewMutation",
+    "recordCashCount",
+    "recordPriceQuote",
+    "resolveReviewCase",
+    "searchInstruments",
+    "updateCategory",
+    "updateDraft",
+    "updateHoldingCost",
+    "updateHoldingQuantity",
+    "updateTrackingSettings"
+  ],
+  "currency": "VND",
+  "money": "18-digit exact integer string; signed balances permitted",
+  "quantity": "exact decimal strings, at most 8 fractional digits; gold canonical chi, 1 luong = 10 chi; stock share",
+  "requiredPreview": [
+    "createAccount",
+    "archiveAccount",
+    "createHolding",
+    "updateHoldingQuantity",
+    "updateHoldingCost",
+    "recordPriceQuote",
+    "correctPostedEvent",
+    "linkRefund",
+    "postDraft",
+    "resolveReviewCase",
+    "updateTrackingSettings",
+    "createEvent when posting=posted",
+    "confirmHolding uses previewHolding token+digest"
+  ],
+  "objectVersions": "All referenced/changed accounts, holdings, target events and reviews must be supplied; extra supplied object versions are also checked. Workspace version is always checked for a new command.",
+  "previewExpirySeconds": 300,
+  "previewIdentity": [
+    "subject",
+    "workspace",
+    "operation",
+    "input digest",
+    "workspace version",
+    "object version map"
+  ],
+  "replay": "Current authorization first, committed semantic replay before version/preview checks; never retry unknown outcome with a new key.",
+  "scope": "SYNTHETIC_LOCAL_POSTGRES_EXECUTED; explicit manual catalogs and manual-owner prices; no provider feeds",
+  "reviewActions": {
+    "cash": [
+      "defer",
+      "adjustUnknown",
+      "forgottenExpense"
+    ],
+    "transfer": [
+      "defer",
+      "confirmTransfer"
+    ],
+    "pending": [
+      "defer",
+      "postPending",
+      "rejectPending"
+    ]
+  },
+  "correctionKinds": [
+    "income",
+    "expense",
+    "refund",
+    "adjustment"
+  ],
+  "unsupported": "Correction of transfer/investment bundles, sales/shorting/corporate actions and ingestion Review branches are rejected; they require separate workflow contracts. Opening is an immutable declaration; no generic payload edit port."
+}

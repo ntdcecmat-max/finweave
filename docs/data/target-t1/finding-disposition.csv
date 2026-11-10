@@ -1,0 +1,18 @@
+finding,designDocument,designResponse,requiredEvidence,status
+DB04-F01,permissions.md,P2 roles/capabilities thay broad worker,Direct SQL Agent/market/retention denial,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F02,invariants-and-workflows.md,Sealed group chặn cả balanced append,2 connections seal/append/update/delete,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F03,invariants-and-workflows.md,Ledger account mapping immutable khi đã dùng,Retarget-vs-first-post race,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F04,README.md,Scope/revision/item identity và composite actual FK,Two Plans same version + standalone,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F05,invariants-and-workflows.md,Finite/range/scale trước cast + bounds,NaN/fraction/overflow/version serialization,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F06,invariants-and-workflows.md,Pinned facts vs query cache identity,Scope/asOf/version cache separation,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F07,invariants-and-workflows.md,History atomic; pinned refs không TTL,Mutation/history rollback; cleanup preserves pins,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F08,invariants-and-workflows.md,One J2 lease/fence/epoch authority,Crash/lost ACK/stale worker/catch-up,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F09,invariants-and-workflows.md,Lock order allocations/refund/confirm,Concurrent domain invariants and whole TX retry,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F10,invariants-and-workflows.md,Expirable payload vs immutable tombstones,Purge/replay/erasure/FK and pin preservation,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F11,README.md,Separate admin auth; gated synthetic profile migration,Admin/customer session isolation + profile gate,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F12,permissions.md,Tenant/global/context/capability checks,RLS forged context/pool reuse/definer escalation,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F13,invariants-and-workflows.md,"Frozen profile/FX provenance, derived freshness",Historical profile change/stale/failure last-good,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F14,invariants-and-workflows.md,Ordered quantity modes + staged CSV rows,Sequence race/set-delta/large CSV atomic selection,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F15,migration-plan.md,Runner/checksum/off-host revoke/restore fence,Clean/upgrade/crash/checksum/restore ACK gap,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F16,migration-plan.md,Lookup/due/history/expiry index candidates,EXPLAIN workload and write overhead,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN
+DB04-F17,erd.md,All entities and explicit FK metadata/dictionary,Structural checks only; catalog parity NOT RUN,DESIGN_SPECIFIED; SQL_IMPLEMENTATION_AND_RUNTIME_NOT_RUN

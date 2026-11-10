@@ -1,0 +1,14 @@
+{
+  "node": "v24.19.0",
+  "pnpm": "11.25.0",
+  "platform": "win32-x64",
+  "postgresServer": "16.14",
+  "postgresBinaryPackage": "16.14.0-beta.17",
+  "lockSha256": "03c70fd9a6c31fc0abe012dffad1555785363f3bfc5a9763e0758cd27c16597a",
+  "executables": {
+    "node": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+    "postgres": "c4a6839621f230076b3347f443b3dbfb133954d695f82866ea67501290bd90d3",
+    "initdb": "2111500f1faa10211d330c2bfd88afedc00abe9caa134607c776453ff6f46f09",
+    "pg_ctl": "b6656121ef0a417ca4bd46dbe3ae50fd9ae077d8d6c06f92f9d498c224488c48"
+  }
+}

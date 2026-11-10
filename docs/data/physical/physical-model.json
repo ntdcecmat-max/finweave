@@ -1,0 +1,5251 @@
+{
+  "profile": "SYNTHETIC-ONLY",
+  "postgresMajor": 16,
+  "tables": [
+    {
+      "name": "identities",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "email",
+          "sql": "email text NOT NULL UNIQUE CHECK (email ~ '^[^@]+@[^@]+[.]test$')",
+          "nullable": false,
+          "meaning": "email"
+        },
+        {
+          "name": "display_name",
+          "sql": "display_name text NOT NULL",
+          "nullable": false,
+          "meaning": "display name"
+        },
+        {
+          "name": "credential_hash",
+          "sql": "credential_hash text NOT NULL",
+          "nullable": false,
+          "meaning": "credential hash"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('active','suspended','deleted'))",
+          "nullable": false,
+          "meaning": "state"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "workspaces",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "owner_id",
+          "sql": "owner_id text NOT NULL REFERENCES fw.identities(id)",
+          "nullable": false,
+          "meaning": "owner id"
+        },
+        {
+          "name": "currency",
+          "sql": "currency text NOT NULL DEFAULT 'VND' CHECK (currency='VND')",
+          "nullable": false,
+          "meaning": "currency"
+        },
+        {
+          "name": "timezone",
+          "sql": "timezone text NOT NULL DEFAULT 'Asia/Ho_Chi_Minh' CHECK (timezone='Asia/Ho_Chi_Minh')",
+          "nullable": false,
+          "meaning": "timezone"
+        },
+        {
+          "name": "tracking_start",
+          "sql": "tracking_start date NOT NULL",
+          "nullable": false,
+          "meaning": "tracking start"
+        },
+        {
+          "name": "financial_version",
+          "sql": "financial_version bigint NOT NULL DEFAULT 1 CHECK (financial_version > 0)",
+          "nullable": false,
+          "meaning": "financial version"
+        },
+        {
+          "name": "profile",
+          "sql": "profile text NOT NULL DEFAULT 'synthetic' CHECK (profile='synthetic')",
+          "nullable": false,
+          "meaning": "profile"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "sessions",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "subject_id",
+          "sql": "subject_id text NOT NULL REFERENCES fw.identities(id)",
+          "nullable": false,
+          "meaning": "subject id"
+        },
+        {
+          "name": "token_digest",
+          "sql": "token_digest text NOT NULL UNIQUE",
+          "nullable": false,
+          "meaning": "token digest"
+        },
+        {
+          "name": "role",
+          "sql": "role text NOT NULL CHECK (role IN ('owner','admin'))",
+          "nullable": false,
+          "meaning": "role"
+        },
+        {
+          "name": "device_id",
+          "sql": "device_id text",
+          "nullable": true,
+          "meaning": "device id"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        },
+        {
+          "name": "revoked_at",
+          "sql": "revoked_at timestamptz",
+          "nullable": true,
+          "meaning": "revoked at"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "expired/revoked metadata 30d; no tokens stored"
+    },
+    {
+      "name": "identity_challenges",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "subject_id",
+          "sql": "subject_id text REFERENCES fw.identities(id)",
+          "nullable": true,
+          "meaning": "subject id"
+        },
+        {
+          "name": "challenge_digest",
+          "sql": "challenge_digest text NOT NULL UNIQUE",
+          "nullable": false,
+          "meaning": "challenge digest"
+        },
+        {
+          "name": "purpose",
+          "sql": "purpose text NOT NULL CHECK (purpose IN ('signin','register','reset','enrollment'))",
+          "nullable": false,
+          "meaning": "purpose"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        },
+        {
+          "name": "consumed_at",
+          "sql": "consumed_at timestamptz",
+          "nullable": true,
+          "meaning": "consumed at"
+        },
+        {
+          "name": "attempts",
+          "sql": "attempts integer NOT NULL DEFAULT 0 CHECK (attempts BETWEEN 0 AND 5)",
+          "nullable": false,
+          "meaning": "attempts"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "expired challenges 24h; digests only"
+    },
+    {
+      "name": "devices",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "owner_id",
+          "sql": "owner_id text NOT NULL REFERENCES fw.identities(id)",
+          "nullable": false,
+          "meaning": "owner id"
+        },
+        {
+          "name": "platform",
+          "sql": "platform text NOT NULL CHECK (platform='android')",
+          "nullable": false,
+          "meaning": "platform"
+        },
+        {
+          "name": "public_key",
+          "sql": "public_key text NOT NULL",
+          "nullable": false,
+          "meaning": "public key"
+        },
+        {
+          "name": "key_digest",
+          "sql": "key_digest text NOT NULL",
+          "nullable": false,
+          "meaning": "key digest"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "app_version",
+          "sql": "app_version text NOT NULL",
+          "nullable": false,
+          "meaning": "app version"
+        },
+        {
+          "name": "consent_version",
+          "sql": "consent_version text NOT NULL",
+          "nullable": false,
+          "meaning": "consent version"
+        },
+        {
+          "name": "status",
+          "sql": "status text NOT NULL CHECK (status IN ('active','revoked'))",
+          "nullable": false,
+          "meaning": "status"
+        },
+        {
+          "name": "revoked_at",
+          "sql": "revoked_at timestamptz",
+          "nullable": true,
+          "meaning": "revoked at"
+        },
+        {
+          "name": "last_seen",
+          "sql": "last_seen timestamptz",
+          "nullable": true,
+          "meaning": "last seen"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,key_digest)",
+        "CHECK ((status='revoked')=(revoked_at IS NOT NULL))"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "accounts",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('bank','wallet','cash'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "opening",
+          "sql": "opening numeric(18,0) NOT NULL CHECK (opening>=0)",
+          "nullable": false,
+          "meaning": "opening"
+        },
+        {
+          "name": "opening_date",
+          "sql": "opening_date date NOT NULL",
+          "nullable": false,
+          "meaning": "opening date"
+        },
+        {
+          "name": "archived",
+          "sql": "archived boolean NOT NULL DEFAULT false",
+          "nullable": false,
+          "meaning": "archived"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "ledger_accounts",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text",
+          "nullable": true,
+          "meaning": "account id"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('asset','income','expense','equity','clearing','investment'))",
+          "nullable": false,
+          "meaning": "kind"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,account_id)",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "sources",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('bank','wallet','price','manual','csv'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "connection",
+          "sql": "connection text NOT NULL CHECK (connection IN ('connected','disconnected','revoked'))",
+          "nullable": false,
+          "meaning": "connection"
+        },
+        {
+          "name": "last_attempt",
+          "sql": "last_attempt timestamptz",
+          "nullable": true,
+          "meaning": "last attempt"
+        },
+        {
+          "name": "last_success",
+          "sql": "last_success timestamptz",
+          "nullable": true,
+          "meaning": "last success"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "instruments",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "symbol",
+          "sql": "symbol text NOT NULL",
+          "nullable": false,
+          "meaning": "symbol"
+        },
+        {
+          "name": "exchange",
+          "sql": "exchange text NOT NULL",
+          "nullable": false,
+          "meaning": "exchange"
+        },
+        {
+          "name": "currency",
+          "sql": "currency text NOT NULL CHECK (currency='VND')",
+          "nullable": false,
+          "meaning": "currency"
+        },
+        {
+          "name": "unit",
+          "sql": "unit text NOT NULL CHECK (unit='share')",
+          "nullable": false,
+          "meaning": "unit"
+        },
+        {
+          "name": "active_from",
+          "sql": "active_from date NOT NULL",
+          "nullable": false,
+          "meaning": "active from"
+        },
+        {
+          "name": "active_to",
+          "sql": "active_to date",
+          "nullable": true,
+          "meaning": "active to"
+        },
+        {
+          "name": "supported",
+          "sql": "supported boolean NOT NULL DEFAULT false",
+          "nullable": false,
+          "meaning": "supported"
+        }
+      ],
+      "constraints": [
+        "UNIQUE (exchange,symbol,active_from)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "gold_profiles",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "product",
+          "sql": "product text NOT NULL",
+          "nullable": false,
+          "meaning": "product"
+        },
+        {
+          "name": "purity",
+          "sql": "purity text NOT NULL",
+          "nullable": false,
+          "meaning": "purity"
+        },
+        {
+          "name": "brand",
+          "sql": "brand text NOT NULL",
+          "nullable": false,
+          "meaning": "brand"
+        },
+        {
+          "name": "region",
+          "sql": "region text NOT NULL",
+          "nullable": false,
+          "meaning": "region"
+        },
+        {
+          "name": "source_ref",
+          "sql": "source_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "source ref"
+        },
+        {
+          "name": "side",
+          "sql": "side text NOT NULL CHECK (side IN ('buy','sell'))",
+          "nullable": false,
+          "meaning": "side"
+        },
+        {
+          "name": "currency",
+          "sql": "currency text NOT NULL CHECK (currency='VND')",
+          "nullable": false,
+          "meaning": "currency"
+        },
+        {
+          "name": "unit",
+          "sql": "unit text NOT NULL CHECK (unit='chi')",
+          "nullable": false,
+          "meaning": "unit"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "holdings",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('stock','gold'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "instrument_id",
+          "sql": "instrument_id text REFERENCES fw.instruments(id)",
+          "nullable": true,
+          "meaning": "instrument id"
+        },
+        {
+          "name": "gold_profile_id",
+          "sql": "gold_profile_id text REFERENCES fw.gold_profiles(id)",
+          "nullable": true,
+          "meaning": "gold profile id"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "cost",
+          "sql": "cost numeric(18,0) CHECK (cost>=0)",
+          "nullable": true,
+          "meaning": "cost"
+        },
+        {
+          "name": "cost_date",
+          "sql": "cost_date date",
+          "nullable": true,
+          "meaning": "cost date"
+        },
+        {
+          "name": "profile_confirmed_version",
+          "sql": "profile_confirmed_version bigint",
+          "nullable": true,
+          "meaning": "profile confirmed version"
+        },
+        {
+          "name": "archived",
+          "sql": "archived boolean NOT NULL DEFAULT false",
+          "nullable": false,
+          "meaning": "archived"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "CHECK ((kind='stock' AND instrument_id IS NOT NULL AND gold_profile_id IS NULL) OR (kind='gold' AND gold_profile_id IS NOT NULL AND instrument_id IS NULL))"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "events",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('opening','income','expense','transfer','refund','investment','adjustment','unknown','reversal'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "amount",
+          "sql": "amount numeric(18,0) NOT NULL CHECK (amount>0)",
+          "nullable": false,
+          "meaning": "amount"
+        },
+        {
+          "name": "business_date",
+          "sql": "business_date date NOT NULL",
+          "nullable": false,
+          "meaning": "business date"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "to_account_id",
+          "sql": "to_account_id text",
+          "nullable": true,
+          "meaning": "to account id"
+        },
+        {
+          "name": "holding_id",
+          "sql": "holding_id text",
+          "nullable": true,
+          "meaning": "holding id"
+        },
+        {
+          "name": "origin_id",
+          "sql": "origin_id text",
+          "nullable": true,
+          "meaning": "origin id"
+        },
+        {
+          "name": "reversal_of",
+          "sql": "reversal_of text",
+          "nullable": true,
+          "meaning": "reversal of"
+        },
+        {
+          "name": "category",
+          "sql": "category text NOT NULL",
+          "nullable": false,
+          "meaning": "category"
+        },
+        {
+          "name": "description",
+          "sql": "description text NOT NULL",
+          "nullable": false,
+          "meaning": "description"
+        },
+        {
+          "name": "posting",
+          "sql": "posting text NOT NULL CHECK (posting IN ('draft','pending','posted'))",
+          "nullable": false,
+          "meaning": "posting"
+        },
+        {
+          "name": "manual_category_override",
+          "sql": "manual_category_override boolean NOT NULL DEFAULT false",
+          "nullable": false,
+          "meaning": "manual category override"
+        },
+        {
+          "name": "reference",
+          "sql": "reference text",
+          "nullable": true,
+          "meaning": "reference"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "CHECK (account_id IS DISTINCT FROM to_account_id)",
+        "CHECK (kind<>'transfer' OR to_account_id IS NOT NULL)",
+        "UNIQUE (workspace_id,reversal_of)",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,to_account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,holding_id) REFERENCES fw.holdings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,origin_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,reversal_of) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "to_account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "holding_id"
+          ],
+          "target": "holdings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "origin_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "reversal_of"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "entry_groups",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text NOT NULL",
+          "nullable": false,
+          "meaning": "event id"
+        },
+        {
+          "name": "reversal_of",
+          "sql": "reversal_of text",
+          "nullable": true,
+          "meaning": "reversal of"
+        },
+        {
+          "name": "committed_at",
+          "sql": "committed_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "committed at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,event_id)",
+        "UNIQUE (workspace_id,reversal_of)",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,reversal_of) REFERENCES fw.entry_groups(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "reversal_of"
+          ],
+          "target": "entry_groups",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "posting_lines",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "group_id",
+          "sql": "group_id text NOT NULL",
+          "nullable": false,
+          "meaning": "group id"
+        },
+        {
+          "name": "ledger_account_id",
+          "sql": "ledger_account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "ledger account id"
+        },
+        {
+          "name": "signed_amount",
+          "sql": "signed_amount numeric(18,0) NOT NULL CHECK (signed_amount<>0)",
+          "nullable": false,
+          "meaning": "signed amount"
+        },
+        {
+          "name": "currency",
+          "sql": "currency text NOT NULL DEFAULT 'VND' CHECK (currency='VND')",
+          "nullable": false,
+          "meaning": "currency"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,group_id) REFERENCES fw.entry_groups(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,ledger_account_id) REFERENCES fw.ledger_accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "group_id"
+          ],
+          "target": "entry_groups",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "ledger_account_id"
+          ],
+          "target": "ledger_accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "holding_movements",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "holding_id",
+          "sql": "holding_id text NOT NULL",
+          "nullable": false,
+          "meaning": "holding id"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text",
+          "nullable": true,
+          "meaning": "event id"
+        },
+        {
+          "name": "business_date",
+          "sql": "business_date date NOT NULL",
+          "nullable": false,
+          "meaning": "business date"
+        },
+        {
+          "name": "quantity",
+          "sql": "quantity numeric(28,8) NOT NULL CHECK (quantity>=0)",
+          "nullable": false,
+          "meaning": "quantity"
+        },
+        {
+          "name": "delta",
+          "sql": "delta numeric(28,8)",
+          "nullable": true,
+          "meaning": "delta"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('declaration','investment','correction'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "reason",
+          "sql": "reason text NOT NULL",
+          "nullable": false,
+          "meaning": "reason"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,holding_id) REFERENCES fw.holdings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "holding_id"
+          ],
+          "target": "holdings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "provider_entitlements",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "provider_id",
+          "sql": "provider_id text NOT NULL",
+          "nullable": false,
+          "meaning": "provider id"
+        },
+        {
+          "name": "rights_version",
+          "sql": "rights_version text NOT NULL",
+          "nullable": false,
+          "meaning": "rights version"
+        },
+        {
+          "name": "credential_ref",
+          "sql": "credential_ref text",
+          "nullable": true,
+          "meaning": "credential ref"
+        },
+        {
+          "name": "quota_daily",
+          "sql": "quota_daily integer NOT NULL CHECK (quota_daily>=0)",
+          "nullable": false,
+          "meaning": "quota daily"
+        },
+        {
+          "name": "allowed_assets",
+          "sql": "allowed_assets jsonb NOT NULL CHECK (jsonb_typeof(allowed_assets)='array') CHECK (allowed_assets IS NULL OR (jsonb_typeof(allowed_assets)='array' AND octet_length(allowed_assets::text)<=262144))",
+          "nullable": false,
+          "meaning": "allowed assets"
+        },
+        {
+          "name": "cache_scope",
+          "sql": "cache_scope text NOT NULL",
+          "nullable": false,
+          "meaning": "cache scope"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz",
+          "nullable": true,
+          "meaning": "expires at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "entitlement lifecycle; refs only, no credentials"
+    },
+    {
+      "name": "quote_observations",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "holding_id",
+          "sql": "holding_id text NOT NULL",
+          "nullable": false,
+          "meaning": "holding id"
+        },
+        {
+          "name": "entitlement_id",
+          "sql": "entitlement_id text NOT NULL",
+          "nullable": false,
+          "meaning": "entitlement id"
+        },
+        {
+          "name": "provider_id",
+          "sql": "provider_id text NOT NULL",
+          "nullable": false,
+          "meaning": "provider id"
+        },
+        {
+          "name": "price",
+          "sql": "price numeric(28,8) NOT NULL CHECK (price>0)",
+          "nullable": false,
+          "meaning": "price"
+        },
+        {
+          "name": "currency",
+          "sql": "currency text NOT NULL CHECK (currency IN ('VND','USD'))",
+          "nullable": false,
+          "meaning": "currency"
+        },
+        {
+          "name": "unit",
+          "sql": "unit text NOT NULL CHECK (unit IN ('share','chi','luong'))",
+          "nullable": false,
+          "meaning": "unit"
+        },
+        {
+          "name": "side",
+          "sql": "side text NOT NULL CHECK (side IN ('buy','sell','close'))",
+          "nullable": false,
+          "meaning": "side"
+        },
+        {
+          "name": "quote_as_of",
+          "sql": "quote_as_of timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "quote as of"
+        },
+        {
+          "name": "fetched_at",
+          "sql": "fetched_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "fetched at"
+        },
+        {
+          "name": "fx_vnd_per_usd",
+          "sql": "fx_vnd_per_usd numeric(28,8) CHECK (fx_vnd_per_usd>0)",
+          "nullable": true,
+          "meaning": "fx vnd per usd"
+        },
+        {
+          "name": "fx_at",
+          "sql": "fx_at timestamptz",
+          "nullable": true,
+          "meaning": "fx at"
+        },
+        {
+          "name": "fingerprint",
+          "sql": "fingerprint text NOT NULL",
+          "nullable": false,
+          "meaning": "fingerprint"
+        },
+        {
+          "name": "quality",
+          "sql": "quality text NOT NULL CHECK (quality IN ('fresh','stale','unknown'))",
+          "nullable": false,
+          "meaning": "quality"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,holding_id,provider_id,fingerprint)",
+        "FOREIGN KEY (workspace_id,holding_id) REFERENCES fw.holdings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,entitlement_id) REFERENCES fw.provider_entitlements(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "holding_id"
+          ],
+          "target": "holdings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "entitlement_id"
+          ],
+          "target": "provider_entitlements",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "evidence",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "source_id",
+          "sql": "source_id text",
+          "nullable": true,
+          "meaning": "source id"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "recorded_at",
+          "sql": "recorded_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "recorded at"
+        },
+        {
+          "name": "observed_date",
+          "sql": "observed_date date",
+          "nullable": true,
+          "meaning": "observed date"
+        },
+        {
+          "name": "reference",
+          "sql": "reference text",
+          "nullable": true,
+          "meaning": "reference"
+        },
+        {
+          "name": "content",
+          "sql": "content jsonb CHECK (content IS NULL OR (jsonb_typeof(content)='object' AND octet_length(content::text)<=262144))",
+          "nullable": true,
+          "meaning": "content"
+        },
+        {
+          "name": "content_digest",
+          "sql": "content_digest text NOT NULL CHECK (content_digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "content digest"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,source_id) REFERENCES fw.sources(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "source_id"
+          ],
+          "target": "sources",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "normalized payload 90d; evidence identity/digest for ledger lifecycle"
+    },
+    {
+      "name": "event_evidence",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text NOT NULL",
+          "nullable": false,
+          "meaning": "event id"
+        },
+        {
+          "name": "evidence_id",
+          "sql": "evidence_id text NOT NULL",
+          "nullable": false,
+          "meaning": "evidence id"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,event_id,evidence_id)",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,evidence_id) REFERENCES fw.evidence(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "evidence_id"
+          ],
+          "target": "evidence",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "source_records",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "source_id",
+          "sql": "source_id text NOT NULL",
+          "nullable": false,
+          "meaning": "source id"
+        },
+        {
+          "name": "source_record_key",
+          "sql": "source_record_key text NOT NULL",
+          "nullable": false,
+          "meaning": "source record key"
+        },
+        {
+          "name": "revision",
+          "sql": "revision bigint NOT NULL CHECK (revision>=0)",
+          "nullable": false,
+          "meaning": "revision"
+        },
+        {
+          "name": "parser_version",
+          "sql": "parser_version text NOT NULL",
+          "nullable": false,
+          "meaning": "parser version"
+        },
+        {
+          "name": "mapping_version",
+          "sql": "mapping_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "mapping version"
+        },
+        {
+          "name": "evidence_id",
+          "sql": "evidence_id text NOT NULL",
+          "nullable": false,
+          "meaning": "evidence id"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text",
+          "nullable": true,
+          "meaning": "event id"
+        },
+        {
+          "name": "status",
+          "sql": "status text NOT NULL CHECK (status IN ('staged','invalid','duplicate','linked'))",
+          "nullable": false,
+          "meaning": "status"
+        },
+        {
+          "name": "manual_override",
+          "sql": "manual_override jsonb CHECK (manual_override IS NULL OR (jsonb_typeof(manual_override)='object' AND octet_length(manual_override::text)<=262144))",
+          "nullable": true,
+          "meaning": "manual override"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,source_id,source_record_key,revision)",
+        "FOREIGN KEY (workspace_id,source_id) REFERENCES fw.sources(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,evidence_id) REFERENCES fw.evidence(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "source_id"
+          ],
+          "target": "sources",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "evidence_id"
+          ],
+          "target": "evidence",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "reviews",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text",
+          "nullable": true,
+          "meaning": "event id"
+        },
+        {
+          "name": "holding_id",
+          "sql": "holding_id text",
+          "nullable": true,
+          "meaning": "holding id"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text",
+          "nullable": true,
+          "meaning": "account id"
+        },
+        {
+          "name": "type",
+          "sql": "type text NOT NULL CHECK (type IN ('cash','duplicate','invalid','transfer','refund','quality','category','pending'))",
+          "nullable": false,
+          "meaning": "type"
+        },
+        {
+          "name": "status",
+          "sql": "status text NOT NULL CHECK (status IN ('open','resolved'))",
+          "nullable": false,
+          "meaning": "status"
+        },
+        {
+          "name": "title",
+          "sql": "title text NOT NULL",
+          "nullable": false,
+          "meaning": "title"
+        },
+        {
+          "name": "variance",
+          "sql": "variance numeric(18,0)",
+          "nullable": true,
+          "meaning": "variance"
+        },
+        {
+          "name": "observed",
+          "sql": "observed numeric(18,0)",
+          "nullable": true,
+          "meaning": "observed"
+        },
+        {
+          "name": "resolution",
+          "sql": "resolution jsonb CHECK (resolution IS NULL OR (jsonb_typeof(resolution)='object' AND octet_length(resolution::text)<=262144))",
+          "nullable": true,
+          "meaning": "resolution"
+        },
+        {
+          "name": "resolved_at",
+          "sql": "resolved_at timestamptz",
+          "nullable": true,
+          "meaning": "resolved at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,holding_id) REFERENCES fw.holdings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "holding_id"
+          ],
+          "target": "holdings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "cash_observations",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "observed",
+          "sql": "observed numeric(18,0) NOT NULL CHECK (observed>=0)",
+          "nullable": false,
+          "meaning": "observed"
+        },
+        {
+          "name": "as_of",
+          "sql": "as_of timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "as of"
+        },
+        {
+          "name": "matched_workspace_version",
+          "sql": "matched_workspace_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "matched workspace version"
+        },
+        {
+          "name": "variance",
+          "sql": "variance numeric(18,0) NOT NULL",
+          "nullable": false,
+          "meaning": "variance"
+        },
+        {
+          "name": "review_id",
+          "sql": "review_id text",
+          "nullable": true,
+          "meaning": "review id"
+        },
+        {
+          "name": "evidence_id",
+          "sql": "evidence_id text NOT NULL",
+          "nullable": false,
+          "meaning": "evidence id"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,review_id) REFERENCES fw.reviews(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,evidence_id) REFERENCES fw.evidence(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "review_id"
+          ],
+          "target": "reviews",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "evidence_id"
+          ],
+          "target": "evidence",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "collector_bindings",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "device_id",
+          "sql": "device_id text NOT NULL",
+          "nullable": false,
+          "meaning": "device id"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "package_name",
+          "sql": "package_name text NOT NULL",
+          "nullable": false,
+          "meaning": "package name"
+        },
+        {
+          "name": "parser_profile_id",
+          "sql": "parser_profile_id text NOT NULL",
+          "nullable": false,
+          "meaning": "parser profile id"
+        },
+        {
+          "name": "consent_at",
+          "sql": "consent_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "consent at"
+        },
+        {
+          "name": "enabled",
+          "sql": "enabled boolean NOT NULL DEFAULT true",
+          "nullable": false,
+          "meaning": "enabled"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,device_id,id)",
+        "FOREIGN KEY (workspace_id,device_id) REFERENCES fw.devices(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "device_id"
+          ],
+          "target": "devices",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "ingestion_receipts",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "device_id",
+          "sql": "device_id text NOT NULL",
+          "nullable": false,
+          "meaning": "device id"
+        },
+        {
+          "name": "binding_id",
+          "sql": "binding_id text NOT NULL",
+          "nullable": false,
+          "meaning": "binding id"
+        },
+        {
+          "name": "binding_version",
+          "sql": "binding_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "binding version"
+        },
+        {
+          "name": "event_key",
+          "sql": "event_key text NOT NULL",
+          "nullable": false,
+          "meaning": "event key"
+        },
+        {
+          "name": "revision",
+          "sql": "revision bigint NOT NULL CHECK (revision>=0)",
+          "nullable": false,
+          "meaning": "revision"
+        },
+        {
+          "name": "source_key",
+          "sql": "source_key text NOT NULL",
+          "nullable": false,
+          "meaning": "source key"
+        },
+        {
+          "name": "observed_at",
+          "sql": "observed_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "observed at"
+        },
+        {
+          "name": "received_at",
+          "sql": "received_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "received at"
+        },
+        {
+          "name": "parser_version",
+          "sql": "parser_version text NOT NULL",
+          "nullable": false,
+          "meaning": "parser version"
+        },
+        {
+          "name": "payload_digest",
+          "sql": "payload_digest text NOT NULL CHECK (payload_digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "payload digest"
+        },
+        {
+          "name": "normalized_evidence",
+          "sql": "normalized_evidence jsonb CHECK (normalized_evidence IS NULL OR (jsonb_typeof(normalized_evidence)='object' AND octet_length(normalized_evidence::text)<=262144))",
+          "nullable": true,
+          "meaning": "normalized evidence"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('received','parsed','posted','needs_review','ignored','failed'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text",
+          "nullable": true,
+          "meaning": "event id"
+        },
+        {
+          "name": "review_id",
+          "sql": "review_id text",
+          "nullable": true,
+          "meaning": "review id"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        },
+        {
+          "name": "ack_at",
+          "sql": "ack_at timestamptz",
+          "nullable": true,
+          "meaning": "ack at"
+        },
+        {
+          "name": "lease_until",
+          "sql": "lease_until timestamptz",
+          "nullable": true,
+          "meaning": "lease until"
+        },
+        {
+          "name": "lease_token",
+          "sql": "lease_token text",
+          "nullable": true,
+          "meaning": "lease token"
+        },
+        {
+          "name": "attempts",
+          "sql": "attempts integer NOT NULL DEFAULT 0 CHECK (attempts BETWEEN 0 AND 3)",
+          "nullable": false,
+          "meaning": "attempts"
+        },
+        {
+          "name": "next_attempt",
+          "sql": "next_attempt timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "next attempt"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,device_id,event_key,revision)",
+        "CHECK (state<>'posted' OR event_id IS NOT NULL)",
+        "CHECK (state<>'needs_review' OR review_id IS NOT NULL)",
+        "FOREIGN KEY (workspace_id,device_id) REFERENCES fw.devices(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,binding_id) REFERENCES fw.collector_bindings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,review_id) REFERENCES fw.reviews(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "device_id"
+          ],
+          "target": "devices",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "binding_id"
+          ],
+          "target": "collector_bindings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "review_id"
+          ],
+          "target": "reviews",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "payload 90d; identity/digest tombstone until workspace erasure"
+    },
+    {
+      "name": "receipt_evidence",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "receipt_id",
+          "sql": "receipt_id text NOT NULL",
+          "nullable": false,
+          "meaning": "receipt id"
+        },
+        {
+          "name": "evidence_id",
+          "sql": "evidence_id text NOT NULL",
+          "nullable": false,
+          "meaning": "evidence id"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,receipt_id,evidence_id)",
+        "FOREIGN KEY (workspace_id,receipt_id) REFERENCES fw.ingestion_receipts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,evidence_id) REFERENCES fw.evidence(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "receipt_id"
+          ],
+          "target": "ingestion_receipts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "evidence_id"
+          ],
+          "target": "evidence",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "coverage_gaps",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "source_id",
+          "sql": "source_id text",
+          "nullable": true,
+          "meaning": "source id"
+        },
+        {
+          "name": "device_id",
+          "sql": "device_id text",
+          "nullable": true,
+          "meaning": "device id"
+        },
+        {
+          "name": "start_at",
+          "sql": "start_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "start at"
+        },
+        {
+          "name": "end_at",
+          "sql": "end_at timestamptz",
+          "nullable": true,
+          "meaning": "end at"
+        },
+        {
+          "name": "reason",
+          "sql": "reason text NOT NULL",
+          "nullable": false,
+          "meaning": "reason"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "CHECK (end_at IS NULL OR end_at>=start_at)",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,source_id) REFERENCES fw.sources(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,device_id) REFERENCES fw.devices(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "source_id"
+          ],
+          "target": "sources",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "device_id"
+          ],
+          "target": "devices",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "refresh_jobs",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "entitlement_id",
+          "sql": "entitlement_id text NOT NULL",
+          "nullable": false,
+          "meaning": "entitlement id"
+        },
+        {
+          "name": "dedupe_key",
+          "sql": "dedupe_key text NOT NULL",
+          "nullable": false,
+          "meaning": "dedupe key"
+        },
+        {
+          "name": "business_date",
+          "sql": "business_date date NOT NULL",
+          "nullable": false,
+          "meaning": "business date"
+        },
+        {
+          "name": "trigger_kind",
+          "sql": "trigger_kind text NOT NULL",
+          "nullable": false,
+          "meaning": "trigger kind"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('queued','running','succeeded','partial','failed','rate_limited'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "attempts",
+          "sql": "attempts integer NOT NULL DEFAULT 0 CHECK (attempts BETWEEN 0 AND 3)",
+          "nullable": false,
+          "meaning": "attempts"
+        },
+        {
+          "name": "next_attempt",
+          "sql": "next_attempt timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "next attempt"
+        },
+        {
+          "name": "lease_until",
+          "sql": "lease_until timestamptz",
+          "nullable": true,
+          "meaning": "lease until"
+        },
+        {
+          "name": "lease_token",
+          "sql": "lease_token text",
+          "nullable": true,
+          "meaning": "lease token"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": true,
+          "meaning": "result"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,dedupe_key)",
+        "FOREIGN KEY (workspace_id,entitlement_id) REFERENCES fw.provider_entitlements(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "entitlement_id"
+          ],
+          "target": "provider_entitlements",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "result payload 90d; dedupe identities workspace lifecycle"
+    },
+    {
+      "name": "import_previews",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "file_digest",
+          "sql": "file_digest text NOT NULL CHECK (file_digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "file digest"
+        },
+        {
+          "name": "mapping_digest",
+          "sql": "mapping_digest text NOT NULL CHECK (mapping_digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "mapping digest"
+        },
+        {
+          "name": "profile_version",
+          "sql": "profile_version text NOT NULL",
+          "nullable": false,
+          "meaning": "profile version"
+        },
+        {
+          "name": "mapping_version",
+          "sql": "mapping_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "mapping version"
+        },
+        {
+          "name": "rows",
+          "sql": "rows jsonb NOT NULL CHECK (rows IS NULL OR (jsonb_typeof(rows)='array' AND octet_length(rows::text)<=262144))",
+          "nullable": false,
+          "meaning": "rows"
+        },
+        {
+          "name": "expected_workspace_version",
+          "sql": "expected_workspace_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "expected workspace version"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        },
+        {
+          "name": "token_digest",
+          "sql": "token_digest text NOT NULL UNIQUE",
+          "nullable": false,
+          "meaning": "token digest"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "staged CSV normalized rows 24h; raw CSV memory only"
+    },
+    {
+      "name": "import_jobs",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "preview_id",
+          "sql": "preview_id text NOT NULL",
+          "nullable": false,
+          "meaning": "preview id"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "selected_row_ids",
+          "sql": "selected_row_ids jsonb NOT NULL CHECK (selected_row_ids IS NULL OR (jsonb_typeof(selected_row_ids)='array' AND octet_length(selected_row_ids::text)<=262144))",
+          "nullable": false,
+          "meaning": "selected row ids"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('pending','running','completed','failed'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": true,
+          "meaning": "result"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        },
+        {
+          "name": "lease_until",
+          "sql": "lease_until timestamptz",
+          "nullable": true,
+          "meaning": "lease until"
+        },
+        {
+          "name": "lease_token",
+          "sql": "lease_token text",
+          "nullable": true,
+          "meaning": "lease token"
+        },
+        {
+          "name": "attempts",
+          "sql": "attempts integer NOT NULL DEFAULT 0",
+          "nullable": false,
+          "meaning": "attempts"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,preview_id)",
+        "FOREIGN KEY (workspace_id,preview_id) REFERENCES fw.import_previews(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "preview_id"
+          ],
+          "target": "import_previews",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "result 90d; identity tombstone remains"
+    },
+    {
+      "name": "snapshots",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "financial_version",
+          "sql": "financial_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "financial version"
+        },
+        {
+          "name": "as_of",
+          "sql": "as_of timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "as of"
+        },
+        {
+          "name": "refs",
+          "sql": "refs jsonb NOT NULL CHECK (refs IS NULL OR (jsonb_typeof(refs)='object' AND octet_length(refs::text)<=262144))",
+          "nullable": false,
+          "meaning": "refs"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        },
+        {
+          "name": "projection",
+          "sql": "projection jsonb NOT NULL CHECK (projection IS NULL OR (jsonb_typeof(projection)='object' AND octet_length(projection::text)<=262144))",
+          "nullable": false,
+          "meaning": "projection"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,financial_version)"
+      ],
+      "relations": [],
+      "retention": "frozen refs for histories; projection cache 30d, reconstruct or OUTSIDE_SNAPSHOT"
+    },
+    {
+      "name": "financial_plans",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "horizon",
+          "sql": "horizon date NOT NULL",
+          "nullable": false,
+          "meaning": "horizon"
+        },
+        {
+          "name": "baseline_snapshot_id",
+          "sql": "baseline_snapshot_id text NOT NULL",
+          "nullable": false,
+          "meaning": "baseline snapshot id"
+        },
+        {
+          "name": "lifecycle",
+          "sql": "lifecycle text NOT NULL CHECK (lifecycle IN ('active','archived'))",
+          "nullable": false,
+          "meaning": "lifecycle"
+        },
+        {
+          "name": "assumptions",
+          "sql": "assumptions jsonb NOT NULL CHECK (assumptions IS NULL OR (jsonb_typeof(assumptions)='array' AND octet_length(assumptions::text)<=262144))",
+          "nullable": false,
+          "meaning": "assumptions"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,baseline_snapshot_id) REFERENCES fw.snapshots(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "baseline_snapshot_id"
+          ],
+          "target": "snapshots",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "plan_items",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "plan_id",
+          "sql": "plan_id text",
+          "nullable": true,
+          "meaning": "plan id"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "kind",
+          "sql": "kind text NOT NULL CHECK (kind IN ('income','expense','investment'))",
+          "nullable": false,
+          "meaning": "kind"
+        },
+        {
+          "name": "amount",
+          "sql": "amount numeric(18,0) NOT NULL CHECK (amount>0)",
+          "nullable": false,
+          "meaning": "amount"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "holding_id",
+          "sql": "holding_id text",
+          "nullable": true,
+          "meaning": "holding id"
+        },
+        {
+          "name": "start_date",
+          "sql": "start_date date NOT NULL",
+          "nullable": false,
+          "meaning": "start date"
+        },
+        {
+          "name": "end_date",
+          "sql": "end_date date NOT NULL",
+          "nullable": false,
+          "meaning": "end date"
+        },
+        {
+          "name": "recurrence",
+          "sql": "recurrence text NOT NULL CHECK (recurrence IN ('once','monthly'))",
+          "nullable": false,
+          "meaning": "recurrence"
+        },
+        {
+          "name": "day_of_month",
+          "sql": "day_of_month integer NOT NULL CHECK (day_of_month BETWEEN 1 AND 31)",
+          "nullable": false,
+          "meaning": "day of month"
+        },
+        {
+          "name": "skip_months",
+          "sql": "skip_months jsonb NOT NULL DEFAULT '[]'::jsonb CHECK (skip_months IS NULL OR (jsonb_typeof(skip_months)='array' AND octet_length(skip_months::text)<=262144))",
+          "nullable": false,
+          "meaning": "skip months"
+        },
+        {
+          "name": "category",
+          "sql": "category text NOT NULL",
+          "nullable": false,
+          "meaning": "category"
+        },
+        {
+          "name": "archived",
+          "sql": "archived boolean NOT NULL DEFAULT false",
+          "nullable": false,
+          "meaning": "archived"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "CHECK (start_date<=end_date)",
+        "CHECK (kind<>'investment' OR holding_id IS NOT NULL)",
+        "FOREIGN KEY (workspace_id,plan_id) REFERENCES fw.financial_plans(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,holding_id) REFERENCES fw.holdings(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "plan_id"
+          ],
+          "target": "financial_plans",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "holding_id"
+          ],
+          "target": "holdings",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "actual_links",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "plan_item_id",
+          "sql": "plan_item_id text NOT NULL",
+          "nullable": false,
+          "meaning": "plan item id"
+        },
+        {
+          "name": "plan_item_version",
+          "sql": "plan_item_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "plan item version"
+        },
+        {
+          "name": "plan_version",
+          "sql": "plan_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "plan version"
+        },
+        {
+          "name": "occurrence_id",
+          "sql": "occurrence_id text NOT NULL",
+          "nullable": false,
+          "meaning": "occurrence id"
+        },
+        {
+          "name": "event_id",
+          "sql": "event_id text NOT NULL",
+          "nullable": false,
+          "meaning": "event id"
+        },
+        {
+          "name": "event_version",
+          "sql": "event_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "event version"
+        },
+        {
+          "name": "reason",
+          "sql": "reason text NOT NULL",
+          "nullable": false,
+          "meaning": "reason"
+        },
+        {
+          "name": "released_at",
+          "sql": "released_at timestamptz",
+          "nullable": true,
+          "meaning": "released at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,plan_item_id) REFERENCES fw.plan_items(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,event_id) REFERENCES fw.events(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "plan_item_id"
+          ],
+          "target": "plan_items",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "event_id"
+          ],
+          "target": "events",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "goals",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "target",
+          "sql": "target numeric(18,0) NOT NULL CHECK (target>0)",
+          "nullable": false,
+          "meaning": "target"
+        },
+        {
+          "name": "due",
+          "sql": "due date NOT NULL",
+          "nullable": false,
+          "meaning": "due"
+        },
+        {
+          "name": "status",
+          "sql": "status text NOT NULL CHECK (status IN ('active','achieved','archived'))",
+          "nullable": false,
+          "meaning": "status"
+        },
+        {
+          "name": "contribution_schedule",
+          "sql": "contribution_schedule jsonb CHECK (contribution_schedule IS NULL OR (jsonb_typeof(contribution_schedule)='object' AND octet_length(contribution_schedule::text)<=262144))",
+          "nullable": true,
+          "meaning": "contribution schedule"
+        },
+        {
+          "name": "projection",
+          "sql": "projection jsonb CHECK (projection IS NULL OR (jsonb_typeof(projection)='object' AND octet_length(projection::text)<=262144))",
+          "nullable": true,
+          "meaning": "projection"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "plan_goal_links",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "plan_item_id",
+          "sql": "plan_item_id text NOT NULL",
+          "nullable": false,
+          "meaning": "plan item id"
+        },
+        {
+          "name": "plan_item_version",
+          "sql": "plan_item_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "plan item version"
+        },
+        {
+          "name": "goal_id",
+          "sql": "goal_id text NOT NULL",
+          "nullable": false,
+          "meaning": "goal id"
+        },
+        {
+          "name": "goal_version",
+          "sql": "goal_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "goal version"
+        },
+        {
+          "name": "role",
+          "sql": "role text NOT NULL",
+          "nullable": false,
+          "meaning": "role"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,plan_item_id,plan_item_version,goal_id)",
+        "FOREIGN KEY (workspace_id,plan_item_id) REFERENCES fw.plan_items(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,goal_id) REFERENCES fw.goals(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "plan_item_id"
+          ],
+          "target": "plan_items",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "goal_id"
+          ],
+          "target": "goals",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "goal_allocations",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "goal_id",
+          "sql": "goal_id text NOT NULL",
+          "nullable": false,
+          "meaning": "goal id"
+        },
+        {
+          "name": "account_id",
+          "sql": "account_id text NOT NULL",
+          "nullable": false,
+          "meaning": "account id"
+        },
+        {
+          "name": "amount",
+          "sql": "amount numeric(18,0) NOT NULL CHECK (amount>0)",
+          "nullable": false,
+          "meaning": "amount"
+        },
+        {
+          "name": "business_date",
+          "sql": "business_date date NOT NULL",
+          "nullable": false,
+          "meaning": "business date"
+        },
+        {
+          "name": "active",
+          "sql": "active boolean NOT NULL DEFAULT true",
+          "nullable": false,
+          "meaning": "active"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,goal_id) REFERENCES fw.goals(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,account_id) REFERENCES fw.accounts(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "goal_id"
+          ],
+          "target": "goals",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "account_id"
+          ],
+          "target": "accounts",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "simulations",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "goal_id",
+          "sql": "goal_id text",
+          "nullable": true,
+          "meaning": "goal id"
+        },
+        {
+          "name": "base_snapshot_id",
+          "sql": "base_snapshot_id text NOT NULL",
+          "nullable": false,
+          "meaning": "base snapshot id"
+        },
+        {
+          "name": "frozen_inputs",
+          "sql": "frozen_inputs jsonb NOT NULL CHECK (frozen_inputs IS NULL OR (jsonb_typeof(frozen_inputs)='object' AND octet_length(frozen_inputs::text)<=262144))",
+          "nullable": false,
+          "meaning": "frozen inputs"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb NOT NULL CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": false,
+          "meaning": "result"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('ready','failed'))",
+          "nullable": false,
+          "meaning": "state"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,goal_id) REFERENCES fw.goals(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,base_snapshot_id) REFERENCES fw.snapshots(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "goal_id"
+          ],
+          "target": "goals",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "base_snapshot_id"
+          ],
+          "target": "snapshots",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "conversations",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "title",
+          "sql": "title text NOT NULL",
+          "nullable": false,
+          "meaning": "title"
+        },
+        {
+          "name": "lifecycle",
+          "sql": "lifecycle text NOT NULL CHECK (lifecycle IN ('active','archived'))",
+          "nullable": false,
+          "meaning": "lifecycle"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "messages",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "conversation_id",
+          "sql": "conversation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "conversation id"
+        },
+        {
+          "name": "text",
+          "sql": "text text NOT NULL",
+          "nullable": false,
+          "meaning": "text"
+        },
+        {
+          "name": "captured_context",
+          "sql": "captured_context jsonb NOT NULL CHECK (captured_context IS NULL OR (jsonb_typeof(captured_context)='object' AND octet_length(captured_context::text)<=262144))",
+          "nullable": false,
+          "meaning": "captured context"
+        },
+        {
+          "name": "processing_kind",
+          "sql": "processing_kind text NOT NULL CHECK (processing_kind IN ('rule','single_tool','agent','scripted'))",
+          "nullable": false,
+          "meaning": "processing kind"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('queued','processing','completed','failed','cancelled'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": true,
+          "meaning": "result"
+        },
+        {
+          "name": "agent_run_id",
+          "sql": "agent_run_id text",
+          "nullable": true,
+          "meaning": "agent run id"
+        },
+        {
+          "name": "planning_draft_id",
+          "sql": "planning_draft_id text",
+          "nullable": true,
+          "meaning": "planning draft id"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,conversation_id) REFERENCES fw.conversations(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "conversation_id"
+          ],
+          "target": "conversations",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "owner history lifecycle; purge on explicit erasure, backup window applies"
+    },
+    {
+      "name": "agent_runs",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "conversation_id",
+          "sql": "conversation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "conversation id"
+        },
+        {
+          "name": "base_snapshot_id",
+          "sql": "base_snapshot_id text NOT NULL",
+          "nullable": false,
+          "meaning": "base snapshot id"
+        },
+        {
+          "name": "intent",
+          "sql": "intent text NOT NULL CHECK (intent IN ('goal','plan','investigation'))",
+          "nullable": false,
+          "meaning": "intent"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('queued','reading','awaiting_user','simulating','draft_ready','completed','partial','failed','cancelled'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "question_id",
+          "sql": "question_id text",
+          "nullable": true,
+          "meaning": "question id"
+        },
+        {
+          "name": "constraints",
+          "sql": "constraints jsonb NOT NULL CHECK (constraints IS NULL OR (jsonb_typeof(constraints)='object' AND octet_length(constraints::text)<=262144))",
+          "nullable": false,
+          "meaning": "constraints"
+        },
+        {
+          "name": "settings",
+          "sql": "settings jsonb NOT NULL CHECK (settings IS NULL OR (jsonb_typeof(settings)='object' AND octet_length(settings::text)<=262144))",
+          "nullable": false,
+          "meaning": "settings"
+        },
+        {
+          "name": "active_millis",
+          "sql": "active_millis integer NOT NULL DEFAULT 0 CHECK (active_millis BETWEEN 0 AND 60000)",
+          "nullable": false,
+          "meaning": "active millis"
+        },
+        {
+          "name": "tool_calls",
+          "sql": "tool_calls integer NOT NULL DEFAULT 0 CHECK (tool_calls BETWEEN 0 AND 8)",
+          "nullable": false,
+          "meaning": "tool calls"
+        },
+        {
+          "name": "clarifications",
+          "sql": "clarifications integer NOT NULL DEFAULT 0 CHECK (clarifications BETWEEN 0 AND 2)",
+          "nullable": false,
+          "meaning": "clarifications"
+        },
+        {
+          "name": "lease_until",
+          "sql": "lease_until timestamptz",
+          "nullable": true,
+          "meaning": "lease until"
+        },
+        {
+          "name": "lease_token",
+          "sql": "lease_token text",
+          "nullable": true,
+          "meaning": "lease token"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,conversation_id) REFERENCES fw.conversations(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,base_snapshot_id) REFERENCES fw.snapshots(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "conversation_id"
+          ],
+          "target": "conversations",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "base_snapshot_id"
+          ],
+          "target": "snapshots",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "planning_drafts",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "conversation_id",
+          "sql": "conversation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "conversation id"
+        },
+        {
+          "name": "run_id",
+          "sql": "run_id text",
+          "nullable": true,
+          "meaning": "run id"
+        },
+        {
+          "name": "base_snapshot_id",
+          "sql": "base_snapshot_id text NOT NULL",
+          "nullable": false,
+          "meaning": "base snapshot id"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('draft','previewed','confirmed','superseded','expired'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "body",
+          "sql": "body jsonb NOT NULL CHECK (body IS NULL OR (jsonb_typeof(body)='object' AND octet_length(body::text)<=262144))",
+          "nullable": false,
+          "meaning": "body"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        },
+        {
+          "name": "confirmed_ids",
+          "sql": "confirmed_ids jsonb NOT NULL DEFAULT '[]'::jsonb CHECK (confirmed_ids IS NULL OR (jsonb_typeof(confirmed_ids)='array' AND octet_length(confirmed_ids::text)<=262144))",
+          "nullable": false,
+          "meaning": "confirmed ids"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,conversation_id) REFERENCES fw.conversations(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,run_id) REFERENCES fw.agent_runs(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,base_snapshot_id) REFERENCES fw.snapshots(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "conversation_id"
+          ],
+          "target": "conversations",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "run_id"
+          ],
+          "target": "agent_runs",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "base_snapshot_id"
+          ],
+          "target": "snapshots",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "unconfirmed 30d; confirmed refs workspace lifecycle"
+    },
+    {
+      "name": "tool_results",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "run_id",
+          "sql": "run_id text",
+          "nullable": true,
+          "meaning": "run id"
+        },
+        {
+          "name": "message_id",
+          "sql": "message_id text",
+          "nullable": true,
+          "meaning": "message id"
+        },
+        {
+          "name": "base_snapshot_id",
+          "sql": "base_snapshot_id text NOT NULL",
+          "nullable": false,
+          "meaning": "base snapshot id"
+        },
+        {
+          "name": "tool_name",
+          "sql": "tool_name text NOT NULL",
+          "nullable": false,
+          "meaning": "tool name"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb NOT NULL CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": false,
+          "meaning": "result"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        },
+        {
+          "name": "evidence_refs",
+          "sql": "evidence_refs jsonb NOT NULL CHECK (evidence_refs IS NULL OR (jsonb_typeof(evidence_refs)='array' AND octet_length(evidence_refs::text)<=262144))",
+          "nullable": false,
+          "meaning": "evidence refs"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "FOREIGN KEY (workspace_id,run_id) REFERENCES fw.agent_runs(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,message_id) REFERENCES fw.messages(workspace_id,id) DEFERRABLE INITIALLY DEFERRED",
+        "FOREIGN KEY (workspace_id,base_snapshot_id) REFERENCES fw.snapshots(workspace_id,id) DEFERRABLE INITIALLY DEFERRED"
+      ],
+      "relations": [
+        {
+          "columns": [
+            "workspace_id",
+            "run_id"
+          ],
+          "target": "agent_runs",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "message_id"
+          ],
+          "target": "messages",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        },
+        {
+          "columns": [
+            "workspace_id",
+            "base_snapshot_id"
+          ],
+          "target": "snapshots",
+          "targetColumns": [
+            "workspace_id",
+            "id"
+          ]
+        }
+      ],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "version_history",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "object_type",
+          "sql": "object_type text NOT NULL",
+          "nullable": false,
+          "meaning": "object type"
+        },
+        {
+          "name": "object_id",
+          "sql": "object_id text NOT NULL",
+          "nullable": false,
+          "meaning": "object id"
+        },
+        {
+          "name": "object_version",
+          "sql": "object_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "object version"
+        },
+        {
+          "name": "payload",
+          "sql": "payload jsonb NOT NULL CHECK (payload IS NULL OR (jsonb_typeof(payload)='object' AND octet_length(payload::text)<=262144))",
+          "nullable": false,
+          "meaning": "payload"
+        },
+        {
+          "name": "schema_ref",
+          "sql": "schema_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "schema ref"
+        },
+        {
+          "name": "reason",
+          "sql": "reason text NOT NULL",
+          "nullable": false,
+          "meaning": "reason"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,object_type,object_id,object_version)"
+      ],
+      "relations": [],
+      "retention": "workspace lifecycle"
+    },
+    {
+      "name": "proposal_previews",
+      "tenant": true,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "subject_id",
+          "sql": "subject_id text NOT NULL REFERENCES fw.identities(id)",
+          "nullable": false,
+          "meaning": "subject id"
+        },
+        {
+          "name": "operation_id",
+          "sql": "operation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "operation id"
+        },
+        {
+          "name": "object_id",
+          "sql": "object_id text",
+          "nullable": true,
+          "meaning": "object id"
+        },
+        {
+          "name": "digest",
+          "sql": "digest text NOT NULL CHECK (digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "digest"
+        },
+        {
+          "name": "base_versions",
+          "sql": "base_versions jsonb NOT NULL CHECK (base_versions IS NULL OR (jsonb_typeof(base_versions)='object' AND octet_length(base_versions::text)<=262144))",
+          "nullable": false,
+          "meaning": "base versions"
+        },
+        {
+          "name": "changes",
+          "sql": "changes jsonb NOT NULL CHECK (changes IS NULL OR (jsonb_typeof(changes)='object' AND octet_length(changes::text)<=262144))",
+          "nullable": false,
+          "meaning": "changes"
+        },
+        {
+          "name": "token_digest",
+          "sql": "token_digest text NOT NULL UNIQUE",
+          "nullable": false,
+          "meaning": "token digest"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        },
+        {
+          "name": "consumed_at",
+          "sql": "consumed_at timestamptz",
+          "nullable": true,
+          "meaning": "consumed at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)"
+      ],
+      "relations": [],
+      "retention": "expired 24h; result identities in idempotency"
+    },
+    {
+      "name": "idempotency_records",
+      "tenant": true,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "workspace_id",
+          "sql": "workspace_id text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace id"
+        },
+        {
+          "name": "id",
+          "sql": "id text NOT NULL",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "principal_id",
+          "sql": "principal_id text NOT NULL",
+          "nullable": false,
+          "meaning": "principal id"
+        },
+        {
+          "name": "operation_id",
+          "sql": "operation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "operation id"
+        },
+        {
+          "name": "key",
+          "sql": "key text NOT NULL",
+          "nullable": false,
+          "meaning": "key"
+        },
+        {
+          "name": "payload_digest",
+          "sql": "payload_digest text NOT NULL CHECK (payload_digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "payload digest"
+        },
+        {
+          "name": "result_ref",
+          "sql": "result_ref text NOT NULL",
+          "nullable": false,
+          "meaning": "result ref"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": true,
+          "meaning": "result"
+        },
+        {
+          "name": "committed_at",
+          "sql": "committed_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "committed at"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (workspace_id,id)",
+        "FOREIGN KEY (workspace_id) REFERENCES fw.workspaces(id)",
+        "UNIQUE (workspace_id,principal_id,operation_id,key)"
+      ],
+      "relations": [],
+      "retention": "result body 90d, identity/digest/ref tombstone until workspace erasure"
+    },
+    {
+      "name": "ops_accounts",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "subject_token",
+          "sql": "subject_token text NOT NULL",
+          "nullable": false,
+          "meaning": "subject token"
+        },
+        {
+          "name": "workspace_token",
+          "sql": "workspace_token text NOT NULL",
+          "nullable": false,
+          "meaning": "workspace token"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('active','suspended'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "device_health",
+          "sql": "device_health jsonb NOT NULL CHECK (device_health IS NULL OR (jsonb_typeof(device_health)='array' AND octet_length(device_health::text)<=262144))",
+          "nullable": false,
+          "meaning": "device health"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "support metadata lifecycle"
+    },
+    {
+      "name": "ops_sources",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "package_name",
+          "sql": "package_name text NOT NULL",
+          "nullable": false,
+          "meaning": "package name"
+        },
+        {
+          "name": "parser_version",
+          "sql": "parser_version text NOT NULL",
+          "nullable": false,
+          "meaning": "parser version"
+        },
+        {
+          "name": "compatibility",
+          "sql": "compatibility text NOT NULL",
+          "nullable": false,
+          "meaning": "compatibility"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('enabled','disabled','degraded'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "binding_count",
+          "sql": "binding_count integer NOT NULL CHECK (binding_count>=0)",
+          "nullable": false,
+          "meaning": "binding count"
+        },
+        {
+          "name": "last_success",
+          "sql": "last_success timestamptz",
+          "nullable": true,
+          "meaning": "last success"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "source lifecycle"
+    },
+    {
+      "name": "ops_jobs",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "source_id",
+          "sql": "source_id text NOT NULL",
+          "nullable": false,
+          "meaning": "source id"
+        },
+        {
+          "name": "job_type",
+          "sql": "job_type text NOT NULL CHECK (job_type IN ('price_refresh','ingestion','sync','import','agent'))",
+          "nullable": false,
+          "meaning": "job type"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('queued','running','failed','succeeded','paused'))",
+          "nullable": false,
+          "meaning": "state"
+        },
+        {
+          "name": "attempts",
+          "sql": "attempts integer NOT NULL DEFAULT 0",
+          "nullable": false,
+          "meaning": "attempts"
+        },
+        {
+          "name": "lease_until",
+          "sql": "lease_until timestamptz",
+          "nullable": true,
+          "meaning": "lease until"
+        },
+        {
+          "name": "lease_token",
+          "sql": "lease_token text",
+          "nullable": true,
+          "meaning": "lease token"
+        },
+        {
+          "name": "next_attempt",
+          "sql": "next_attempt timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "next attempt"
+        },
+        {
+          "name": "error_code",
+          "sql": "error_code text",
+          "nullable": true,
+          "meaning": "error code"
+        },
+        {
+          "name": "request_id",
+          "sql": "request_id text NOT NULL",
+          "nullable": false,
+          "meaning": "request id"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "metadata 90d"
+    },
+    {
+      "name": "ops_quotas",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "name",
+          "sql": "name text NOT NULL",
+          "nullable": false,
+          "meaning": "name"
+        },
+        {
+          "name": "used",
+          "sql": "used bigint NOT NULL CHECK (used>=0)",
+          "nullable": false,
+          "meaning": "used"
+        },
+        {
+          "name": "limit_value",
+          "sql": "limit_value bigint NOT NULL CHECK (limit_value>=0)",
+          "nullable": false,
+          "meaning": "limit value"
+        },
+        {
+          "name": "reset_at",
+          "sql": "reset_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "reset at"
+        },
+        {
+          "name": "cooldown_until",
+          "sql": "cooldown_until timestamptz",
+          "nullable": true,
+          "meaning": "cooldown until"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "30d"
+    },
+    {
+      "name": "ops_releases",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "version_name",
+          "sql": "version_name text NOT NULL",
+          "nullable": false,
+          "meaning": "version name"
+        },
+        {
+          "name": "channel",
+          "sql": "channel text NOT NULL",
+          "nullable": false,
+          "meaning": "channel"
+        },
+        {
+          "name": "published_at",
+          "sql": "published_at timestamptz",
+          "nullable": true,
+          "meaning": "published at"
+        },
+        {
+          "name": "artifact_url",
+          "sql": "artifact_url text",
+          "nullable": true,
+          "meaning": "artifact url"
+        },
+        {
+          "name": "sha256",
+          "sql": "sha256 text",
+          "nullable": true,
+          "meaning": "sha256"
+        },
+        {
+          "name": "signing_fingerprint",
+          "sql": "signing_fingerprint text",
+          "nullable": true,
+          "meaning": "signing fingerprint"
+        },
+        {
+          "name": "compatibility",
+          "sql": "compatibility text NOT NULL",
+          "nullable": false,
+          "meaning": "compatibility"
+        },
+        {
+          "name": "test_state",
+          "sql": "test_state text NOT NULL CHECK (test_state IN ('not_run','passed','failed'))",
+          "nullable": false,
+          "meaning": "test state"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "release lifecycle"
+    },
+    {
+      "name": "ops_incidents",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "severity",
+          "sql": "severity text NOT NULL CHECK (severity IN ('info','warning','critical'))",
+          "nullable": false,
+          "meaning": "severity"
+        },
+        {
+          "name": "source_id",
+          "sql": "source_id text",
+          "nullable": true,
+          "meaning": "source id"
+        },
+        {
+          "name": "code",
+          "sql": "code text NOT NULL",
+          "nullable": false,
+          "meaning": "code"
+        },
+        {
+          "name": "state",
+          "sql": "state text NOT NULL CHECK (state IN ('open','resolved'))",
+          "nullable": false,
+          "meaning": "state"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "90d"
+    },
+    {
+      "name": "ops_previews",
+      "tenant": false,
+      "mutable": true,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "version",
+          "sql": "version bigint NOT NULL DEFAULT 1 CHECK (version > 0)",
+          "nullable": false,
+          "meaning": "version"
+        },
+        {
+          "name": "updated_at",
+          "sql": "updated_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "updated at"
+        },
+        {
+          "name": "subject_id",
+          "sql": "subject_id text NOT NULL",
+          "nullable": false,
+          "meaning": "subject id"
+        },
+        {
+          "name": "action",
+          "sql": "action text NOT NULL",
+          "nullable": false,
+          "meaning": "action"
+        },
+        {
+          "name": "object_id",
+          "sql": "object_id text NOT NULL",
+          "nullable": false,
+          "meaning": "object id"
+        },
+        {
+          "name": "expected_version",
+          "sql": "expected_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "expected version"
+        },
+        {
+          "name": "reason_code",
+          "sql": "reason_code text NOT NULL",
+          "nullable": false,
+          "meaning": "reason code"
+        },
+        {
+          "name": "digest",
+          "sql": "digest text NOT NULL CHECK (digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "digest"
+        },
+        {
+          "name": "token_digest",
+          "sql": "token_digest text NOT NULL UNIQUE",
+          "nullable": false,
+          "meaning": "token digest"
+        },
+        {
+          "name": "expires_at",
+          "sql": "expires_at timestamptz NOT NULL",
+          "nullable": false,
+          "meaning": "expires at"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "24h"
+    },
+    {
+      "name": "ops_idempotency",
+      "tenant": false,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "subject_id",
+          "sql": "subject_id text NOT NULL",
+          "nullable": false,
+          "meaning": "subject id"
+        },
+        {
+          "name": "operation_id",
+          "sql": "operation_id text NOT NULL",
+          "nullable": false,
+          "meaning": "operation id"
+        },
+        {
+          "name": "key",
+          "sql": "key text NOT NULL",
+          "nullable": false,
+          "meaning": "key"
+        },
+        {
+          "name": "digest",
+          "sql": "digest text NOT NULL CHECK (digest ~ '^[a-f0-9]{64}$')",
+          "nullable": false,
+          "meaning": "digest"
+        },
+        {
+          "name": "result",
+          "sql": "result jsonb NOT NULL CHECK (result IS NULL OR (jsonb_typeof(result)='object' AND octet_length(result::text)<=262144))",
+          "nullable": false,
+          "meaning": "result"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "90d plus dedupe tombstone"
+    },
+    {
+      "name": "ops_audit",
+      "tenant": false,
+      "mutable": false,
+      "columns": [
+        {
+          "name": "id",
+          "sql": "id text PRIMARY KEY",
+          "nullable": false,
+          "meaning": "id"
+        },
+        {
+          "name": "created_at",
+          "sql": "created_at timestamptz NOT NULL DEFAULT now()",
+          "nullable": false,
+          "meaning": "created at"
+        },
+        {
+          "name": "actor_id",
+          "sql": "actor_id text NOT NULL",
+          "nullable": false,
+          "meaning": "actor id"
+        },
+        {
+          "name": "action",
+          "sql": "action text NOT NULL CHECK (action IN ('retry_job','disable_source'))",
+          "nullable": false,
+          "meaning": "action"
+        },
+        {
+          "name": "object_id",
+          "sql": "object_id text NOT NULL",
+          "nullable": false,
+          "meaning": "object id"
+        },
+        {
+          "name": "reason_code",
+          "sql": "reason_code text NOT NULL",
+          "nullable": false,
+          "meaning": "reason code"
+        },
+        {
+          "name": "from_version",
+          "sql": "from_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "from version"
+        },
+        {
+          "name": "to_version",
+          "sql": "to_version bigint NOT NULL",
+          "nullable": false,
+          "meaning": "to version"
+        },
+        {
+          "name": "result",
+          "sql": "result text NOT NULL CHECK (result IN ('succeeded','failed','denied'))",
+          "nullable": false,
+          "meaning": "result"
+        },
+        {
+          "name": "request_id",
+          "sql": "request_id text NOT NULL",
+          "nullable": false,
+          "meaning": "request id"
+        }
+      ],
+      "constraints": [],
+      "relations": [],
+      "retention": "180d synthetic; real retention pending policy"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "events_period",
+      "table": "events",
+      "columns": "workspace_id,business_date DESC,id DESC",
+      "where": null,
+      "purpose": "listTransactions stable date/id + period"
+    },
+    {
+      "name": "events_account",
+      "table": "events",
+      "columns": "workspace_id,account_id,business_date,id",
+      "where": null,
+      "purpose": "account history and scoped flow"
+    },
+    {
+      "name": "lines_balance",
+      "table": "posting_lines",
+      "columns": "workspace_id,ledger_account_id,group_id",
+      "where": null,
+      "purpose": "account signed balance, group validation"
+    },
+    {
+      "name": "quotes_asof",
+      "table": "quote_observations",
+      "columns": "workspace_id,holding_id,quote_as_of DESC,id",
+      "where": null,
+      "purpose": "latest compatible observation <= report asOf"
+    },
+    {
+      "name": "movement_asof",
+      "table": "holding_movements",
+      "columns": "workspace_id,holding_id,business_date DESC,id",
+      "where": null,
+      "purpose": "quantity at historical date"
+    },
+    {
+      "name": "receipt_poll",
+      "table": "ingestion_receipts",
+      "columns": "workspace_id,device_id,created_at DESC,id",
+      "where": null,
+      "purpose": "device receipts cursor"
+    },
+    {
+      "name": "receipt_pending",
+      "table": "ingestion_receipts",
+      "columns": "workspace_id,created_at,id",
+      "where": "state IN ('received','parsed')",
+      "purpose": "ingestion dispatcher"
+    },
+    {
+      "name": "refresh_due",
+      "table": "refresh_jobs",
+      "columns": "next_attempt,lease_until",
+      "where": "state IN ('queued','running','rate_limited')",
+      "purpose": "SKIP LOCKED due jobs; service role only"
+    },
+    {
+      "name": "ops_due",
+      "table": "ops_jobs",
+      "columns": "next_attempt,lease_until",
+      "where": "state IN ('queued','running')",
+      "purpose": "scheduler due metadata"
+    },
+    {
+      "name": "messages_history",
+      "table": "messages",
+      "columns": "workspace_id,conversation_id,created_at DESC,id DESC",
+      "where": null,
+      "purpose": "shared history keyset pagination"
+    },
+    {
+      "name": "draft_owner_state",
+      "table": "planning_drafts",
+      "columns": "workspace_id,state,created_at DESC,id",
+      "where": null,
+      "purpose": "draft list and expiry"
+    },
+    {
+      "name": "review_open",
+      "table": "reviews",
+      "columns": "workspace_id,status,created_at DESC,id",
+      "where": null,
+      "purpose": "Review inbox"
+    },
+    {
+      "name": "allocation_active",
+      "table": "goal_allocations",
+      "columns": "workspace_id,account_id,goal_id",
+      "where": "active",
+      "purpose": "sum earmarks across goals under account lock"
+    },
+    {
+      "name": "actual_unique_active",
+      "table": "actual_links",
+      "columns": "workspace_id,plan_version,event_id",
+      "where": "released_at IS NULL",
+      "purpose": "one event per plan version; unique"
+    },
+    {
+      "name": "binding_live",
+      "table": "collector_bindings",
+      "columns": "workspace_id,device_id,package_name,account_id",
+      "where": "enabled",
+      "purpose": "unique active mapping; no owner retarget"
+    },
+    {
+      "name": "ops_replay",
+      "table": "ops_idempotency",
+      "columns": "subject_id,operation_id,key",
+      "where": null,
+      "purpose": "unique admin request replay"
+    },
+    {
+      "name": "snapshots_asof",
+      "table": "snapshots",
+      "columns": "workspace_id,as_of DESC",
+      "where": null,
+      "purpose": "frozen report refs"
+    },
+    {
+      "name": "goal_status",
+      "table": "goals",
+      "columns": "workspace_id,status,id",
+      "where": null,
+      "purpose": "Goals pages"
+    }
+  ]
+}

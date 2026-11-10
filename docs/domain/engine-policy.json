@@ -1,0 +1,22 @@
+{
+  "id": "FW-ENGINE-DOMAIN-001",
+  "forecastModel": "FW-FORECAST-MODEL-001",
+  "status": "ACCEPTED_DESIGN_RUNTIME_NOT_RUN",
+  "actualCurrency": "VND",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "moneyDigits": 18,
+  "quantityPrecision": 28,
+  "quantityScale": 8,
+  "decimalPrecisionCandidate": 80,
+  "moneyRounding": "ROUND_HALF_UP_PER_HOLDING_THEN_SUM",
+  "actualArithmetic": "EXACT_DECIMAL_NO_BINARY64",
+  "forecastArithmetic": "Exact baseline and funding ledger; versioned approximate transcendental factors permitted for simulation only; not actual writes",
+  "forecastTrialsMax": 1000,
+  "forecastMonthsMax": 360,
+  "forecastPageRowsMax": 12,
+  "forecastPageBytesMax": 262144,
+  "financialWritesByForecast": false,
+  "financialWritesByAgent": false,
+  "sqlConcurrency": "Short READ COMMITTED write UoW with workspace financial anchor; REPEATABLE READ read snapshot; bounded full-transaction retry",
+  "runtime": "NOT_RUN"
+}

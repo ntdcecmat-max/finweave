@@ -1,0 +1,51 @@
+{
+  "id": "FW-SOURCES-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-004",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-002",
+  "files": {
+    "api": {
+      "path": "docs/contracts/v2-t1-r4/openapi.json",
+      "sha256": "c873127da5b4680dfd2535f518c09807532c47eef88d6b0d3a8fed1bc7bc1ca6"
+    },
+    "database": {
+      "path": "docs/data/target-t1-async/target-model.json",
+      "sha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424"
+    },
+    "asyncBundle": {
+      "path": "docs/async/implementation-bundle.json",
+      "sha256": "4994176b71f62ff2e776fe68866d563c3e8809c103b8db921dac8c7a5950bc62"
+    },
+    "androidBundle": {
+      "path": "docs/android/implementation-bundle.json",
+      "sha256": "1a460f76a969d80dace0fd9af0bb574a1a29db861173f49714b3deaa3f4b066b"
+    },
+    "security": {
+      "path": "docs/security/t1/security-policy.json",
+      "sha256": "f02497dc8584babf6aa6a27f3302198abc675ca407becee0a35f46075291ae97"
+    },
+    "domain": {
+      "path": "docs/domain/engine-policy.json",
+      "sha256": "2cd8171dde4c324e5408f0e3f354f48fb5b9c402213c4529e87e17f8da3d53aa"
+    },
+    "policy": {
+      "path": "docs/sources/source-policy.json",
+      "sha256": "a31fc1d7053b85af8011f112a586f75b10211271af61498fb14c7a15b3e2d591"
+    },
+    "registry": {
+      "path": "docs/sources/provider-registry.json",
+      "sha256": "43c5d44ea8a62108ebf4166f01749995433de250630258ef2a049191a3ff87fe"
+    },
+    "profileSchemas": {
+      "path": "docs/sources/profile-schemas.json",
+      "sha256": "60316296ec5a51840df079681114f148e3134a86df235951cf9ed68d63c462a8"
+    },
+    "mapping": {
+      "path": "docs/sources/contract-storage-map.json",
+      "sha256": "d82b5bd40220d6b9765f9e4c466390f94d8ebc0c808b8e120f0b6d99b4c81eea"
+    }
+  },
+  "realProviders": "NOT_ACTIVATED",
+  "runtime": "NOT_RUN"
+}

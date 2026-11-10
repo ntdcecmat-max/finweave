@@ -1,0 +1,72 @@
+{
+  "id": "FW-ANDROID-POLICY-001",
+  "date": "2026-10-09",
+  "status": "DESIGN_ONLY",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-002",
+  "apiRevision": "FW-API-T1-D1J2-004",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "stack": {
+    "shell": "Capacitor8.x compatible exact patches at implementation",
+    "native": "Kotlin",
+    "storage": "Room plus AES256GCM sensitive payloads",
+    "minSdk": 24,
+    "compileSdk": 36,
+    "targetSdk": 36
+  },
+  "rawNotification": {
+    "persist": false,
+    "upload": false,
+    "log": false,
+    "model": false,
+    "memoryChannelItems": 32,
+    "textProjectionBytes": 16384
+  },
+  "outbox": {
+    "maxItems": 1000,
+    "maxBytes": 8388608,
+    "unackedBudgetIncludesQuarantine": true,
+    "autoRetryDays": 7,
+    "quarantineAdditionalDays": 7,
+    "maxBatchItems": 50,
+    "maxEnvelopeBytes": 262144
+  },
+  "ackReplay": {
+    "maxItems": 1000,
+    "maxBytes": 8388608,
+    "maxAgeDays": 7,
+    "autoReingestMissing": false
+  },
+  "work": {
+    "periodicMinutes": 15,
+    "backoffSeconds": 30,
+    "scopedUploaders": 1,
+    "exactTimingGuarantee": false
+  },
+  "keys": {
+    "installation": "P256",
+    "collector": "separate P256 per scoped enrollment",
+    "vault": "per-vault AES256GCM DEK wrapped by Keystore",
+    "backgroundPerUseBiometric": false,
+    "strongBoxGuaranteed": false
+  },
+  "clock": {
+    "sameBoot": "elapsedRealtime plus trusted TLS server interval",
+    "rebootWithoutTrustedAnchor": "seal payload and pause real capture",
+    "useUpperAgeBound": true,
+    "physicalDeletionWhileOffGuaranteed": false
+  },
+  "distribution": {
+    "preferred": "local synthetic APK; eligible limited distribution optional",
+    "freeDeviceLimit": 20,
+    "commercialEligibilityConfirmed": false,
+    "accountCreated": false
+  },
+  "realBuildGates": {
+    "appId": null,
+    "apiHttpsOrigin": null,
+    "releaseCertificate": null,
+    "verifiedDeviceMatrix": false,
+    "verifiedSourceCatalog": false
+  },
+  "runtime": "NOT_RUN"
+}

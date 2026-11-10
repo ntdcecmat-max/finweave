@@ -1,0 +1,13 @@
+{
+  "id": "FW-SECURITY-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-002",
+  "apiSha256": "2b7727363508ecf7e805e96838c3d478d211d6fa4a461210d111ad3fee8d3578",
+  "securityProfile": "FW-SEC-T1-001",
+  "securityPolicySha256": "f02497dc8584babf6aa6a27f3302198abc675ca407becee0a35f46075291ae97",
+  "databaseRevision": "FW-PHYS-T1-SECURITY-003",
+  "databaseModelSha256": "099b7a1c3ecb8cdb53ec430d6ee278b6ff58bd6a9ecda700b4894b55dd60c876",
+  "previousAPINotRewritten": true,
+  "previousDBNotRewritten": true,
+  "runtime": "NOT_RUN"
+}

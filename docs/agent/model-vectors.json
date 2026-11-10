@@ -1,0 +1,376 @@
+{
+  "scope": "Design predicate examples only, not Agent/Engine/SQL/model performance",
+  "vectors": [
+    {
+      "id": "eligible_last_action",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": true
+    },
+    {
+      "id": "denied_actions",
+      "kind": "eligible",
+      "input": {
+        "actions": 8,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_active",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 60000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_clarifications",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 3,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_modelRounds",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 12,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_currentGeneration",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": false,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_authorized",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": false,
+        "rights": true,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_rights",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": false,
+        "constraintPreserved": true
+      },
+      "expected": false
+    },
+    {
+      "id": "denied_constraintPreserved",
+      "kind": "eligible",
+      "input": {
+        "actions": 7,
+        "active": 59000,
+        "clarifications": 1,
+        "modelRounds": 11,
+        "currentGeneration": true,
+        "authorized": true,
+        "rights": true,
+        "constraintPreserved": false
+      },
+      "expected": false
+    },
+    {
+      "id": "resume_budget_not_reset",
+      "kind": "remaining",
+      "input": {
+        "used": 7,
+        "resume": true
+      },
+      "expected": 1
+    },
+    {
+      "id": "exhausted_not_restart",
+      "kind": "remaining",
+      "input": {
+        "used": 8,
+        "resume": true
+      },
+      "expected": 0
+    },
+    {
+      "id": "replay_11",
+      "kind": "replay",
+      "input": {
+        "committed": true,
+        "sameDigest": true
+      },
+      "expected": "RETURN_COMMITTED"
+    },
+    {
+      "id": "replay_12",
+      "kind": "replay",
+      "input": {
+        "committed": true,
+        "sameDigest": false
+      },
+      "expected": "CONFLICT"
+    },
+    {
+      "id": "replay_13",
+      "kind": "replay",
+      "input": {
+        "committed": false,
+        "sameDigest": true
+      },
+      "expected": "EXECUTE_WITH_SAME_ACTION"
+    },
+    {
+      "id": "admission_14",
+      "kind": "admission",
+      "input": {
+        "savedDay": "2026-10-09",
+        "currentDay": "2026-10-09",
+        "charged": true
+      },
+      "expected": "NO_SECOND_CHARGE"
+    },
+    {
+      "id": "admission_15",
+      "kind": "admission",
+      "input": {
+        "savedDay": "2026-10-08",
+        "currentDay": "2026-10-09",
+        "charged": true
+      },
+      "expected": "RESERVE_CURRENT_DAY"
+    },
+    {
+      "id": "admission_16",
+      "kind": "admission",
+      "input": {
+        "savedDay": "2026-10-09",
+        "currentDay": "2026-10-09",
+        "charged": false
+      },
+      "expected": "RESERVE_CURRENT_DAY"
+    },
+    {
+      "id": "investigation_draft",
+      "kind": "intent",
+      "input": {
+        "kind": "draft",
+        "intent": "investigation"
+      },
+      "expected": false
+    },
+    {
+      "id": "investigation_pure",
+      "kind": "intent",
+      "input": {
+        "kind": "pure",
+        "intent": "investigation"
+      },
+      "expected": false
+    },
+    {
+      "id": "investigation_read",
+      "kind": "intent",
+      "input": {
+        "kind": "read",
+        "intent": "investigation"
+      },
+      "expected": true
+    },
+    {
+      "id": "investigation_control",
+      "kind": "intent",
+      "input": {
+        "kind": "control",
+        "intent": "investigation"
+      },
+      "expected": true
+    },
+    {
+      "id": "investigation_proposal",
+      "kind": "intent",
+      "input": {
+        "kind": "proposal",
+        "intent": "investigation"
+      },
+      "expected": true
+    },
+    {
+      "id": "model_confirm_denied",
+      "kind": "capability",
+      "input": {
+        "name": "confirmPlanningDraft"
+      },
+      "expected": false
+    },
+    {
+      "id": "draft_port_allowed",
+      "kind": "capability",
+      "input": {
+        "name": "proposePlanningDraft"
+      },
+      "expected": true
+    },
+    {
+      "id": "grounded_fact",
+      "kind": "ground",
+      "input": {
+        "evidenceExists": true,
+        "sameSnapshot": true,
+        "authorized": true,
+        "modelProse": false
+      },
+      "expected": "RENDER_ENGINE_FACT"
+    },
+    {
+      "id": "ungrounded_evidenceExists",
+      "kind": "ground",
+      "input": {
+        "evidenceExists": false,
+        "sameSnapshot": true,
+        "authorized": true,
+        "modelProse": false
+      },
+      "expected": "UNAVAILABLE"
+    },
+    {
+      "id": "ungrounded_sameSnapshot",
+      "kind": "ground",
+      "input": {
+        "evidenceExists": true,
+        "sameSnapshot": false,
+        "authorized": true,
+        "modelProse": false
+      },
+      "expected": "UNAVAILABLE"
+    },
+    {
+      "id": "ungrounded_authorized",
+      "kind": "ground",
+      "input": {
+        "evidenceExists": true,
+        "sameSnapshot": true,
+        "authorized": false,
+        "modelProse": false
+      },
+      "expected": "UNAVAILABLE"
+    },
+    {
+      "id": "numeric_prose_ignored",
+      "kind": "ground",
+      "input": {
+        "evidenceExists": true,
+        "sameSnapshot": true,
+        "authorized": true,
+        "modelProse": true
+      },
+      "expected": "REJECT_FREE_FACTUAL_PROSE"
+    },
+    {
+      "id": "unknown_inference_charged",
+      "kind": "reservation",
+      "input": {
+        "reserved": 25000,
+        "observed": null
+      },
+      "expected": 25000
+    },
+    {
+      "id": "observed_inference_settled",
+      "kind": "reservation",
+      "input": {
+        "reserved": 25000,
+        "observed": 7000
+      },
+      "expected": 7000
+    },
+    {
+      "id": "cancel_late_no_publish",
+      "kind": "publish",
+      "input": {
+        "cancelled": true,
+        "liveEpoch": true
+      },
+      "expected": false
+    },
+    {
+      "id": "recovery_no_publish",
+      "kind": "publish",
+      "input": {
+        "cancelled": false,
+        "liveEpoch": false
+      },
+      "expected": false
+    },
+    {
+      "id": "live_publish_model",
+      "kind": "publish",
+      "input": {
+        "cancelled": false,
+        "liveEpoch": true
+      },
+      "expected": true
+    }
+  ]
+}

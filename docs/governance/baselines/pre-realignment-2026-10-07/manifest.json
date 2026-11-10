@@ -1,0 +1,50 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "DD2121E4ABFD7AF11D7793D27B616921A6F19B070FC0236BED835E486217B594"
+  },
+  {
+    "path": "FinWeave_Tech_Stack.md",
+    "sha256": "F32417407943E7BA770E775C9D83CC887049A55E3AE731C3C1D5F43E9774306E"
+  },
+  {
+    "path": "docs/product/prd.md",
+    "sha256": "F38DEDBC98C3A276D0F8B18FB69B36E8E82241D20847178DB25F2DD8F5CA9422"
+  },
+  {
+    "path": "docs/product/scope.md",
+    "sha256": "D9D86CF0A4A76DA808281F6DC19625FEB2629A2375BF710D291FB2DC0BFC6868"
+  },
+  {
+    "path": "docs/requirements/srs.md",
+    "sha256": "5634F042A720BD5794CFD6AC139D24B0B353E7EA10AB6D1EEDBC8CB5CEEC52CB"
+  },
+  {
+    "path": "docs/architecture/high-level-design.md",
+    "sha256": "7E581D836CA9F9793A641973891EC74FFF97C80EDF468D7797066D58CC2D947C"
+  },
+  {
+    "path": "docs/architecture/low-level-design.md",
+    "sha256": "25DD597658BF4262568F62481136CB69C217985D241A87226F39138F03226353"
+  },
+  {
+    "path": "docs/architecture/views/architecture-views.md",
+    "sha256": "6A4E482EE11C33DC8D2A004CE4D1D1053E7A8CA0290F80FCE2AADCFCFD2B16F1"
+  },
+  {
+    "path": "docs/data/logical-data-model.md",
+    "sha256": "5F419437DAB782E54217E0C418768CDB7BCBDA5A1615E0C9BFAB1B52B6A39EEA"
+  },
+  {
+    "path": "docs/product/roadmap.md",
+    "sha256": "60F8002B7E22DCD0DBCA1B9303F22553FF61E31FB76E2057087F49D6A4D6787E"
+  },
+  {
+    "path": "docs/product/feasibility-study.md",
+    "sha256": "00F8DC24004AF9651EB90D04B274AC185DC739FCBEC7EAB7F68DE930D18F612B"
+  },
+  {
+    "path": "docs/product/cost-model.md",
+    "sha256": "AC98ACDEB4A1B9B3E620E20239FB307D4E4CD1795001346AACDEE075D4C6B3DD"
+  }
+]

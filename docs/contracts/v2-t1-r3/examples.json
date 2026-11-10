@@ -1,0 +1,349 @@
+[
+  {
+    "operationId": "startForecastRun",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "startForecastRun",
+      "input": {
+        "baseSnapshotId": null,
+        "settings": {
+          "incomeGrowth": "0",
+          "inflation": "0",
+          "cashReturn": "0",
+          "stockReturn": "0",
+          "goldReturn": "0",
+          "stockVolatility": "0",
+          "goldVolatility": "0",
+          "incomeVolatility": "0",
+          "expenseVolatility": "0",
+          "reserveMonths": "0",
+          "investSurplus": "0",
+          "goldWeight": "0",
+          "debtAPR": "0",
+          "incomeDrop": "0",
+          "stockShock": "0",
+          "inflationShock": "0",
+          "months": 1,
+          "income": "0",
+          "expense": "0",
+          "debt": "0",
+          "debtPayment": "0",
+          "stress": false,
+          "stressStart": 1,
+          "stressMonths": 1,
+          "realMoney": false,
+          "poolCash": false
+        },
+        "scopeAccountIds": [
+          "SYN_ACCOUNT"
+        ],
+        "goalIds": [],
+        "seed": "SYN_SEED",
+        "trials": 3,
+        "overduePolicy": "retain_overdue"
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": 0,
+      "data": {
+        "id": "SYN_FORECAST",
+        "version": 1,
+        "state": "queued",
+        "baseSnapshotId": "SYN_SNAPSHOT",
+        "baseFinancialVersion": 1,
+        "createdAt": "2026-10-09T00:00:00Z",
+        "completedAt": null,
+        "resultExpiresAt": null,
+        "safeErrorCode": null,
+        "cancelRequested": false
+      }
+    },
+    "scope": "SYNTHETIC STRUCTURAL EXAMPLE ONLY; no backend/Engine/worker/crypto execution"
+  },
+  {
+    "operationId": "getForecastRun",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "getForecastRun",
+      "input": {
+        "id": "SYN_FORECAST",
+        "cursor": null
+      },
+      "mutation": null
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": 0,
+      "data": {
+        "run": {
+          "id": "SYN_FORECAST",
+          "version": 2,
+          "state": "succeeded",
+          "baseSnapshotId": "SYN_SNAPSHOT",
+          "baseFinancialVersion": 1,
+          "createdAt": "2026-10-09T00:00:00Z",
+          "completedAt": "2026-10-09T00:00:01Z",
+          "resultExpiresAt": "2026-11-08T00:00:01Z",
+          "safeErrorCode": null,
+          "cancelRequested": false
+        },
+        "page": {
+          "pageIndex": 0,
+          "pageCount": 1,
+          "summary": {
+            "engineVersion": "FW-ENGINE-DOMAIN-001",
+            "forecastModelVersion": "FW-FORECAST-MODEL-001",
+            "seed": "SYN_SEED",
+            "trials": 3,
+            "settings": {
+              "incomeGrowth": "0",
+              "inflation": "0",
+              "cashReturn": "0",
+              "stockReturn": "0",
+              "goldReturn": "0",
+              "stockVolatility": "0",
+              "goldVolatility": "0",
+              "incomeVolatility": "0",
+              "expenseVolatility": "0",
+              "reserveMonths": "0",
+              "investSurplus": "0",
+              "goldWeight": "0",
+              "debtAPR": "0",
+              "incomeDrop": "0",
+              "stockShock": "0",
+              "inflationShock": "0",
+              "months": 1,
+              "income": "0",
+              "expense": "0",
+              "debt": "0",
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "realMoney": false,
+              "poolCash": false
+            },
+            "overduePolicy": "retain_overdue",
+            "moneyBasis": "nominal",
+            "inputDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "baseSnapshotId": "SYN_SNAPSHOT",
+            "baseFinancialVersion": 1,
+            "scopeAccountIds": [
+              "SYN_ACCOUNT"
+            ],
+            "outputGoalIds": [],
+            "horizon": "2026-11-09",
+            "solvencyPercent": 100,
+            "missingReasons": [],
+            "assumptions": [
+              "SYNTHETIC SHAPE ONLY: no forecast execution or calibration"
+            ],
+            "classification": "simulated",
+            "allPathsComplete": true,
+            "baseline": {
+              "asOf": "2026-10-09T00:00:00Z",
+              "monthStarts": [
+                "2026-09-01"
+              ],
+              "complete": true,
+              "hasEvents": false,
+              "income": "0",
+              "expense": "0",
+              "initialCash": "0",
+              "initialAssets": "0",
+              "history": [
+                {
+                  "monthStart": "2026-09-01",
+                  "endExclusive": "2026-10-01",
+                  "income": "0",
+                  "expense": "0",
+                  "refund": "0",
+                  "net": "0"
+                }
+              ],
+              "missingReasons": []
+            }
+          },
+          "points": [
+            {
+              "date": "2026-11-09",
+              "assets": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "cash": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "netWorth": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "goals": [],
+              "inflationIndex": "1"
+            }
+          ],
+          "central": [
+            {
+              "date": "2026-11-09",
+              "cash": "0",
+              "stock": "0",
+              "gold": "0",
+              "assets": "0",
+              "debt": "0",
+              "income": "0",
+              "expense": "0",
+              "invested": "0",
+              "unfundedInvestment": "0",
+              "goalContributions": "0",
+              "debtPaid": "0",
+              "growth": "0",
+              "inflationIndex": "1"
+            }
+          ],
+          "withoutPlans": [
+            {
+              "date": "2026-11-09",
+              "cash": "0",
+              "stock": "0",
+              "gold": "0",
+              "assets": "0",
+              "debt": "0",
+              "income": "0",
+              "expense": "0",
+              "invested": "0",
+              "unfundedInvestment": "0",
+              "goalContributions": "0",
+              "debtPaid": "0",
+              "growth": "0",
+              "inflationIndex": "1"
+            }
+          ],
+          "counterfactual": [
+            {
+              "date": "2026-11-09",
+              "assets": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "cash": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "netWorth": {
+                "p10": "0",
+                "p25": "0",
+                "p50": "0",
+                "p75": "0",
+                "p90": "0"
+              },
+              "goals": [],
+              "inflationIndex": "1"
+            }
+          ],
+          "goalOutcomes": []
+        },
+        "nextCursor": null
+      }
+    },
+    "scope": "SYNTHETIC STRUCTURAL EXAMPLE ONLY; no backend/Engine/worker/crypto execution"
+  },
+  {
+    "operationId": "cancelForecastRun",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "W_A",
+      "operationId": "cancelForecastRun",
+      "input": {
+        "id": "SYN_FORECAST",
+        "expectedVersion": 1
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": 0,
+        "expectedObjectVersions": {},
+        "previewToken": null
+      }
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": 0,
+      "data": {
+        "id": "SYN_FORECAST",
+        "version": 2,
+        "state": "cancelled",
+        "baseSnapshotId": "SYN_SNAPSHOT",
+        "baseFinancialVersion": 1,
+        "createdAt": "2026-10-09T00:00:00Z",
+        "completedAt": "2026-10-09T00:00:01Z",
+        "resultExpiresAt": null,
+        "safeErrorCode": null,
+        "cancelRequested": true
+      }
+    },
+    "scope": "SYNTHETIC STRUCTURAL EXAMPLE ONLY; no backend/Engine/worker/crypto execution"
+  },
+  {
+    "operationId": "executeForecastRun",
+    "request": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceId": "SYNTHETIC_ID",
+      "operationId": "executeForecastRun",
+      "input": {
+        "runId": "SYN_FORECAST",
+        "leaseToken": "SYNTHETIC_01",
+        "dispatchJobId": "SYNTHETIC_ID",
+        "generation": 0,
+        "recoveryEpoch": 0
+      },
+      "mutation": {
+        "idempotencyKey": "KEY_SYNTHETIC_01",
+        "expectedWorkspaceVersion": null,
+        "expectedObjectVersions": {},
+        "previewToken": "SYNTHETIC_ID"
+      }
+    },
+    "reply": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "data": {
+        "runId": "SYN_FORECAST",
+        "state": "succeeded",
+        "completed": true
+      }
+    },
+    "scope": "SYNTHETIC STRUCTURAL EXAMPLE ONLY; no backend/Engine/worker/crypto execution"
+  }
+]

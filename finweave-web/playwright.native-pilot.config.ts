@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';
+import {resolve} from 'node:path';
+export default defineConfig({testDir:'./tests',testMatch:'native-pilot.browser.test.ts',workers:1,timeout:60000,retries:0,reporter:[['list'],['json',{outputFile:resolve('../docs/execution/evidence/android-pilot-2026-10-11/browser-results.json')}]],use:{baseURL:'http://127.0.0.1:4193',channel:'msedge',viewport:{width:390,height:844},trace:'retain-on-failure'},outputDir:resolve('../docs/execution/evidence/android-pilot-2026-10-11/test-artifacts'),webServer:{command:`"${process.execPath}" node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4193 --strictPort`,url:'http://127.0.0.1:4193',reuseExistingServer:false}});

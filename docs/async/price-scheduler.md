@@ -1,0 +1,41 @@
+# Daily/manual prices, scheduler và quota
+
+**ASY-18…22 · DESIGN / PROVIDER, SCHEDULER & SQL NOT RUN.** [Policy](async-policy.json), [DB005](../data/target-t1-async/README.md), [valuation rules](../domain/precision-calendar-snapshots.md).
+
+## 1. Lịch độc lập client
+
+Host timer gọi scheduler mỗi60s; running dispatcher scan1s, idle5s là starting config. Không dùng web tab hoặc điện thoại để quyết định daily job. `scheduler_state.next_due_at` là mốc UTC tương ứng **18:00 Asia/Ho_Chi_Minh mỗi ngày**; đây là lịch fetch ban đầu, không khẳng định provider có giá mới vào giờ đó. ARCH-11 chốt source publication/calendar/quota rồi cập nhật version policy nếu cần. Cuối tuần/ngày lễ cũng kiểm lịch nhưng source có thể trả last-known; không chế closing quote mới.
+
+Tick khóa schedule row, tính latest due occurrence≤now. Outage nhiều ngày: tạo/coalesce **một** refresh cho latest due ngày, ghi missed interval/disposition vào bounded schedule history/typed payload và update watermark cùng transaction. Không tạo7 fetch hiện tại rồi gắn7 businessDates như historical quotes. `last_dispatched_at` là đã enqueue, khác source `last_success`; update watermark khi enqueue commit hoặc explicit disabled/no-eligible disposition đã lưu. Nếu transaction rollback thì watermark không đi trước work. Catch-up lịch khác retention/erasure không được coalesce mất các mục bắt buộc; mỗi loại có registry và bounded continuation riêng.
+
+Schedules tenant lock theo workspace→schedule→job để thống nhất enqueue/revoke; global host tick không giữ schedule lock rồi đợi workspace. Scan IDs trước, recheck trong UoW. Dedupe scheduled=(workspace,entitlement identity+rights/profile/selection digest,businessDate,scheduled); manual dùng same-key replay trước cooldown và identity riêng cho request mới. Không nối hai entitlement chỉ vì cùng provider name.
+
+## 2. Freeze và coalesce
+
+Owner chọn holding IDs→server authorize, normalize unique/nonempty, partition theo entitlement/credential/license/cache scope, instrument/gold-profile version, side/unit/currency/FX và provider batch bounds. Selection/version/rights/normalization/trigger được freeze trong private `refresh_input` payload qua `refresh_jobs.request_payload_id`. Worker đọc frozen input, không lấy “mọi holding hiện có” khi bắt đầu. Một public refresh ID có thể là parent manifest của nhiều child refresh records dùng bảng hiện có; typed payload giữ child IDs/digests, children cùngworkspace, DAG không chu trình. Parent status aggregate children, không tự gọi provider, không làm orphan child khi crash.
+
+Parent aggregate không có dispatch job chờ children; acceptance atomically tạo parent+children+child jobs. Child finalize cập nhật parent aggregate dưới parent/child domain locks chuẩn trong cùng transaction; last child chốt parent terminal. Khi chưa đủ children, public parent queued/running/rate_limited theo manifest, không gọi executePriceRefresh rồi bịa một output running ngoài schema. Single-partition request dùng trực tiếp child làm public ID. `result_payload_id` giữ typed refresh_checkpoint khi active và đổi sang refresh_result khi terminal; request_payload_id vẫn immutable. Quota reservation + request-intent CAS phải cùng UoW, lock order workspace→job→refresh anchors→sorted quota buckets; không broker nào giữ quota lock rồi đợi tenant lock.
+
+Manual cooldown60s theo workspace+entitlement/profile/selection, không phải limit chỉ nằm trên UI. Trước trả rate limit, có thể coalesce với queued/running compatible run: **exact same normalized selection digest/rights/profile/basis**, không join subset nếu response sẽ có holding thừa/thiếu. Same-key replay giữ original result/reference; khác key coalesce trả current authorized job với coalesced=true. Lượt đã completed không được giả running/coalesced chỉ để báo fetch mới. Selection rỗng reject422; max100/request không phải giới hạn tổng holdings, daily scan chia partitions bao phủ tất cả authorized holdings theo frozen watermark. Holdings/profile đổi trong lúc chạy: không retarget quote cũ vào profile mới; lưu observation provenance hợp lệ hoặc retained/missing với reason, current valuation chỉ dùng compatible refs.
+
+Provider batching/reuse/cache chỉ trong quyền license/credential/entitlement scope đã duyệt; không cache global rồi phân phối dữ liệu có quyền riêng cho mọi owner. Chưa chọn provider, không gọi network thật và không hứa free quota. Parent/child fanout cần limits/backpressure trước admission; không tự truncate selected instruments.
+
+## 3. Quota và request boundaries
+
+`provider_entitlements.quota_daily` là declared limit, **không phải durable used counter**; `ops_quotas` là sanitized projection, không dùng app-admin pool để giữ private entitlement/credential authority. Thêm `provider_quota_buckets` với opaque keyed namespace, provider-defined window, hard limit, reserved_count và cooldown_until. MarketQuota narrow broker resolve mọi shared-credential/global-license và tenant-entitlement buckets áp dụng, khóa theo stable namespace order và reserve tất cả trong một transaction. Caller không chọn namespace/limit/window;0 hoặc license chưa xác nhận nghĩa deny real egress.
+
+Reserve trước từng external request, không giữ DB lock qua HTTP. Unknown response/crash vẫn **charged**, không refund vì không biết provider đã tính quota; retry là request mới và phải reserve lại. Có thể tiêu quota bảo thủ, không vượt quota để “bù”. Same-ticket concurrent reentry không được hai calls: attempt execution single-flight supervisor, request-intent identity trong private refresh checkpoint bằng payload registry, CAS request phase `reserved→sent_unknown→observed`; stale generation không gửi request mới. Không gọi lại intent `sent_unknown` trong cùng attempt; retry mới vẫn đi quota, fixed provider adapters chỉ read-only prices.
+
+Window limit đã sử dụng không được giảm xuống thấp hơn reserved_count bằng UPDATE vi phạm invariant; thay đổi license/quota giữa kỳ phải chặn admission/cooldown đến reset hoặc reconcile rõ. Window namespace/key/config không được đổi để tạo counter rỗng. Lỗi finalize không hoàn quota hoặc giả upstream request chưa từng xảy ra.
+
+Retry-After429/503 được parse seconds hoặc HTTP-date theo server clock; persist cooldown để restart không xóa floor. Thiếu/invalid header dùng bounded backoff, không suy quota unlimited. Khi header và JSONretryAfterSeconds khác nhau chọn floor lớn hơn và ghi protocol mismatch; response body `RefreshJob.retryAfter` là absolute date-time, không seconds. [RFC Retry-After](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3).
+
+Runtime reservation/checkpoint storage đi narrow CAS payload functions, không generic private JSON patch. Restore phải fail closed Market egress tới khi reconcile provider reset/window/usage từ nguồn tin cậy hoặc chờ window kế tiếp: backup cũ không là bằng chứng quota còn. Giữ quota namespace key ổn định qua restore/rotation; đổi namespace không làm reset quota. Metered/paid model/provider egress vẫn chưa được cho phép chỉ bởi policy này.
+
+## 4. Publish và failures
+
+Provider call/parse ngoài financial transaction, bounded timeout25s ban đầu, payload size/profile limits trước store. Recheck ticket, source enabled, entitlement expiry/rights, profile compatibility, recovery/access trước publish. Observation fingerprint chứa source/profile/side/unit/currency/quoteAsOf/normalized value/FX/source identity; cùng quote không thêm historical price giả. `fetchedAt` là fetch time, không thay `quoteAsOf`. Không publish future/incompatible/NaN/negative quotes.
+
+Child results có thể updated/retained/missing; parent chỉ complete khi mọi child terminal. Partial nghĩa một số có kết quả hợp lệ, không “toàn thành công”; rate_limited là nghiệp vụ hiển thị kèmretryAfter nhưng J2 có thể queued để thử lại. Retry failed child không refetch child đã publish cùng identity; quan sát lịch sử trước vẫn giữ. Last-good không bị xóa khi lỗi; workspace financialVersion chỉ đổi khi valuation-relevant facts thay đổi, attempt/progress dùng control version riêng. Không đổi cash/quantity từ price job.
+
+Provider recovery/history gap, backup restore và lịch backfill cần quyền/API source thật ở ARCH-11; không dùng fetch hiện tại để vá mọi ngày quá khứ. Metrics chỉ queue age/count/duration/error allowlist, không ticker/account/entitlement IDs qua Ops logs.

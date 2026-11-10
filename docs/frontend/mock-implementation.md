@@ -1,3 +1,17 @@
+> Hiện hành 08/10/2026: UI operational/user/admin đã có prototype; phần mô tả bước5 bên dưới là lịch sử core mock. Xem [nghiệm thu mới](../testing/frontend-acceptance-report.md) và [catalogue](../design/interface-catalogue.md). Chưa migrate canonical v2, native/backend/security chưa nghiệm thu.
+
+## Runtime và phiên bản API — hiệu chỉnh 08/10/2026
+
+| Phần chạy hiện tại | Hợp đồng/transport thực tế | Kết luận |
+|---|---|---|
+| User core + identity | `1.1.0`, 70 business + 6 identity, `/__mock/v1/logical/*` và identity mock | Đang dùng schema synthetic v1.1; không là production auth |
+| User operational | 18 operations, nhãn `2.0.0`, **một** endpoint `/__mock/v2/operational` | Prototype riêng. Envelope, tên operation, fields và URL khác canonical v2; cùng nhãn không chứng minh tương thích |
+| Admin | `adminGateway` trong bộ nhớ, strict metadata DTO, 5 methods | Bundle riêng, chưa HTTP admin API hoặc production authorization |
+| Android | React wizard + `FinWeaveCollector` bridge interface | Chưa Kotlin collector, hàng đợi durable, signed APK hoặc evidence trên máy thật |
+| API bàn giao đích | `docs/contracts/v2/openapi.json`, 133 operations, `/v2/operations/*`, `/v2/identity/*`, `/v2/admin/*`, internal paths | Hợp đồng đích, chưa được frontend hiện tại tuân thủ đầy đủ; adapter/backend cần triển khai |
+
+[Consumer mapping](../contracts/v2/consumer-operation-mapping.csv) ghi các khác biệt cần chuyển đổi. Kiểm schema/examples và version label không thay thế kiểm quyền, atomic commit hoặc conformance. Ba operation `getState`, `registerExampleDevice`, `testCollector` chỉ phục vụ fixture/prototype.
+
 # Mock Implementation — bước 5
 
 IMP-MOCK-001 · v0.2 · 06/10/2026. Source: finweave-web/src/mocks/{browser,handlers,repository,projections,command-mapping,scripted-assistant}.ts. Contract 1.1.0, 70 business + 6 identity operations. Mock-only financial fixtures/domain commands không được import vào production features; startup chọn mock rõ ràng, không fallback khi API lỗi.

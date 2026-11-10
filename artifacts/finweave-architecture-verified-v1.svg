@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1780" viewBox="0 0 2200 1780"><defs><marker id="blue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10" fill="#245d91"/></marker><marker id="purple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10" fill="#7652a5"/></marker></defs><rect width="2200" height="1780" fill="#fff"/><g font-family="Segoe UI,Arial,sans-serif">
+<text x="55" y="65" font-size="43" fill="#113352" font-weight="750" text-anchor="start">FINWEAVE — KIẾN TRÚC HỆ THỐNG</text>
+<text x="55" y="108" font-size="26" fill="#173451" font-weight="400" text-anchor="start">Client–Server  •  Modular Monolith  •  Phân lớp trách nhiệm  •  Tách tiến trình và quyền</text>
+<text x="55" y="147" font-size="22" fill="#577087" font-weight="400" text-anchor="start">Đối chiếu mã nguồn local ngày 03/11/2026 · Sơ đồ thành phần và các kết nối chính</text>
+<text x="55" y="215" font-size="25" fill="#173451" font-weight="700" text-anchor="start">ỨNG DỤNG CLIENT</text>
+<text x="520" y="215" font-size="25" fill="#173451" font-weight="700" text-anchor="start">BACKEND: CÙNG CODEBASE TYPESCRIPT / FINANCIAL ENGINE</text>
+<text x="1700" y="215" font-size="25" fill="#173451" font-weight="700" text-anchor="start">TÍCH HỢP LOCAL</text>
+<rect x="55" y="275" width="330" height="150" rx="14" fill="#edf5fc" stroke="#91adc6" stroke-width="2"/>
+<text x="77" y="315" font-size="27" fill="#173451" font-weight="700" text-anchor="start">User Web</text>
+<text x="77" y="352" font-size="22" fill="#173451" font-weight="400" text-anchor="start">React · TypeScript · Vite</text>
+<text x="77" y="383" font-size="22" fill="#173451" font-weight="400" text-anchor="start">5 nhóm màn hình chính</text>
+<rect x="55" y="505" width="330" height="150" rx="14" fill="#edf5fc" stroke="#91adc6" stroke-width="2"/>
+<text x="77" y="545" font-size="27" fill="#173451" font-weight="700" text-anchor="start">Android App</text>
+<text x="77" y="582" font-size="22" fill="#173451" font-weight="400" text-anchor="start">React WebView · Capacitor</text>
+<text x="77" y="613" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Kotlin · Native bridge</text>
+<rect x="55" y="890" width="330" height="150" rx="14" fill="#f3effb" stroke="#aa95c7" stroke-width="2"/>
+<text x="77" y="930" font-size="27" fill="#173451" font-weight="700" text-anchor="start">Admin Web</text>
+<text x="77" y="967" font-size="22" fill="#173451" font-weight="400" text-anchor="start">React · Build riêng</text>
+<text x="77" y="998" font-size="22" fill="#173451" font-weight="400" text-anchor="start">API và phiên quản trị riêng</text>
+<rect x="510" y="245" width="940" height="565" rx="18" fill="#eaf3fa" stroke="#7291ae" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="530" y="282" font-size="24" fill="#173451" font-weight="700" text-anchor="start">TIẾN TRÌNH USER / DEVICE API — Node.js + Fastify</text>
+<rect x="540" y="300" width="880" height="94" rx="14" fill="#fff" stroke="#91adc6" stroke-width="2"/>
+<text x="562" y="340" font-size="25" fill="#173451" font-weight="700" text-anchor="start">HTTP API · Contract / DTO · Identity / Authorization</text>
+<rect x="540" y="430" width="880" height="210" rx="14" fill="#fff" stroke="#91adc6" stroke-width="2"/>
+<text x="562" y="470" font-size="25" fill="#173451" font-weight="700" text-anchor="start">APPLICATION SERVICES / NHÓM NGHIỆP VỤ</text>
+<text x="562" y="507" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Accounts · Ledger · Portfolio · Market</text>
+<text x="562" y="538" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Ingestion · CSV / Ảnh OCR · Review</text>
+<text x="562" y="569" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Planning &amp; Goals · Read Models · Assistant</text>
+<rect x="540" y="690" width="880" height="87" rx="14" fill="#dff3f0" stroke="#6aa59f" stroke-width="2"/>
+<text x="562" y="730" font-size="25" fill="#173451" font-weight="700" text-anchor="start">Financial Engine: exact money · posting · planning · forecast</text>
+<path d="M385 340 H465 V345 H540" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M385 340 H465 V345 H540" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<path d="M385 580 H445 V370 H540" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M385 580 H445 V370 H540" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<text x="400" y="286" font-size="20" fill="#173451" font-weight="400" text-anchor="start">HTTP</text>
+<text x="395" y="617" font-size="18" fill="#173451" font-weight="400" text-anchor="start">HTTP</text>
+<path d="M980 394 V430" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M980 394 V430" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<path d="M980 640 V690" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M980 640 V690" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<rect x="510" y="860" width="940" height="215" rx="18" fill="#f5f0fb" stroke="#7291ae" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="530" y="897" font-size="24" fill="#173451" font-weight="700" text-anchor="start">TIẾN TRÌNH OPS API — Node.js + Fastify</text>
+<rect x="540" y="925" width="880" height="115" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="562" y="965" font-size="26" fill="#173451" font-weight="700" text-anchor="start">Ops Identity + Ops services</text>
+<text x="562" y="1002" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Metadata · Safe preview / confirm · Audit · Control requests</text>
+<path d="M385 965 H540" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M385 965 H540" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<text x="405" y="948" font-size="20" fill="#7652a5" font-weight="400" text-anchor="start">HTTP</text>
+<rect x="510" y="1135" width="940" height="270" rx="18" fill="#f5f0fb" stroke="#7291ae" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="530" y="1172" font-size="24" fill="#173451" font-weight="700" text-anchor="start">CÁC TIẾN TRÌNH WORKER — profile / credential riêng</text>
+<text x="540" y="1210" font-size="22" fill="#173451" font-weight="400" text-anchor="start">PostgreSQL dispatch: claim · lease · heartbeat · retry · complete</text>
+<rect x="540" y="1250" width="160" height="108" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="562" y="1290" font-size="24" fill="#173451" font-weight="700" text-anchor="start">Ingestion</text>
+<text x="562" y="1327" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Nhập dữ liệu</text>
+<rect x="717" y="1250" width="160" height="108" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="739" y="1290" font-size="24" fill="#173451" font-weight="700" text-anchor="start">Market</text>
+<text x="739" y="1327" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Cập nhật giá</text>
+<rect x="894" y="1250" width="160" height="108" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="916" y="1290" font-size="24" fill="#173451" font-weight="700" text-anchor="start">Forecast</text>
+<text x="916" y="1327" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Dự báo</text>
+<rect x="1071" y="1250" width="160" height="108" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="1093" y="1290" font-size="24" fill="#173451" font-weight="700" text-anchor="start">Agent</text>
+<text x="1093" y="1327" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Tool / draft</text>
+<rect x="1248" y="1250" width="160" height="108" rx="14" fill="#fff" stroke="#aa95c7" stroke-width="2"/>
+<text x="1270" y="1290" font-size="24" fill="#173451" font-weight="700" text-anchor="start">Retention</text>
+<text x="1270" y="1327" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Dọn hết hạn</text>
+<rect x="1700" y="265" width="445" height="125" rx="14" fill="#edf5fc" stroke="#91adc6" stroke-width="2"/>
+<text x="1722" y="305" font-size="27" fill="#173451" font-weight="700" text-anchor="start">Local Mail Sink</text>
+<text x="1722" y="342" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Nhận OTP / mail thử nghiệm</text>
+<rect x="1700" y="445" width="445" height="150" rx="14" fill="#edf5fc" stroke="#91adc6" stroke-width="2"/>
+<text x="1722" y="485" font-size="27" fill="#173451" font-weight="700" text-anchor="start">Windows OCR</text>
+<text x="1722" y="522" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Ảnh → chữ → parser trường</text>
+<text x="1722" y="553" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Gọi từ luồng scanScreenshot</text>
+<rect x="1700" y="1200" width="445" height="150" rx="14" fill="#edf5fc" stroke="#91adc6" stroke-width="2"/>
+<text x="1722" y="1240" font-size="27" fill="#173451" font-weight="700" text-anchor="start">Ollama / Qwen</text>
+<text x="1722" y="1277" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Model local cho Agent</text>
+<text x="1722" y="1308" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Quyết định qua ToolGateway</text>
+<path d="M1420 345 H1700" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1420 345 H1700" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<text x="1490" y="328" font-size="20" fill="#173451" font-weight="400" text-anchor="start">Gửi mail sau commit</text>
+<path d="M1420 510 H1700" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1420 510 H1700" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<text x="1480" y="493" font-size="20" fill="#173451" font-weight="400" text-anchor="start">Gọi OCR local</text>
+<path d="M1151 1250 V1170 H1660 V1275 H1700" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1151 1250 V1170 H1660 V1275 H1700" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<text x="1490" y="1150" font-size="20" fill="#7652a5" font-weight="400" text-anchor="start">Agent gọi model</text>
+<path d="M1420 620 H1500 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1420 620 H1500 V1515" fill="none" stroke="#245d91" stroke-width="3" stroke-linejoin="round"  marker-end="url(#blue)"/>
+<text x="1518" y="805" font-size="21" fill="#173451" font-weight="400" text-anchor="start">SQL / pg</text>
+<text x="1518" y="834" font-size="21" fill="#173451" font-weight="400" text-anchor="start">UnitOfWork / Tx</text>
+<path d="M1450 990 H1585 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1450 990 H1585 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<text x="1603" y="1008" font-size="21" fill="#7652a5" font-weight="400" text-anchor="start">Pool / role Ops riêng</text>
+<text x="1603" y="1038" font-size="21" fill="#7652a5" font-weight="400" text-anchor="start">Không có finance pool</text>
+<path d="M620 1358 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M620 1358 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<path d="M797 1358 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M797 1358 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<path d="M974 1358 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M974 1358 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<path d="M1151 1358 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1151 1358 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<path d="M1328 1358 V1515" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M1328 1358 V1515" fill="none" stroke="#7652a5" stroke-width="3" stroke-linejoin="round"  marker-end="url(#purple)"/>
+<rect x="510" y="1515" width="1635" height="130" rx="14" fill="#eaf3fa" stroke="#7291ae" stroke-width="2"/>
+<text x="532" y="1555" font-size="28" fill="#173451" font-weight="700" text-anchor="start">POSTGRESQL — CÙNG RANH GIỚI NHẤT QUÁN DỮ LIỆU</text>
+<text x="532" y="1592" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Finance / Ledger · Business · Identity · Ops metadata · Durable Jobs / Dispatch</text>
+<text x="532" y="1623" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Schema / role tách quyền · Workers truy cập theo nhiệm vụ · Không có database riêng cho mỗi domain</text>
+<rect x="55" y="1160" width="330" height="245" rx="14" fill="#f7f9fb" stroke="#bdccd8" stroke-width="2"/>
+<text x="77" y="1200" font-size="25" fill="#173451" font-weight="700" text-anchor="start">CÁCH ĐỌC</text>
+<text x="77" y="1237" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Mũi tên: bên gọi → bên nhận</text>
+<text x="77" y="1268" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Đường SQL: truy cập dữ liệu</text>
+<text x="77" y="1299" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Giao cắt không có nút: tách biệt</text>
+<text x="77" y="1330" font-size="22" fill="#173451" font-weight="400" text-anchor="start">Các ô nghiệp vụ là nhóm</text>
+<text x="77" y="1361" font-size="22" fill="#173451" font-weight="400" text-anchor="start">trách nhiệm trong codebase</text>
+<text x="55" y="1480" font-size="23" fill="#173451" font-weight="700" text-anchor="start">RANH GIỚI DỮ LIỆU</text>
+<text x="55" y="1688" font-size="24" fill="#173451" font-weight="600" text-anchor="start">QUY TẮC: Ops chỉ nhận metadata / lệnh an toàn • Agent tạo draft, không tự ghi actual ledger • Nguồn nhập dùng ledger chung</text>
+<text x="55" y="1727" font-size="22" fill="#577087" font-weight="400" text-anchor="start">Phạm vi local; nguồn tài chính thật và production chưa kích hoạt. Các hộp biểu diễn trách nhiệm, không khẳng định phân lớp tuyệt đối.</text>
+</g></svg>

@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam defaultFontName Segoe UI
+actor "Chủ workspace" as Owner
+actor "Quản trị viên ứng dụng" as Admin
+actor "Android OS / ứng dụng nguồn" as OS
+actor "Nhà cung cấp giá" as Price
+actor "Dịch vụ mô hình AI (khi bật)" as AI
+rectangle "FinWeave" {
+usecase "UC-SYS-01\nThiết lập, tài khoản và tiền mặt" as UC_SYS_01
+usecase "UC-SYS-02\nGhi nhận, thu nạp và giao dịch" as UC_SYS_02
+usecase "UC-SYS-03\nTài sản đầu tư và giá thị trường" as UC_SYS_03
+usecase "UC-SYS-04\nBáo cáo, tổng quan và rà soát" as UC_SYS_04
+usecase "UC-SYS-05\nKế hoạch, mục tiêu và mô phỏng" as UC_SYS_05
+usecase "UC-SYS-06\nTrợ lý thông minh và Agent" as UC_SYS_06
+usecase "UC-SYS-07\nQuản trị vận hành" as UC_SYS_07
+}
+Owner -- UC_SYS_01
+Owner -- UC_SYS_02
+Owner -- UC_SYS_03
+Owner -- UC_SYS_04
+Owner -- UC_SYS_05
+Owner -- UC_SYS_06
+Admin -- UC_SYS_07
+OS -- UC_SYS_02
+Price -- UC_SYS_03
+AI -- UC_SYS_06
+@enduml

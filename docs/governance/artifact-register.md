@@ -1,6 +1,22 @@
+> **ARCH-13 hiện hành — 09/10/2026:** [Operations](../operations/README.md) / [ADR020](../architecture/adr/ADR-020-local-first-operations-and-fenced-releases.md). API005 / DB005 / native003 giữ nguyên; local-first CI, release có bảo trì, backup/witness/alerts ngoài host. **DESIGN SPECIFIED; runtime/SQL/release/restore NOT RUN; REAL chưa bật.** Các notice revision cũ bên dưới là lịch sử; source/policy đích theo [bundle](../operations/implementation-bundle.json).
+
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](../contracts/v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
+
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
+
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
+
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](../contracts/v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](../data/target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
+
+> Rà frontend 08/10/2026: kết luận hiện hành tại [nghiệm thu](../testing/frontend-acceptance-report.md), [RTM 41 AC](../execution/realignment-traceability.md), [UI RTM](../design/ui-requirement-traceability.md) và [catalogue 50 mục](../design/interface-catalogue.md). Các counts/PASS của Step4–6 và tuyên bố chưa regression trong hồ sơ cũ bên dưới là lịch sử, đã được thay bằng lượt acceptance-2. Operational prototype nhãn 2.0.0 khác canonical v2; native/backend/security/UAT chưa nghiệm thu.
+
+> Bổ sung bàn giao08/10/2026: [index](../handover/README.md), [API v2 canonical](../contracts/v2/README.md), [physical schema](../data/physical/README.md), [quyết định vận hành](../handover/operational-decisions.md) và [validation](../handover/validation-report.md). Các tuyên bố chưa generated/chỉ logical hoặc mọi lựa chọn còn mở trong phần ngày07/10 là trạng thái lịch sử; frontend hiện có additive v2/admin mock nhưng chưa backend/native/security thật.
+
+> Baseline v3 — 07/10/2026: phần dưới mô tả thiết kế/triển khai mock lịch sử. Phạm vi hiện hành theo [PRD](../product/prd.md), [SRS](../requirements/srs.md), [API delta](../contracts/operational-api-spec.md), [UI delta](../design/operational-design-delta.md) và [audit](../execution/product-realignment-audit.md). Chưa migrate runtime/schema; không dùng evidence cũ làm PASS cho Android/backend/Agent thật.
+
 # FinWeave — Artifact Register
 
-Cập nhật 06/10/2026 (Asia/Saigon). ID: GOV-REG-001; version 2.2. Nguồn quản trị: [Playbook §3.4–3.7](../../FinWeave_Agent_Execution_Playbook.md). Register đăng ký nguồn yêu cầu/design và evidence sản phẩm M1 theo đúng mức, không biến approval hồ sơ thành user acceptance.
+Cập nhật 06/10/2026 (Asia/Saigon). ID: GOV-REG-001; version 2.2. Nguồn quản trị: [scenarios hiện hành; Playbook ở root đã bị xóa](../product/operational-scenarios.md). Register đăng ký nguồn yêu cầu/design và evidence sản phẩm M1 theo đúng mức, không biến approval hồ sơ thành user acceptance.
 
 ## Quy ước trách nhiệm và baseline
 
@@ -73,7 +89,7 @@ User Flows/IA/Wireframes và Principles/Style/Tokens gộp có sections/IDs cụ
 
 ## Nguồn điều khiển
 
-[Ideas](../../FinWeave_Ideas.md), [Playbook](../../FinWeave_Agent_Execution_Playbook.md), [Human Setup](../../FinWeave_Human_Setup_and_Prompts.md) là nguồn do user cung cấp, owner PO; AG chỉ đọc, không tự sửa hay tuyên bố xác minh provider trong nguồn. Nhiệm vụ trước cho bước2 và OD-02/03/04; nhiệm vụ hiện tại cho đủ bước3 tớiM1 qua D-23. Tech Stack là proposal, ADR-001 chọn thực tế. Navigations do user cung cấp, giữ nguyên. Không sửa nguồn gốc.
+[PRD hiện hành; đầu vào Ideas ở root đã bị xóa](../product/prd.md), [scenarios hiện hành; Playbook ở root đã bị xóa](../product/operational-scenarios.md), [hồ sơ bàn giao hiện hành; setup/prompts ở root đã bị xóa](../handover/README.md) là nguồn do user cung cấp, owner PO; AG chỉ đọc, không tự sửa hay tuyên bố xác minh provider trong nguồn. Nhiệm vụ trước cho bước2 và OD-02/03/04; nhiệm vụ hiện tại cho đủ bước3 tớiM1 qua D-23. Tech Stack là proposal, ADR-001 chọn thực tế. Navigations do user cung cấp, giữ nguyên. Không sửa nguồn gốc.
 
 ## Lịch sử thay đổi và bản được thay thế
 
@@ -141,3 +157,106 @@ Chốt EVD-S5-001: build/typecheck PASS, 85 unit checks; kết quả cuối 39 b
 Step6 supersedes earlier stopping-at-Step5 status for current task. Research0participants, no usertest/UAT/POsign-off, security/datareal blocked. StopafterM2 peruser, no automaticStep7–9.
 
 Chốt bước6: **PASS_FRONTEND_SYNTHETIC_MOCK**. Typecheck/customAST lint/build/contracts exit0;99/99unit, full54/54 + finalAI8/8 =55distinct PASS,72representative renders0axe violations. Raw run1FAIL/initial harness failures kept separately; all scope-affecting findings fixed/regressed. [Delivery checks](../execution/evidence/step6-delivery-checks.json), [manual review](../execution/evidence/step6-manual-review.json). P3bundle backlog; realintegration BLOCKED_SECURITY_POC,0participants/UATpending. Historical stopping statements above belong to their earlier step; current stop is M2.
+
+## Đăng ký delta operational-v3 — 08/10/2026
+
+| Artifact | Vai trò / trạng thái |
+| --- | --- |
+| PRD/scope/SRS-v3 | Baseline yêu cầu làm việc, chưa user UAT hoặc implementation mới |
+| Tech stack v0.2, HLD/LLD/views/data v0.2 | Kiến trúc đích, conventional synthetic và protected real tách riêng |
+| ADR005/006 | Android/3 surfaces và trust-profile conflict; native/security PoC pending |
+| Android collector / Deployment topology / Feasibility sources | Capability, jobs/cost/limits và tài liệu tham chiếu đã desk-reviewed |
+| Operational API spec / UI design delta | Spec mới, chưa generate schema hoặc sửa UI/runtime |
+| Agent specification | Co-create/replan Plan–Goals và investigation; model/eval chưa thực hiện |
+| RTM v3 / Operational acceptance plan |41 AC inventory,13 AC mới và6 NFR mới chưa chạy |
+| Product realignment audit | Findings, changes, limitations và verification documentation |
+| pre-realignment-2026-10-07 |12 tài liệu cũ giữ nguyên byte, manifest SHA256; không nguồn yêu cầu hiện hành |
+
+[Điểm vào hồ sơ v3](../../README.md), [Audit](../execution/product-realignment-audit.md). Agent là người soạn/tự rà; không tự nhận independent review hoặc PO sign-off.
+
+## AI-SPEC-001 v1.0 — 08/10/2026
+
+[Đặc tả hợp nhất AI](../product/ai-agent-specification.md) là nguồn chi tiết duy nhất của REQ-AI-01/02 và REQ-AGENT-01/02/03:24 functional requirements,8 quality requirements,7 use cases. Kế thừa Q&A/explanations/chat/history/context/evidence/mascot; phát triển Agent Plan–Goals/investigation trên cùng authority. SRS giữ inventory41 AC; refinements không được tính như32 AC cấp hệ thống mới. [Pre-unification snapshot](baselines/ai-before-unification-2026-10-08/README.md) giữ lịch sử; unified tests/evaluation chưa chạy. [Verification](../execution/ai-unification-verification.md) ghi kiểm tra tài liệu/frontend preservation cho lượt hợp nhất.
+
+## UI/UX v1.0 — 08/10/2026
+
+User đã duyệt hướng cập nhật chi tiết tài liệu giao diện, kế thừa frontend hiện có và chỉ sửa docs. Bộ [UI/UX hiện hành](../design/README.md) gồm DES-CAT/UX/BHV/CMP/PAT/SYS/AUTH/A11Y/DELTA v1.0; bổ sung DES-ANDROID-001, DES-ADMIN-001, DES-RTM-001. Phân loại user web/core Android/native/admin/auth,16 flows, forms/states/rights, Agent Plan–Goals cùng Q&A/mascot/history.41 parent AC và24 AI-FR/8 AI-NFR giữ nguyên;26 nhóm UI acceptance NOT RUN. Snapshot9 tài liệu và manifest tại [ui-before-v3](baselines/ui-before-v3-2026-10-08/README.md); [báo cáo thay đổi/verification](../execution/ui-documentation-update.md). Chưa pixel/user review, native PoC, contract v2 hoặc implementation mới; code frontend không thay đổi trong lượt này.
+
+## Rà frontend 08/10/2026 — kết quả hiện hành
+
+| Hồ sơ | Trạng thái và bằng chứng |
+|---|---|
+| TST-FA-001 | PASS_FRONTEND_SYNTHETIC_CHECKED_SCOPE; 67/67 browser một lượt, 0 retry; 131/131 unit; [raw/checks](../execution/evidence/frontend-review-2026-10-08/acceptance-2/) |
+| DES-CAT-001 / DES-RTM-001 | 50 screen IDs đối chiếu source/spec/test; 26 UI-AC và 41 parent AC phân CHECKED_SUBSET/NOT_RUN, không PASS toàn bộ v3 |
+| Điều tra lỗi | 35 ca baseline, mọi lỗi diagnostic và lượt full trước giữ raw/trace/nguyên nhân/oracle; source và baseline có đối chiếu SHA-256 |
+| API/runtime | Core/identity 1.1.0; operational prototype 18 operations nhãn 2.0.0; admin memory gateway. Canonical v2 target 133 operations chưa conformance |
+| Gate ngoài frontend | Signed APK/native, backend/security/real providers/Agent eval và UAT/PO chưa kiểm chứng; v3 PARTIAL |
+
+AG tự kiểm tự động; không manual visual review mới hoặc formal PO sign-off. Bản bàn giao đóng dấu và các baseline lịch sử giữ nguyên.
+
+## ARCH-04 — D1 + J2 accepted08/10/2026
+
+[ADR-011](../architecture/adr/ADR-011-evolving-schema-and-shared-jobs.md), [target DB package](../data/target-t1/README.md), [change report](../architecture/ARCH-04-change-report.md). D1 kế thừa54-table synthetic baseline bằng004+ migration design; J2 một shared dispatch authority. Expand design70 bảng/782 cột/141 FK, permissions/invariants/API dependency overlay133 và17 finding dispositions. API/physical baseline/r1/r2/source frontend không đổi; SQL/grants/domain/upgrade/restore NOT RUN. Không tự tạo baseline revision mới hoặc PO/UAT sign-off.
+
+## ARCH-05 — T1 contract design08/10/2026
+
+[ADR-012](../architecture/adr/ADR-012-unified-t1-contract-revision.md), [working API T1/D1/J2](../contracts/v2-t1/README.md), [change report](../architecture/ARCH-05-change-report.md). Giữ133 operations, thêm8 thành141; payload2.0.0 pre-release với exact revision/hash pin. Không mặc định tương thích baseline/mock.
+
+Fresh source/schema/AST/field diff,145 consumer mapping rows,41 reviewed storage rules,31 runtime scenarios SPECIFIED. Auth/DB credential delta tiếp tục ARCH-06; Fastify/backend/native/security/UAT NOT RUN. Frontend/canonical baseline/DB target/r1/r2/research giữ hashes; không tạo handover revision mới.
+
+## ARCH-06 — 08/10/2026
+
+| Artifact | State |
+| --- | --- |
+| [ADR-013](../architecture/adr/ADR-013-first-party-identity-and-scoped-credentials.md), [identity LLD](../security/identity/identity-access-design.md), [operation permissions](../security/identity/operation-permissions.csv) | ACCEPTED DESIGN / RUNTIME NOT RUN |
+| [API002](../contracts/v2-t1-r2/README.md), [auth DB target](../data/target-t1-auth/README.md) | Unreleased target, previous001/D1J2 immutable; SQL NOT RUN |
+| [Change report](../architecture/ARCH-06-change-report.md), [validation](../execution/evidence/arch-06-identity-2026-10-08/validation.json) | Static artifact scope only |
+| [Auth acceptance](../security/identity/acceptance-plan.md) |30 runtime cases NOT RUN |
+
+## ARCH-07 — 09/10/2026
+
+| Artifact | Phạm vi/trạng thái |
+| --- | --- |
+| [Hồ sơ bảo vệ dữ liệu T1](../security/t1/README.md), [ADR-014](../architecture/adr/ADR-014-t1-data-protection-and-recovery-witness.md) | Threat model, custody khóa, phân quyền, logs, egress, backup và recovery; thiết kế đã chọn |
+| [Schema bảo mật revision 003](../data/target-t1-security/README.md), [bundle](../security/t1/implementation-bundle.json) | 84 bảng / 960 cột / 155 FK; API002 giữ nguyên; SQL NOT RUN |
+| [32 ca SEC](../security/t1/acceptance-plan.md), [spikes](../testing/technical-spikes.md) | Tất cả kiểm thử security thực tế NOT RUN |
+| [Báo cáo thay đổi](../architecture/ARCH-07-change-report.md), [validation](../execution/evidence/arch-07-t1-security-2026-10-09/validation.json) | Kiểm tra artifact và bảo toàn hashes; không thay runtime acceptance |
+
+## ARCH-08 — 09/10/2026
+
+| Artifact | Nội dung/trạng thái |
+| --- | --- |
+| [Engine/domain](../domain/README.md), [ADR-015](../architecture/adr/ADR-015-exact-financial-engine-and-frozen-forecast-runs.md) | Exact ledger/planning/quantity/calendar và conditional forecast; design accepted |
+| [API003](../contracts/v2-t1-r3/README.md), [DB004](../data/target-t1-domain/README.md), [bundle](../domain/implementation-bundle.json) |151operations/626schemas,86bảng/988cột/161FK; prior packages giữ nguyên |
+| [30 requirements/cases](../domain/acceptance-plan.md), [source review](../domain/source-review.md), [golden vectors](../domain/golden-vectors.json) | Refinements và expected examples; production runtime NOT RUN |
+| [Change report](../architecture/ARCH-08-change-report.md), [validation](../execution/evidence/arch-08-domain-2026-10-09/validation.json) | Static artifact/oracle/hash evidence, không backend acceptance |
+
+## ARCH-09 — Current async artifacts
+
+Register FW-ASYNC-J2-001, FW-J2-REGISTRY-001, API FW-API-T1-D1J2-004, DB FW-PHYS-T1-ASYNC-005, ADR-016, ASY/ASN32refinements/cases. Prior r1/r2/ARCH01…08 packs/evidence preserved. Manifest ARCH09 chỉ design revision, không backend release hoặc frontend acceptance revision.
+
+[Hồ sơ async](../async/README.md), [API004](../contracts/v2-t1-r4/README.md), [DB005](../data/target-t1-async/README.md), [ADR-016](../architecture/adr/ADR-016-postgresql-dispatch-and-explicit-sync-outcomes.md), [32 ca runtime](../async/acceptance-plan.md).
+
+## ARCH-10 — Android implementation handover
+
+Register FW-ANDROID-DESIGN-001 / FW-ANDROID-LOCAL-001 / FW-NATIVE-BRIDGE-002 / ADR017, evidence arch-10-android-2026-10-09. Prior manifests/snapshots/source/API004/DB005 unchanged.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+Register FW-SOURCES-DESIGN-001 / FW-SOURCES-POLICY-001 / FW-SOURCE-REGISTRY-001 / FW-SOURCES-RTM-001 / ADR018; source implementation bundle pins API004/DB005/Android. Prior manifests remain immutable historical evidence.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+Register FW-AGENT-DESIGN-001 / FW-AGENT-POLICY-001 / FW-AGENT-TOOLS-001 / FW-AGENT-EVAL-001 / ADR019 / API005 / native bridge003. Prior ARCH06–11/API004/baselines unchanged; current overview hashes nằm manifest ARCH12.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).
+
+## ARCH-13 — Operations handover
+
+Ghi FW-OPS-DESIGN-001, FW-OPS-POLICY-001, schemas, OPS-01…32, RB-01…14, ADR020 và manifest ARCH13. Giữ nguyên các gói/snapshot trước; cập nhật19 tài liệu tổng quan.
+
+[Hồ sơ vận hành](../operations/README.md) · [Acceptance32 NOT RUN](../operations/acceptance-plan.md) · [Báo cáo](../architecture/ARCH-13-change-report.md).

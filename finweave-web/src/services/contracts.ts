@@ -1,7 +1,7 @@
 import type { DTO } from '../contracts/schemas';
 import type { OperationId,Input,Output } from '../contracts/operations';
 export interface CallOptions { requestId:string; workspaceId:string; mutation:DTO<'MutationOptions'>|null; signal?:AbortSignal; }
-export interface Reply<K extends OperationId> {contractVersion:'1.1.0';requestId:string;workspaceVersion:number;data:Output<K>;}
+export interface Reply<K extends OperationId> {contractVersion:'1.1.0'|'2.0.0';requestId:string;workspaceVersion:K extends 'getSession'?number|null:number;data:Output<K>;}
 export interface LogicalTransport { readonly mode:'synthetic_mock'|'protected'; call<K extends OperationId>(operation:K,input:Input<K>,options:CallOptions):Promise<Reply<K>>; }
 /** Named methods, inferred from the versioned schema. Authorization remains inside the trusted service. */
 export type Services = {[K in OperationId]:(input:Input<K>,options:CallOptions)=>Promise<Reply<K>>};

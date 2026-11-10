@@ -1,6 +1,8 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Operational Scenarios
 
-ID REQ-SCN-001 · v2.0 · analysis-v2/scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. Nguồn [Playbook §13](../../FinWeave_Agent_Execution_Playbook.md), [Scope](scope.md), [Rules](business-rules.md), [Use Cases](use-cases.md). **Scenario và fixture specification với expected tính độc lập; chưa phải fixture app hoặc kết quả user test.**
+ID REQ-SCN-001 · v2.0 · analysis-v2/scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. Nguồn [scenarios hiện hành; Playbook ở root đã bị xóa](operational-scenarios.md), [Scope](scope.md), [Rules](business-rules.md), [Use Cases](use-cases.md). **Scenario và fixture specification với expected tính độc lập; chưa phải fixture app hoặc kết quả user test.**
 
 ## Reset và clock giả
 

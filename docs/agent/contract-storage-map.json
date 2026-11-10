@@ -1,0 +1,146 @@
+{
+  "apiRevision": "FW-API-T1-D1J2-005",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-003",
+  "postgresChanges": false,
+  "operations": [
+    {
+      "operationId": "startAgentRun",
+      "tables": [
+        "agent_runs",
+        "jobs"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "answerAgentRun",
+      "tables": [
+        "agent_runs",
+        "jobs"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "cancelAgentRun",
+      "tables": [
+        "agent_runs",
+        "jobs"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "executeAgentStep",
+      "tables": [
+        "agent_runs",
+        "tool_results",
+        "payload_objects",
+        "planning_drafts"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "sendAssistantMessage",
+      "tables": [
+        "messages",
+        "jobs"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "getAssistantMessage",
+      "tables": [
+        "messages",
+        "tool_results"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "getConversation",
+      "tables": [
+        "conversations",
+        "messages"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "listMessages",
+      "tables": [
+        "messages"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "createPlanningDraft",
+      "tables": [
+        "planning_drafts"
+      ],
+      "agentCapabilityMayInvoke": true
+    },
+    {
+      "operationId": "reviseDraft",
+      "tables": [
+        "planning_drafts"
+      ],
+      "agentCapabilityMayInvoke": true
+    },
+    {
+      "operationId": "simulatePlanningDraft",
+      "tables": [
+        "planning_drafts",
+        "simulations"
+      ],
+      "agentCapabilityMayInvoke": true
+    },
+    {
+      "operationId": "previewPlanningDraft",
+      "tables": [
+        "planning_drafts"
+      ],
+      "agentCapabilityMayInvoke": false
+    },
+    {
+      "operationId": "confirmPlanningDraft",
+      "tables": [
+        "planning_drafts",
+        "planning_revisions",
+        "goals"
+      ],
+      "agentCapabilityMayInvoke": false
+    }
+  ],
+  "privateKinds": [
+    {
+      "name": "agent_execution_checkpoint",
+      "owner": "Assistant",
+      "table": "payload_objects",
+      "maxBytes": 262144,
+      "genericCrud": false
+    },
+    {
+      "name": "agent_usage_bucket",
+      "owner": "Assistant",
+      "table": "payload_objects",
+      "maxBytes": 262144,
+      "genericCrud": false
+    }
+  ],
+  "globalAdmission": {
+    "table": "ops_quotas",
+    "capability": "AgentAdmission narrow aggregate broker",
+    "namespaced": true,
+    "workspaceIdsInGlobalRows": false,
+    "runtime": "NOT_RUN"
+  },
+  "baseCompatibility": {
+    "asyncApi": "004",
+    "sourceApi": "004",
+    "securityApi": "002",
+    "currentApi": "005",
+    "routeActorsChanged": false,
+    "requestSchemasChanged": false,
+    "databaseChanged": false,
+    "oldAndroidBridge": "002 exactAPI004",
+    "currentAndroidBridge": "003 exactAPI005"
+  },
+  "consumerMigration": "NOT_IMPLEMENTED"
+}

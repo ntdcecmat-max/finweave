@@ -1,0 +1,12 @@
+DRAFT — NOT SUBMITTED — CONFIRM THE BLOCKED APK VERSION FIRST
+Package: test.finweave.prototype
+Version: 0.1.2-pilot (3)
+APK SHA-256: 47d104c462ace93afe14931b3f30fad52edc27ccbe3e9cd38811f16e516d04b9
+
+The supplied screenshot shows Google Play Protect blocking FinWeave during direct installation from a Google Drive/file-manager source with the sensitive-data/financial-fraud warning. The version is not visible in the screenshot. The 0.1.2 pilot was the current complete artifact before this task; confirm the exact blocked file before submitting this draft and hash.
+
+FinWeave is a personal-finance prototype whose intended core feature is to record transactions from notifications from bank or wallet apps explicitly selected by the user. NotificationListenerService is intentionally declared for this purpose; removing it would remove the core feature.
+
+The in-app setup explains the data access and asks for affirmative consent before opening Android notification-access settings. The native bridge checks the consent version. Capture requires a verified source profile, source signer/version, account binding and native enrollment. The prototype currently has no live source profiles or connected native enrollment/backend, so real capture is not activated. No bank login credentials are requested. The parser rejects OTP content and retains only minimized financial evidence. Collector code uses an encrypted Room/Android Keystore outbox and a WorkManager uploader for a future authorized backend connection.
+
+The app does not declare READ_SMS, RECEIVE_SMS, an accessibility service, QUERY_ALL_PACKAGES or REQUEST_INSTALL_PACKAGES. It does not hide notification access or ask users to turn off Play Protect. Please review whether the classification is appropriate for this declared, consent-based personal-finance use case. We understand that approval is not guaranteed and this request is not a request for advice on a future implementation.

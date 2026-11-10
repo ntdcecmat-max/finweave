@@ -1,0 +1,2125 @@
+{
+  "scope": "Synthetic Decision/API fragments/bridge shape examples, not endpoint/Agent/model/financial correctness tests",
+  "cases": [
+    {
+      "id": "decision_getFinancialSnapshot",
+      "schema": "Decision",
+      "value": {
+        "capability": "getFinancialSnapshot",
+        "arguments": {}
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_getCoverage",
+      "schema": "Decision",
+      "value": {
+        "capability": "getCoverage",
+        "arguments": {
+          "cursor": null
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_getTransactions",
+      "schema": "Decision",
+      "value": {
+        "capability": "getTransactions",
+        "arguments": {
+          "cursor": null,
+          "kind": "all"
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_getEvidence",
+      "schema": "Decision",
+      "value": {
+        "capability": "getEvidence",
+        "arguments": {
+          "evidenceRefs": [
+            "evA"
+          ]
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_getPlanningContext",
+      "schema": "Decision",
+      "value": {
+        "capability": "getPlanningContext",
+        "arguments": {}
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_getPlanActualVariance",
+      "schema": "Decision",
+      "value": {
+        "capability": "getPlanActualVariance",
+        "arguments": {}
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_simulatePlan",
+      "schema": "Decision",
+      "value": {
+        "capability": "simulatePlan",
+        "arguments": {
+          "draftRef": "draftA",
+          "expectedVersion": 1
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_compareScenarios",
+      "schema": "Decision",
+      "value": {
+        "capability": "compareScenarios",
+        "arguments": {
+          "candidates": [
+            {
+              "goals": [
+                {
+                  "existingId": null,
+                  "name": "Synthetic goal",
+                  "target": "60000000",
+                  "due": "2027-10-01",
+                  "account": "accountA",
+                  "contribution": "5000000",
+                  "start": "2026-10-01",
+                  "day": 1,
+                  "skipMonths": [],
+                  "profile": "cash",
+                  "ref": "goalA"
+                }
+              ],
+              "items": [],
+              "links": [],
+              "scope": [
+                "accountA"
+              ],
+              "reserve": "1000000",
+              "income": "5000000",
+              "expense": "0",
+              "priority": "goal_first",
+              "notes": "Synthetic fixture, not real finance",
+              "settings": {
+                "months": 12,
+                "income": "5000000",
+                "expense": "0",
+                "incomeGrowth": 0,
+                "inflation": 0,
+                "cashReturn": 0,
+                "stockReturn": 0,
+                "goldReturn": 0,
+                "stockVolatility": 0,
+                "goldVolatility": 0,
+                "incomeVolatility": 0,
+                "expenseVolatility": 0,
+                "reserveMonths": 0,
+                "investSurplus": 0,
+                "goldWeight": 0,
+                "debt": null,
+                "debtAPR": 0,
+                "debtPayment": "0",
+                "stress": false,
+                "stressStart": 1,
+                "stressMonths": 1,
+                "incomeDrop": 0,
+                "stockShock": 0,
+                "inflationShock": 0,
+                "realMoney": false,
+                "poolCash": false
+              }
+            }
+          ]
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_proposePlanningDraft",
+      "schema": "Decision",
+      "value": {
+        "capability": "proposePlanningDraft",
+        "arguments": {
+          "body": {
+            "goals": [
+              {
+                "existingId": null,
+                "name": "Synthetic goal",
+                "target": "60000000",
+                "due": "2027-10-01",
+                "account": "accountA",
+                "contribution": "5000000",
+                "start": "2026-10-01",
+                "day": 1,
+                "skipMonths": [],
+                "profile": "cash",
+                "ref": "goalA"
+              }
+            ],
+            "items": [],
+            "links": [],
+            "scope": [
+              "accountA"
+            ],
+            "reserve": "1000000",
+            "income": "5000000",
+            "expense": "0",
+            "priority": "goal_first",
+            "notes": "Synthetic fixture, not real finance",
+            "settings": {
+              "months": 12,
+              "income": "5000000",
+              "expense": "0",
+              "incomeGrowth": 0,
+              "inflation": 0,
+              "cashReturn": 0,
+              "stockReturn": 0,
+              "goldReturn": 0,
+              "stockVolatility": 0,
+              "goldVolatility": 0,
+              "incomeVolatility": 0,
+              "expenseVolatility": 0,
+              "reserveMonths": 0,
+              "investSurplus": 0,
+              "goldWeight": 0,
+              "debt": null,
+              "debtAPR": 0,
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "incomeDrop": 0,
+              "stockShock": 0,
+              "inflationShock": 0,
+              "realMoney": false,
+              "poolCash": false
+            }
+          }
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_amendPlanningDraft",
+      "schema": "Decision",
+      "value": {
+        "capability": "amendPlanningDraft",
+        "arguments": {
+          "draftRef": "draftA",
+          "expectedVersion": 1,
+          "body": {
+            "goals": [
+              {
+                "existingId": null,
+                "name": "Synthetic goal",
+                "target": "60000000",
+                "due": "2027-10-01",
+                "account": "accountA",
+                "contribution": "5000000",
+                "start": "2026-10-01",
+                "day": 1,
+                "skipMonths": [],
+                "profile": "cash",
+                "ref": "goalA"
+              }
+            ],
+            "items": [],
+            "links": [],
+            "scope": [
+              "accountA"
+            ],
+            "reserve": "1000000",
+            "income": "5000000",
+            "expense": "0",
+            "priority": "goal_first",
+            "notes": "Synthetic fixture, not real finance",
+            "settings": {
+              "months": 12,
+              "income": "5000000",
+              "expense": "0",
+              "incomeGrowth": 0,
+              "inflation": 0,
+              "cashReturn": 0,
+              "stockReturn": 0,
+              "goldReturn": 0,
+              "stockVolatility": 0,
+              "goldVolatility": 0,
+              "incomeVolatility": 0,
+              "expenseVolatility": 0,
+              "reserveMonths": 0,
+              "investSurplus": 0,
+              "goldWeight": 0,
+              "debt": null,
+              "debtAPR": 0,
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "incomeDrop": 0,
+              "stockShock": 0,
+              "inflationShock": 0,
+              "realMoney": false,
+              "poolCash": false
+            }
+          }
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_proposeReviewActions",
+      "schema": "Decision",
+      "value": {
+        "capability": "proposeReviewActions",
+        "arguments": {
+          "evidenceRefs": [
+            "evA"
+          ],
+          "reasonCodes": [
+            "COVERAGE_GAP"
+          ]
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_askClarification",
+      "schema": "Decision",
+      "value": {
+        "capability": "askClarification",
+        "arguments": {
+          "missingFields": [
+            "reserve"
+          ]
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "decision_finishRun",
+      "schema": "Decision",
+      "value": {
+        "capability": "finishRun",
+        "arguments": {
+          "conclusion": "DRAFT_READY",
+          "evidenceRefs": [
+            "evA"
+          ],
+          "assumptionRefs": [],
+          "proposalRefs": [
+            "draftA"
+          ]
+        }
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "forbidden_tool",
+      "schema": "Decision",
+      "value": {
+        "capability": "confirmPlanningDraft",
+        "arguments": {}
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "two_decisions",
+      "schema": "Decision",
+      "value": [
+        {
+          "capability": "finishRun",
+          "arguments": {
+            "conclusion": "DRAFT_READY",
+            "evidenceRefs": [
+              "evA"
+            ],
+            "assumptionRefs": [],
+            "proposalRefs": [
+              "draftA"
+            ]
+          }
+        },
+        {
+          "capability": "finishRun",
+          "arguments": {
+            "conclusion": "DRAFT_READY",
+            "evidenceRefs": [
+              "evA"
+            ],
+            "assumptionRefs": [],
+            "proposalRefs": [
+              "draftA"
+            ]
+          }
+        }
+      ],
+      "expectedValid": false
+    },
+    {
+      "id": "owner_injected",
+      "schema": "Decision",
+      "value": {
+        "capability": "getFinancialSnapshot",
+        "arguments": {
+          "ownerId": "other"
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "raw_injected",
+      "schema": "Decision",
+      "value": {
+        "capability": "getEvidence",
+        "arguments": {
+          "evidenceRefs": [],
+          "rawText": "forbidden"
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "finish_model_money",
+      "schema": "Decision",
+      "value": {
+        "capability": "finishRun",
+        "arguments": {
+          "conclusion": "DRAFT_READY",
+          "evidenceRefs": [
+            "evA"
+          ],
+          "assumptionRefs": [],
+          "proposalRefs": [
+            "draftA"
+          ],
+          "money": "999"
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "negative_version",
+      "schema": "Decision",
+      "value": {
+        "capability": "simulatePlan",
+        "arguments": {
+          "draftRef": "draftA",
+          "expectedVersion": -1
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "too_many_candidates",
+      "schema": "Decision",
+      "value": {
+        "capability": "compareScenarios",
+        "arguments": {
+          "candidates": [
+            {
+              "goals": [
+                {
+                  "existingId": null,
+                  "name": "Synthetic goal",
+                  "target": "60000000",
+                  "due": "2027-10-01",
+                  "account": "accountA",
+                  "contribution": "5000000",
+                  "start": "2026-10-01",
+                  "day": 1,
+                  "skipMonths": [],
+                  "profile": "cash",
+                  "ref": "goalA"
+                }
+              ],
+              "items": [],
+              "links": [],
+              "scope": [
+                "accountA"
+              ],
+              "reserve": "1000000",
+              "income": "5000000",
+              "expense": "0",
+              "priority": "goal_first",
+              "notes": "Synthetic fixture, not real finance",
+              "settings": {
+                "months": 12,
+                "income": "5000000",
+                "expense": "0",
+                "incomeGrowth": 0,
+                "inflation": 0,
+                "cashReturn": 0,
+                "stockReturn": 0,
+                "goldReturn": 0,
+                "stockVolatility": 0,
+                "goldVolatility": 0,
+                "incomeVolatility": 0,
+                "expenseVolatility": 0,
+                "reserveMonths": 0,
+                "investSurplus": 0,
+                "goldWeight": 0,
+                "debt": null,
+                "debtAPR": 0,
+                "debtPayment": "0",
+                "stress": false,
+                "stressStart": 1,
+                "stressMonths": 1,
+                "incomeDrop": 0,
+                "stockShock": 0,
+                "inflationShock": 0,
+                "realMoney": false,
+                "poolCash": false
+              }
+            },
+            {
+              "goals": [
+                {
+                  "existingId": null,
+                  "name": "Synthetic goal",
+                  "target": "60000000",
+                  "due": "2027-10-01",
+                  "account": "accountA",
+                  "contribution": "5000000",
+                  "start": "2026-10-01",
+                  "day": 1,
+                  "skipMonths": [],
+                  "profile": "cash",
+                  "ref": "goalA"
+                }
+              ],
+              "items": [],
+              "links": [],
+              "scope": [
+                "accountA"
+              ],
+              "reserve": "1000000",
+              "income": "5000000",
+              "expense": "0",
+              "priority": "goal_first",
+              "notes": "Synthetic fixture, not real finance",
+              "settings": {
+                "months": 12,
+                "income": "5000000",
+                "expense": "0",
+                "incomeGrowth": 0,
+                "inflation": 0,
+                "cashReturn": 0,
+                "stockReturn": 0,
+                "goldReturn": 0,
+                "stockVolatility": 0,
+                "goldVolatility": 0,
+                "incomeVolatility": 0,
+                "expenseVolatility": 0,
+                "reserveMonths": 0,
+                "investSurplus": 0,
+                "goldWeight": 0,
+                "debt": null,
+                "debtAPR": 0,
+                "debtPayment": "0",
+                "stress": false,
+                "stressStart": 1,
+                "stressMonths": 1,
+                "incomeDrop": 0,
+                "stockShock": 0,
+                "inflationShock": 0,
+                "realMoney": false,
+                "poolCash": false
+              }
+            },
+            {
+              "goals": [
+                {
+                  "existingId": null,
+                  "name": "Synthetic goal",
+                  "target": "60000000",
+                  "due": "2027-10-01",
+                  "account": "accountA",
+                  "contribution": "5000000",
+                  "start": "2026-10-01",
+                  "day": 1,
+                  "skipMonths": [],
+                  "profile": "cash",
+                  "ref": "goalA"
+                }
+              ],
+              "items": [],
+              "links": [],
+              "scope": [
+                "accountA"
+              ],
+              "reserve": "1000000",
+              "income": "5000000",
+              "expense": "0",
+              "priority": "goal_first",
+              "notes": "Synthetic fixture, not real finance",
+              "settings": {
+                "months": 12,
+                "income": "5000000",
+                "expense": "0",
+                "incomeGrowth": 0,
+                "inflation": 0,
+                "cashReturn": 0,
+                "stockReturn": 0,
+                "goldReturn": 0,
+                "stockVolatility": 0,
+                "goldVolatility": 0,
+                "incomeVolatility": 0,
+                "expenseVolatility": 0,
+                "reserveMonths": 0,
+                "investSurplus": 0,
+                "goldWeight": 0,
+                "debt": null,
+                "debtAPR": 0,
+                "debtPayment": "0",
+                "stress": false,
+                "stressStart": 1,
+                "stressMonths": 1,
+                "incomeDrop": 0,
+                "stockShock": 0,
+                "inflationShock": 0,
+                "realMoney": false,
+                "poolCash": false
+              }
+            },
+            {
+              "goals": [
+                {
+                  "existingId": null,
+                  "name": "Synthetic goal",
+                  "target": "60000000",
+                  "due": "2027-10-01",
+                  "account": "accountA",
+                  "contribution": "5000000",
+                  "start": "2026-10-01",
+                  "day": 1,
+                  "skipMonths": [],
+                  "profile": "cash",
+                  "ref": "goalA"
+                }
+              ],
+              "items": [],
+              "links": [],
+              "scope": [
+                "accountA"
+              ],
+              "reserve": "1000000",
+              "income": "5000000",
+              "expense": "0",
+              "priority": "goal_first",
+              "notes": "Synthetic fixture, not real finance",
+              "settings": {
+                "months": 12,
+                "income": "5000000",
+                "expense": "0",
+                "incomeGrowth": 0,
+                "inflation": 0,
+                "cashReturn": 0,
+                "stockReturn": 0,
+                "goldReturn": 0,
+                "stockVolatility": 0,
+                "goldVolatility": 0,
+                "incomeVolatility": 0,
+                "expenseVolatility": 0,
+                "reserveMonths": 0,
+                "investSurplus": 0,
+                "goldWeight": 0,
+                "debt": null,
+                "debtAPR": 0,
+                "debtPayment": "0",
+                "stress": false,
+                "stressStart": 1,
+                "stressMonths": 1,
+                "incomeDrop": 0,
+                "stockShock": 0,
+                "inflationShock": 0,
+                "realMoney": false,
+                "poolCash": false
+              }
+            }
+          ]
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "invalid_question",
+      "schema": "Decision",
+      "value": {
+        "capability": "askClarification",
+        "arguments": {
+          "missingFields": [
+            "password"
+          ]
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "duplicate_question_slots",
+      "schema": "Decision",
+      "value": {
+        "capability": "askClarification",
+        "arguments": {
+          "missingFields": [
+            "reserve",
+            "reserve"
+          ]
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "fractional_money",
+      "schema": "Decision",
+      "value": {
+        "capability": "proposePlanningDraft",
+        "arguments": {
+          "body": {
+            "goals": [
+              {
+                "existingId": null,
+                "name": "Synthetic goal",
+                "target": "60000000",
+                "due": "2027-10-01",
+                "account": "accountA",
+                "contribution": "5000000",
+                "start": "2026-10-01",
+                "day": 1,
+                "skipMonths": [],
+                "profile": "cash",
+                "ref": "goalA"
+              }
+            ],
+            "items": [],
+            "links": [],
+            "scope": [
+              "accountA"
+            ],
+            "reserve": "1.5",
+            "income": "5000000",
+            "expense": "0",
+            "priority": "goal_first",
+            "notes": "Synthetic fixture, not real finance",
+            "settings": {
+              "months": 12,
+              "income": "5000000",
+              "expense": "0",
+              "incomeGrowth": 0,
+              "inflation": 0,
+              "cashReturn": 0,
+              "stockReturn": 0,
+              "goldReturn": 0,
+              "stockVolatility": 0,
+              "goldVolatility": 0,
+              "incomeVolatility": 0,
+              "expenseVolatility": 0,
+              "reserveMonths": 0,
+              "investSurplus": 0,
+              "goldWeight": 0,
+              "debt": null,
+              "debtAPR": 0,
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "incomeDrop": 0,
+              "stockShock": 0,
+              "inflationShock": 0,
+              "realMoney": false,
+              "poolCash": false
+            }
+          }
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "invalid_date",
+      "schema": "Decision",
+      "value": {
+        "capability": "proposePlanningDraft",
+        "arguments": {
+          "body": {
+            "goals": [
+              {
+                "existingId": null,
+                "name": "Synthetic goal",
+                "target": "60000000",
+                "due": "2026-02-29",
+                "account": "accountA",
+                "contribution": "5000000",
+                "start": "2026-10-01",
+                "day": 1,
+                "skipMonths": [],
+                "profile": "cash",
+                "ref": "goalA"
+              }
+            ],
+            "items": [],
+            "links": [],
+            "scope": [
+              "accountA"
+            ],
+            "reserve": "1000000",
+            "income": "5000000",
+            "expense": "0",
+            "priority": "goal_first",
+            "notes": "Synthetic fixture, not real finance",
+            "settings": {
+              "months": 12,
+              "income": "5000000",
+              "expense": "0",
+              "incomeGrowth": 0,
+              "inflation": 0,
+              "cashReturn": 0,
+              "stockReturn": 0,
+              "goldReturn": 0,
+              "stockVolatility": 0,
+              "goldVolatility": 0,
+              "incomeVolatility": 0,
+              "expenseVolatility": 0,
+              "reserveMonths": 0,
+              "investSurplus": 0,
+              "goldWeight": 0,
+              "debt": null,
+              "debtAPR": 0,
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "incomeDrop": 0,
+              "stockShock": 0,
+              "inflationShock": 0,
+              "realMoney": false,
+              "poolCash": false
+            }
+          }
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "empty_scope",
+      "schema": "Decision",
+      "value": {
+        "capability": "proposePlanningDraft",
+        "arguments": {
+          "body": {
+            "goals": [
+              {
+                "existingId": null,
+                "name": "Synthetic goal",
+                "target": "60000000",
+                "due": "2027-10-01",
+                "account": "accountA",
+                "contribution": "5000000",
+                "start": "2026-10-01",
+                "day": 1,
+                "skipMonths": [],
+                "profile": "cash",
+                "ref": "goalA"
+              }
+            ],
+            "items": [],
+            "links": [],
+            "scope": [],
+            "reserve": "1000000",
+            "income": "5000000",
+            "expense": "0",
+            "priority": "goal_first",
+            "notes": "Synthetic fixture, not real finance",
+            "settings": {
+              "months": 12,
+              "income": "5000000",
+              "expense": "0",
+              "incomeGrowth": 0,
+              "inflation": 0,
+              "cashReturn": 0,
+              "stockReturn": 0,
+              "goldReturn": 0,
+              "stockVolatility": 0,
+              "goldVolatility": 0,
+              "incomeVolatility": 0,
+              "expenseVolatility": 0,
+              "reserveMonths": 0,
+              "investSurplus": 0,
+              "goldWeight": 0,
+              "debt": null,
+              "debtAPR": 0,
+              "debtPayment": "0",
+              "stress": false,
+              "stressStart": 1,
+              "stressMonths": 1,
+              "incomeDrop": 0,
+              "stockShock": 0,
+              "inflationShock": 0,
+              "realMoney": false,
+              "poolCash": false
+            }
+          }
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "native003_exact005",
+      "schema": "BridgeCapabilities",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-003",
+        "apiRevision": "FW-API-T1-D1J2-005",
+        "profile": "SYNTHETIC",
+        "buildId": "design-only",
+        "requiredConsentVersion": "fixture1",
+        "nativeAvailable": true
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "native_old_handshake",
+      "schema": "BridgeCapabilities",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-003",
+        "apiRevision": "FW-API-T1-D1J2-004",
+        "profile": "SYNTHETIC",
+        "buildId": "design-only",
+        "requiredConsentVersion": "fixture1",
+        "nativeAvailable": true
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "mode_0_scripted_mock",
+      "schema": "ApiFragment:/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_0_deterministic",
+      "schema": "ApiFragment:/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "deterministic",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_0_local_model",
+      "schema": "ApiFragment:/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "local_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_0_hosted_model",
+      "schema": "ApiFragment:/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "hosted_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "invalid_mode_0",
+      "schema": "ApiFragment:/components/schemas/getConversationOutput/properties/messages/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "real_but_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "mode_1_scripted_mock",
+      "schema": "ApiFragment:/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_1_deterministic",
+      "schema": "ApiFragment:/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "deterministic",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_1_local_model",
+      "schema": "ApiFragment:/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "local_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_1_hosted_model",
+      "schema": "ApiFragment:/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "hosted_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "invalid_mode_1",
+      "schema": "ApiFragment:/components/schemas/listMessagesOutput/properties/items/items/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "real_but_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "mode_2_scripted_mock",
+      "schema": "ApiFragment:/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_2_deterministic",
+      "schema": "ApiFragment:/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "deterministic",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_2_local_model",
+      "schema": "ApiFragment:/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "local_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_2_hosted_model",
+      "schema": "ApiFragment:/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "hosted_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "invalid_mode_2",
+      "schema": "ApiFragment:/components/schemas/sendAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "real_but_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "mode_3_scripted_mock",
+      "schema": "ApiFragment:/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_3_deterministic",
+      "schema": "ApiFragment:/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "deterministic",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_3_local_model",
+      "schema": "ApiFragment:/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "local_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_3_hosted_model",
+      "schema": "ApiFragment:/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "hosted_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "invalid_mode_3",
+      "schema": "ApiFragment:/components/schemas/getAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "real_but_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "mode_4_scripted_mock",
+      "schema": "ApiFragment:/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "scripted_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_4_deterministic",
+      "schema": "ApiFragment:/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "deterministic",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_4_local_model",
+      "schema": "ApiFragment:/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "local_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "mode_4_hosted_model",
+      "schema": "ApiFragment:/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "hosted_model",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": true
+    },
+    {
+      "id": "invalid_mode_4",
+      "schema": "ApiFragment:/components/schemas/cancelAssistantMessageOutput/properties/result/anyOf/0",
+      "value": {
+        "id": "resultA",
+        "messageId": "messageA",
+        "mode": "real_but_mock",
+        "context": {
+          "navigation": "ai",
+          "route": "/home/ai",
+          "query": {
+            "period": {
+              "start": "2026-10-01",
+              "endExclusive": "2026-11-01",
+              "timezone": "Asia/Ho_Chi_Minh"
+            },
+            "accountIds": [],
+            "snapshotVersion": 1
+          },
+          "transactionFilter": null,
+          "selected": null,
+          "workspaceVersion": 1,
+          "snapshotRefs": {
+            "workspaceVersion": 1,
+            "sourceVersions": {},
+            "holdingVersions": {},
+            "quoteIds": [],
+            "eventVersions": {},
+            "planVersions": {},
+            "goalVersions": {}
+          },
+          "capturedAt": "2026-10-09T08:00:00Z"
+        },
+        "tool": "goals",
+        "text": "Kết quả từ snapshot đã chọn.",
+        "metrics": [],
+        "evidenceIds": [],
+        "targets": [],
+        "stale": false,
+        "createdAt": "2026-10-09T08:00:00Z"
+      },
+      "expectedValid": false
+    },
+    {
+      "id": "counter_0_0",
+      "schema": "ApiFragment:/components/schemas/startAgentRunOutput/properties/toolCalls",
+      "value": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_0_8",
+      "schema": "ApiFragment:/components/schemas/startAgentRunOutput/properties/toolCalls",
+      "value": 8,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_0_-1",
+      "schema": "ApiFragment:/components/schemas/startAgentRunOutput/properties/toolCalls",
+      "value": -1,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_0_9",
+      "schema": "ApiFragment:/components/schemas/startAgentRunOutput/properties/toolCalls",
+      "value": 9,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_0_0.5",
+      "schema": "ApiFragment:/components/schemas/startAgentRunOutput/properties/toolCalls",
+      "value": 0.5,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_1_0",
+      "schema": "ApiFragment:/components/schemas/answerAgentRunOutput/properties/toolCalls",
+      "value": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_1_8",
+      "schema": "ApiFragment:/components/schemas/answerAgentRunOutput/properties/toolCalls",
+      "value": 8,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_1_-1",
+      "schema": "ApiFragment:/components/schemas/answerAgentRunOutput/properties/toolCalls",
+      "value": -1,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_1_9",
+      "schema": "ApiFragment:/components/schemas/answerAgentRunOutput/properties/toolCalls",
+      "value": 9,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_1_0.5",
+      "schema": "ApiFragment:/components/schemas/answerAgentRunOutput/properties/toolCalls",
+      "value": 0.5,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_2_0",
+      "schema": "ApiFragment:/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+      "value": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_2_8",
+      "schema": "ApiFragment:/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+      "value": 8,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_2_-1",
+      "schema": "ApiFragment:/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+      "value": -1,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_2_9",
+      "schema": "ApiFragment:/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+      "value": 9,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_2_0.5",
+      "schema": "ApiFragment:/components/schemas/cancelAgentRunOutput/properties/toolCalls",
+      "value": 0.5,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_3_0",
+      "schema": "ApiFragment:/components/schemas/getAgentRunOutput/properties/toolCalls",
+      "value": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_3_8",
+      "schema": "ApiFragment:/components/schemas/getAgentRunOutput/properties/toolCalls",
+      "value": 8,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_3_-1",
+      "schema": "ApiFragment:/components/schemas/getAgentRunOutput/properties/toolCalls",
+      "value": -1,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_3_9",
+      "schema": "ApiFragment:/components/schemas/getAgentRunOutput/properties/toolCalls",
+      "value": 9,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_3_0.5",
+      "schema": "ApiFragment:/components/schemas/getAgentRunOutput/properties/toolCalls",
+      "value": 0.5,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_4_0",
+      "schema": "ApiFragment:/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls",
+      "value": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_4_8",
+      "schema": "ApiFragment:/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls",
+      "value": 8,
+      "expectedValid": true
+    },
+    {
+      "id": "counter_4_-1",
+      "schema": "ApiFragment:/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls",
+      "value": -1,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_4_9",
+      "schema": "ApiFragment:/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls",
+      "value": 9,
+      "expectedValid": false
+    },
+    {
+      "id": "counter_4_0.5",
+      "schema": "ApiFragment:/components/schemas/listAgentRunsOutput/properties/items/items/properties/toolCalls",
+      "value": 0.5,
+      "expectedValid": false
+    }
+  ]
+}

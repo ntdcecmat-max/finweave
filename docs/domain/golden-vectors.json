@@ -1,0 +1,715 @@
+[
+  {
+    "id": "GOLD-001",
+    "kind": "money_valid",
+    "input": {
+      "value": "0"
+    },
+    "expected": true
+  },
+  {
+    "id": "GOLD-002",
+    "kind": "money_valid",
+    "input": {
+      "value": "999999999999999999"
+    },
+    "expected": true
+  },
+  {
+    "id": "GOLD-003",
+    "kind": "money_valid",
+    "input": {
+      "value": "1000000000000000000"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-004",
+    "kind": "money_valid",
+    "input": {
+      "value": "0.5"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-005",
+    "kind": "money_valid",
+    "input": {
+      "value": "NaN"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-006",
+    "kind": "money_valid",
+    "input": {
+      "value": "Infinity"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-007",
+    "kind": "money_valid",
+    "input": {
+      "value": "1e3"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-008",
+    "kind": "money_valid",
+    "input": {
+      "value": "01"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-009",
+    "kind": "money_valid",
+    "input": {
+      "value": "-0"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-010",
+    "kind": "money_valid",
+    "input": {
+      "value": "1.000"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-011",
+    "kind": "sum",
+    "input": {
+      "values": [
+        "20000000",
+        "10000000",
+        "-2000000",
+        "-1000000",
+        "-600000",
+        "200000",
+        "-100000"
+      ]
+    },
+    "expected": "26500000"
+  },
+  {
+    "id": "GOLD-012",
+    "kind": "sum",
+    "input": {
+      "values": [
+        "26500000",
+        "1750000",
+        "2850000"
+      ]
+    },
+    "expected": "31100000"
+  },
+  {
+    "id": "GOLD-013",
+    "kind": "sum",
+    "input": {
+      "values": [
+        "1100000",
+        "-200000"
+      ]
+    },
+    "expected": "900000"
+  },
+  {
+    "id": "GOLD-014",
+    "kind": "sum",
+    "input": {
+      "values": [
+        "-150000",
+        "150000",
+        "-120000"
+      ]
+    },
+    "expected": "-120000"
+  },
+  {
+    "id": "GOLD-015",
+    "kind": "valuation",
+    "input": {
+      "quantity": "100",
+      "price": "50000",
+      "unit": "share",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": "5000000"
+  },
+  {
+    "id": "GOLD-016",
+    "kind": "valuation",
+    "input": {
+      "quantity": "5",
+      "price": "80000000",
+      "unit": "luong",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": "40000000"
+  },
+  {
+    "id": "GOLD-017",
+    "kind": "valuation",
+    "input": {
+      "quantity": "5",
+      "price": "3200",
+      "unit": "luong",
+      "currency": "USD",
+      "fx": "25000"
+    },
+    "expected": "40000000"
+  },
+  {
+    "id": "GOLD-018",
+    "kind": "valuation",
+    "input": {
+      "quantity": "0.5",
+      "price": "1",
+      "unit": "share",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": "1"
+  },
+  {
+    "id": "GOLD-019",
+    "kind": "valuation",
+    "input": {
+      "quantity": "0.3",
+      "price": "1.5",
+      "unit": "share",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": "0"
+  },
+  {
+    "id": "GOLD-020",
+    "kind": "valuation",
+    "input": {
+      "quantity": "0",
+      "price": null,
+      "unit": "share",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": "0"
+  },
+  {
+    "id": "GOLD-021",
+    "kind": "valuation",
+    "input": {
+      "quantity": null,
+      "price": "50000",
+      "unit": "share",
+      "currency": "VND",
+      "fx": null
+    },
+    "expected": null
+  },
+  {
+    "id": "GOLD-022",
+    "kind": "valuation",
+    "input": {
+      "quantity": "5",
+      "price": "3200",
+      "unit": "luong",
+      "currency": "USD",
+      "fx": null
+    },
+    "expected": null
+  },
+  {
+    "id": "GOLD-023",
+    "kind": "known_total",
+    "input": {
+      "values": [
+        "31100000",
+        "5000000",
+        null
+      ]
+    },
+    "expected": {
+      "knownSubtotal": "36100000",
+      "total": null
+    }
+  },
+  {
+    "id": "GOLD-024",
+    "kind": "scope_flow",
+    "input": {
+      "lines": [
+        [
+          "bank",
+          "-2000000"
+        ],
+        [
+          "wallet",
+          "2000000"
+        ]
+      ],
+      "scope": [
+        "bank",
+        "wallet"
+      ]
+    },
+    "expected": "0"
+  },
+  {
+    "id": "GOLD-025",
+    "kind": "scope_flow",
+    "input": {
+      "lines": [
+        [
+          "bank",
+          "-2000000"
+        ],
+        [
+          "wallet",
+          "2000000"
+        ]
+      ],
+      "scope": [
+        "bank"
+      ]
+    },
+    "expected": "-2000000"
+  },
+  {
+    "id": "GOLD-026",
+    "kind": "scope_flow",
+    "input": {
+      "lines": [
+        [
+          "bank",
+          "-2000000"
+        ],
+        [
+          "wallet",
+          "2000000"
+        ]
+      ],
+      "scope": [
+        "wallet"
+      ]
+    },
+    "expected": "2000000"
+  },
+  {
+    "id": "GOLD-027",
+    "kind": "refund_cap",
+    "input": {
+      "expense": "600000",
+      "refunds": [
+        "200000",
+        "400000"
+      ]
+    },
+    "expected": true
+  },
+  {
+    "id": "GOLD-028",
+    "kind": "refund_cap",
+    "input": {
+      "expense": "600000",
+      "refunds": [
+        "200000",
+        "400001"
+      ]
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-029",
+    "kind": "pro_rata",
+    "input": {
+      "cash": "5",
+      "allocations": [
+        {
+          "id": "B",
+          "amount": "3"
+        },
+        {
+          "id": "A",
+          "amount": "3"
+        }
+      ]
+    },
+    "expected": {
+      "A": "3",
+      "B": "2"
+    }
+  },
+  {
+    "id": "GOLD-030",
+    "kind": "pro_rata",
+    "input": {
+      "cash": "2",
+      "allocations": [
+        {
+          "id": "B",
+          "amount": "1"
+        },
+        {
+          "id": "A",
+          "amount": "100"
+        }
+      ]
+    },
+    "expected": {
+      "A": "2",
+      "B": "0"
+    }
+  },
+  {
+    "id": "GOLD-031",
+    "kind": "pro_rata",
+    "input": {
+      "cash": "-1",
+      "allocations": [
+        {
+          "id": "A",
+          "amount": "100"
+        }
+      ]
+    },
+    "expected": {
+      "A": "0"
+    }
+  },
+  {
+    "id": "GOLD-032",
+    "kind": "remaining",
+    "input": {
+      "planned": "2000000",
+      "signedActual": [
+        "2500000"
+      ]
+    },
+    "expected": {
+      "actual": "2500000",
+      "remaining": "0",
+      "overspend": "500000"
+    }
+  },
+  {
+    "id": "GOLD-033",
+    "kind": "remaining",
+    "input": {
+      "planned": "2000000",
+      "signedActual": [
+        "2000000",
+        "-2000000",
+        "1500000",
+        "-100000"
+      ]
+    },
+    "expected": {
+      "actual": "1400000",
+      "remaining": "600000",
+      "overspend": "0"
+    }
+  },
+  {
+    "id": "GOLD-034",
+    "kind": "remaining",
+    "input": {
+      "planned": "2000000",
+      "signedActual": [
+        "-200000"
+      ]
+    },
+    "expected": {
+      "actual": "-200000",
+      "remaining": "2200000",
+      "overspend": "0"
+    }
+  },
+  {
+    "id": "GOLD-035",
+    "kind": "recurrence",
+    "input": {
+      "start": "2026-01-31",
+      "end": "2026-03-31",
+      "day": 31
+    },
+    "expected": [
+      "2026-01-31",
+      "2026-02-28",
+      "2026-03-31"
+    ]
+  },
+  {
+    "id": "GOLD-036",
+    "kind": "recurrence",
+    "input": {
+      "start": "2028-01-31",
+      "end": "2028-03-31",
+      "day": 31,
+      "skip": [
+        "2028-02"
+      ]
+    },
+    "expected": [
+      "2028-01-31",
+      "2028-03-31"
+    ]
+  },
+  {
+    "id": "GOLD-037",
+    "kind": "recurrence",
+    "input": {
+      "start": "2026-01-31",
+      "end": "2056-01-31",
+      "day": 31,
+      "countOnly": true
+    },
+    "expected": 361
+  },
+  {
+    "id": "GOLD-038",
+    "kind": "local_day",
+    "input": {
+      "instant": "2026-10-08T18:00:00Z"
+    },
+    "expected": "2026-10-09"
+  },
+  {
+    "id": "GOLD-039",
+    "kind": "stale",
+    "input": {
+      "ageSeconds": "86400",
+      "thresholdSeconds": "86400"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-040",
+    "kind": "stale",
+    "input": {
+      "ageSeconds": "86400.001",
+      "thresholdSeconds": "86400"
+    },
+    "expected": true
+  },
+  {
+    "id": "GOLD-041",
+    "kind": "group_valid",
+    "input": {
+      "lines": [
+        "-100",
+        "100"
+      ],
+      "sealed": true
+    },
+    "expected": true
+  },
+  {
+    "id": "GOLD-042",
+    "kind": "group_valid",
+    "input": {
+      "lines": [
+        "-100",
+        "99"
+      ],
+      "sealed": true
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-043",
+    "kind": "group_valid",
+    "input": {
+      "lines": [
+        "0",
+        "0"
+      ],
+      "sealed": true
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-044",
+    "kind": "group_valid",
+    "input": {
+      "lines": [
+        "-100",
+        "100"
+      ],
+      "sealed": false
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-045",
+    "kind": "simple_plan",
+    "input": {
+      "actualCash": "32100000",
+      "income": "1000000",
+      "expense": "0",
+      "investment": "500000"
+    },
+    "expected": "32600000"
+  },
+  {
+    "id": "GOLD-046",
+    "kind": "simulate_move",
+    "input": {
+      "mode": "save",
+      "cash": "31100000",
+      "assets": "76100000",
+      "amount": "5000000"
+    },
+    "expected": {
+      "cash": "31100000",
+      "assets": "76100000"
+    }
+  },
+  {
+    "id": "GOLD-047",
+    "kind": "simulate_move",
+    "input": {
+      "mode": "consume",
+      "cash": "31100000",
+      "assets": "76100000",
+      "amount": "5000000"
+    },
+    "expected": {
+      "cash": "26100000",
+      "assets": "71100000"
+    }
+  },
+  {
+    "id": "GOLD-048",
+    "kind": "simulate_move",
+    "input": {
+      "mode": "invest",
+      "cash": "31100000",
+      "assets": "76100000",
+      "amount": "5000000"
+    },
+    "expected": {
+      "cash": "26100000",
+      "assets": "76100000"
+    }
+  },
+  {
+    "id": "GOLD-049",
+    "kind": "goal_pass",
+    "input": {
+      "measured": "80000000",
+      "target": "70000000",
+      "freeCash": "10000000",
+      "expense": "5000000",
+      "liquidMonths": "3"
+    },
+    "expected": false
+  },
+  {
+    "id": "GOLD-050",
+    "kind": "goal_pass",
+    "input": {
+      "measured": null,
+      "target": "70000000",
+      "freeCash": "10000000",
+      "expense": "5000000",
+      "liquidMonths": "0"
+    },
+    "expected": null
+  },
+  {
+    "id": "GOLD-051",
+    "kind": "linear_forecast",
+    "input": {
+      "initial": "76100000",
+      "months": 12,
+      "income": "10000000",
+      "expense": "1100000"
+    },
+    "expected": "182900000"
+  },
+  {
+    "id": "GOLD-052",
+    "kind": "prorated_months",
+    "input": {
+      "firstDay": "2026-01-16",
+      "endExclusive": "2026-03-01",
+      "monthly": {
+        "2026-01": "3100",
+        "2026-02": "2800"
+      }
+    },
+    "expected": "4400"
+  },
+  {
+    "id": "GOLD-053",
+    "kind": "quantiles",
+    "input": {
+      "values": [
+        "10",
+        "20",
+        "30",
+        "40"
+      ]
+    },
+    "expected": {
+      "p10": "13",
+      "p25": "18",
+      "p50": "25",
+      "p75": "33",
+      "p90": "37"
+    }
+  },
+  {
+    "id": "GOLD-054",
+    "kind": "probability",
+    "input": {
+      "successes": 3,
+      "trials": 4,
+      "complete": true
+    },
+    "expected": "75"
+  },
+  {
+    "id": "GOLD-055",
+    "kind": "probability",
+    "input": {
+      "successes": 3,
+      "trials": 4,
+      "complete": false
+    },
+    "expected": null
+  },
+  {
+    "id": "GOLD-056",
+    "kind": "probability",
+    "input": {
+      "successes": 3,
+      "trials": 4,
+      "complete": true,
+      "missing": true
+    },
+    "expected": null
+  },
+  {
+    "id": "GOLD-057",
+    "kind": "debt_principal",
+    "input": {
+      "cash": "1000",
+      "debt": "600",
+      "payment": "200"
+    },
+    "expected": {
+      "cash": "800",
+      "debt": "400",
+      "netWorthDelta": "0"
+    }
+  }
+]

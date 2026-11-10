@@ -1,0 +1,36 @@
+{
+  "status": "AUTHORIZED_UPLOAD_UNCONFIRMED_NOT_SUBMITTED",
+  "createdAt": "2026-10-11T20:13:06.210Z",
+  "developerEmail": "ntd.cecmat@gmail.com",
+  "developerName": "FinWeave",
+  "developerNameSource": "App name used for optional form field; no separate developer name supplied",
+  "suspectedBlockedArtifact": {
+    "apk": "FinWeave-0.1.2-pilot.apk",
+    "packageName": "test.finweave.prototype",
+    "versionName": "0.1.2-pilot",
+    "versionCode": 3,
+    "sha256": "47d104c462ace93afe14931b3f30fad52edc27ccbe3e9cd38811f16e516d04b9",
+    "signingCertificateSha256": "734a9b3d80c66eacd6515b0250c2ef0aad6fff0b7ddb45d9bfaad20616ce7286"
+  },
+  "screenshotVersionConfirmed": false,
+  "fullCandidateArtifact": {
+    "apk": "FinWeave-0.1.4-pilot.apk",
+    "packageName": "test.finweave.prototype",
+    "versionName": "0.1.4-pilot",
+    "versionCode": 5,
+    "sha256": "73560e83dc32573f2f40de670632af3b8e8fb2e37f411ac66024cfe34f710639",
+    "signingCertificateSha256": "734a9b3d80c66eacd6515b0250c2ef0aad6fff0b7ddb45d9bfaad20616ce7286"
+  },
+  "candidateDeviceTest": "NOT_RUN",
+  "candidateBlockObserved": false,
+  "virusTotalUploaded": false,
+  "externalUploadAuthorized": true,
+  "googleAppealAuthorized": true,
+  "virusTotalUploadAttempted": true,
+  "virusTotalUploadConfirmed": false,
+  "uploadAttemptNote": "Browser filechooser timed out before automation could select the exact APK. No matching hash report confirmed; do not claim successful upload.",
+  "googleAppealFormPartiallyFilled": true,
+  "googleAppealSubmitted": false,
+  "appealUrl": "https://support.google.com/googleplay/android-developer/contact/protectappeals",
+  "guidanceUrl": "https://developers.google.com/android/play-protect/warning-dev-guidance"
+}

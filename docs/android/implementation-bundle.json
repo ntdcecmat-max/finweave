@@ -1,0 +1,50 @@
+{
+  "id": "FW-ANDROID-BUNDLE-20261009",
+  "status": "DESIGN_ONLY",
+  "apiRevision": "FW-API-T1-D1J2-004",
+  "databaseRevision": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeRevision": "FW-NATIVE-BRIDGE-002",
+  "files": {
+    "api": {
+      "path": "docs/contracts/v2-t1-r4/openapi.json",
+      "sha256": "c873127da5b4680dfd2535f518c09807532c47eef88d6b0d3a8fed1bc7bc1ca6"
+    },
+    "database": {
+      "path": "docs/data/target-t1-async/target-model.json",
+      "sha256": "84698a505073909a3e5f0ac86aa80aedd877039a13e6f584c0c1dbd0c41e5424"
+    },
+    "asyncBundle": {
+      "path": "docs/async/implementation-bundle.json",
+      "sha256": "4994176b71f62ff2e776fe68866d563c3e8809c103b8db921dac8c7a5950bc62"
+    },
+    "identity": {
+      "path": "docs/security/identity/identity-access-design.md",
+      "sha256": "9a40f34ea8ff7b69c69f06bd6eedc8a1945f40170ef41905dbc9c70ee60561e5"
+    },
+    "security": {
+      "path": "docs/security/t1/README.md",
+      "sha256": "645fa6d1018e1abed402ad5f421c4fa0b885c47beaf4b5d21e371889f9df3286"
+    },
+    "policy": {
+      "path": "docs/android/android-policy.json",
+      "sha256": "f17960cfa5442da525643f9470cc513d85f8aef1b4a1b43480e1765fd9f9e592"
+    },
+    "bridge": {
+      "path": "docs/android/native-bridge-schemas.json",
+      "sha256": "5cee16a88f6ee6e713b22462f8921b973952a0dfc26bd8bb9641c654d67c72c2"
+    },
+    "localModel": {
+      "path": "docs/android/local-model.json",
+      "sha256": "f8fc596f35c2745a2e7eca6f1b9a2d852821f49acd1e74d0cca3cc9f96e06f3e"
+    },
+    "consumerMap": {
+      "path": "docs/android/consumer-operation-map.json",
+      "sha256": "901fdacc3f730811be402dcb4c79398e58c9b08eaa4a5113807ea10661d450d8"
+    },
+    "managedHandlers": {
+      "path": "docs/android/managed-handler-contract.json",
+      "sha256": "f42297a22242459f4a21f58bed6d10eb0b141785fdf6f7997041b57a78aa9cf1"
+    }
+  },
+  "runtime": "NOT_RUN"
+}

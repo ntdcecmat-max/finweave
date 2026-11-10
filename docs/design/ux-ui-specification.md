@@ -1,87 +1,65 @@
-# UX/UI & Frontend Technical Specification v0.1
+# UX/UI specification — trải nghiệm đích FinWeave
 
-DES-UX-001 · 06/10/2026 · scope-v2/analysis-v2 (28REQ/AC) · implemented, render-reviewed bởi AG; PO formal review pending. Bản nháp được tạo trước /design và trước triển khai features; nội dung này cập nhật theo code/render thực tế. [ADR](../architecture/adr/ADR-001-frontend.md), [Design System](design-system.md), [Components](component-specifications.md), [Patterns](pattern-library.md), [Accessibility](accessibility-requirements.md), [Validation](validation-report.md).
+DES-UX-001 · v1.0 · 08/10/2026 · SPECIFIED / visual review và user UAT pending.
 
-## Information Architecture — DES-IA-001
+Tài liệu thay thế mô tả mock làm chuẩn thiết kế tương lai; [bản cũ](../governance/baselines/ui-before-v3-2026-10-08/ux-ui-specification.md) giữ wireframe/triển khai và bằng chứng lịch sử. [Catalogue](interface-catalogue.md) xác định từng màn và phần kế thừa. Không đổi code, không nhận các màn mới đã render hoặc native-tested.
 
-| Navigation chính | Tabs/routes thực tế | Câu hỏi / đối tượng và hành động |
-|---|---|---|
-| Home | /home Tổng hợp; /home/reports Báo cáo; /home/assets Tài khoản & Tài sản | Tiền ở đâu, chi lớn, tài sản có giá nào; account/holding CRUD, history, quantity/quote, cash count |
-| Giao dịch | /transactions; /transactions/flow; /transactions/transfers; /transactions/refunds | Tất cả / Thu–chi / Chuyển / Hoàn; ghi, lọc, detail, sửa/category/posted correction, evidence, plan match |
-| Plan | /plan; /plan/items; /plan/investments; /plan/goals; /plan/simulation | Tổng quan; Thu nhập & Chi tiêu; Đầu tư; Mục tiêu; Mô phỏng; forecast/versions/actual tracking |
-| Dữ liệu | /data Nguồn dữ liệu; /data/review Kiểm tra dữ liệu | Source capability/connection/freshness, CSV mapping/staging/jobs; case/evidence/resolution/quality |
-| Trợ lý AI | /ai chat; /ai/history | Scripted read-only result+evidence; shared conversation với panel contextual |
-| Utility qua Thiết lập | /design; dialogs Thiết lập/Scope/Khoảng tùy chọn | Không navigation thứ6. Settings là dialog qua profile; desktop thêm shortcut cuối sidebar |
+## 1. Người dùng, phạm vi và nguyên tắc
 
-Object detail là dialog deep-link qua query **selected=event:id / account:id / holding:id / review:id / formula:cash|assets|flow**. Không tạo route :id hoặc /settings chưa có. Base / chuyển Home; route không tồn tại có CTA về Home. Mobile bottom nav đúng5đích luôn có icon+label; desktop sidebar đúng5đích.
+- User web: quản lý và đọc tài chính trên màn lớn; không cần cài Android để nhập tay/CSV, theo dõi giá hoặc dùng Plan/Goals.
+- User Android: cùng owner/workspace/backend/ledger và các nghiệp vụ core; bổ sung collector native, permission, queue. APK là một sản phẩm cài được, không chỉ viewport nhỏ.
+- Admin: vận hành nguồn/parser/jobs/quota/releases/incident qua metadata tối thiểu; không đọc finance, raw notification, chat/prompt hoặc impersonate user.
 
-URL giữ period/start/end/scope và transaction filters category/type/account/posting/reconciliation/search/plan/selected. Không đưa amount/raw/key/prompt vào URL. Date range start inclusive/end exclusive; custom UI chọn ngày cuối inclusive rồi chuyển ngày sau. Back phục hồi URL/context trước; close detail bỏ selected. Period/scope giữ khi đổi nav. Plan horizon và goal funded tại business clock độc lập report filter; không bỏ backing chỉ vì ẩn account khỏi báo cáo.
+Năm nguyên tắc giữ: đọc tiền trước; mỗi số có căn cứ; missing khác zero; planned/actual/simulated tách riêng; hành động có preview và kết quả. Mở rộng: coverage hiển thị trung thực; không đồng nhất upload với posted; AI giải thích và tạo draft trong cùng trợ lý; quyền UI không thay kiểm quyền server. Chỉ dùng synthetic khi trust/security gate chưa đạt.
 
-## User Flows — DES-FLW-001
+## 2. Kiến trúc thông tin và điều hướng
 
-| Flow / REQ | Tác vụ cụ thể và kết thúc | Nhánh khác / guard |
-|---|---|---|
-| FL-01 Setup, AC01–05 | Thiết lập→Reset F-EMPTY→mốc theo dõi→Home/Assets thêm bank/wallet/cash→thêm DEMO-A/gold→quote→preview/confirm→Home | Invalid tên/amount/date/market/unit chặn; cancel không item. Opening tách income. Missing/null khác khai báo0; cash tự khai báo, chưa count |
-| FL-02 Ghi cash/chuyển/refund, AC08 | Giao dịch→Ghi giao dịch→kind/account/amount/date/category hoặc to/origin/fee→Xem tác động→Xác nhận→list/detail/Home | Transfer 2legs+fee riêng; refund nhận ngày nào tính ngày đó; draft/pending chưa posted; investment linked cash+holding không expense |
-| FL-03 Import/source, AC06/07 | Dữ liệu→sample/file giả+account+mapping→preview raw/normalized/status→select valid→subset impact→confirm→job/Review | Hủy chưa job/case; retry same batch delta0; invalid/duplicate cần Review. Refresh lỗi giữ quote; revoke→reconnect giả→retry; không key thật |
-| FL-04 Hiểu số, AC11/13/14/20/21 | Home→metric explanation hoặc chart Ăn uống→DEMO04/05→detail/evidence→Back; assetmark→holding→quantity/quote/unit/source | Scope ngoài wallet giải thích transfer flow; custom08Oct không dùng31Octquote; no results clear filter; unknown partial subtotal |
-| FL-05 Xử lý nghi vấn, AC09/12/15/16 | Cash count2,8m khi calculated2,85m→observation−50k→Review evidence→adjustunknown hoặc forgottenexpense→reason/preview/confirm/history | Observation không post; cancel giữ money; duplicate hợp nhất evidence không double; source revision giữ manual category; quality lượng/giá/FX/nguồn riêng |
-| FL-06 Plan tracking, AC22/23 | Plan→thu5m/chi2m/invest1m Nov→forecast33,1m→edit/version→clockNov30→actual4m/2,5m/0,5m+10shares→link từngitem→remaining/overspend | Forecast không actual; transfer/wrongaccount/date/kind chặn; unlink không ledger; recurrence clamp31; conflict giữ input và re-preview |
-| FL-07 Goals, AC24/25 | Goal5m dueNov30→allocatebank3m→funded60%/available23,5m→actualbankspend24m→funded50%/shortfall0,5m | Goal2allocate24m chặn aggregate; spending thật vẫn ghi; allocation giữ; achieved cần đủ funded; release/archive không moneyevent |
-| FL-08 Mô phỏng, AC26 | Goal3mallocated→góp1m×2 save; consume5m; invest1m→lưu3conditionalcards→so với frozen actual→tính lại phiên mới | Save chỉ earmark; consume/invest khác cash/assets/gross; partial nếu thiếu quote; actual không mutation; version/horizon/assumptions rõ |
-| FL-09 Contextual AI, AC27/28 | Bất kỳ5nav/selected→headerlinh vật→chipcontext→send→pending→result/ref→fullchat/history→drill | Response giữ capture lúc gửi; navigate không thay oldresult; no-data/tool/timeout/quota/denied không số bịa; cancel khôngresult; maskall; resetclear |
+User giữ **Tổng quan — Giao dịch — Plan — Dữ liệu — Trợ lý AI**. Route đang có trong catalogue không đổi ở bước tài liệu này. Goals nằm trong Plan; Devices trong Dữ liệu; Settings từ profile. Contextual panel không tạo trợ lý hoặc kho lịch sử thứ hai. Android giữ hierarchy, có “Thiết lập tự động ghi nhận” tại Dữ liệu/Settings; không xin quyền notification khi user chỉ xem báo cáo.
 
-[Demo script](../execution/evidence/demo-script.md) có dữ liệu và bước lặp lại. Đây là flows đã Agent tự walkthrough, không nghiên cứu người tham gia.
+Desktop giữ sidebar224px, compact184px dưới1000; dưới760 dùng bottom nav72px; max content1240px. Dưới640 fields một cột, summary2×2 khi đọc được, chart tối thiểu220px; dưới1200 hero stack. Android áp safe-area/insets, bàn phím và native Back; text scale lớn có thể chuyển summary thành một cột. Admin dùng sidebar riêng Overview/Accounts & devices/Sources & parsers/Jobs/Quotas/Releases/Incidents, không mascot đọc tài chính.
 
-## Wireframes — DES-WIR-001
+Period/scope dùng cho báo cáo, không thay business clock/goal deadline. Drill → list/detail → Back giữ context phù hợp; đổi filter không tự gửi prompt hoặc ghi dữ liệu. Legacy selected query chỉ mang loại/opaque ID trong synthetic. Đích production không chứa tiền, prompt, raw, secret hoặc mô tả/search nhạy cảm trong URL; filter nhạy cảm nằm trong trạng thái phiên đã bảo vệ. Shared context dùng DTO được phép, không sao chép URL thô.
 
-Wireframe section /design là layout giản lược có5templates và link mở màn thật. Cấu trúc đọc theo DOM:
+## 3. Hành trình đầy đủ
 
-Home: shell/context → title+CTA → subtabs/coverage → CASH HERO | ASSET HERO → INCOME/GROSS/REFUND/NET → FLOW | SPEND → ALLOCATION | ACCOUNT BALANCES → INSIGHTS.
-Giao dịch: title+CTA → 4tabs → filters → rows/cells hoặc mobile cards → detail/evidence/adjust.
-Plan: title/CTA+5tabs → planned metrics → forecast line/timeline → items actual/remaining → goals backing/progress hoặc frozen simulation comparisons.
-Dữ liệu: 2tabs → source cards → CSV staging/mapping/preview → jobs/audit; Review: status → case cards → quality warnings → detail proposals.
-AI: context+scripted label → questions hoặc captured conversation → result/evidence/drill → composer; History giữ cùng capture version.
+Các UX-FL là refinement của yêu cầu hiện có, không thêm chức năng ngoài PRD.
+| ID | Bắt đầu → các bước chính → kết thúc | Nhánh lỗi/quyền và màn |
+| --- | --- | --- |
+| UX-FL-01 | Đăng nhập/đăng ký → workspace VND/timezone/tracking → account/opening → tổng quan | Auth fail/expired/denied; missing opening không0. UI-AUTH, UI-U-17, UI-S-01 |
+| UX-FL-02 | Ghi thu/chi/chuyển/hoàn → validation → preview → confirm → ledger/snapshot | Same account, thiếu leg/origin, timeout uncertain, correction có history. UI-U-04…07, UI-S-03/06 |
+| UX-FL-03 | CSV → mapping → preview valid/invalid/duplicate → chọn rows → confirm → job → kết quả | Cancel không post; partial parse khác partial commit, retry cùng key. UI-U-13, UI-S-09/10 |
+| UX-FL-04 | Tổng quan/báo cáo → chart/bảng/insight → chi tiết căn cứ → Back hoặc hỏi AI | Unknown/coverage/stale vẫn drill có giải thích; không chart fake. UI-U-01/02, UI-S-01…03/08 |
+| UX-FL-05 | Cash count/Review → evidence → supplement/ghép/link/defer → preview → confirm | Account ambiguity/redaction không đoán; duplicate/transfer không double money. UI-U-14, UI-S-04/06 |
+| UX-FL-06 | Plan thủ công → recurring item/investment → forecast → link actual → theo dõi | Eligible versions/date/capacity; planned không thành actual. UI-U-08…10 |
+| UX-FL-07 | Goal thủ công → target/deadline → contribution → allocate/release/achieve/archive | Earmark không cộng tiền lần2; thiếu funding không tự đạt. UI-U-11 |
+| UX-FL-08 | Goal/Plan → save/consume/invest simulation → compare assumptions → giữ scenario | Không tự trade/actual writes; snapshot cũ được gắn nhãn. UI-U-12 |
+| UX-FL-09 | Mascot/full chat/history → hỏi đơn giản → read result/evidence → drill/tiếp tục | Chung conversation; cancel/quota/partial/stale; không buộc Agent. UI-U-15/16, UI-S-08 |
+| UX-FL-10 | Web giới thiệu Android hoặc Dữ liệu Android → disclosure → OS permission → source → mapping → test | Deny/restricted/unsupported → manual/CSV; có thể quay lại sau. UI-M-01…04/06 |
+| UX-FL-11 | Notification hợp lệ → native outbox → durable receipt → posted/Review → web/mobile refresh cùng version | Offline/restart/permission revoke/ambiguous/repeated/multi-device/gaps. UI-M-05, UI-U-18, UI-S-10 |
+| UX-FL-12 | Thêm stock: mã + lượng → resolve instrument; vàng: xác nhận profile → số chỉ → lưu holding | Mã mơ hồ, wrong unit/purity/side/currency, thiếu giá đều hiện rõ. UI-U-03, UI-S-02 |
+| UX-FL-13 | Backend daily hoặc user “Cập nhật giá” → job → latest valid/partial/failed → giữ last-good | Không đổi lượng/cash/income; quota/cooldown/holiday; không cần mở app. UI-U-03/19, UI-S-10 |
+| UX-FL-14 | Goal-first hoặc Plan-first → Agent hỏi ràng buộc → draft liên kết → engine mô phỏng → user chỉnh → preview → confirm | Bất khả thi, cancel, quyền, stale/conflict; flow thủ công song song. UI-U-08/11/15, UI-S-05…07 |
+| UX-FL-15 | Actual lệch Plan hoặc user yêu cầu điều tra → Agent đọc/so/đặt câu hỏi → evidence + đề xuất → draft amendment hoặc Review | Không tự sửa active plan, quyết định Review hoặc actual. UI-U-08/14/15, UI-S-04…07 |
+| UX-FL-16 | Admin phát hiện incident/job fail → xem metadata → chọn safe retry/disable + reason → preview/confirm → audit | 403, immutable version, uncertain outcome; không mở tài chính hoặc đổi finance. UI-ADM-01…07 |
 
-Desktop sidebar224px, header kỳ/scope/privacy/profile/mascot, content max1240px. Dưới1000 sidebar184px; dưới760 sidebar biến thành bottom5nav72px. Dưới1200 hero xếp1cột để số lớn dễ đọc; dưới640 layout business1cột, summary4cards thành2×2, form1cột, chart220px. Header linh vật44px nằm trong normal flow ở mọi width, không floating phủ CTA/profile. Sidebar/header labels phụ nhỏ hơn body nhưng không mang financial value chính.
+Mỗi flow phải có đường quay về, draft được giữ trong phạm vi phiên/quyền hợp lệ; logout không giữ draft tài chính mở trên màn hình. Không thêm đọc SMS/email hoặc iOS collector như fallback tự động.
 
-## Frontend structure và data boundary
+## 4. Bố cục nội dung cần dựng
 
-finweave-web/src/app: App/routes/shell, Query store/context, URL filters, action builders và detail/action view context.
-components: Button/Badge/Modal/Empty/Freshness/Evidence, ActionForm và FinancialChart.
-features: Home, Transactions, Details, Plan, Data, Assistant; design: tokens/base/layout/DesignPage.
-domain: model, fixtures, import parser, deterministic Decimal selectors và commands.
-services/demo: fetch/AbortController; mocks/browser: MSW handlers và memory store.
+| Màn tiêu biểu | Thứ tự từ trên xuống / hành động chính |
+| --- | --- |
+| Tổng quan | Kỳ/scope + sync/coverage → tiền đang có → tài sản theo dõi/subtotal → thu/gross/refund/net → charts/bảng → insight/evidence; “Ghi giao dịch” |
+| Assets | Tiền theo bank/wallet/cash → stock/gold + quoteAsOf/source/quantityAsOf → “Cập nhật giá” + job state → thêm holding đơn giản → drill |
+| Dữ liệu | Source health/coverage → Android/device setup/status → CSV/importjobs → Review; không giấu fallback sau onboarding |
+| Plan/Goals | Actual/dự kiến/mô phỏng label → forecast/progress/shortfall → items/goals → “Cùng trợ lý lập kế hoạch” và tạo thủ công → draft/run liên quan |
+| Agent/draft | Context + quyền và dữ liệu thiếu → câu hỏi/tiến trình ngắn → phương án từ Engine + assumptions/evidence → form chỉnh → before/after → “Xác nhận áp dụng” |
+| Android status | Consent/OS/network/source riêng → lastObserved/lastAck → queue/receipts/gaps → retry/permission/source mapping/fallback |
+| Admin overview | Environment/version → sanitized health/counts → incidents/job queue/quota → link chi tiết; không chart tài sản user |
 
-Query key hiện tại ['store'] duy nhất cho local demo single workspace; report là selector của store+URL context, không cache report thứ2. Commit trả store mới→setQueryData; error không optimistic-post. Reset tăng generation, clear filters/mask/drafts/dialogs/chat và nạp fixture chính xác. Đây là seam tái sử dụng M2; M2 phải bổ sung workspace/versioned query keys, formal contracts/transport/auth/error/pagination, không coi ['/demo'] là đã nghiệm thu bước4.
+Đây là hierarchy và hành vi để vẽ wireframe, không phải pixel specification hoặc hình đã được user review. [Pattern library](pattern-library.md) và [design system](design-system.md) quy định composition/tokens; screen spec quy định states. Thiết kế chi tiết vòng tiếp theo cần desktop/mobile mockups, real-device prototype, keyboard/assistive review và PO review trước nghiệm thu.
 
-Network thực tế GET /demo/state, POST /demo/preview, POST /demo/command intercepted MSW tại cùng origin. Memory clone preview; key+payload check; expected store.version và command guards; commit atomic trong synthetic memory. CSV batch identity giữ payload/mapping/account/selection. Service abort5s; fault modes không chứng minh fault handling backend thật. Không persistence, provider, LLM, paid service hoặc public host.
+## 5. Copy và quyết định người dùng
 
-Money decimal string, VND integer round-half-up từngholding trước cộng; quantity decimal. Date-only giữ nghĩa Asia/Ho_Chi_Minh, timestamp+07 riêng. Full valuation null nếu thiếu; known subtotal không gọi full/net worth. Phân loại/posting/reconciliation riêng. Actual/planned/simulated không dùng chung row như đã xảy ra.
+Nhãn bắt buộc: “Chưa biết”, “Phần đã biết”, “Giá cập nhật lúc…”, “Lượng khai báo lúc…”, “Có khoảng trống dữ liệu”, “Đã gửi lên máy chủ”, “Chờ kiểm tra”, “Đã ghi sổ”, “Bản nháp — chưa áp dụng”, “Dự kiến”, “Mô phỏng”. Không viết “Đồng bộ hoàn tất” khi mới nhận ACK nhưng chưa biết ingestion outcome.
 
-## Charts và interactions
-
-ECharts modular SVG bar/pie/line; màu từ CSS semantic tokens; caption source/unit/time và native table/drill. Axis triệu VND được ghi rõ, tiền đầy đủ ở table/detail. Home spend theo net nhưng table/căn cứ giữ gross/refund. Tie ăn uống/mua sắm400k ghi đồng hạng. Flow không chỉ nét expense; scope boundary tách transfer.
-
-Donut chỉ portions đã định giá, unknown không dựng lát0; Home cảnh báo total unknown và giữ known subtotal. Holding detail phép tínhqty×quote×FX/unit/time. Reports price movement cần hai quote hợp lệ cùng khoảng; chưa đủ thì unknown, không historical chart giả. Plan forecast line có Dự kiến và fixed-price assumption. Simulation so frozen values với conditional result, không giá thị trường forecast.
-
-UI actions đều có input/action/result hoặc link tới scope object. No-data/invalid/offline/timeout/conflict/revoked/loading/stale/empty/cancel/retry có cách tiếp tục. Form preview→confirm; confirm busy chặn repeat/đóng. AI processing clone capture; không để pending result đè context mới. Privacy gỡ toàn geometry và nhạy cảm text; masking chỉ UI synthetic, không security guarantee.
-
-## Visual checklist và assumptions
-
-Xem trực tiếp đủ40References; học hierarchy/dashboard, readable table, provenance, plan/AI composition. Không sao số/logo/billing/asset/concept animation. Phần thiếu tự đề xuất: before/after financial preview, independent timestamps, boundary explanation, full unknown subtotal, goal backed capacity, captured AI result, mobile action placement. Căn cứ28UC/BR/DR, D23…27 và catalogue; không chờ user thêm ảnh.
-
-Kiểm1440×900,390×844,360×844; no page overflow; dấu Việt/số dài; label/status/time/source/unit; table alternative; touch/focus/trap/Escape/return; planned/simulated/actual; maskcards/chart/detail/AI/history; reset/replay. [Validation](validation-report.md) ghi result thực tế, defects và giới hạn; thiết kế v0.1 tiếp tục in-review, chưa khóa PO acceptance. Bundle còn lớn và chưa cold-load/production capacity benchmark. Không có participant, không research result giả.
-
-## Frontend technical specification v0.2 — bước5
-
-React app hiện hành,16business+7authroutes+/design; đúng5navigation. AuthGate trước AppProvider; QueryClient → Auth/App/Chat providers → View/detail/forms. Services/API layer và mock network tách module; protected mode đóng. [ADR004](../architecture/adr/ADR-004-stateful-mock-and-read-model.md), [Mock Implementation](../frontend/mock-implementation.md) quy định state/data boundary và lifecycle.
-
-Responsive/tokens/charts/keyboard/privacy tiếp tục design đã kiểm. Shared snapshot cho card/chart/table/detail, source/time/unit/missing và actual/planned/simulated classification. Account/holding mutations refetch; quote cập nhậtvaluation, quantity không tự tạoexpense. Import asyncjob và Review có evidence; Plan/Goal không ghiactual, simulation frozen. UI không giảm thành5screens; [catalogue](interface-catalogue.md) liệt kê13modules/86actions với contracts/local actions.
-
-Checklist thực hiện: ba viewport, chart table fallback và drill, mobileform/preview/detail/panel; keyboard dialog trap/return, errorinput preservation, duplicate-submit block, import replay, chat cancellation/context/history, mask mọifinancial displays. Kết quả và defects thực ở Step5report; chưa usertest, real provider/security/capacity.
-
-
-## Bước6 kiểm chứng và correction
-
-Build hiện hành v0.3 giữ tokens/architecture; leaderlabel/insight nói rõ mọi đồnghạng. Previewfields lockpending; uncertaincommit retry immutable request; cancellationerror explicitpending; CSVtemplate-loading race fixed. Visual đối chiếu8ref trực tiếp lần này,40refcatalogueM1 giữlịch sử. [A11y/responsive](../testing/accessibility-responsive-report.md), [Acceptance](../testing/frontend-acceptance-report.md), [Handover](../testing/integration-handover.md). Agent tự review,0participants; design không là userresearch/signoff/securityproof.
+Consent nêu dữ liệu đọc/gửi, nguồn được chọn, cách tắt, giới hạn coverage; không chỉ một nút “Cho phép tất cả”. Agent hỏi ưu tiên/ràng buộc còn thiếu, ghi assumptions user chưa xác nhận; không trình lời giải như sự thật tài chính hoặc hứa lợi nhuận. Errors nêu việc user có thể làm, giữ căn cứ/số cũ khi hợp lệ; secrets và internal traces không đưa vào copy.

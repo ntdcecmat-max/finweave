@@ -1,30 +1,24 @@
-# FinWeave — Feasibility Study sơ bộ
+# Feasibility v3 — khả thi có điều kiện
 
-Ngày 05/10/2026; version2.0, scope-v2. Phương pháp: phân tích ba tài liệu nguồn và kiểm kê workspace; chưa chạy PoC, user research, benchmark hoặc xác minh provider. Kết luận là đánh giá kế hoạch, không phải xác nhận kỹ thuật/thương mại thực tế.
+07/10/2026 · desk review, chưa native/backend/provider PoC. [Audit](../execution/product-realignment-audit.md), [nguồn kiểm chứng](../architecture/feasibility-sources.md).
 
-## Kết luận
+| Hạng mục | Kết luận / điều kiện cần chứng minh |
+| --- | --- |
+| React web → APK | Có đường Capacitor/native plugin; chưa có Android code/APK trong repo. Giữ frontend, thử native collector trước quyết định rewrite |
+| Đọc notification Android | Nền tảng có NotificationListenerService; mỗi app/OS/OEM vẫn cần test, không lịch sử đầy đủ/OTP/force-stop guarantees |
+| Cổ phiếu chỉ mã+quantity | Form khả thi với instrument catalog; provider server entitlement chưa được chứng minh. SSI có tài liệu API, không tự đồng nghĩa free redistribution cho mọi user |
+| Vàng chỉ quantity | Khả thi sau xác nhận profile; trang giá PNJ/SJC không chứng minh có API miễn phí được phép dùng/phân phối. Chưa chọn provider thực |
+| Daily/manual và sync | Backend jobs + PG persistence + polling khả thi về thiết kế; free-tier pause/cold-start làm SLA có điều kiện, phải PoC 7 ngày |
+| Ba giao diện | Cùng React và backend có thể tiết kiệm công; admin cần authorization riêng, mobile cần native code; hiện chỉ web prototype |
+| Agent trong Plan/Goals | Tác vụ draft/clarify/simulate/replan có giả thuyết giá trị; model/privacy/cost/eval chưa chứng minh, manual fallback vẫn cần |
+| Miễn phí + anti-root-Ops | Chưa có cấu hình đáp ứng đồng thời. Free cloud conventional chỉ synthetic; protected real giữ gate hoặc user quyết định đổi trust model |
 
-Có thể tiếp tục bước 2 và chuẩn bị prototype M1 trong phạm vi đã chọn bằng fixture và web local; chưa phát hiện phụ thuộc bắt buộc backend/provider thật cho tác vụ mô phỏng. M2 phụ thuộc contract/mock/transport; M3 còn điều kiện nguồn, quyền, privacy, chi phí và môi trường chưa giải quyết. Chưa có cơ sở cam kết ngày hoàn thành, chi phí tiền hoặc tính khả thi sản phẩm SaaS với dữ liệu thật.
+## Chọn ít nguồn nhưng kiểm thật
 
-| Khía cạnh | Căn cứ hiện có | Đánh giá sơ bộ M1 | Điều còn phải kiểm chứng / gate |
-|---|---|---|---|
-| Nhu cầu/giá trị | Ideas/user idea nêu UP-01…08; chưa có người tham gia | Giả thuyết đủ để viết tác vụ, giá trị chưa xác nhận | Phỏng vấn/test giả, câu trả lời và lỗi hiểu |
-| Kỹ thuật UI | Playbook cho phép prototype local/mock; workspace chưa có code | Hướng web khả thi về phạm vi kế hoạch; chưa kiểm tra runtime | Chọn công cụ và chạy browser ở bước 3; thao tác/visual/reset đủ AC |
-| Dữ liệu/nghiệp vụ | Oracle có opening, transfer, refund và bốn nhóm | Có thể định nghĩa expected độc lập; nhánh phức tạp cần rules | Bước 2 dictionary/status/rounding; bước 3 consistency walkthrough |
-| Vận hành/demo | Một workspace giả, không yêu cầu service production | Có thể giới hạn local, không phụ thuộc vận hành SaaS | Cách mở/reset, yêu cầu môi trường và lưu state phải thử khi có app |
-| Bảo mật/quyền riêng tư | Ideas 15–16 đặt gate chống Ops cả runtime | M1 giả giảm phụ thuộc dữ liệu thật; không chứng minh bảo đảm security | FUT-02: boundary/key/code/client/auth/recovery và test trước thật |
-| Nguồn/quyền sử dụng | Thông tin ứng viên trong Ideas, chưa xác minh lại | Dùng nguồn dummy, không công bố adapter thật | DEP-01…03 trước tích hợp; tài liệu/terms/mẫu được cấp quyền |
-| Kinh tế/nguồn lực | Chưa budget, deadline, đơn giá/capacity | Effort scope-v2 TBD, estimate cũ superseded; chưa cần mua dịch vụ | Cost model + báo giá/effort thực khi có nguồn lực |
-| Lịch/khả năng bàn giao | Bước1 đã có; nhiệm vụ mới bước 2, bước 3 chưa được giao | Có thể chia theo gate, cập nhật D-12/D-19 | Chốt capacity/rubric/user availability trước hẹn ngày |
+Trước R1 chọn một ngân hàng và một ví người dùng cần, thu samples đã khử nhạy cảm có quyền, lập support matrix/template/parser và device tests. Chưa có tên được chọn nên không tự tuyên bố hỗ trợ bất kỳ ngân hàng nào.
 
-## Các điểm phải khảo sát sớm và điều kiện dừng
+Provider cổ phiếu cần xác minh coverage HOSE/HNX/UPCOM theo phạm vi đã chọn, unit, quote delay/market day, authentication, quota, phí, caching/display/redistribution rights. Provider vàng cần profile/brand/purity/side/unit/time và quyền máy đọc. Giá tham chiếu thủ công là fallback minh bạch, **không đạt yêu cầu automatic daily price**. Nếu không có nguồn miễn phí phù hợp, phải báo dependency/budget còn mở, không scrape không kiểm quyền hoặc dùng giá giả.
 
-Trước thiết kế: làm rõ nhóm user, timestamp/stale, CSV/quote demo bằng OD-01…04. Không có người tham gia thì ghi hạn chế và tiếp tục walkthrough, không phát minh kết quả.
+## Privacy là quyết định có ảnh hưởng phạm vi
 
-Trước contract M2 phục vụ backend định hướng: khảo sát protected boundary vì transport tài chính không được mặc định plaintext qua gateway. Trước dữ liệu thật: PoC/gate Ideas 15, quyền provider/key/nguồn và recovery cần bằng chứng. Nếu ngân sách/boundary chưa đáp ứng, duy trì synthetic integration, không đổi nhãn thành M3 cho khách hàng thật.
-
-Nếu runtime local không đáp ứng cách mở prototype, kiểm tra phương án kỹ thuật khác trong cùng web local trước khi phát sinh phí. Nếu scope/rubric yêu cầu thêm tính năng hoặc platform, cập nhật charter/AC/cost thay vì tự thêm trong lúc xây. Xem [Options](options-analysis.md), [Risks](risk-register.md).
-
-## Khả thi bổ sung sơ bộ — chưa PoC/benchmark
-
-Plan/Goals/Insights/AI scripted có thể đặc tả và mô phỏng M1 mà không nguồn thật. Rủi ro mới: forecast không đồng nhất actual, over-allocation, context/report lịch sử stale, chat hallucination/masking. Nghiệp vụ được bổ sung BR-25…36/DR-16…22/SCN mới; khả thi kỹ thuật thực tế của protected Engine/LLM vẫn chưa chứng minh. D-19 thay phạm vi, cần estimate mới; không giữ estimate cũ làm cam kết scope-v2.
+App-admin không xem finance có thể thiết kế bằng role/API; chống cả DBA/root Ops đòi trust/key/client/runtime khác. [ADR-006](../architecture/adr/ADR-006-deployment-trust-profiles.md) giữ rõ hai mức, không tự giảm yêu cầu. Hoàn thiện documentation và synthetic PoC không cần đưa dữ liệu thật vào môi trường chưa đủ điều kiện.

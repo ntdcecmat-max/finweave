@@ -1,0 +1,114 @@
+{
+  "asOf": "2026-10-09",
+  "method": "Public primary-source desk research only; no account/login/vendor API/notification capture",
+  "sources": [
+    {
+      "id": "SSI-OVERVIEW",
+      "url": "https://developers.ssi.com.vn/docs/faq/service-overview",
+      "finding": "Hiện chưa phí API; tài khoản SSI, scopes/key và per-endpoint quota; UAT tùy availability. Không có grant redistribution trong nội dung đã đọc.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-MIGRATION",
+      "url": "https://developers.ssi.com.vn/docs/faq/v2-to-v3-migration",
+      "finding": "V3 official long-term; V2 bug support hết2026, duy trì đến30/06/2027; không suy ra V3 scale từ V2.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-ENV",
+      "url": "https://developers.ssi.com.vn/docs/getting-started/terms-and-environments",
+      "finding": "Public production API origin và key/environment separation; terms acceptance không tự xác nhận SaaS entitlement.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-MARKET",
+      "url": "https://developers.ssi.com.vn/docs/faq/market-data",
+      "finding": "REST/daily vs intraday/stream semantics; chưa proof field scale/finality/time mapping đáp ứng portfolio.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-CATALOG",
+      "url": "https://developers.ssi.com.vn/docs/api-reference/data-securitiesByBoard",
+      "finding": "V3 symbol/board/index catalogue candidate; không dùng tất cả securities như cổ phiếu cơ sở.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-SUMMARY",
+      "url": "https://developers.ssi.com.vn/docs/api-reference/data-securitiesSummary",
+      "finding": "V3 daily summary page/date/string fields đã desk-read; repeat fetch lỗi tại cuối review, không API probe; unit/finality/time gates vẫn mở.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-OHLC",
+      "url": "https://developers.ssi.com.vn/docs/api-reference/data-ohlc",
+      "finding": "V3 OHLC/timeFrame/paging candidate; repeat fetch lỗi, không giả hard limits/adjusted basis.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SSI-V2-HISTORICAL",
+      "url": "https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-data/huong-dan-ket-noi",
+      "finding": "Tham chiếu cũ, không current adapter selection.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "PNJ",
+      "url": "https://www.pnj.com.vn/blog/gia-vang/",
+      "finding": "Bảng public nghìnVND/chỉ và product/side; update-date trong truy xuất trống, không source timestamp/API/license proof.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SJC",
+      "url": "https://www.sjc.com.vn/",
+      "finding": "Bảng public nghìnVND/lượng; HTML đọc chưa có đầy đủ quote rows; no automation grant xác minh.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "VNSTOCK-LICENSE",
+      "url": "https://vnstocks.com/onboard/giay-phep-su-dung",
+      "finding": "license-2026.09, software phạm vi/tier khác upstream data rights; không blanket commercial ban/grant.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "VNSTOCK-REPO",
+      "url": "https://github.com/thinh-vu/vnstock/blob/main/README.md",
+      "finding": "Connector không data entitlement; không cài/import vào project.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "VCB-PLAY",
+      "url": "https://play.google.com/store/apps/details?id=com.VCB",
+      "finding": "Official publisher/package com.VCB; signer/installed version/template chưa xác minh.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "MOMO-PLAY",
+      "url": "https://play.google.com/store/apps/details?id=com.mservice.momotransfer",
+      "finding": "Official package com.mservice.momotransfer; không proof template coverage.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "VCB-OTT",
+      "url": "https://vietcombank.com.vn/vi-VN/Trang-thong-tin-dien-tu/Articles/2025/02/24/20250224_VCB_Thong-tin-bao-chi-Voice-OTT",
+      "finding": "Voice OTT incoming announcement option; không đảm bảo every debit/credit external payload.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "MOMO-RECEIVE",
+      "url": "https://www.momo.vn/hoi-dap/sau-bao-lau-nguoi-nhan-se-nhan-duoc-tien",
+      "finding": "Thông báo trong ứng dụng khi nhận; không đồng nghĩa every event external NLS notification.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "MOMO-LIFECYCLE",
+      "url": "https://www.momo.vn/tin-tuc/thong-bao/chuyen-tien-muot-hon-bao-gio-het-khong-can-doi-8878",
+      "finding": "26/06/2026 pending/final transfer notifications; parser phải phân finality, không ingest Zalo như source MoMo.",
+      "liveIntegration": "NOT_RUN"
+    },
+    {
+      "id": "SIGNING",
+      "url": "https://developer.android.com/reference/android/content/pm/SigningInfo",
+      "finding": "API28+ signing history/rotation vs multi-signer; cần actual installed-app proof, không package-only trust.",
+      "liveIntegration": "NOT_RUN"
+    }
+  ]
+}

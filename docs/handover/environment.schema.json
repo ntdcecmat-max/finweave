@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FinWeave local synthetic environment (parsed values, secret-free)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["FINWEAVE_ENV", "DATA_CLASSIFICATION", "TRUST_PROFILE", "API_BIND", "API_PORT", "DATABASE_URL", "AUTH_MODE", "COOKIE_SECURE", "USER_ORIGIN", "ADMIN_ORIGIN", "AI_MODE", "PRICE_MODE", "COLLECTOR_SOURCE_MODE", "EXTERNAL_SPEND_CAP_VND", "DAILY_REFRESH_TIMEZONE", "DAILY_REFRESH_HOUR", "MAX_NOTIFICATION_BATCH", "MAX_NOTIFICATION_BYTES", "PREVIEW_TTL_SECONDS", "LOG_PAYLOADS", "REAL_DATA_ENABLED"],
+  "properties": {
+    "FINWEAVE_ENV": {"const": "local_synthetic"},
+    "DATA_CLASSIFICATION": {"const": "synthetic_only"},
+    "TRUST_PROFILE": {"const": "conventional_synthetic"},
+    "API_BIND": {"const": "127.0.0.1"},
+    "API_PORT": {"const": 8080},
+    "DATABASE_URL": {"const": "postgresql://127.0.0.1:5432/finweave_synthetic"},
+    "AUTH_MODE": {"const": "synthetic_test_only"},
+    "COOKIE_SECURE": {"const": false},
+    "USER_ORIGIN": {"const": "http://127.0.0.1:4181"},
+    "ADMIN_ORIGIN": {"const": "http://127.0.0.1:4183"},
+    "AI_MODE": {"const": "scripted_synthetic"},
+    "PRICE_MODE": {"const": "synthetic"},
+    "COLLECTOR_SOURCE_MODE": {"const": "synthetic_test_packages"},
+    "EXTERNAL_SPEND_CAP_VND": {"const": 0},
+    "DAILY_REFRESH_TIMEZONE": {"const": "Asia/Ho_Chi_Minh"},
+    "DAILY_REFRESH_HOUR": {"const": 18},
+    "MAX_NOTIFICATION_BATCH": {"const": 50},
+    "MAX_NOTIFICATION_BYTES": {"const": 262144},
+    "PREVIEW_TTL_SECONDS": {"const": 600},
+    "LOG_PAYLOADS": {"const": false},
+    "REAL_DATA_ENABLED": {"const": false}
+  }
+}

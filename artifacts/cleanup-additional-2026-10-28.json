@@ -1,0 +1,1004 @@
+{
+  "date": "2026-10-28",
+  "beforeLogicalFileBytes": 25614062400,
+  "afterLogicalFileBytes": 22073455186,
+  "afterUniqueFileBytes": 18282334936,
+  "additionalFreedBytes": 7332243061,
+  "deletedBytes": 2358122787,
+  "sharedBytes": 3791120250,
+  "gitReductionBytes": 1183000024,
+  "gitBeforeBytes": 1995283064,
+  "gitAfterBytes": 812283040,
+  "cumulativeFreedBytes": 30301894939,
+  "sizeNote": "Approximate logical data sizes, counting hardlinked files once for the unique size; filesystem sparse/compression allocation and tiny audit/helper files can differ.",
+  "git": {
+    "objectsBefore": 4001,
+    "objectsAfter": 4001,
+    "objectIdsUnchanged": true,
+    "fullFsckBefore": "PASS",
+    "fullFsckAfter": "PASS",
+    "temporaryGarbageRemoved": [
+      {
+        "path": ".git/objects/44/tmp_obj_10vUYt",
+        "bytes": 266240,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/75/tmp_obj_8dlhiN",
+        "bytes": 1462272,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/75/tmp_obj_H0RpDu",
+        "bytes": 2220032,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/75/tmp_obj_h6ZuX2",
+        "bytes": 4636672,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/75/tmp_obj_VoGAo7",
+        "bytes": 8044544,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/7a/tmp_obj_muuo4q",
+        "bytes": 24748032,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/d5/tmp_obj_bpho9g",
+        "bytes": 15585280,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/ed/tmp_obj_56Zatx",
+        "bytes": 39845888,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/ed/tmp_obj_HjojrV",
+        "bytes": 69038080,
+        "status": "deleted-stale-git-temp"
+      },
+      {
+        "path": ".git/objects/ed/tmp_obj_sbZHAg",
+        "bytes": 60276736,
+        "status": "deleted-stale-git-temp"
+      }
+    ]
+  },
+  "verification": {
+    "at": "2026-10-28T14:26:47.151Z",
+    "checks": [
+      {
+        "name": "Pre-existing source, document and configuration files unchanged",
+        "status": "PASS",
+        "files": 1101,
+        "changed": []
+      },
+      {
+        "name": "All preserved duplicate files match SHA-256 and share a single file on disk",
+        "status": "PASS",
+        "groups": 65,
+        "duplicateFiles": 71
+      },
+      {
+        "name": "AI artifact runtimeArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact weightsArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact ollamaManifestArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact tokenizerArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact chatTemplateArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact licenseArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "Required APK 0.1.2",
+        "status": "PASS"
+      },
+      {
+        "name": "Required APK 0.1.4",
+        "status": "PASS"
+      },
+      {
+        "name": "Required APK 0.1.8",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/pilot-signing/finweave-pilot.p12",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/pilot-signing/password.txt",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/sdk/platform-tools/adb.exe",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/sdk/build-tools/36.0.0/apksigner.bat",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/sdk/system-images/android-30/default/x86_64/system.img",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained .local/android-toolchain/sdk/system-images/android-35/default/x86_64/system.img",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained finweave-web/dist/index.html",
+        "status": "PASS"
+      },
+      {
+        "name": "Retained finweave-web/dist-admin/index.html",
+        "status": "PASS"
+      },
+      {
+        "name": "Configured persistent database finweave-backend/.local/runtime-state.json",
+        "status": "PASS"
+      },
+      {
+        "name": "Configured persistent database .local/staging-synthetic/state.json",
+        "status": "PASS"
+      },
+      {
+        "name": "Configured release .local/staging-synthetic/state.json",
+        "status": "PASS"
+      },
+      {
+        "name": "Configured persistent database finweave-backend/.local/async-observation-state.json",
+        "status": "PASS"
+      },
+      {
+        "name": "Every Git object preserved after compression",
+        "status": "PASS",
+        "before": 4001,
+        "after": 4001
+      },
+      {
+        "name": "Web serves Login/Home/Design, worker, JavaScript and CSS",
+        "status": "PASS",
+        "routes": [
+          "/auth/login",
+          "/home",
+          "/design",
+          "/mockServiceWorker.js",
+          "/assets/index-C9ooF-ub.js",
+          "/assets/index-BhxCVKDa.css"
+        ]
+      }
+    ]
+  },
+  "apkSignatureVerification": "PASS: install-pilot.ps1 -VerifyOnly; FinWeave-0.1.8-pilot.apk",
+  "preserved": [
+    "All 1101 pre-existing Git-visible source/document/configuration/metadata files unchanged",
+    "All application settings and configured persistent runtime/staging/observation databases",
+    "Current signed APK 0.1.8 and APKs 0.1.2/0.1.4 required by Play Protect preparation",
+    "Android SDK, emulator images API 30/35, JDK, Gradle",
+    "Configured Ollama runtime, AI model weights/tokenizer/template/license; all existing model paths resolve",
+    "Final historical test reports remain readable; duplicated immutable evidence uses shared disk storage",
+    "Every valid Git object, commit, ref, reflog and index entry"
+  ],
+  "testLimitations": "Only preservation, signature/hash checks, Git fsck and HTTP smoke verification performed in this pass. Full test suite remains limited by missing dependencies recorded in the earlier report.",
+  "deletions": [
+    {
+      "path": ".local/android-toolchain/tools",
+      "reason": "141 files identical to the installed Android SDK command-line tools",
+      "bytes": 179901603,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/tools/postgresql-16.15.zip",
+      "reason": "Installer archive; all extracted database tools verified against pinned SHA-256 hashes",
+      "bytes": 332441502,
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aligned.apk",
+      "reason": "Temporary APK build/signing output; current signed APK retained",
+      "bytes": 43999975,
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aligned-sideload.apk",
+      "reason": "Temporary APK build/signing output; current signed APK retained",
+      "bytes": 43406400,
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/verified-candidate-full.apk",
+      "reason": "Temporary APK build/signing output; current signed APK retained",
+      "bytes": 44047414,
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/verified-candidate-sideload.apk",
+      "reason": "Temporary APK build/signing output; current signed APK retained",
+      "bytes": 43452519,
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/llama-b11429-vulkan",
+      "reason": "Experimental alternative model server; configured application exclusively uses the preserved Ollama runtime",
+      "bytes": 94802717,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.0-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 43009590,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.1-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 43157046,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.3-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 43452519,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.5-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 44035126,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.6-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 44039222,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/FinWeave-0.1.7-pilot.apk",
+      "reason": "Superseded pilot APK; current 0.1.8 and 0.1.2/0.1.4 required by Play Protect scripts retained",
+      "bytes": 44043318,
+      "status": "deleted"
+    },
+    {
+      "path": "artifacts/android/finweave-pilot-aligned.apk",
+      "reason": "Old unsigned APK intermediate; current signed APK retained",
+      "bytes": 42961787,
+      "status": "deleted"
+    },
+    {
+      "path": "docs/execution/evidence/be19/mockbrowser-1791879273215/mock-browser-artifacts/.playwright-artifacts-0",
+      "reason": "Abandoned temporary browser trace recordings from an interrupted test run",
+      "bytes": 497247399,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/agent-eval-1791879849765",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 27421,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791888461678",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 47187922,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791895589685",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45822249,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791879595811",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 47663033,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791895592126",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 48634041,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791879938650",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45474812,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791880867005",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 57828525,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791879860617",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45466001,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T08-14-44-922Z",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 128458556,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-2YxK5Su1vvyxTvh6aZt72qNLoeq3jLXrwIZrlDjIoxE",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-56ap8P2xVfZYlen5IGWfcXk56hGzWjSxFnaZGWTxhFc",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-a1AwdjFIQRBIl_fy-xfThSCpppY_NAY_AyD78b2LqpU",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-beC3GR_zVbbdNRBdB-FdkZIiWzbdbRE74Mj5G2vm7nA",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-cWC0WQ_FsHNkuwwSfC09Tlti3X4evRH4EjAkvSkIgIQ",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-Dc6i1WttpyexH6e_snEIkZH_CfWvsQEiaORk4inyVKY",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-dvIGofKKpXcajwRDKkD_aEo_bt9bLyuivXcPukWom_o",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-HZrm9quQZU5Vf1k1IvIPsQC5J67VvTv63A5cGPNvIpo",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-mkz14u5i3dz0nW2jPpSOD1QY9sIh1nPCIXfTnGNzEts",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-nAir1EWxb__MNuuYFdo4k25NkcP5SeRGopKMCkGRKtQ",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-NkKOW1IxFUkwXfhnWiPthSzCExiJP37RQhgljtMB1LM",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-Oo7bRJ8Fh4O5ipRvFefUdp_MpgjJgPg_VesULbQnlJg",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-P2o6cXPETncfz90eBIk4cbLTAlORlLylzX1mpaNUl9U",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-pTKWlqULWmQ18KTPuhmXGPs_JwZoPF7ZIuvZtZ27RF0",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-q698hvQ0pyCcvGPPYkJkY2_G7weUgblcjep934HNOpg",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-xr51qQ1kyiEJdcL1CCWRr7oUxFndi8XZtEwq9gRSs2Y",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-xxMcnKZZ_t48WOIpdRDBsBmWsJiLemK18vJnqkYPLFU",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-YcxSQQ8uVwrkkODkDMYDJQfoNrLcSMuexNYSqPa6UhI",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/provision-test-Zp-asDCInS7MmlfCHt9-ObvnKAbc1Ws-c7NPTWidmgg",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 345,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/rc-browser-1791881370997",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 46104800,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/rc-browser-1791882822211",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 46039437,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/rc-browser-1791889745629",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 46031251,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/real-model-1791888556102",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45580542,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/release-smoke-1791877100661",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45703682,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791879013045",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 32423346,
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791895586410",
+      "reason": "Disposable synthetic test fixture; configured persistent databases excluded",
+      "bytes": 45672477,
+      "status": "deleted"
+    }
+  ],
+  "sharedFiles": [
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-08-22-772Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-08-22-772Z/clean-catalog.json",
+      "bytes": 1519509,
+      "sha256": "34efbe82361599fda1a40d20bb82fe67c4184a0a5d359d06cc32daef6cbd8233",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-12-47-518Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-12-47-518Z/clean-catalog.json",
+      "bytes": 1532245,
+      "sha256": "50f887f985e8da800ea6eafd86a657c2ddd6781b06dedef32fff362ee56d89ec",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-16-44-383Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-15-46-001Z/upgrade-catalog.json",
+      "bytes": 1552703,
+      "sha256": "9ff0c8911e537aa6ff5c3ae00282c393ed4ce7cf2873ad5feac97abb8753b892",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-21-29-149Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-19-32-135Z/upgrade-catalog.json",
+      "bytes": 1552933,
+      "sha256": "a0cdb1b289ea1c69a40785a1996bd5f9778f3f559fc1ac8bae675f4881aa0b1e",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-35-47-629Z/clean-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/clean-catalog.json",
+      "bytes": 1552945,
+      "sha256": "128ec3bf9a7a146e54b6d979deefdfce899ec4a827428f9a8171e9d88b332b08",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-12T17-12-56-523Z/clean-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/clean-catalog.json",
+      "bytes": 1552945,
+      "sha256": "128ec3bf9a7a146e54b6d979deefdfce899ec4a827428f9a8171e9d88b332b08",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-13T07-14-38-667Z/clean-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/clean-catalog.json",
+      "bytes": 1552945,
+      "sha256": "128ec3bf9a7a146e54b6d979deefdfce899ec4a827428f9a8171e9d88b332b08",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-13T08-14-44-922Z/clean-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/clean-catalog.json",
+      "bytes": 1552945,
+      "sha256": "128ec3bf9a7a146e54b6d979deefdfce899ec4a827428f9a8171e9d88b332b08",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-35-47-629Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/upgrade-catalog.json",
+      "bytes": 1552945,
+      "sha256": "03aa0560b83d268adbb0d844e1a652a8ad4817a5f7bed20206490ccb162e1f75",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-12T17-12-56-523Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/upgrade-catalog.json",
+      "bytes": 1552945,
+      "sha256": "03aa0560b83d268adbb0d844e1a652a8ad4817a5f7bed20206490ccb162e1f75",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-13T07-14-38-667Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/upgrade-catalog.json",
+      "bytes": 1552945,
+      "sha256": "03aa0560b83d268adbb0d844e1a652a8ad4817a5f7bed20206490ccb162e1f75",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/db005-local-2026-10-09/2026-10-13T08-14-44-922Z/upgrade-catalog.json",
+      "sharedWith": "docs/execution/evidence/db005-local-2026-10-09/2026-10-09T05-22-30-804Z/upgrade-catalog.json",
+      "bytes": 1552945,
+      "sha256": "03aa0560b83d268adbb0d844e1a652a8ad4817a5f7bed20206490ccb162e1f75",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/acceptance-1/test-artifacts/network.browser-N06-histor-5e0e4-ges-without-losing-messages/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/acceptance-1/browser-report/data/827ff2c4b0c394bb4a598090f73d85112786a94d.zip",
+      "bytes": 15455247,
+      "sha256": "db74c6b172c3b5e8f4a61768afd58f2e214a68734d6690a555dfa7f6c14c34af",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/walkthrough.browser-B09-AC-b4e93-ation-with-no-actual-writes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/13c2679eaa841810cd56b6e88e33129eca37f915.zip",
+      "bytes": 28180667,
+      "sha256": "0e5dc21b59afb89e53a470be55069d86375b2326f6fd9b88e4eee2d74c002d96",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/walkthrough.browser-B12-14-3924a-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/310d9174265593d6879035e8d8626213a6494df5.zip",
+      "bytes": 44716461,
+      "sha256": "c088c21eb33cacc8db4a1967812491ec4e0ee98c4f0ee967337ded4a5b8e7fdc",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/walkthrough.browser-B07-AC-6f1a6-d-actual→forecast-remaining/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/932cac5375647568a477d1619d0bbbf50594f9fb.zip",
+      "bytes": 16492527,
+      "sha256": "4d45863656481cb5be58516b4d7e09c1243612cda957019e6f08c124cc208ccb",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/additional.browser-B20-opt-de75d-ation-and-Review-supplement/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/b2256d678c42ba9cc27dcfa4e9ce7b3ff491d202.zip",
+      "bytes": 24613455,
+      "sha256": "59ba1ff1581dfff162f5ef390d072ebb0c8d14c1a6db7bff4602a81b0299c686",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/walkthrough.browser-B08-AC-d2a52-shortage-actual-not-blocked/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/d38cdc79059b293b570d236fdcac58aaef94daae.zip",
+      "bytes": 25505948,
+      "sha256": "84acd63bb10dc5a99cf9689b4e0bea4066672b4ca8e1e06e16010d772ed7ce10",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/test-artifacts/walkthrough.browser-B01-AC-240f9-cel-gold-display-conversion/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-1/browser-report/data/e70e2b1802503a32425ffcb1812f2c89de9219ea.zip",
+      "bytes": 29764242,
+      "sha256": "c9016560c8974bf9f0f17c7e58f6f30b8047b317867c333dc2341f02e07e7999",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/operational.browser-OP03-g-daede-e-atomic-owner-confirmation/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/027b3bd346b66ca8461c85f839c447bc60d39935.zip",
+      "bytes": 24270806,
+      "sha256": "701e7c2aa7602ecbfeae7ddb5eacfb008bb453015ae21a8b417110721f65f0f6",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/additional.browser-B15-AC1-a930a-ty-quote-source-independent/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/29759e24286adaf4c3d2cdbdda2f9fc2034e8ca5.zip",
+      "bytes": 23692098,
+      "sha256": "14968b484e5f4c79039aa47ab78a1066257c01c5ebc8414f5531e66ef89ce4ac",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/walkthrough.browser-B12-36-d0a38-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/5af1bba238024be6edd55636f3ec0ea0d34b545f.zip",
+      "bytes": 40000840,
+      "sha256": "cd1b729a480de8516eaa210a6eb0c82262204c330b2cbe7446b09899a3f039d1",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/walkthrough.browser-B12-39-a4dfa-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/6c73e7b98a16d476ed011b9f95c15e7c558e4bdc.zip",
+      "bytes": 39716921,
+      "sha256": "b91185beb678be9da67e9ebb515062404020440d31c3050d4963469b7942890a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/auth.browser-AUTH-UI-08-ca-17aaa-opens-real-forms-navigation/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/8760ed77a8fda0bb63011d7d2d382467db09b331.zip",
+      "bytes": 15979003,
+      "sha256": "4e1c8f09f23ff8033d3c92218a91ccb913e4137b5ed172a04b64c16c007b2887",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/operational.browser-OP06-s-2992e-e-require-preview-and-audit/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/9fea65fa9a3d5b52a4f5c0ef092f429cd482b5b4.zip",
+      "bytes": 15658411,
+      "sha256": "78fc28d72f953a30f17ca3f998f830e3d4c842febbffb013793995b109090f14",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/operational.browser-OP03-p-51660-e-atomic-owner-confirmation/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/c5fcab5ee46347e400cf4cc8d462baa05cf36145.zip",
+      "bytes": 24331398,
+      "sha256": "38829398031c54d4580e08dd78b54c532bdbd142f1fd4041d396793432913f4a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/walkthrough.browser-B12-14-3924a-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/cbe41cf35b249e0d04ac490215ab7e7b831f961e.zip",
+      "bytes": 52119518,
+      "sha256": "e7c1612df095146fbfeca2d40bd4788e7734cde92f35c92cc4247a9cb2256786",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/operational.browser-OP04-c-83fc1-licit-recompute-and-preview/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/dbcc0730a00cdf902b67349b05ec9ee2483df811.zip",
+      "bytes": 24475389,
+      "sha256": "2035130622dd96aef1ed4d4477f82ec832bb27535cfa12e7a50b4df4502e8585",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/walkthrough.browser-B02-AC-7d3a8-gory-drill-scope-and-period/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/ddc63ce1f1f0455291774f8e50ebbb1d33d013de.zip",
+      "bytes": 22295535,
+      "sha256": "8c91d42efea61f54bf498d4331f582083daefd3d2c3bbb3bbbff272adf7ee576",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/operational.browser-OP01-c-8a6ef-ever-moves-cash-or-quantity/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/fbef1ed0c94575677aea7824a6d412915fa7dfb5.zip",
+      "bytes": 15322715,
+      "sha256": "1adfac67fc83018bf30fc3e67536cf8dd41d4551a76a86c4b25e1cbb40e1493a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/test-artifacts/walkthrough.browser-B09-AC-b4e93-ation-with-no-actual-writes/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-3/browser-report/data/ffd0fa6daeaeac5335d3e04b509ab03f69d395f3.zip",
+      "bytes": 29115257,
+      "sha256": "7b32e82ae5b7c21ff66000ac9f837ccb98e9d5d8c98da600307b1bf493d5fed0",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-4/test-artifacts/walkthrough.browser-B02-AC-7d3a8-gory-drill-scope-and-period/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-4/browser-report/data/47487281aa87312c469144c9ed4b66ee27e84765.zip",
+      "bytes": 28451928,
+      "sha256": "14c38e00313a02088b925ef215906bc8c3bc55a60b2d8811971d252231c965b8",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-4/test-artifacts/operational.browser-OP01-c-8a6ef-ever-moves-cash-or-quantity/trace.zip",
+      "sharedWith": "docs/execution/evidence/frontend-review-2026-10-08/diagnostic-4/browser-report/data/ca99799f96d4303aa1088dd7ce6ce70134322d78.zip",
+      "bytes": 26262233,
+      "sha256": "2d5e4d610b881f5e9a047a211749ca3ab3827fec41dd8f673c80642ec9ffe321",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/handover-2026-10-08/observed-contracts.json",
+      "sharedWith": "docs/execution/evidence/FW-HANDOVER-20261008-r1/observed-contracts.json",
+      "bytes": 1681112,
+      "sha256": "76615b12d6ff35b82564731e42204e204747e16ff44541ecf908ae29d7485b58",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/performance.browser-B17-lo-3f356-rm-up-then-ten-measurements/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/04c757abbed7d6271837e9a0b11685ce8f475dde.zip",
+      "bytes": 21565699,
+      "sha256": "1b296aae3573b57168bd7e04f6989bb8d01439854c15690411321a9d2e965c9c",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/network.browser-N07-contex-3afc5-t-stale-after-filter-change/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/0d96f52da21ea03dd3cee016ba0397a8d8796059.zip",
+      "bytes": 36000834,
+      "sha256": "a1e799d2d08d956e36943c8eb5bb7baf7188b17aabdcdb2729d0768e3eea0435",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E04--69e6f-newly-filtered-transactions/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/1f7fe9c6bd654b2261a738507b7a4f4bea0202f2.zip",
+      "bytes": 34254466,
+      "sha256": "3e799364f4797a6b297bb4d8c362d7478b61d63ec1a5158f657c233734651740",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B15-AC1-a930a-ty-quote-source-independent/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/1f9d26083534073e3e461f1a1245f03c797347f5.zip",
+      "bytes": 25793820,
+      "sha256": "ddfbb651744a53b805dd21a63a0ed702f772a883fa4b6c2c8f0f07a870b6d657",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--3b4e9--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/256ea5c6ab37f3954b83f5d39913326bd7ec6650.zip",
+      "bytes": 16133299,
+      "sha256": "4e4ea38adfcd142dfd2f4ea411eb400e1b13e6b0dd7b4c231cedee348e6f8b5a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B12-36-d0a38-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/26d8dfece3a19f902c666828e42243606ed843d4.zip",
+      "bytes": 16372669,
+      "sha256": "77ff4acc0ed3c5ac8622a85ad178cd4b4d010ae8d0b00c0cc324a272c9239aa1",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E03--42e8c-creates-a-second-cash-event/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/274c6ffa7f434c9b6f15dbf8db8c44e140b014f9.zip",
+      "bytes": 16390171,
+      "sha256": "892ce22028f3ea5df0e132c3340b8c149af8773702d4ea5d119dbeb0471c504c",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--629d1--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/286a5634557782a4a9a385b75c60c1365d04f877.zip",
+      "bytes": 15899977,
+      "sha256": "9ad7d301230408d2a86171c02b541deb3a4be85df267fbb804be16c5955bb582",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/network.browser-N03-import-0d811-t-replay-share-one-snapshot/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/35c622e5d0370593f81faa332ec9ebb031761004.zip",
+      "bytes": 22712636,
+      "sha256": "a56042799a8d4bbb981ea1c2d628f6a1d5e62018c8a59e5a559b9cbd78fcc3f3",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B14-AC0-cad43-uotes-and-linked-investment/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/3e0ff39a8ce2ad755a833c25b29ca4ea19030349.zip",
+      "bytes": 24382362,
+      "sha256": "14272680e786760536854f2113571a037ccc4903634c4063f0b2a592dbc0ebad",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B12-14-3924a-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/4f7e3e0d030ac46b23b4d2a8058a8082347978ac.zip",
+      "bytes": 18319971,
+      "sha256": "684c1d72a498fb2902d8a0babb43f42b1942adcccfa33254ba5e0025b1df172f",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B11-AC-ed972-s-return-all5-panel-entries/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/535528b001c87d0b02ed51de6f5b58a195e2609e.zip",
+      "bytes": 18466252,
+      "sha256": "791b5951fc6dad4af5ab64728b10cfe5c3bc701b069f067a91b0e7a974194f26",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E11--43153-ect-tool-and-classification/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/5cdbea1ec850110359b183a49c9f3b1007cd720b.zip",
+      "bytes": 17274968,
+      "sha256": "c131b09a816fa2f08e5ea3714e0711531be0ac93670038222bf91fc6f1fb4ed4",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B09-AC-b4e93-ation-with-no-actual-writes/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/5d483ea92f996b271900f8f09cfe308154533676.zip",
+      "bytes": 18727055,
+      "sha256": "7bd14b1c0c6d303e624f82991fcda4bc6cba61106ac8f54a8824dbdd21a559e0",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B19-sha-99267-action-action-at-all-widths/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/60ddd4854f7fdd560061fcbe3627e11ef1766d3a.zip",
+      "bytes": 18944173,
+      "sha256": "b5c2c82739bea0b41d698fa368abb10ec83a971e5e9563069e2046ea2d038fcd",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B20-opt-de75d-ation-and-Review-supplement/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/76705821c8f44ad20f119f5017786a5b4924f798.zip",
+      "bytes": 26167031,
+      "sha256": "7073b70e9b348218e96304b16759242e389cbd3401c98a48d58132c41aebf47d",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B16-AC1-3fac6-evoked-and-no-authorized-AI/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/78cb6fc9024d2aed067d1dc57dd6ffcd2ea89df4.zip",
+      "bytes": 22070013,
+      "sha256": "c4ad708aae2c24330f7c25fe65879c7f2668c6b739f7c99d17844840cc83c104",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/network.browser-N02-offlin-831b3-y-resubmits-through-network/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/7aac790fa448bfa9bafc332cca9a56a9142339ff.zip",
+      "bytes": 22131567,
+      "sha256": "f5a8575c3005254d4a047e42511c7c98f93b356d0615c9dc8d5f4630b53f9df0",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B05-AC-431b3-ing-FX-cause-honest-unknown/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/85b5439e2400028e09458ccfccd188e0fcc24caa.zip",
+      "bytes": 18602052,
+      "sha256": "6c1745b4b096e05656f9f8adac46ac32b89abeb9c5a9adf01488d9b3c469869a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B13-360-8f7ec-panel-and-no-mascot-overlap/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/8845f3bfd2eb625c1c1093e3491081724b7b5f9e.zip",
+      "bytes": 22674766,
+      "sha256": "40c567f3a0b42707fa0fbc2600eac2bc8d4fa66901608a392682ec50abe24bdb",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B04-AC-1c6b5-duplicate-and-source-errors/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/8fe76478c43c15fcb9546f8ac1246b4defd51afa.zip",
+      "bytes": 18522231,
+      "sha256": "0702b87792fe1a03ca938e8fc3095068dbd42fc3cd102b0a2a2d501657ca176d",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B02-AC-7d3a8-gory-drill-scope-and-period/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/aca71b750c152127d9a662c7ff15e15b549b842c.zip",
+      "bytes": 18806707,
+      "sha256": "d778ae8b0320e6838b0a53231267e46384e1de6aef57e4642952210d0f31cef4",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--b08a5--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/b3bd2863c203b9e0dc204b62600ed03461f5886e.zip",
+      "bytes": 16374484,
+      "sha256": "6bb772486d5e95b9b5a1f091285bf0710fa71720f6a1d1c65f0b26012d8c0b24",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B10-AC-8aee9-d-history-errors-mask-reset/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/b8826e867ba64e39e69b1095606e2644a59e68c3.zip",
+      "bytes": 18620604,
+      "sha256": "eddb46ae747952fdc23ba9f41e5e3689090f65363e4cf9de43b308cefe966004",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--b9c18--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/b8b64c50837fdf2ad9b9ca8729eb0a2a71abecac.zip",
+      "bytes": 16178418,
+      "sha256": "33ae2749e7c7614f7391def719a45c9450d08f8545c1b4b22050b006061db9f8",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B01-AC-240f9-cel-gold-display-conversion/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/be6b91e54c2b061e2b2505341e272a59f6b2ad60.zip",
+      "bytes": 18407005,
+      "sha256": "786201a3af1b4fce20e0b7e0ecc217253a3c15e51494109634652b12a502603f",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--d52a7--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/c5910729dc00e170fa31c4cc1f93ff9dda50377c.zip",
+      "bytes": 16918784,
+      "sha256": "3142f504dae5c9dea9b8f6d13ca66f50fd33dbcad01043df620513d9aabbbab2",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E01--103a0--retains-input-and-recovers/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/cf34c266e1977ed37b16dcbfee8352adbcfa3d27.zip",
+      "bytes": 16260982,
+      "sha256": "83b62ca0eebc402b39fc94b3a7c04e2f8986787cd0f560fc8851c2d237ff5445",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/acceptance.browser-S6-E02--75ccc-put-then-retry-commits-once/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/d991dcbc0974956b5d398f5a1f6fcb808d177afd.zip",
+      "bytes": 16157602,
+      "sha256": "860e968e453cac84a1d144f4d0cff6298e8410e21dec33a89ebe5ed635433452",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B07-AC-6f1a6-d-actual→forecast-remaining/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/e3903fd982424b1ca65a6b06793f6fcd97628cee.zip",
+      "bytes": 18586633,
+      "sha256": "a2130ebc878e27a69873ad06b5ad5349bd28ec2920293e4cbd286370bf91f7c6",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B06-AC-bd78b-efund-and-single-leg-Review/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/e4000fc65a7017037297042d8e430acdc046d7c4.zip",
+      "bytes": 18434200,
+      "sha256": "9d57bfc7f9ee5768fba3798c00b7690b573667eeb423b77029b12a56c1c369b9",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/additional.browser-B13-390-74f47-panel-and-no-mascot-overlap/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/e40f8f4fbe7b0d39b7feff28f5152abf8a96aaa0.zip",
+      "bytes": 22609662,
+      "sha256": "cce0647862f884db69540a265cbcecf6bf591d398044b3228274537c174ee816",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B12-39-a4dfa-ts-table-privacy-all-routes/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/e6185e15c93a1c633bf3a93df8c265acae123918.zip",
+      "bytes": 16451822,
+      "sha256": "e5094002093e7f655dea3a10ce12059083d1332a2c93035dd9f2983105e50b4c",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B03-AC-100c7-cancel-correction-and-audit/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/edb082f94ba2522b084929fdb6e9c077c045d2b8.zip",
+      "bytes": 18690589,
+      "sha256": "e2fadd3341f1300674a4b8597a078ba221642ba968811856162ee5b1951dbcbc",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-test-artifacts/walkthrough.browser-B08-AC-d2a52-shortage-actual-not-blocked/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-report/data/fc0a04fe3a9aba8ecf4df1943db1a74a76c8fec7.zip",
+      "bytes": 18616973,
+      "sha256": "0368666fae175f55fa69f48107ecf708fae1d054c6d5ef044037f7e379e08e7a",
+      "status": "hardlinked"
+    },
+    {
+      "path": "docs/execution/evidence/step6-run1-artifacts/network.browser-N05-setup--60302-ID-clearing-CSV-stays-empty/trace.zip",
+      "sharedWith": "docs/execution/evidence/step6-browser-run1-report/data/54afc01101a432f22bbcc0dec2983be3ff666c10.zip",
+      "bytes": 4636856,
+      "sha256": "0e52b4d335a65f9dcacf46aa45c9ee7e5a1c1f7e771cd8007003b839f8ced6d8",
+      "status": "hardlinked"
+    },
+    {
+      "path": ".local/model-toolchain/Qwen3-4B-Q4_K_M.gguf",
+      "sharedWith": ".local/model-toolchain/ollama-models/blobs/sha256-7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+      "bytes": 2497280256,
+      "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+      "status": "hardlinked"
+    }
+  ]
+}

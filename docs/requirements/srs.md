@@ -1,73 +1,135 @@
-# FinWeave — Software Requirements Specification
+> **03/11/2026 — Nhập giao dịch bằng ảnh:** phương thức nhập chính chuyển sang người dùng chọn/chụp ảnh, OCR tách từng giao dịch và tự lưu khi đủ thông tin; trường thiếu chờ kiểm tra. Notification Android là tùy chọn. [Yêu cầu và thiết kế hiện hành](../product/screenshot-transaction-entry.md). Các mô tả collector bắt buộc bên dưới là lịch sử phương án trước thay đổi này.
 
-> Cập nhật execution06/10/2026: nội dung requirement/scope-v2/analysis-v2 và28REQ/AC dưới đây giữ nguyên. Bước3 đã implement/kiểm chứng synthetic M1; xem [Validation](../design/validation-report.md) và [coverage](../execution/evidence/m1-coverage.md). Các câu planned/chưa app của hồ sơ bước1–2 mô tả thời điểm phân tích; trạng thái sản phẩm hiện hành nằm trong execution/register. Formal PO acceptance và user research chưa diễn ra.
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](../contracts/v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
 
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
 
-ID REQ-SRS-001 · v2.0 · analysis-v2 trên scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. Nguồn [PRD](../product/prd.md), [Scope](../product/scope.md) và Ideas; giữ nguyên 18 ID REQ/AC lõi, thêm AC-19…28. “Phải” dưới đây là mục tiêu hành vi chưa triển khai; không nghĩa app verified. 18 FR lõi giữ hồi quy; 10 FR mới theo D-19, NFR bổ sung đo/đánh giá chất lượng cùng scope, Plan/Goals/AI bổ sung do user chọn D-19, không tự thêm ngoài scope-v2.
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
 
-## Functional requirements
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](../contracts/v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](../data/target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
 
-| Requirement / P0 M1 | Hành vi phải có và điều kiện lỗi chính | AC / UC / Rules / Data |
-|---|---|---|
-| REQ-SET-01 | Thiết lập mốc/workspace demo VND/+07/kỳ; opening tách income; lần sau mở Tổng quan thẳng. Date invalid/future chặn, cancel không thay settings | AC-01; UC-SET-01; BR-01/03/04; DR-01/02/14 |
-| REQ-BANK-01 | Tạo bank và wallet tên/loại/opening/date/source; zero khai báo khác missing; validate tên/amount/date, preview/hủy; không xóa history khi archive | AC-02; UC-BANK-01; BR-02/04/20; DR-02/07/08 |
-| REQ-CASH-01 | Tạo ví cash opening tự khai báo; balance calculated riêng observation; chưa count là unknown, không 0. Opening missing có nhãn, không báo tổng đầy đủ | AC-03; UC-CASH-01; BR-02/04/14; DR-02/12 |
-| REQ-STOCK-01 | Khai báo ticker+market, quantity/date, optional cost basis; quote riêng source/unit/time; thiếu market/quantity âm chặn, không cost thì gain/loss unknown | AC-04; UC-STOCK-01; BR-02/15/18; DR-03/04/11 |
-| REQ-GOLD-01 | Khai báo product/purity/unit/quantity/date, quote tương thích; đổi display5 chỉ↔0,5 lượng cùng 40m; international giữ nhãn/FX. Sai loại/unit/FX missing chưa định giá | AC-05; UC-GOLD-01; BR-02/15/16; DR-03/04/11 |
-| REQ-INPUT-01 | CSV demo profile/mapping/account; validate→preview→confirm selected valid subset all-or-none mô phỏng; lỗi/ambiguous giữ staging/Review sau confirm; cancel không mutation; retry cùng key không duplicate | AC-06; UC-IMPORT-01; BR-09/10/11; DR-06/07/09/10/13/15 |
-| REQ-INPUT-02 | Nguồn notification/quote demo rõ capability/status/time/action; dummy connection, refresh/retry/disconnect; source/quote lỗi/cũ/revoked không giá0, quote không tự quantity update | AC-07; UC-SOURCE-01; BR-18/22; DR-06/11/13 |
-| REQ-MONEY-01 | Nhập thu/chi/transfer/fee/refund; bắt buộc money/account/date, amount>0; preview/confirm/cancel; transfer hai legs và fee riêng, refund ngày nhận/link riêng, một phía/mơ hồ tạo Review | AC-08; UC-MONEY-01; BR-02…09; DR-02/07/08/09/10/15 |
-| REQ-CASH-02 | Count cùng mốc/currency/type, variance trước/after; không auto expense; bổ sung event hoặc xác nhận adjustment reason/history. Cancel count resolution không đổi money | AC-09; UC-CASH-02; BR-14; DR-02/07/08/10/12 |
-| REQ-HOLD-01 | Cập nhật quantity/date/reason và quote độc lập; giữ movements; correction không sinh tiền/thu–chi. Ví dụ purchase đủ evidence linked investment money+quantity, không chi sinh hoạt; invalid/version conflict chặn | AC-10; UC-HOLD-01; BR-13/15/16/17/18; DR-04/05/07/08/11/14 |
-| REQ-TXN-01 | Filter kỳ/account/type/category/posting/reconciliation; detail money/date/account/evidence/history; pending riêng; no results empty, error retry giữ filters, không amount bằng0 thay missing | AC-11; UC-TXN-01; BR-03/05/12/19; DR-06/07/08/09/14 |
-| REQ-TXN-02 | Sửa draft, category override, posted adjust preview/reason/version; giữ original+reversal/replacement; reimport không override user; stale version/timeout xử lý có kết quả một lần | AC-12; UC-TXN-02; BR-09/12/13; DR-06…10/15 |
-| REQ-TRACK-01 | Tổng quan tiền/income/gross/refund/net/cashflow/assets theo chung snapshot/scope/asOf/versions; visual có period/unit/table. Missing/stale có nhãn, không net-worth đầy đủ; khớp oracle | AC-13; UC-OVERVIEW-01; BR-03…08/17/18/19; DR-02/04/07/08/11/14 |
-| REQ-TRACK-02 | Chart drill tới filters tương ứng/holding và Back giữ context; toggle scope/archive giữ history, ranh giới transfer được giải thích. Version stale refresh hoặc nêu changed, không chi tiết lệch snapshot âm thầm | AC-14; UC-DRILL-01; BR-06/19/20; DR-02/04/07/14/15 |
-| REQ-REVIEW-01 | Cases thiếu/trùng/transfer/refund/category/pending/balance: evidence/căn cứ/preview/actions theo loại, confirmed/refused/supplement/cancel/defer; retry case resolved delta0; thiếu phía không fake received | AC-15; UC-REVIEW-01; BR-05…14/21; DR-06…10/12/15 |
-| REQ-REVIEW-02 | Case quality holdings/price/FX/compatibility/source; separate dates/actions update/reconnect/refuse/defer; keep old quote labeled; no accuracy% hoặc user-declared thành verified | AC-16; UC-REVIEW-02; BR-15/16/18/19/21/22; DR-03…06/10/11/14 |
-| REQ-UX-01 | Tiếng Việt web desktop/mobile/keyboard, focus/dialog/errors/table, reduced motion nếu có animation; masking toàn bộ giá trị nhạy cảm; lỗi không chỉ màu, không clipping | AC-17; UC-UX-01; BR-23; DR-14/15 |
-| REQ-DEMO-01 | Nhãn synthetic/date/price, mở local theo hướng dẫn bước 3, scenario/reset complete; reset không key thật/real data, không nút optional gây hiểu sai; không persistence claim backend | AC-18; UC-DEMO-01; BR-24; DR-01…22 |
+> **ARCH-08 hiện hành — 09/10/2026:** [Financial Engine/domain](../domain/README.md), [API revision 003: 151 operations / 626 schemas](../contracts/v2-t1-r3/README.md), [DB revision 004: 86 bảng / 988 cột](../data/target-t1-domain/README.md) và [bundle/hashes](../domain/implementation-bundle.json). Kế thừa T1/auth/security; bổ sung 4 operations dự báo và 2 bảng qua J2, không sửa prior packages, frontend hoặc snapshots. **Thiết kế đã chốt; Engine/SQL/concurrency/forecast thực tế NOT RUN.** Các notice ARCH-05…07 dưới đây giữ lịch sử revision; target hiện hành theo 003/004 và các addenda này.
 
-| REQ-NAV-01 | Có đúng 5 navigation theo Scope §10; tài khoản/tài sản trong Home, Sources/Review trong Dữ liệu, settings qua hồ sơ. Back giữ kỳ/phạm vi/filter; quyền detail và mutation vẫn áp dụng. | AC-19; UC-NAV-01; BR-25/35; DR-15/16/22 |
-| REQ-REPORT-01 | Home có hai khối Tiền & Hoạt động / Tài sản & Cơ cấu. Chọn tháng/quý/năm/custom đổi chart/report; activity theo kỳ khác balance/valuation as-of. Hiện coverage, phần tương lai và thiếu giá lịch sử. | AC-20; UC-REPORT-01; BR-26/36; DR-01/04/11/14/16 |
-| REQ-INSIGHT-01 | Insights từ snapshot/rule/version có căn cứ và action drill-down. Phân biệt rule với AI scripted; không tạo xu hướng khi thiếu kỳ so sánh. Đổi context phải tính lại. | AC-21; UC-INSIGHT-01; BR-27/34/36; DR-14/16/21/22 |
-| REQ-PLAN-01 | Tạo/sửa/archive Plan thu nhập/chi tiêu/đầu tư với horizon, recurrence theo tháng, baseline/version và giả định. Dashboard/timeline forecast không thay actual; validation/cancel/conflict giữ input. | AC-22; UC-PLAN-01; BR-28/32/36; DR-17/20 |
-| REQ-PLAN-02 | Preview/confirm/unlink actual events theo item và account/currency/type/time; mỗi event chỉ gắn một item trong planVersion. Dùng posted effects signed, refund ở kỳ nhận; tách actual, remaining, overspend và variance. | AC-23; UC-PLAN-02; BR-29/36; DR-07/08/17/18 |
-| REQ-GOAL-01 | Tạo/sửa/archive goal có target/hạn/nguồn/contribution schedule. Phân bổ/release cash hiện có, kiểm tra tổng qua nhiều goal; thu dự kiến hoặc stock valuation không là cash phân bổ. Earmark không tạo tài sản mới. | AC-24; UC-GOAL-01; BR-30/31; DR-02/19 |
-| REQ-GOAL-02 | Theo dõi funded/allocated progress, remaining, shortfall và milestones. Actual spending vẫn ghi nhận dù goal hụt nguồn; không tự xóa earmark. Chỉ đánh dấu achieved khi funded≥target; archive/release có history, không posting. | AC-25; UC-GOAL-02; BR-30/31/32; DR-02/07/19 |
-| REQ-SIM-01 | Mô phỏng đạt goal và thay đổi tài chính với steps theo ngày, giả định và frozen versions. Phân biệt mua tiêu dùng với đầu tư linked; so scenarios, trả partial khi thiếu dữ liệu, không ghi actual. | AC-26; UC-SIM-01; BR-28/32/36; DR-17/19/20 |
-| REQ-AI-01 | Chat/history hỏi–đáp và giải thích qua whitelist read-only tools; cards có result refs, quality và context. Lỗi/no-data/quota nêu giới hạn, không writes/trade. M1 scripted, không model/key/provider thật. | AC-27; UC-AI-01; BR-33/34/36; DR-14/16…22 |
-| REQ-AI-02 | Linh vật mở chat ở cả 5 navigation, đồng bộ conversation với trang AI. Hiện context trước gửi, xử lý stale/race; hỗ trợ focus/Escape/masking/reduced motion/mobile/reset, không che action. | AC-28; UC-AI-02; BR-25/35/36; DR-15/16/22 |
+> **ARCH-07 — 09/10/2026:** [Hồ sơ bảo vệ dữ liệu T1](../security/t1/README.md), [bundle và hashes](../security/t1/implementation-bundle.json), [schema đích 84 bảng / 960 cột](../data/target-t1-security/README.md). API revision 002 giữ nguyên 147 operations; các gói và snapshot trước được giữ nguyên. Security profile bổ sung yêu cầu triển khai, không đổi payload API. SQL, bảo mật, backup, witness và restore thực tế đều **NOT RUN**; giữ đủ tính năng và 41 AC. Nội dung ARCH-07 hiện hành làm rõ các phần còn mở trong tài liệu kế thừa.
 
-## Non-functional requirements
+# FinWeave — SRS v3
 
-Tất cả ngưỡng đề xuất chưa đo. Owner chuẩn bị/check: AG; PO review mục tiêu; reviewer nguồn/security thật chưa chỉ định, phải có trước gate tương ứng. [Scenarios](../product/operational-scenarios.md) và [RTM](../execution/traceability.md) map NFR riêng, không trộn evidence sản phẩm với review tài liệu.
+REQ-SRS-001 · 07/10/2026 · operational-v3 · SPECIFIED, NOT IMPLEMENTED/ACCEPTED.
 
-| ID / loại / mức | Yêu cầu và tiêu chí kiểm chứng | Cách đánh giá / thời điểm / căn cứ |
-|---|---|---|
-| NFR-01 / correctness / M1→M3 | Tất cả giá trị oracle/nhánh kỳ/phạm vi khớp chính xác VND và không float; số liệu cùng versions nhất quán; missing không 0 | M1 walkthrough 28 AC/SCN-X01…14; M2 test/mock; M3 reconciliation independent. BR-02…19, DR-14; hiện chỉ tính độc lập expected |
-| NFR-02 / accessibility / M1/M2 | AC-17: mọi action keyboard, focus visible/trap/return dialog, label và lỗi chữ, chart table, không màu đơn lẻ; masking không lộ ở accessible text | Walkthrough SCN-UX-01 tại bước 3; accessibility audit bước6, chưa chứng nhận tiêu chuẩn/WCAG nào |
-| NFR-03 / responsive/localization / M1/M2 | Việt nhất quán, VND/unit/date +07, viewport1440×900/390×844/360px; không page overflow ngang/clipped, table có container scroll nếu cần | SCN-UX-01 ảnh/keyboard bước 3; coverage NFR này không thay user research |
-| NFR-04 / reliability / M1→M3 | Không báo success trước kết quả; validation/offline/timeout/conflict giữ input và retry/cancel; rapid double confirm/retry không hiệu ứng tiền lần2; lỗi commit không half selected batch | SCN-X11 + import/money/review; M1 states mô phỏng; M2 mock fault; M3 timeout-after-commit/worker/concurrency thật, không claimed exactly-once |
-| NFR-05 / traceability/transparency / M1→M3 | 28/28 FR và AC có UC/SCN/rules/data; mọi metrics có snapshot/period/scope/asOf/versions/provenance, mọi unsupported/unknown/self-declared/stale có nhãn | Rà RTM/links hiện tại; prototype drill-down bước 3; lineage/test bước 7/8. BR-18…24 |
-| NFR-06 / reproducibility / M1/M2 | Reset trở về fixture/scenario/filter/version deterministic; lặp sequence cùng input cho cùng expected; clock giả không theo ngày máy; storage demo phải được mô tả khi xây | SCN-DEMO-01/OVERVIEW-01; DR-15; bước 3/6. Hồ sơ hiện spec, chưa chạy reset app |
-| NFR-07 / privacy/secrets / M1→M3 | M1 chỉ synthetic và dummy keys, không real finance vào repo/log/chat/LLM; masking không thay encryption. M2 contracts phải nêu encrypted transport tới boundary, workspace supplied không chứng minh quyền | Review tài liệu/fixture bước 2/3; contract bước 4. M3 audit artifacts/DB/gateway/queue/log/backup/response/secret handling theo Ideas15–16; OD-07 unresolved |
-| NFR-08 / ownership & anti-Ops / M3 gate | Admin/Ops/DBA/support không đọc finance, giả mạo user/device/recovery, tự sửa code/client/key policy để giải mã. Tenant checks cả refs/source/report; workload attestation + tách quyền theo trust model. Nếu chưa đạt, chỉ synthetic experimental integration | OD-07/FUT-02; PoC threat-driven trước transport/real data, evidence bước 7/8/9. Chưa có PoC/approval; demo denied SCN-X12 không chứng minh requirement này |
-| NFR-09 / usability / M1 | Mọi tác vụ lõi hoàn thành trong mô phỏng, lỗi nghiêm trọng hiểu sai/mất tác vụ =0 chưa xử lý; mục tiêu 28/28 AC. Chưa có người thì chỉ AG walkthrough | Bước 3: 28 SCN chính + 14 nhánh; BL-10/11, OD-01/A-04; ≥4/5 người chỉ đề xuất nếu có user test, chưa đo |
-| NFR-10 / source quality / M1→M3 | Tách quantity/price/source freshness; no false realtime/coverage; quote compatible/FX/time rõ; M1 dùng OD thresholds demo, M3 provider chỉ advertised sau quyền/license/mẫu đo | SCN-SOURCE-01/REVIEW-02/X09; BR-15…22; OD-02/04 giả định, OD-05/06 chưa provider verification |
-| NFR-11 / performance / M1, kế thừa M2/M3 | Giả định mục tiêu local demo20 rows: phản hồi filter/preview/render≤1s, state “đang xử lý” cho mô phỏng chờ>1s, không khóa Back/cancel; đo tối thiểu10 lượt sau warm-up ghi máy/browser/fixture và max elapsed. Đây không production SLA | Bước3 SCN-UX-01/IMPORT-01/TXN-01; PO review ngưỡng D-18. Server latency/capacity/SLO chưa chốt, cần benchmark workload+crypto ở bước 8/9, không suy từ demo |
+Nguồn: [PRD](../product/prd.md), [Scope](../product/scope.md). [SRS v2](../governance/baselines/pre-realignment-2026-10-07/docs/requirements/srs.md) giữ nguyên chi tiết 28 FR/AC và 15 NFR cũ, kế thừa bằng tham chiếu với delta dưới đây. [RTM v3](../execution/realignment-traceability.md) phân biệt test lịch sử và test mới. Không sửa schemas/runtime frontend trong nhiệm vụ này.
 
-| NFR-12 / navigation-context-accessibility / M1→M3 | Cùng 5 navigation và hội thoại/context giữ a panel/full page; mọi entry/close/send dùng keyboard; mobile không che action; race response không áp vào context mới, masking gồm text/cards/history | SCN-NAV-01/AI-02; UC-NAV-01/AI-02; BR-25/35; bước 3 walkthrough, M2 race mock, M3 permission/session test |
-| NFR-13 / temporal-reporting / M1→M3 | Period half-open/+07, số dư as-of và movements kỳ nhất quán; historical quote≤asOf, gaps/tracking/future partial rõ, không market interpolation giả | SCN-REPORT-01; UC-REPORT-01; BR-26/36; test độc lập expected bước 2, UX bước 3, Engine test bước 7/8 |
-| NFR-14 / planning-financial-integrity / M1→M3 | Plan/goal/simulation không mutation actual; mapping unique/reversal/refund đúng, allocation funded/shortfall xác định; repeat/version/rebuild cùng inputs cho cùng kết quả | SCN-PLAN-01/02/GOAL-01/02/SIM-01/X14; BR-28…32; M1 mô phỏng, M2 mock, M3 invariants/concurrency thật |
-| NFR-15 / AI-safety-evaluation / M1→M3 | Cards chỉ từ authorized result; no fabricated figures, prompt/source instruction không mở tool ngoài whitelist, no write/trade; fail/quota/timeout không silent paid fallback. M1 scripted vàsynthetic, không claim providerverified | SCN-AI-01/02/X13; BR-33…35. Bước3 kiểm tra scripted branches; provider/model evaluation/quota/license và real-data privacy chỉ sau quyết định/quyền ở bước 4/7/8, OD-09/07 pending |
+## 1. Migration 28 yêu cầu cũ
 
-## Ràng buộc, states và nghiệm thu
+| ID/AC | Hành vi giữ lại hoặc thay thế |
+| --- | --- |
+| SET-01/BANK-01/CASH-01; AC-01…03 | Workspace/owner thật, VND/timezone, opening/date; missing khác zero; demo giữ synthetic |
+| STOCK-01/GOLD-01; AC-04/05 | Quantity/quote/cost/source compatibility; đơn giản hóa input theo REQ-STOCK-02/GOLD-02, metadata được resolve hoặc xác nhận một lần |
+| INPUT-01; AC-06 | CSV fallback, mapping/preview/confirm/idempotency. Giới hạn 20 rows chỉ là fixture |
+| INPUT-02; AC-07 | Dummy source được thay bằng capability/permission/device/provider/jobs thật theo AC-31/36 |
+| MONEY-01/CASH-02/HOLD-01; AC-08…10 | Thu/chi/transfer/refund/fee/count/correction với history; giá mới không thành income |
+| TXN-01/02, TRACK-01/02; AC-11…14 | Filter/detail/correction/snapshot/drill/scope; server là authority real mode |
+| REVIEW-01/02; AC-15/16 | Evidence/quality/decision và không double money; bổ sung notification ambiguity |
+| UX-01; AC-17 | Việt, keyboard, mask, responsive; bổ sung real-device native tests |
+| DEMO-01; AC-18 | Chỉ demo profile; production không reset finance bằng nút demo |
+| NAV-01/REPORT-01/INSIGHT-01; AC-19…21 | Năm đích user; admin riêng. Reports đúng snapshot/kỳ, deterministic insights |
+| PLAN-01/02, GOAL-01/02, SIM-01; AC-22…26 | Giữ planned/actual/simulated và allocation rules; bổ sung draft Plan–Goal do Agent tạo và user xác nhận ở AC-39 |
+| AI-01/02; AC-27/28 | Hỏi–đáp/giải thích, chat/history/context/evidence và linh vật tiếp tục là tính năng sản phẩm, được kế thừa và phát triển. Scripted adapter hiện có giữ làm demo/regression; Agent đa bước bổ sung theo AC-38…40 trong cùng trợ lý |
 
-State machine nghiệp vụ nguồn duy nhất ở [Rules §Các trục trạng thái](../product/business-rules.md); dictionary ở [Data](../data/data-requirements.md); không thêm status trộn các trục. UC lỗi chung và từng nhánh ở [Use Cases](../product/use-cases.md). OD-02…04 defaults là giả định được phép dùng để tiếp tục, không approved provider/market policy. D-13…18 giữ alternatives và impact. Không OpenAPI/DB schema, research results, provider verification hoặc security PoC ở bước 2.
+Tên rút gọn trong bảng đều có tiền tố REQ-. BR-01…36/DR-01…22 giữ semantics nghiệp vụ; BR-37…44 bổ sung draft/nguồn/sync. NFR-15 và BR-33 về AI read-only được làm rõ: Agent được ghi draft theo BR-37, vẫn không được ghi actual, áp dụng active plan hoặc xác nhận thay owner. Mock clocks/stale thresholds/reset không tự trở thành policy production. NFR-07/08 trust/privacy được cập nhật có phạm vi theo lựa chọn owner A + T1 bên dưới; không còn target anti-Ops chống root/DBA. Không tuyên bố security đã đạt.
 
-M1 FR/NFR vẫn `planned`; tài liệu có thể self-reviewed ở bước 2. Formal sign-off pending; chưa đạt M1/M2/M3. Tiêu chí bước 2 là DoD hồ sơ, [gate review](../execution/evidence/step-2-review.md) sau kiểm tra. Scope/AC có quyền cao hơn diễn giải SRS; nếu mâu thuẫn phải ghi decisions và sửa hồ sơ trước gate.
+### Nguồn đặc tả AI hợp nhất — 08/10/2026
 
-## Nghiệm thu scope-v2
+[AI-SPEC-001 v1.0](../product/ai-agent-specification.md) là nguồn chi tiết duy nhất cho trợ lý kế thừa và Agent phát triển thêm. Giữ REQ-AI-01/02 và REQ-AGENT-01/02/03 cùng AC-27/28/38/39/40;24 AI-FR và8 AI-NFR là refinement, không tăng inventory41 AC hệ thống. Các hàng Agent bên dưới là tóm tắt cấp hệ thống; bảng§9 của AI-SPEC định nghĩa mapping đầy đủ.
 
-28 REQ/AC, 15 NFR, 28 UC, 28 scenario chính và 14 nhánh bổ sung là targets tài liệu, chưa app verified. Các nguyên tắc 18 REQ/AC lõi và oracle scope-v1 vẫn hồi quy. D-19 chọn 5 navigation/Plan/Goals/AI/Insights; D-20…22/OD-08/09 chứa defaults phân tích, không provider/sign-off. Formal external review vẫn pending. Gate cũ trong snapshot v1 không làm scope-v2 tự đạt; cần [gate hiện tại](../execution/evidence/step-2-review.md).
+| Requirement hệ thống | Nội dung kế thừa / mở rộng | Mã chi tiết |
+| --- | --- | --- |
+| REQ-AI-01 / AC-27 | Hỏi–đáp, giải thích, history, captured context, evidence/drill và lỗi; dùng capability đọc tiếp tục phát triển | AI-FR-001…007/009/019…021/023; AI-NFR-001…006 |
+| REQ-AI-02 / AC-28 | Full chat/panel/linh vật dùng chung hội thoại và các trạng thái, keyboard/mask/mobile/reduced-motion | AI-FR-004…008/019; AI-NFR-002/007 |
+| REQ-AGENT-01 / AC-38 | Điều tra đa bước mở rộng từ đọc/giải thích, cùng hội thoại và nguồn căn cứ | AI-FR-002/006/007/017…021/023; AI-NFR-001…006/008 |
+| REQ-AGENT-02 / AC-39 | Clarify/create/revise/simulate/confirm linked Plan–Goal drafts và manual handoff | AI-FR-010…016/019…024; AI-NFR-001…008 |
+| REQ-AGENT-03 / AC-40 | Shared runtime/tool boundaries, budget/errors và regression+Agent evaluation | AI-FR-009/019…024; AI-NFR-001…008 |
+
+## 2. Functional requirements mới
+
+Mọi số trong AC là fixture, không giá thị trường. **Toàn bộ AC-29…41: NOT RUN.**
+
+| ID / release | Hành vi và acceptance criteria |
+| --- | --- |
+| REQ-SURFACE-01 / R1 | **AC-29:** web/mobile cùng owner/workspace đọc cùng version; user gọi admin API bị 403, admin gọi finance API user bị 403 dù sửa object ID; logout xóa cache phiên |
+| REQ-APK-01 / R1 | **AC-30:** APK release có ký cài/cập nhật trên real device thuộc support matrix; assets bundled; tắt UI vẫn nhận fixture notification và sync. Update cùng signing identity giữ trạng thái hợp lệ; emulator/build-only chưa đủ |
+| REQ-CAPTURE-01 / R1 | **AC-31:** consent + OS permission + source/account allowlist; deny/revoke/OTP/app ngoài allowlist/redacted/unsupported/disconnected/force-stop đều đúng trạng thái, không giả coverage đầy đủ |
+| REQ-INGEST-03 / R1 | **AC-32:** durable receipt, parser version, idempotency và domain dedupe. Retry 10 lần/timeout sau commit không nhân posting; hai giao dịch thật cùng amount không bị xóa. Hai legs transfer nội bộ ghép đúng, phí riêng; thiếu dữ liệu vào Review |
+| REQ-SYNC-01 / R1 | **AC-33:** offline nhận 3 events, restart rồi online gửi đủ một lần; hai UI đồng nhất sau foreground refresh; response cũ không đè mới; revoke chặn upload; queue user A không được gửi bằng user B |
+| REQ-STOCK-02 / R1 | **AC-34:** ticker catalog + quantity, market/unit/date resolve tự động, cost optional; fixture 100×25.000 = 2.500.000 VND, đổi giá 26.000 → 2.600.000 nhưng quantity/cash/income không đổi; mã mơ hồ không đoán |
+| REQ-GOLD-02 / R1 | **AC-35:** profile được xác nhận, nhập chỉ; 2×8.000.000 = 16.000.000 VND, 0,2 lượng tương đương. Quote khác product/purity/side/unit bị từ chối; missing không 0 |
+| REQ-PRICE-01 / R1 | **AC-36:** tắt mọi client vẫn chạy daily; manual/daily đang trùng key dùng cùng job; không giữ quoteAsOf giả hôm nay vào ngày nghỉ. Timeout/429/partial giữ last-good; recovery lấy latest có quyền, không bịa lịch sử |
+| REQ-ADMIN-01 / R1 | **AC-37:** console có jobs/provider/parser/quota/release metadata và retry/disable có audit; không amount/raw/prompt trong response/log/UI. Retry không double posting; disable parser ngăn xử lý mới, không xóa evidence cũ |
+| REQ-AGENT-01 / R1.1 | **AC-38:** điều tra có branching theo evidence/coverage, clarification và stop; case trùng + transfer + gap nêu đúng phần chắc/chưa chắc, case sạch không bịa lỗi. Mỗi số truy ToolResult/snapshot; không actual write |
+| REQ-AGENT-02 / R1.1 | **AC-39:** từ Plan hoặc Goals, user nêu mục tiêu → Agent hỏi reserve/target/deadline/priorities còn thiếu → tạo GoalDraft+PlanDraft liên kết → Engine mô phỏng → user sửa bằng hội thoại → preview/confirm lưu atomic. Cancel không thay active plan; confirm lặp không duplicate; snapshot mới gây stale/re-preview; phương án bất khả thi nêu lý do. Điều chỉnh theo actual cũng phải qua draft/confirm |
+| REQ-AGENT-03 / R1.1 | **AC-40:** tối đa 8 tool calls/run, 60s active budget, 2 lượt clarification rồi pause; user wait không tính active time. Quota/offline/injection/cross-tenant/stale/cancel được kiểm; agent đạt evaluation rubric trước release |
+| REQ-RECOVERY-01 / R1 | **AC-41:** crash trước commit không effects, sau commit replay same result; restore synthetic DB/files/key configuration tái tạo snapshot; outbox chưa ACK không mất sau restart. Uninstall có thể mất queue local và phải được giải thích |
+
+### NFR-08 — Trust model được owner chọn ngày 08/10/2026
+
+**TRUSTED-SERVER T1, theo [ADR-008](../architecture/adr/ADR-008-modular-backend-trusted-server.md).** Backend/runtime/DB/backup/key operators được tin và có khả năng đọc finance hoặc thay runtime. Thay phần NFR-08 kế thừa yêu cầu ngăn chính root/DBA/Ops và bắt buộc protected attestation/independent key-client authority. App-admin vẫn không được đọc finance, impersonate hoặc tạo actual writes qua quyền ứng dụng; tenant/object/device authorization bắt buộc.
+
+NFR-07 kế thừa được làm rõ cho T1: authenticated TLS tới trusted backend, encrypted native outbox, mã hóa storage/backup, secret separation/redaction/minimization; không bắt buộc opaque ciphertext-only gateway tới enclave. Server xử lý finance dạng rõ không có nghĩa được ghi finance/raw/OTP/prompt/token vào logs, repo hoặc gửi external LLM tùy ý. NFR-19/20 tiếp tục áp dụng.
+
+**SEC-REAL-T1: NOT RUN / BLOCKED_PENDING_IMPLEMENTATION_AND_TESTS.** Điều kiện: direct-API/DB tenant và admin negative tests, device/enrollment/revoke, transport/secrets/log redaction, encryption/key access, restore/erasure/replay, retention và provider/privacy controls có evidence. Root/DBA không đọc finance và protected-client/attestation PoC không còn tiêu chí bắt buộc T1; vẫn ghi nhận rủi ro privileged access. Không đổi 41 AC, wire API/schema hoặc frontend guards trong task tài liệu này.
+
+## 3. NFR bổ sung
+
+| ID | Mục tiêu và cách kiểm |
+| --- | --- |
+| NFR-16 / coverage | Support matrix package/appVersion/parser/Android/OEM từ device tests. Một ngân hàng + một ví có end-to-end evidence trước R1; lastObserved/lastAck/gaps rõ, không notification không chứng minh không giao dịch |
+| NFR-17 / sync | Design target: ≥95% trong ít nhất 30 lượt fixture từ durable receipt tới hai UI foreground cùng snapshot ≤30s khi network/backend sẵn sàng. Đo riêng cold-start và Android scheduling; không delivery guarantee khi OS ngắt |
+| NFR-18 / schedule & cost | Daily mặc định18:00 +07, cửa sổ mục tiêu60 phút trong môi trường khỏe, đo7 ngày; overdue/partial phải thấy. Quota/cost cap không silent paid fallback; free tier không SLA |
+| NFR-19 / ingestion privacy | Lọc tại device, không OTP/credentials/app khác; raw không log/analytics/LLM. Outbox mã hóa với Keystore; dữ liệu chưa ACK không silent drop; retention theo policy trong Android/data specs |
+| NFR-20 / access | Server session/device/workspace/object checks, admin tách role; không token trong URL/localStorage; revoke/logout dừng collector. RLS/TLS là defense in depth; T1 tin infrastructure operators, app-admin và tenant isolation vẫn bắt buộc theo NFR-08 cập nhật |
+| NFR-21 / recovery | Đề xuất pilot RPO≤24h/RTO≤1 ngày, đo bằng restore drill; job/receipt/event/quote/run refs truy vết. Cloud không đồng nghĩa đã có backup đúng policy |
+
+Các ngưỡng/budget trên là mặc định thiết kế do người soạn đề xuất, chưa benchmark hoặc PO sign-off. Kế hoạch test: [Operational acceptance](../testing/operational-acceptance-plan.md).
+
+## 4. State và gate
+
+Device consent/OS permission/connection/network là các trục riêng. Outbox queued/sending/acknowledged/retry_wait/quarantined, không xóa trước durable receipt. Ingestion received/parsed/posted/needs_review/ignored/failed; receipt không tự đồng nghĩa posted.
+
+Price job queued/running/succeeded/partial/failed/rate_limited. Agent queued/planning/reading/awaiting_user/simulating/draft_ready/completed/partial/failed/cancelled; resume kiểm lại quyền và snapshot. Draft Plan–Goal chưa active trước owner confirmation, confirmation dùng version/digest/idempotency/transaction.
+
+R1 cần AC core, các invariant kế thừa liên quan, nguồn/quyền/Android/security/restore/UAT thật. R1.1 thêm real Plan/Goals và AC-38…40. Trust đã chọn T1; cloud real còn chờ SEC-REAL-T1/auth/native/source/restore và UAT evidence. Không dùng PASS frontend synthetic để bỏ gates. Nhãn R1/R1.1 là lịch sử nhóm triển khai, không cho phép bỏ feature: backlog hiện hành giữ toàn bộ REQUIRED.
+
+## ARCH-07 — Tham chiếu triển khai bảo mật (09/10/2026)
+
+NFR-07/08/19/20 và recovery NFR-21 được cụ thể hóa trong [hồ sơ T1](../security/t1/README.md), [SEC-01…32](../security/t1/acceptance-plan.md) và [các ca AUTH](../security/identity/acceptance-plan.md). Giữ đầy đủ tính năng và 41 AC.
+
+Lệnh cấm raw/OTP của ngân hàng không cấm mã xác thực riêng của FinWeave tại đúng auth verifier/mail adapter; cả hai đều không được ghi logs hay gửi LLM. RPO 24 giờ / RTO 24 giờ là mục tiêu chưa đo. Dữ liệu được ACK sau backup gần nhất vẫn có thể mất khi restore; witness nhằm ngăn hồi sinh lệnh xóa/thu hồi đã được xác nhận an toàn cho recovery trước khi mở hệ thống. Tất cả ca SEC thực tế NOT RUN; tài liệu chưa chứng nhận compliance hay bảo mật đã triển khai.
+
+## ARCH-08 — Đặc tả domain thực thi (09/10/2026)
+
+[Engine/domain](../domain/README.md) cụ thể hóa AC tài khoản/giao dịch/tài sản/Plan–Goals/Agent và NFR accuracy/consistency; giữ41parentAC. Extended forecast kế thừa nợ/lạm phát/stress/pooling/profiles/uncertainty/criteria đã có ở frontend; probability là conditional simulation, không mark actual achieved.
+
+Exact money/quantity, sealed posting, consistent snapshot, scoped current authorization và atomic owner planning confirmation bắt buộc. API003/DB004 là target tiếp nối, consumers chưa tích hợp. [DOM-01…30](../domain/acceptance-plan.md) chưa chạy trên backend; oracle độc lập chỉ kiểm expected examples. Missing/partial/stale phải có nhãn và căn cứ, không0 giả hoặc calibrated forecast claim.
+
+## ARCH-09 — ASY-01…32 refinements
+
+Giữ41parentAC/full scope. ASY làm rõ acceptance/enqueue, typed work/fence/retry, notification ACK/dedupe/offline/restore, daily/manual prices/quota, atomic import, inherited Assistant/Agent/forecast, owner sync/cursors/outcome. Các32ASN runtime cases đều NOT RUN; không gộp UI/mock/schema/model thành integrated/real PASS.
+
+[Hồ sơ async](../async/README.md), [API004](../contracts/v2-t1-r4/README.md), [DB005](../data/target-t1-async/README.md), [ADR-016](../architecture/adr/ADR-016-postgresql-dispatch-and-explicit-sync-outcomes.md), [32 ca runtime](../async/acceptance-plan.md).
+
+## ARCH-10 — Android implementation handover
+
+Add AND01…32 Android design refinements linked UI-M01…06, no change existing41parent AC. Real support requires exact OS/OEM/source matrix evidence; all Android runtime cases NOT RUN.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+SRC-01…SRC-32 giữ mọi feature và 41 AC gốc; hỗ trợ thật phải package/signer/template/device+finality verified. Daily job attempt khác giá fresh daily; missing/failure giữ last-good/Review/gap thay zero hoặc simulated live.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+AI-FR-001…024 / AI-NFR-001…008 và 41 AC giữ đủ, ART-01…ART-32 thêm runtime detail. Simple Q&A không forcedAgent, multi-step Goal/Plan/variance/investigation có draft/evidence/clarification và owner-confirm riêng.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).

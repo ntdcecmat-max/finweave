@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-28",
+  "checks": [
+    "50 UC cards rendered",
+    "11 embedded diagrams rendered",
+    "All embedded images decoded",
+    "Search by UC ID isolates one case",
+    "Expand selected case",
+    "Expanded case contains postconditions",
+    "Group filter finds 5 Assistant cases",
+    "Vietnamese search works without accents",
+    "Diagram opens in zoom dialog",
+    "Mobile layout has no page-level horizontal overflow",
+    "No JavaScript errors"
+  ],
+  "errors": []
+}

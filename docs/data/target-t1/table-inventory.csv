@@ -1,0 +1,71 @@
+table,owner,tenant,stage,expandColumns,contractChange
+identities,Identity,False,INHERITED_EXPAND,8,Synthetic .test restriction kept in original migrations; gated profile-aware auth validation replaces it only for real-T1 deployment. No raw PII in logs.
+workspaces,Identity,False,INHERITED_EXPAND,11,Replace synthetic-only profile constraint only in a separately gated T1 migration; never enable real by client input.
+sessions,Identity,False,INHERITED_EXPAND,10,"Customer sessions role becomes owner only after migrating admin authentication to OpsIdentity; session.device_id semantic clarified ARCH-06, not guessed as FK."
+identity_challenges,Identity,False,INHERITED_EXPAND,10,
+devices,Identity,True,INHERITED_EXPAND,16,Revocation fence checked at receipt acceptance and financial commit.
+accounts,Accounts,True,INHERITED_EXPAND,10,
+ledger_accounts,Ledger,True,INHERITED_EXPAND,7,"Immutable account_id/kind once used by posted bundle; archive allowed, no retarget."
+sources,Ingestion,True,INHERITED_EXPAND,11,
+instruments,Market,False,INHERITED_EXPAND,11,
+gold_profiles,Market,False,INHERITED_EXPAND,12,
+holdings,Portfolio,True,INHERITED_EXPAND,13,
+events,Ledger,True,INHERITED_EXPAND,18,
+entry_groups,Ledger,True,INHERITED_EXPAND,8,Replace immutable trigger intentionally: new group builds only within one transaction; must seal before commit; sealed bundle rejects append/update/delete.
+posting_lines,Ledger,True,INHERITED_EXPAND,7,
+holding_movements,Portfolio,True,INHERITED_EXPAND,12,"UNIQUE(workspace_id,holding_id,sequence_no); quantity is resulting balance; delta only for delta mode, declaration not purchase."
+provider_entitlements,Market,True,INHERITED_EXPAND,12,
+quote_observations,Market,True,INHERITED_EXPAND,17,"Freeze source price/currency/unit, quoteAsOf and FX provenance; quality exposed by API is derived at read asOf, not permanently fresh."
+evidence,Ingestion,True,INHERITED_EXPAND,12,"After verified move remove content field, retain digest/identity/refs; no raw notification or OTP."
+event_evidence,Ingestion,True,INHERITED_EXPAND,5,
+source_records,Ingestion,True,INHERITED_EXPAND,14,
+reviews,Review,True,INHERITED_EXPAND,15,
+cash_observations,Ledger,True,INHERITED_EXPAND,10,
+collector_bindings,Ingestion,True,INHERITED_EXPAND,11,
+ingestion_receipts,Ingestion,True,INHERITED_EXPAND,27,After verified payload cutover remove normalized_evidence; after J2 cutover remove delivery lease/retry fields; retain transport dedupe identity and minimal result tombstone.
+receipt_evidence,Ingestion,True,INHERITED_EXPAND,5,
+coverage_gaps,Ingestion,True,INHERITED_EXPAND,11,
+refresh_jobs,Market,True,INHERITED_EXPAND,17,Domain lifecycle remains; remove inline result after payload cutover and lease/retry fields after J2 cutover.
+import_previews,Imports,True,INHERITED_EXPAND,16,"Move rows array to import_rows; retain preview token, expiry and selected-set digest; budget applies per row and per request, not whole CSV in one JSON."
+import_jobs,Imports,True,INHERITED_EXPAND,15,Domain lifecycle remains; remove inline result after payload cutover and lease/retry fields after J2 cutover; selected set atomic.
+snapshots,ReadModels,True,INHERITED_EXPAND,10,"Replace UNIQUE(workspace_id,financial_version) with (workspace_id,financial_version,as_of,refs_digest,engine_version); move projection to projection_cache after cutover."
+financial_plans,Planning,True,INHERITED_EXPAND,10,
+plan_items,Planning,True,INHERITED_EXPAND,19,"Backfill from plan_id, or explicit standalone scope; freeze revisions under scope lock."
+actual_links,Planning,True,INHERITED_EXPAND,14,"Replace active unique index with (workspace_id,planning_revision_id,event_id) WHERE released_at IS NULL; FK to frozen item version. Resolve scope from authorized item, never from bare plan_version."
+goals,Planning,True,INHERITED_EXPAND,11,
+plan_goal_links,Planning,True,INHERITED_EXPAND,10,
+goal_allocations,Planning,True,INHERITED_EXPAND,10,
+simulations,Planning,True,INHERITED_EXPAND,9,
+conversations,Assistant,True,INHERITED_EXPAND,7,
+messages,Assistant,True,INHERITED_EXPAND,13,
+agent_runs,Assistant,True,INHERITED_EXPAND,17,Delivery lease/retry/cancel execution authority moves to J2; Agent logical state and budget stay in domain record.
+planning_drafts,Planning,True,INHERITED_EXPAND,13,
+tool_results,Assistant,True,INHERITED_EXPAND,11,Remove inline result after verified payload cutover; typed evidence retention separate from operational attempt logs.
+version_history,SharedTX,True,INHERITED_EXPAND,9,
+proposal_previews,SharedTX,True,INHERITED_EXPAND,14,
+idempotency_records,SharedTX,True,INHERITED_EXPAND,11,Remove inline result after verified payload cutover; retain operation/key/digest and committed effect refs beyond result TTL; old key never silently re-executes.
+ops_accounts,Ops,False,INHERITED_EXPAND,8,
+ops_sources,Ops,False,INHERITED_EXPAND,12,
+ops_jobs,Ops,False,INHERITED_EXPAND,13,
+ops_quotas,Ops,False,INHERITED_EXPAND,9,
+ops_releases,Ops,False,INHERITED_EXPAND,12,
+ops_incidents,Ops,False,INHERITED_EXPAND,8,
+ops_previews,Ops,False,INHERITED_EXPAND,12,
+ops_idempotency,Ops,False,INHERITED_EXPAND,7,
+ops_audit,Ops,False,INHERITED_EXPAND,10,
+jobs,SharedJobs,True,NEW_DESIGN,17,
+job_attempts,SharedJobs,True,NEW_DESIGN,11,
+scheduler_state,SharedJobs,False,NEW_DESIGN,9,
+planning_scopes,Planning,True,NEW_DESIGN,7,
+planning_revisions,Planning,True,NEW_DESIGN,9,
+planning_revision_items,Planning,True,NEW_DESIGN,8,
+projection_cache,ReadModels,True,NEW_DESIGN,8,
+import_rows,Imports,True,NEW_DESIGN,12,
+admin_principals,OpsIdentity,False,NEW_DESIGN,8,
+admin_sessions,OpsIdentity,False,NEW_DESIGN,8,
+admin_mfa_factors,OpsIdentity,False,NEW_DESIGN,7,
+admin_challenges,OpsIdentity,False,NEW_DESIGN,8,
+payload_objects,SharedTX,True,NEW_DESIGN,12,
+recovery_journal,Recovery,False,NEW_DESIGN,8,
+ops_control_requests,Ops,False,NEW_DESIGN,12,
+migration_journal,Migrations,False,NEW_DESIGN,8,

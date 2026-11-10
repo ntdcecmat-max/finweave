@@ -1,0 +1,1428 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Bangkok",
+  "sizeBasis": "Logical file bytes; symlink targets not traversed. Filesystem allocation can differ for sparse/hardlinked files.",
+  "beforeBytes": 48583654074,
+  "afterBytesExcludingCleanupHelpers": 25614001298,
+  "reclaimedCandidateBytes": 22969651878,
+  "deletedTargets": 205,
+  "failedTargets": [],
+  "categories": {
+    "Installer archive or download fragments; extracted runtime retained": 5564054177,
+    "Byte-identical extracted Android image; installed SDK copy retained": 5120089841,
+    "Stopped disposable synthetic test database; newest run retained": 8604431249,
+    "Failed or superseded local test release; logs/manifests and active releases retained": 3161354709,
+    "Regenerable Android compilation intermediates; APKs, source and build toolchain retained": 519721902
+  },
+  "verification": {
+    "at": "2026-10-28T13:45:12.864Z",
+    "checks": [
+      {
+        "name": "All pre-existing tracked and untracked source/document/config files unchanged",
+        "fileCount": 1099,
+        "status": "PASS",
+        "changed": []
+      },
+      {
+        "name": "AI artifact runtimeArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact weightsArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact ollamaManifestArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact tokenizerArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact chatTemplateArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "AI artifact licenseArtifact",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/pilot-signing/finweave-pilot.p12",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/pilot-signing/password.txt",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/sdk/platform-tools/adb.exe",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/sdk/build-tools/36.0.0/apksigner.bat",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/sdk/system-images/android-30/default/x86_64/system.img",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved .local/android-toolchain/sdk/system-images/android-35/default/x86_64/system.img",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved finweave-web/node_modules",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved finweave-backend/node_modules",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved finweave-web/dist/index.html",
+        "status": "PASS"
+      },
+      {
+        "name": "Preserved finweave-web/dist-admin/index.html",
+        "status": "PASS"
+      },
+      {
+        "name": "Persistent runtime database retained",
+        "status": "PASS"
+      },
+      {
+        "name": "Persistent staging database retained",
+        "status": "PASS"
+      },
+      {
+        "name": "staging release archive retained",
+        "status": "PASS"
+      },
+      {
+        "name": "Persistent observation database retained",
+        "status": "PASS"
+      },
+      {
+        "name": "Existing web build starts and serves routes, worker, scripts and styles",
+        "status": "PASS",
+        "responses": [
+          {
+            "path": "/auth/login",
+            "status": 200
+          },
+          {
+            "path": "/home",
+            "status": 200
+          },
+          {
+            "path": "/design",
+            "status": 200
+          },
+          {
+            "path": "/mockServiceWorker.js",
+            "status": 200
+          },
+          {
+            "path": "/assets/index-C9ooF-ub.js",
+            "status": 200
+          },
+          {
+            "path": "/assets/index-BhxCVKDa.css",
+            "status": 200
+          }
+        ]
+      }
+    ]
+  },
+  "unitTests": {
+    "before": {
+      "frontend": "BLOCKED: missing std-env",
+      "backend": {
+        "passed": 40,
+        "failed": 3,
+        "reason": "Missing fast-deep-equal and native argon2 package"
+      }
+    },
+    "after": {
+      "frontend": "BLOCKED: same missing std-env",
+      "backend": {
+        "passed": 40,
+        "failed": 3,
+        "reason": "Same missing dependencies as before cleanup"
+      }
+    }
+  },
+  "androidImageCopies": [
+    {
+      "from": ".local/android-toolchain/aosp-api30-r11/x86_64",
+      "to": ".local/android-toolchain/sdk/system-images/android-30/default/x86_64",
+      "filesMatched": 16,
+      "sha256Match": true
+    },
+    {
+      "from": ".local/android-toolchain/aosp-api35-r02/x86_64",
+      "to": ".local/android-toolchain/sdk/system-images/android-35/default/x86_64",
+      "filesMatched": 24,
+      "sha256Match": true
+    }
+  ],
+  "keptTestRuns": [
+    "agent-eval-1791879849765",
+    "assistant-1791888461678",
+    "async-test-1791895589685",
+    "business-1791879595811",
+    "finance-test-1791895592126",
+    "operations-1791880867005",
+    "ops-test-1791879860617",
+    "pg-2026-10-13T08-14-44-922Z",
+    "real-model-1791888556102",
+    "runtime-test-1791895586410"
+  ],
+  "preserved": [
+    "All application source, documents, configuration and existing user changes",
+    "Web dist and admin dist; all published APKs",
+    "node_modules and lockfiles",
+    "Android SDK/JDK/Gradle toolchain and signing identity",
+    "Pinned AI runtime, GGUF weights, model blobs, tokenizer/template/license",
+    "Configured persistent runtime, staging and observation databases",
+    "Active release/history pointers plus newest verified release",
+    "Git history and historical test evidence"
+  ],
+  "limitations": [
+    "No full browser workflow, real model inference or Android device test performed",
+    "Deleted Android compilation caches will regenerate on the next build"
+  ],
+  "deletions": [
+    {
+      "path": ".local/android-toolchain/jdk.zip",
+      "bytes": 205073461,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/sdk-tools.zip",
+      "bytes": 155655386,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/android-35-x86_64-r09.zip",
+      "bytes": 432666900,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aosp-api30-r11.zip",
+      "bytes": 676379777,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aosp-api35-r02.zip",
+      "bytes": 782404023,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/image-parts",
+      "bytes": 33670123,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/image-identity-probe.bin",
+      "bytes": 1060742,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/image-range-probe.bin",
+      "bytes": 1060742,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/ollama-windows-amd64-v0.40.3-complete.zip",
+      "bytes": 1468053171,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/ollama-windows-amd64-v0.40.3.zip",
+      "bytes": 161984256,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/ollama-windows-amd64-v0.40.3-retry.zip",
+      "bytes": 143606080,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/ollama-parts",
+      "bytes": 1468053171,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/ollama-range-probe.bin",
+      "bytes": 1048576,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/model-toolchain/llama-b11429-bin-win-vulkan-x64.zip",
+      "bytes": 33337769,
+      "reason": "Installer archive or download fragments; extracted runtime retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aosp-api30-r11",
+      "bytes": 3342354647,
+      "reason": "Byte-identical extracted Android image; installed SDK copy retained",
+      "status": "deleted"
+    },
+    {
+      "path": ".local/android-toolchain/aosp-api35-r02",
+      "bytes": 1777735194,
+      "reason": "Byte-identical extracted Android image; installed SDK copy retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/agent-eval-1791714569983",
+      "bytes": 27417,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/agent-eval-1791713977691",
+      "bytes": 27420,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/agent-eval-1791713731309",
+      "bytes": 27417,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/agent-eval-1791713257248",
+      "bytes": 27194,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791884991294",
+      "bytes": 47196114,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791879766411",
+      "bytes": 47196114,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791875563120",
+      "bytes": 47196114,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791825088989",
+      "bytes": 47196998,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791714454769",
+      "bytes": 46798840,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791713978907",
+      "bytes": 46733319,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791713819108",
+      "bytes": 46725122,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791713679636",
+      "bytes": 46569279,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791713394291",
+      "bytes": 46503124,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791713048540",
+      "bytes": 46339901,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791712884406",
+      "bytes": 45986866,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791712746023",
+      "bytes": 45315041,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791712664984",
+      "bytes": 45315038,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791712599798",
+      "bytes": 41091841,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791662377605",
+      "bytes": 45378290,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791662339174",
+      "bytes": 45378281,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791662209614",
+      "bytes": 45378284,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791661950735",
+      "bytes": 45296087,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791661831679",
+      "bytes": 44776534,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791661646323",
+      "bytes": 45180409,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791661579928",
+      "bytes": 44884194,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/assistant-1791661508772",
+      "bytes": 44410565,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791879690865",
+      "bytes": 45821658,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791875513282",
+      "bytes": 45805274,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791825048054",
+      "bytes": 45798028,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791730639476",
+      "bytes": 45722729,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791730399666",
+      "bytes": 43115056,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791662428492",
+      "bytes": 45217492,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791662015037",
+      "bytes": 45201116,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791619604414",
+      "bytes": 44878672,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791619306315",
+      "bytes": 44903244,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791618757283",
+      "bytes": 44895040,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791618614274",
+      "bytes": 44794009,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791618366124",
+      "bytes": 44886856,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791567278423",
+      "bytes": 44240201,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566855551",
+      "bytes": 44248394,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566622644",
+      "bytes": 44256592,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566343032",
+      "bytes": 44248387,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566259217",
+      "bytes": 44230817,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566151836",
+      "bytes": 44197144,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791566063963",
+      "bytes": 44138674,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791565985676",
+      "bytes": 44089928,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546569235",
+      "bytes": 44032343,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546485465",
+      "bytes": 44031811,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546415947",
+      "bytes": 43982166,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546274828",
+      "bytes": 43932321,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546204149",
+      "bytes": 43898348,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546112404",
+      "bytes": 43865848,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/async-test-1791546025659",
+      "bytes": 43732518,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791714455682",
+      "bytes": 47250046,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791713982927",
+      "bytes": 47250039,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791713537295",
+      "bytes": 47241842,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791662452881",
+      "bytes": 47068042,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791662336776",
+      "bytes": 47068047,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791661875399",
+      "bytes": 47018495,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791661372148",
+      "bytes": 42898416,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791661320728",
+      "bytes": 41091822,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791619604250",
+      "bytes": 46737402,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791619306238",
+      "bytes": 46745594,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791618933242",
+      "bytes": 46729214,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791618612624",
+      "bytes": 46680071,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791618207471",
+      "bytes": 46555996,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791617545403",
+      "bytes": 45776367,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791617455379",
+      "bytes": 45686441,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791617286708",
+      "bytes": 45612695,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791617215427",
+      "bytes": 45283292,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791570080245",
+      "bytes": 45128307,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791570012788",
+      "bytes": 45079745,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791569939640",
+      "bytes": 44961379,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/business-1791569882648",
+      "bytes": 44337809,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791879494575",
+      "bytes": 48864008,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791662454196",
+      "bytes": 48081199,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791662337600",
+      "bytes": 48040259,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791661924469",
+      "bytes": 48113987,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791619603221",
+      "bytes": 47775158,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791619303552",
+      "bytes": 47734200,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791618614585",
+      "bytes": 47775150,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791618365399",
+      "bytes": 47783352,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791569395982",
+      "bytes": 47413727,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791569342988",
+      "bytes": 41091895,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791566846706",
+      "bytes": 45030948,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791566633121",
+      "bytes": 44545136,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791566391792",
+      "bytes": 45030944,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791544585978",
+      "bytes": 44335328,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791544060788",
+      "bytes": 44335321,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791543834296",
+      "bytes": 44310758,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791543590083",
+      "bytes": 43990342,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791543500068",
+      "bytes": 43562615,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791543395457",
+      "bytes": 43340639,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/finance-test-1791543281040",
+      "bytes": 43281606,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791875390843",
+      "bytes": 74687547,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791825072019",
+      "bytes": 57821185,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791824682747",
+      "bytes": 74998019,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791824486363",
+      "bytes": 58214509,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791824132071",
+      "bytes": 45386128,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791824002367",
+      "bytes": 45268804,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/operations-1791823952300",
+      "bytes": 41091857,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791875452882",
+      "bytes": 45466001,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791825006779",
+      "bytes": 45472193,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791815689817",
+      "bytes": 45398092,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791815332043",
+      "bytes": 41086865,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730615841",
+      "bytes": 45398092,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730511256",
+      "bytes": 45397696,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730472277",
+      "bytes": 45397697,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730211683",
+      "bytes": 45398085,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730125849",
+      "bytes": 45250738,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730063624",
+      "bytes": 45042448,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/ops-test-1791730031199",
+      "bytes": 45042449,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T08-13-30-811Z",
+      "bytes": 88625613,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T08-09-18-090Z",
+      "bytes": 41091857,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T08-08-23-410Z",
+      "bytes": 41091855,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T07-14-38-667Z",
+      "bytes": 128520199,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-13T07-13-40-346Z",
+      "bytes": 88625543,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-12T17-12-56-523Z",
+      "bytes": 128520201,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-12T17-12-11-933Z",
+      "bytes": 88625612,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-35-47-629Z",
+      "bytes": 128520019,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-22-30-804Z",
+      "bytes": 128520196,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-21-29-149Z",
+      "bytes": 55349532,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-19-32-248Z",
+      "bytes": 88625615,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-19-32-135Z",
+      "bytes": 128304808,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-16-44-383Z",
+      "bytes": 98797123,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-15-46-001Z",
+      "bytes": 55275224,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-12-47-518Z",
+      "bytes": 98588113,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-11-43-216Z",
+      "bytes": 88625615,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-11-28-822Z",
+      "bytes": 54969211,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-08-22-772Z",
+      "bytes": 85085373,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-07-50-362Z",
+      "bytes": 41091860,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T05-06-16-208Z",
+      "bytes": 41091857,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T04-56-04-957Z",
+      "bytes": 88625618,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T04-50-49-136Z",
+      "bytes": 88583995,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T04-47-32-452Z",
+      "bytes": 52569470,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/pg-2026-10-09T04-46-43-812Z",
+      "bytes": 41091857,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/real-model-1791888076023",
+      "bytes": 45654270,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/real-model-1791887659080",
+      "bytes": 45348014,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/real-model-1791887152274",
+      "bytes": 45348014,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791879408582",
+      "bytes": 45672477,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791875390225",
+      "bytes": 45672477,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791824964218",
+      "bytes": 45672980,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791730627654",
+      "bytes": 45598458,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791730258630",
+      "bytes": 45598463,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791729904832",
+      "bytes": 43102659,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791729834464",
+      "bytes": 41091897,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791662387216",
+      "bytes": 45067669,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791661972866",
+      "bytes": 45067669,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791619605577",
+      "bytes": 44753425,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791619305488",
+      "bytes": 44753427,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791618615980",
+      "bytes": 44753420,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791566899015",
+      "bytes": 44187900,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791566669161",
+      "bytes": 44187898,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791566378583",
+      "bytes": 44187899,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791545793654",
+      "bytes": 44022874,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791545714395",
+      "bytes": 42422938,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791544307649",
+      "bytes": 43467299,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791543646200",
+      "bytes": 43467315,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791527263921",
+      "bytes": 42689188,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791527065292",
+      "bytes": 42689181,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526921087",
+      "bytes": 42689184,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526664311",
+      "bytes": 42689186,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526460662",
+      "bytes": 42689183,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526314932",
+      "bytes": 42672411,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526178649",
+      "bytes": 42672414,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526111165",
+      "bytes": 42340563,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791526022863",
+      "bytes": 42664212,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525746039",
+      "bytes": 42631055,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525688448",
+      "bytes": 42473003,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525630818",
+      "bytes": 42374112,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525565083",
+      "bytes": 42257855,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525520445",
+      "bytes": 42157746,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525451652",
+      "bytes": 42157746,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/runtime-test-1791525398990",
+      "bytes": 41091895,
+      "reason": "Stopped disposable synthetic test database; newest run retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/5EhcTjnAW_2OLiy03kpQa6t1KXJ3caV3OdiBCymXjWg/tested",
+      "bytes": 936345512,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/5EhcTjnAW_2OLiy03kpQa6t1KXJ3caV3OdiBCymXjWg/backend-source.json.gz",
+      "bytes": 143391337,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/bjB70cJm3f83oVM_G0NXQ6TVH4RaU8Qk5v1jdY0bkZc/tested",
+      "bytes": 746652361,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/bjB70cJm3f83oVM_G0NXQ6TVH4RaU8Qk5v1jdY0bkZc/backend-source.json.gz",
+      "bytes": 7329087,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/jD3Vqqvl0d_PuFWYuFuSLGy6z80IonKdo0JLWVDvxmA/backend-source.json.gz",
+      "bytes": 143408240,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/KkeYjLUqNVxOneWzHBXDTmDdi3vDTnzuRleYWzKZyDg/backend-source.json.gz",
+      "bytes": 143407549,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/OY78cI3WIXNLHsG3TDRdg1NnIZcDLmnk8hiUflGefTE/backend-source.json.gz",
+      "bytes": 143392164,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/PG943ygAYY2WiWt-k8BKWOA-ws-GMbmLQVU_rSNYLwo/backend-source.json.gz",
+      "bytes": 143391391,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/XydIddS5Aw8s9SMJUtBHzvBGvvTEyOhiP5qE1jcAMLA/tested",
+      "bytes": 746694080,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-backend/.local/releases/XydIddS5Aw8s9SMJUtBHzvBGvvTEyOhiP5qE1jcAMLA/backend-source.json.gz",
+      "bytes": 7342988,
+      "reason": "Failed or superseded local test release; logs/manifests and active releases retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-web/android/app/build",
+      "bytes": 493090359,
+      "reason": "Regenerable Android compilation intermediates; APKs, source and build toolchain retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-web/android/build",
+      "bytes": 131450,
+      "reason": "Regenerable Android compilation intermediates; APKs, source and build toolchain retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-web/android/.gradle",
+      "bytes": 24523889,
+      "reason": "Regenerable Android compilation intermediates; APKs, source and build toolchain retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-web/android/.kotlin",
+      "bytes": 0,
+      "reason": "Regenerable Android compilation intermediates; APKs, source and build toolchain retained",
+      "status": "deleted"
+    },
+    {
+      "path": "finweave-web/android/capacitor-cordova-android-plugins/build",
+      "bytes": 1976204,
+      "reason": "Regenerable Android compilation intermediates; APKs, source and build toolchain retained",
+      "status": "deleted"
+    }
+  ]
+}

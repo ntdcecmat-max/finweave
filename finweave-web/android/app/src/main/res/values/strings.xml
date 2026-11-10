@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FinWeave</string>
+    <string name="collector_access_label">FinWeave — tự động ghi nhận giao dịch</string>
+    <string name="collector_access_description">FinWeave xử lý thông báo giao dịch từ nguồn ngân hàng hoặc ví bạn đã chọn sau khi bạn đồng ý. Bạn có thể thu hồi quyền trong Android bất kỳ lúc nào.</string>
+    <string name="title_activity_main">FinWeave</string>
+    <string name="package_name">test.finweave.prototype</string>
+    <string name="custom_url_scheme">test.finweave.prototype</string>
+</resources>

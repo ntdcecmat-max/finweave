@@ -1,0 +1,10 @@
+{
+  "id": "FW-PHYS-T1-SECURITY-003",
+  "status": "EXPAND_DESIGN_SQL_NOT_RUN",
+  "tables": 84,
+  "columns": 960,
+  "foreignKeys": 155,
+  "newTables": 2,
+  "addedExistingColumns": 12,
+  "modelSha256": "099b7a1c3ecb8cdb53ec430d6ee278b6ff58bd6a9ecda700b4894b55dd60c876"
+}

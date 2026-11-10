@@ -1,0 +1,2119 @@
+{
+  "scope": "Synthetic schema fixtures only; no Android or actual API execution",
+  "cases": [
+    {
+      "name": "LegacyQueueItem_valid",
+      "schema": "LegacyQueueItem",
+      "value": {
+        "id": "item1",
+        "state": "pending",
+        "observedAt": "2026-10-09T12:00:00Z",
+        "source": "synthetic",
+        "reason": null,
+        "retryAfter": null
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "LegacyStatus_valid",
+      "schema": "LegacyStatus",
+      "value": {
+        "permission": "granted",
+        "consented": true,
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "lastObserved": null,
+        "lastAck": null,
+        "pausedReason": null,
+        "queue": []
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "Capabilities_valid",
+      "schema": "Capabilities",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "apiRevision": "FW-API-T1-D1J2-004",
+        "profile": "SYNTHETIC",
+        "buildId": "design-fixture",
+        "requiredConsentVersion": "fixture-v1",
+        "nativeAvailable": true
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "StatusV2_valid",
+      "schema": "StatusV2",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "generation": 1,
+        "checkedAt": "2026-10-09T12:00:00Z",
+        "permission": "granted",
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "listenerBound": true,
+        "consent": "accepted",
+        "vault": "ready",
+        "clock": "trusted",
+        "readiness": "ready",
+        "reason": null,
+        "pendingCount": 0,
+        "pendingBytes": 0,
+        "quarantineCount": 0,
+        "ackReplayCount": 0,
+        "queueTruncated": false,
+        "lastObserved": null,
+        "lastAck": null,
+        "physicalPurgeOverdue": false,
+        "revokePending": false
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "ConfigureCapture_valid",
+      "schema": "ConfigureCapture",
+      "value": {
+        "generation": 1,
+        "consentVersion": "fixture-v1",
+        "bindingIds": [
+          "binding1"
+        ]
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "ListQueueInput_valid",
+      "schema": "ListQueueInput",
+      "value": {
+        "generation": 1,
+        "cursor": null,
+        "pageSize": 100
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "QueuePage_valid",
+      "schema": "QueuePage",
+      "value": {
+        "generation": 1,
+        "items": [],
+        "nextCursor": null
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "OwnerInvocation_valid",
+      "schema": "OwnerInvocation",
+      "value": {
+        "generation": 1,
+        "operationId": "listAccounts",
+        "input": {
+          "includeArchived": false,
+          "page": {
+            "cursor": null,
+            "pageSize": 50
+          }
+        },
+        "idempotencyKey": null
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "BridgeError_valid",
+      "schema": "BridgeError",
+      "value": {
+        "code": "CLOCK_UNTRUSTED",
+        "retryAfter": null
+      },
+      "expectedValid": true
+    },
+    {
+      "name": "LegacyStatus_negative_1",
+      "schema": "LegacyStatus",
+      "value": {
+        "permission": "granted",
+        "consented": true,
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "lastObserved": null,
+        "lastAck": null,
+        "pausedReason": null,
+        "queue": [],
+        "accessToken": "secret"
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "LegacyStatus_negative_2",
+      "schema": "LegacyStatus",
+      "value": {
+        "permission": "granted",
+        "consented": true,
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "lastObserved": null,
+        "lastAck": null,
+        "pausedReason": null,
+        "queue": [
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          }
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "LegacyStatus_negative_3",
+      "schema": "LegacyStatus",
+      "value": {
+        "permission": "maybe",
+        "consented": true,
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "lastObserved": null,
+        "lastAck": null,
+        "pausedReason": null,
+        "queue": []
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "LegacyQueueItem_negative_4",
+      "schema": "LegacyQueueItem",
+      "value": {
+        "id": "item1",
+        "state": "pending",
+        "observedAt": "yesterday",
+        "source": "synthetic",
+        "reason": null,
+        "retryAfter": null
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "LegacyQueueItem_negative_5",
+      "schema": "LegacyQueueItem",
+      "value": {
+        "id": "item1",
+        "state": "pending",
+        "observedAt": "2026-10-09T12:00:00Z",
+        "source": "synthetic",
+        "reason": null,
+        "retryAfter": null,
+        "rawText": "OTP"
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "Capabilities_negative_6",
+      "schema": "Capabilities",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "apiRevision": "FW-API-T1-D1J2-003",
+        "profile": "SYNTHETIC",
+        "buildId": "design-fixture",
+        "requiredConsentVersion": "fixture-v1",
+        "nativeAvailable": true
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "Capabilities_negative_7",
+      "schema": "Capabilities",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "apiRevision": "FW-API-T1-D1J2-004",
+        "profile": "SYNTHETIC",
+        "buildId": "design-fixture",
+        "requiredConsentVersion": "fixture-v1",
+        "nativeAvailable": false
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "ConfigureCapture_negative_8",
+      "schema": "ConfigureCapture",
+      "value": {
+        "generation": 1,
+        "consentVersion": "fixture-v1",
+        "bindingIds": [
+          "a",
+          "a"
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "ConfigureCapture_negative_9",
+      "schema": "ConfigureCapture",
+      "value": {
+        "generation": 0,
+        "consentVersion": "fixture-v1",
+        "bindingIds": [
+          "binding1"
+        ]
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "ConfigureCapture_negative_10",
+      "schema": "ConfigureCapture",
+      "value": {
+        "generation": 1,
+        "consentVersion": "fixture-v1",
+        "bindingIds": [
+          "binding1"
+        ],
+        "ownerId": "other"
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "ListQueueInput_negative_11",
+      "schema": "ListQueueInput",
+      "value": {
+        "generation": 1,
+        "cursor": null,
+        "pageSize": 101
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "ListQueueInput_negative_12",
+      "schema": "ListQueueInput",
+      "value": {
+        "generation": 1,
+        "cursor": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "pageSize": 100
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "QueuePage_negative_13",
+      "schema": "QueuePage",
+      "value": {
+        "generation": 1,
+        "items": [
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          },
+          {
+            "id": "item1",
+            "state": "pending",
+            "observedAt": "2026-10-09T12:00:00Z",
+            "source": "synthetic",
+            "reason": null,
+            "retryAfter": null
+          }
+        ],
+        "nextCursor": null
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "StatusV2_negative_14",
+      "schema": "StatusV2",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "generation": 1,
+        "checkedAt": "2026-10-09T12:00:00Z",
+        "permission": "granted",
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "listenerBound": true,
+        "consent": "accepted",
+        "vault": "ready",
+        "clock": "trusted",
+        "readiness": "ready",
+        "reason": null,
+        "pendingCount": 1001,
+        "pendingBytes": 0,
+        "quarantineCount": 0,
+        "ackReplayCount": 0,
+        "queueTruncated": false,
+        "lastObserved": null,
+        "lastAck": null,
+        "physicalPurgeOverdue": false,
+        "revokePending": false
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "StatusV2_negative_15",
+      "schema": "StatusV2",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "generation": 1,
+        "checkedAt": "2026-10-09T12:00:00Z",
+        "permission": "granted",
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "listenerBound": true,
+        "consent": "accepted",
+        "vault": "ready",
+        "clock": "trusted",
+        "readiness": "ready",
+        "reason": null,
+        "pendingCount": 0,
+        "pendingBytes": 8388609,
+        "quarantineCount": 0,
+        "ackReplayCount": 0,
+        "queueTruncated": false,
+        "lastObserved": null,
+        "lastAck": null,
+        "physicalPurgeOverdue": false,
+        "revokePending": false
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "StatusV2_negative_16",
+      "schema": "StatusV2",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "generation": 1,
+        "checkedAt": "2026-10-09T12:00:00Z",
+        "permission": "granted",
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "listenerBound": "yes",
+        "consent": "accepted",
+        "vault": "ready",
+        "clock": "trusted",
+        "readiness": "ready",
+        "reason": null,
+        "pendingCount": 0,
+        "pendingBytes": 0,
+        "quarantineCount": 0,
+        "ackReplayCount": 0,
+        "queueTruncated": false,
+        "lastObserved": null,
+        "lastAck": null,
+        "physicalPurgeOverdue": false,
+        "revokePending": false
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "StatusV2_negative_17",
+      "schema": "StatusV2",
+      "value": {
+        "bridgeRevision": "FW-NATIVE-BRIDGE-002",
+        "generation": 1,
+        "checkedAt": "invalid",
+        "permission": "granted",
+        "network": "online",
+        "enrolled": true,
+        "ownerBound": true,
+        "listenerBound": true,
+        "consent": "accepted",
+        "vault": "ready",
+        "clock": "trusted",
+        "readiness": "ready",
+        "reason": null,
+        "pendingCount": 0,
+        "pendingBytes": 0,
+        "quarantineCount": 0,
+        "ackReplayCount": 0,
+        "queueTruncated": false,
+        "lastObserved": null,
+        "lastAck": null,
+        "physicalPurgeOverdue": false,
+        "revokePending": false
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "OwnerInvocation_negative_18",
+      "schema": "OwnerInvocation",
+      "value": {
+        "generation": 1,
+        "operationId": "renewCollectorCredential",
+        "input": {
+          "includeArchived": false,
+          "page": {
+            "cursor": null,
+            "pageSize": 50
+          }
+        },
+        "idempotencyKey": null
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "OwnerInvocation_negative_19",
+      "schema": "OwnerInvocation",
+      "value": {
+        "generation": 1,
+        "operationId": "listAccounts",
+        "input": {
+          "includeArchived": false,
+          "page": {
+            "cursor": null,
+            "pageSize": 50
+          }
+        },
+        "idempotencyKey": null,
+        "url": "https://attacker.invalid"
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "OwnerInvocation_negative_20",
+      "schema": "OwnerInvocation",
+      "value": {
+        "generation": 1,
+        "operationId": "listAccounts",
+        "input": {
+          "includeArchived": false,
+          "page": {
+            "cursor": null,
+            "pageSize": 50
+          }
+        },
+        "idempotencyKey": null,
+        "headers": {
+          "Authorization": "secret"
+        }
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "OwnerInvocation_negative_21",
+      "schema": "OwnerInvocation",
+      "value": {
+        "generation": 1,
+        "operationId": "rotateOwnerRecoveryCodes",
+        "input": {
+          "includeArchived": false,
+          "page": {
+            "cursor": null,
+            "pageSize": 50
+          }
+        },
+        "idempotencyKey": null
+      },
+      "expectedValid": false
+    },
+    {
+      "name": "BridgeError_negative_22",
+      "schema": "BridgeError",
+      "value": {
+        "code": "SQL_RAW_ERROR",
+        "retryAfter": null
+      },
+      "expectedValid": false
+    }
+  ]
+}

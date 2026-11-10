@@ -1,0 +1,41 @@
+{
+  "asOf": "2026-10-09",
+  "method": "Official primary documentation only; no model/API/key/download",
+  "sources": [
+    {
+      "id": "OLLAMA-TOOLS",
+      "url": "https://docs.ollama.com/capabilities/tool-calling",
+      "finding": "Application executes tools/loop; docs not model quality proof."
+    },
+    {
+      "id": "OLLAMA-STRUCTURED",
+      "url": "https://docs.ollama.com/capabilities/structured-outputs",
+      "finding": "Local JSON schema; cloud currently unsupported, exact model/runtime semantics need test."
+    },
+    {
+      "id": "OLLAMA-CHAT",
+      "url": "https://docs.ollama.com/api/chat",
+      "finding": "Chat options/content/thinking/usage; no assumption all models support identical fields."
+    },
+    {
+      "id": "OLLAMA-FAQ",
+      "url": "https://docs.ollama.com/faq",
+      "finding": "Local-only/cloud-disable and loopback documented; resource/capability must measure."
+    },
+    {
+      "id": "QWEN-CARD",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B",
+      "finding": "4B candidate with Apache2.0 card; not installed/artifact-pinned or VN benchmarked."
+    },
+    {
+      "id": "QWEN-LICENSE",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B/blob/main/LICENSE",
+      "finding": "License file read, actual deployed weight/runtime derivative licenses must pin."
+    },
+    {
+      "id": "OPENAI-TOOLS",
+      "url": "https://developers.openai.com/api/docs/guides/function-calling",
+      "finding": "Optional hosted strict per-tool schemas and one-call setting; structure not authority or financial correctness."
+    }
+  ]
+}

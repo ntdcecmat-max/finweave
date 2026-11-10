@@ -1,0 +1,23 @@
+{
+  "id": "FW-DB-LOCAL-FOUNDATION-001",
+  "implementationSchema": "FW-DB-LOCAL-004",
+  "runnerRevision": "FW-MIGRATOR-LOCAL-002",
+  "engineKernelRevision": "FW-ENGINE-EXACT-001",
+  "apiTarget": "FW-API-T1-D1J2-005",
+  "databaseTarget": "FW-PHYS-T1-ASYNC-005",
+  "nativeBridgeTarget": "FW-NATIVE-BRIDGE-003",
+  "status": "IMPLEMENTED_AND_TESTED_LOCAL_FOUNDATION_ONLY",
+  "domainTablesExecuted": 54,
+  "infrastructureTablesExecuted": 1,
+  "fullTargetParity": false,
+  "realEnabled": false,
+  "providerEnabled": false,
+  "modelEnabled": false,
+  "businessApiImplemented": false,
+  "notes": [
+    "Pinned DB005 list retains 87 logical table identities: deploy migration_journal to fw_infra, not duplicate fw authority.",
+    "Money numeric typmods replaced by explicit finite/integer/18-digit checks; see versioned physical addendum.",
+    "Ledger groups require building-to-sealed in one transaction; no changes to historical migrations.",
+    "All 21 BE packages, 41 parent AC and full AI specification remain required. No complete package/parent AC acceptance claimed."
+  ]
+}

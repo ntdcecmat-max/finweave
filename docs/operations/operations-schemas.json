@@ -1,0 +1,923 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finweave.invalid/design/ops001",
+  "description": "Design contract; validators below are static examples, not deployed config/release controls.",
+  "$defs": {
+    "Pins": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiRevision": {
+          "const": "FW-API-T1-D1J2-005"
+        },
+        "apiSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "databaseRevision": {
+          "const": "FW-PHYS-T1-ASYNC-005"
+        },
+        "databaseSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "nativeBridgeRevision": {
+          "const": "FW-NATIVE-BRIDGE-003"
+        },
+        "nativeBridgeSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "apiRevision",
+        "apiSha256",
+        "databaseRevision",
+        "databaseSha256",
+        "nativeBridgeRevision",
+        "nativeBridgeSha256"
+      ]
+    },
+    "SecretRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "owner_api",
+            "ops_api",
+            "market",
+            "agent",
+            "ingestion",
+            "forecast",
+            "retention",
+            "migration",
+            "backup",
+            "witness_producer"
+          ]
+        },
+        "fileRef": {
+          "type": "string",
+          "pattern": "^/run/secrets/[a-z0-9_-]{1,80}$"
+        },
+        "keyVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "purpose",
+        "fileRef",
+        "keyVersion"
+      ]
+    },
+    "RuntimeConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environmentClass": {
+          "type": "string",
+          "enum": [
+            "LOCAL_SYNTHETIC",
+            "STAGING_SYNTHETIC",
+            "REAL_T1"
+          ]
+        },
+        "environmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "releaseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "pins": {
+          "$ref": "#/$defs/Pins"
+        },
+        "userOrigin": {
+          "type": "string",
+          "format": "uri"
+        },
+        "adminOrigin": {
+          "type": "string",
+          "format": "uri"
+        },
+        "dataMode": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC",
+            "REAL"
+          ]
+        },
+        "realEnabled": {
+          "type": "boolean"
+        },
+        "modelEnabled": {
+          "type": "boolean"
+        },
+        "sourcesEnabled": {
+          "type": "boolean"
+        },
+        "externalBudgetVnd": {
+          "const": 0
+        },
+        "encryptedMountRequired": {
+          "type": "boolean"
+        },
+        "secretRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SecretRef"
+          },
+          "minItems": 1,
+          "maxItems": 24,
+          "uniqueItems": true
+        },
+        "backupIntervalHours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 24
+        },
+        "backupSnapshotMaxAgeDays": {
+          "const": 34
+        },
+        "packPurgeMaxHours": {
+          "const": 24
+        },
+        "erasureMaxDays": {
+          "const": 35
+        },
+        "hostTickSeconds": {
+          "const": 60
+        },
+        "newJobsEnabled": {
+          "type": "boolean"
+        },
+        "maintenance": {
+          "type": "boolean"
+        },
+        "autoPaidFallback": {
+          "const": false
+        }
+      },
+      "required": [
+        "environmentClass",
+        "environmentId",
+        "releaseId",
+        "pins",
+        "userOrigin",
+        "adminOrigin",
+        "dataMode",
+        "realEnabled",
+        "modelEnabled",
+        "sourcesEnabled",
+        "externalBudgetVnd",
+        "encryptedMountRequired",
+        "secretRefs",
+        "backupIntervalHours",
+        "backupSnapshotMaxAgeDays",
+        "packPurgeMaxHours",
+        "erasureMaxDays",
+        "hostTickSeconds",
+        "newJobsEnabled",
+        "maintenance",
+        "autoPaidFallback"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "environmentClass": {
+                "const": "REAL_T1"
+              }
+            },
+            "required": [
+              "environmentClass"
+            ]
+          },
+          "then": {
+            "properties": {
+              "dataMode": {
+                "const": "REAL"
+              },
+              "encryptedMountRequired": {
+                "const": true
+              },
+              "userOrigin": {
+                "pattern": "^https://"
+              },
+              "adminOrigin": {
+                "pattern": "^https://"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "dataMode": {
+                "const": "SYNTHETIC"
+              },
+              "realEnabled": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GateEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "BLOCKED",
+            "NOT_RUN"
+          ]
+        },
+        "sourceSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "configSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evidenceRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "executedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC",
+            "REAL_T1",
+            "DESIGN_ONLY"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "sourceSha256",
+        "configSha256",
+        "evidenceRef",
+        "executedAt",
+        "scope"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "PASS"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidenceRef": {
+                "type": "string",
+                "minLength": 1
+              },
+              "executedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "scope": {
+                "type": "string",
+                "enum": [
+                  "SYNTHETIC",
+                  "REAL_T1"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "user_web",
+            "admin_web",
+            "backend_amd64",
+            "backend_arm64",
+            "apk",
+            "migration_set",
+            "policy_set"
+          ]
+        },
+        "pathOrDigestRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 300
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NOT_BUILT",
+            "BUILT_TESTED"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "pathOrDigestRef",
+        "sha256",
+        "status"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "BUILT_TESTED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "pathOrDigestRef": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ReleaseManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DESIGN_TEMPLATE",
+            "VERIFIED_CANDIDATE"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "WORKING_TREE_ARCHIVE"
+              ]
+            },
+            "head": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "contentSha256": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "includesUntrackedAndDeletions": {
+              "const": true
+            }
+          },
+          "required": [
+            "kind",
+            "head",
+            "contentSha256",
+            "includesUntrackedAndDeletions"
+          ]
+        },
+        "pins": {
+          "$ref": "#/$defs/Pins"
+        },
+        "configSha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Artifact"
+          },
+          "minItems": 6,
+          "maxItems": 7
+        },
+        "compatibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "previousCodeSupportsCurrentDatabase": {
+              "type": "boolean"
+            },
+            "jobPolicies": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "uniqueItems": true
+            },
+            "payloadKinds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "uniqueItems": true
+            },
+            "installedNativeRevisions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "previousCodeSupportsCurrentDatabase",
+            "jobPolicies",
+            "payloadKinds",
+            "installedNativeRevisions"
+          ]
+        },
+        "gates": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "G-ARTIFACT": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-DB": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-DOMAIN": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-AUTH": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-J2": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-CONSUMERS": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-NATIVE": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-SOURCE": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-AGENT": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-SEC-T1": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-OPS": {
+              "$ref": "#/$defs/GateEvidence"
+            },
+            "G-UAT": {
+              "$ref": "#/$defs/GateEvidence"
+            }
+          },
+          "required": [
+            "G-ARTIFACT",
+            "G-DB",
+            "G-DOMAIN",
+            "G-AUTH",
+            "G-J2",
+            "G-CONSUMERS",
+            "G-NATIVE",
+            "G-SOURCE",
+            "G-AGENT",
+            "G-SEC-T1",
+            "G-OPS",
+            "G-UAT"
+          ]
+        },
+        "signature": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tool": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 80
+            },
+            "trustedKeyId": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 120
+            },
+            "detachedSignatureRef": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 240
+            },
+            "verified": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "tool",
+            "trustedKeyId",
+            "detachedSignatureRef",
+            "verified"
+          ]
+        },
+        "runtime": {
+          "type": "string",
+          "enum": [
+            "NOT_RUN",
+            "CANDIDATE_TESTED"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source",
+        "pins",
+        "configSha256",
+        "artifacts",
+        "compatibility",
+        "gates",
+        "signature",
+        "runtime"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED_CANDIDATE"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "configSha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "source": {
+                "properties": {
+                  "contentSha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                }
+              },
+              "artifacts": {
+                "items": {
+                  "properties": {
+                    "status": {
+                      "const": "BUILT_TESTED"
+                    }
+                  }
+                }
+              },
+              "signature": {
+                "properties": {
+                  "tool": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "trustedKeyId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detachedSignatureRef": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "verified": {
+                    "const": true
+                  }
+                }
+              },
+              "runtime": {
+                "const": "CANDIDATE_TESTED"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ReleaseCheckpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "releaseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "prepared",
+            "verified",
+            "maintenance",
+            "drained",
+            "migrated",
+            "smoke_passed",
+            "opened",
+            "halted"
+          ]
+        },
+        "deployLockHeld": {
+          "type": "boolean"
+        },
+        "maintenance": {
+          "type": "boolean"
+        },
+        "oldWriterFenced": {
+          "type": "boolean"
+        },
+        "noActiveClaims": {
+          "type": "boolean"
+        },
+        "schemaChecksumsMatch": {
+          "type": "boolean"
+        },
+        "grantsVerified": {
+          "type": "boolean"
+        },
+        "registryCompatible": {
+          "type": "boolean"
+        },
+        "recoveryGateOpen": {
+          "type": "boolean"
+        },
+        "smokePassed": {
+          "type": "boolean"
+        },
+        "backupVerified": {
+          "type": "boolean"
+        },
+        "pendingDeniesAnchored": {
+          "type": "boolean"
+        },
+        "priorCodeCompatible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "releaseId",
+        "phase",
+        "deployLockHeld",
+        "maintenance",
+        "oldWriterFenced",
+        "noActiveClaims",
+        "schemaChecksumsMatch",
+        "grantsVerified",
+        "registryCompatible",
+        "recoveryGateOpen",
+        "smokePassed",
+        "backupVerified",
+        "pendingDeniesAnchored",
+        "priorCodeCompatible"
+      ]
+    },
+    "OperationalLog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        },
+        "operationClass": {
+          "type": "string",
+          "enum": [
+            "read",
+            "mutation",
+            "dispatch",
+            "backup",
+            "recovery",
+            "release"
+          ]
+        },
+        "statusClass": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "denied",
+            "error",
+            "partial"
+          ]
+        },
+        "safeCode": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "NOT_READY",
+            "AUTH_DENIED",
+            "QUOTA_HELD",
+            "BACKUP_OVERDUE",
+            "RECOVERY_LOCKED",
+            "WORKER_FENCED",
+            "SCHEMA_MISMATCH"
+          ]
+        },
+        "latencyBucket": {
+          "type": "string",
+          "enum": [
+            "lt100ms",
+            "lt1s",
+            "lt10s",
+            "ge10s"
+          ]
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "user_api",
+            "ops_api",
+            "market",
+            "agent",
+            "ingestion",
+            "forecast",
+            "retention",
+            "migration",
+            "backup",
+            "witness"
+          ]
+        },
+        "releaseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "environmentClass": {
+          "type": "string",
+          "enum": [
+            "LOCAL_SYNTHETIC",
+            "STAGING_SYNTHETIC",
+            "REAL_T1"
+          ]
+        }
+      },
+      "required": [
+        "requestId",
+        "operationClass",
+        "statusClass",
+        "safeCode",
+        "latencyBucket",
+        "profile",
+        "releaseId",
+        "environmentClass"
+      ]
+    },
+    "ExternalAlert": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "safeCode": {
+          "type": "string",
+          "enum": [
+            "HOST_MISSING",
+            "BACKUP_OVERDUE",
+            "RECOVERY_LOCKED",
+            "DISK_CRITICAL",
+            "ERASURE_OVERDUE",
+            "TLS_EXPIRING",
+            "QUEUE_OVERDUE",
+            "CLOCK_UNTRUSTED"
+          ]
+        },
+        "environmentClass": {
+          "type": "string",
+          "enum": [
+            "LOCAL_SYNTHETIC",
+            "STAGING_SYNTHETIC",
+            "REAL_T1"
+          ]
+        },
+        "releaseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "host",
+            "backup",
+            "recovery",
+            "market",
+            "agent",
+            "ingestion",
+            "forecast",
+            "retention"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "warning",
+            "critical"
+          ]
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "incidentRef": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        }
+      },
+      "required": [
+        "safeCode",
+        "environmentClass",
+        "releaseId",
+        "profile",
+        "severity",
+        "at",
+        "incidentRef"
+      ]
+    }
+  },
+  "$comment": "No runtime implementation is present."
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "status": 409,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "VERSION_CONFLICT",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 409,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "PREVIEW_EXPIRED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 409,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "IDEMPOTENCY_CONFLICT",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 403,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "DEVICE_REVOKED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 422,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "PARSER_UNSUPPORTED",
+      "message": "Synthetic safe error",
+      "retryable": false,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 429,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "RATE_LIMITED",
+      "message": "Synthetic safe error",
+      "retryable": true,
+      "retryAfterSeconds": 30,
+      "fieldErrors": [],
+      "outcome": "not_committed"
+    }
+  },
+  {
+    "status": 503,
+    "error": {
+      "contractVersion": "2.0.0",
+      "requestId": "REQ_SYNTHETIC_01",
+      "workspaceVersion": null,
+      "code": "OUTCOME_UNKNOWN",
+      "message": "Synthetic safe error",
+      "retryable": true,
+      "retryAfterSeconds": null,
+      "fieldErrors": [],
+      "outcome": "unknown"
+    }
+  }
+]

@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Bộ hồ sơ bước1–3 / M1
 
 Baseline `scope-v2` bước 1, `analysis-v2` bước 2; cập nhật06/10/2026, execution/register version2.1. Chuẩn bị M1 cho bốn nhóm lõi cùng Home/Plan/Goals/AI theo 5 navigation. M1 PASS qua AG self-walkthrough/automation; pending formal PO acceptance. Chưa user research thật; [Validation](../design/validation-report.md) và [coverage](../execution/evidence/m1-coverage.md) là evidence sản phẩm.

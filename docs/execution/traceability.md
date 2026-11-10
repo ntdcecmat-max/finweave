@@ -1,11 +1,13 @@
+> Hiệu chỉnh 08/10/2026: RTM sản phẩm hiện hành có **41 AC** tại [realignment-traceability](realignment-traceability.md). 28 AC/Step4–6 bên dưới là baseline kế thừa, không tổng scope hiện hành. [Truy vết UI mới](../design/ui-requirement-traceability.md), [catalogue 50 IDs](../design/interface-catalogue.md) và [báo cáo nghiệm thu mới](../testing/frontend-acceptance-report.md) phân biệt synthetic đã chạy với native/API/UAT chưa kiểm chứng. PASS lịch sử không áp dụng cho toàn bộ v3; runtime còn dùng v1.1 và operational prototype khác canonical v2.
+
 # FinWeave — Requirements Traceability Matrix
 
-REQ-RTM-001 · v2.4 ·06/10/2026 · scope-v2/analysis-v2; M1-v0.1. In-review; AG self-review, PO external sign-off pending. 28REQ/AC giữ nguyên:18core +10đã chọn. **M2 frontend được nghiệm thu AG ở bước 6: PASS_FRONTEND_SYNTHETIC_MOCK**; contract exact 1.1.0. Các phần M1/bước 4 bên dưới giữ oracle và lịch sử; real auth/privacy/security/provider vẫn blocked. Authmock/systemcatalogue bổsungtheouser, giữ28REQ/AC.
+REQ-RTM-001 · v2.4 ·06/10/2026 · scope-v2/analysis-v2; M1-v0.1. In-review; AG self-review, PO external sign-off pending. 28REQ/AC giữ nguyên:18core +10đã chọn. **Kết luận lịch sử ngày 06/10 của bước 6: PASS_FRONTEND_SYNTHETIC_MOCK; đã được thay bằng báo cáo rà soát 08/10 ở đầu tài liệu**; contract exact 1.1.0. Các phần M1/bước 4 bên dưới giữ oracle và lịch sử; real auth/privacy/security/provider vẫn blocked. Authmock/systemcatalogue bổsungtheouser, giữ28REQ/AC.
 
 Nguồn sự thật: [Needs](../product/stakeholder-needs.md), [Context](../requirements/context-model.md), [PRD](../product/prd.md), [SRS FR/NFR](../requirements/srs.md), [UC](../product/use-cases.md), [Scenarios](../product/operational-scenarios.md), [Rules](../product/business-rules.md), [Data](../data/data-requirements.md), [Glossary](../requirements/glossary.md). ID rút gọn trong cột Rules/Data là thành phần của prefix đầu tiên (BR-02/04 = BR-02, BR-04); dấu … là dải inclusive. UC và SCN chính giữ ID dự kiến từ bước 1; UC-UX-01 bổ sung cho REQ-UX-01 vốn xuyên UC, không thêm FR.
 
 
-## RTM chức năng hiện hành
+## RTM chức năng kế thừa v1 (28 AC, bằng chứng lịch sử)
 
 | Requirement / Ideas § / Need | UC → màn/route đã chạy | SCN chính/nhánh → AC/oracle | Rules | Data | Logical contracts M2 (v1.1.0, wiring bước 5) | Backlog / M1 state / evidence |
 |---|---|---|---|---|---|---|

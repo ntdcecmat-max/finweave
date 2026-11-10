@@ -1,56 +1,86 @@
-# FinWeave — Product Requirements Document
+> **03/11/2026 — Nhập giao dịch bằng ảnh:** phương thức nhập chính chuyển sang người dùng chọn/chụp ảnh, OCR tách từng giao dịch và tự lưu khi đủ thông tin; trường thiếu chờ kiểm tra. Notification Android là tùy chọn. [Yêu cầu và thiết kế hiện hành](screenshot-transaction-entry.md). Các mô tả collector bắt buộc bên dưới là lịch sử phương án trước thay đổi này.
 
-> Cập nhật execution06/10/2026: nội dung requirement/scope-v2/analysis-v2 và28REQ/AC dưới đây giữ nguyên. Bước3 đã implement/kiểm chứng synthetic M1; xem [Validation](../design/validation-report.md) và [coverage](../execution/evidence/m1-coverage.md). Các câu planned/chưa app của hồ sơ bước1–2 mô tả thời điểm phân tích; trạng thái sản phẩm hiện hành nằm trong execution/register. Formal PO acceptance và user research chưa diễn ra.
+# FinWeave — Product Requirements Document v3
 
+PRD-001 · 07/10/2026 · scope-v3 / operational-v3 · yêu cầu làm việc, chưa nghiệm thu sản phẩm.
 
-ID PRD-001 · v2.0 · analysis-v2 trên scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending external review. [Scope](scope.md) là nguồn 28 REQ/AC theo D-19; PRD diễn giải scope-v2. [SRS](../requirements/srs.md) đặc tả hành vi, [RTM](../execution/traceability.md) nối kiểm chứng.
+Mục tiêu: sản phẩm chạy thực tế với admin web, user web và user Android, ưu tiên chi phí thấp. Lần rà soát này **chỉ sửa tài liệu**, không sửa frontend/backend hoặc deploy. [Báo cáo](../execution/product-realignment-audit.md) ghi bằng chứng; [PRD v2](../governance/baselines/pre-realignment-2026-10-07/docs/product/prd.md) giữ lịch sử. Không đánh đồng tài liệu mới với phần mềm đã triển khai.
 
-## Vấn đề, mục tiêu và đối tượng
+## 1. Vấn đề và giá trị
 
-Cá nhân giả định A-01…03 có tiền phân tán, ghi tiền mặt chưa đủ, holdings tự khai báo và nguồn có thể thiếu/trùng/cũ. Sản phẩm cần trả lời tiền ở đâu, chi vào gì, tài sản theo giá nào và dữ liệu nào cần kiểm tra. Nguồn [Stakeholder Needs](stakeholder-needs.md) SN-01…12; chưa phỏng vấn hoặc kiểm chứng thị trường.
+Người dùng cá nhân cần nhìn chung tiền ở ngân hàng/ví/tiền mặt và giá trị cổ phiếu/vàng, giảm nhập giao dịch thủ công, hiểu nguyên nhân biến động và chuyển mục tiêu thành kế hoạch khả thi. Mỗi số liệu có nguồn, thời điểm và độ đầy đủ; không gọi số dư tính toán là số dư ngân hàng đã xác minh, không gọi tổng bốn nhóm là tài sản ròng đầy đủ khi chưa có nợ.
 
-Mục tiêu bàn giao hướng M1: web tiếng Việt responsive local, tác vụ mô phỏng đủ bốn nhóm và đường truy căn cứ. Nhiệm vụ hiện tại chỉ hoàn thành hồ sơ bước 2 rồi đánh giá gate. Không xây prototype/contract/backend trong bước này.
+Giả thuyết khác biệt: nối thu nhận Android, định giá tài sản Việt Nam và Agent cùng người dùng xây dựng/điều chỉnh Plan–Goals có căn cứ. Đây chưa phải USP đã được nghiên cứu thị trường chứng minh. Chat/linh vật không tự tạo ra lợi thế sản phẩm.
 
-## Phạm vi và hành trình
+## 2. Ba giao diện
 
-| Nhóm khả năng / ưu tiên | Nội dung và benefit | Requirement / AC |
-|---|---|---|
-| Thiết lập / P0 | Workspace/mốc, bank/wallet/cash, stock/gold; biết nguồn và trạng thái khai báo | REQ-SET-01/BANK-01/CASH-01/STOCK-01/GOLD-01; AC-01…05 |
-| Đưa dữ liệu vào / P0 | CSV preview/confirm, thông báo/giá demo, thu/chi/chuyển/refund/count và lượng/giá | REQ-INPUT-01/INPUT-02/MONEY-01/CASH-02/HOLD-01; AC-06…10 |
-| Khám phá và cập nhật / P0 | Filter/detail, category và sửa posted có lịch sử | REQ-TXN-01/TXN-02; AC-11/12 |
-| Theo dõi / P0 | Tiền, thu–chi, dòng tiền, tài sản, drill-down giữ context; scope/archive | REQ-TRACK-01/TRACK-02; AC-13/14 |
-| Review / P0 | Thiếu/trùng/transfer/refund/pending/lệch, quantity/quote/FX/cũ | REQ-REVIEW-01/REVIEW-02; AC-15/16 |
-| Trải nghiệm và demo / P0 | Tiếng Việt, bàn phím, ba viewport, masking/reset và nhãn synthetic | REQ-UX-01/DEMO-01; AC-17/18 |
-| Navigation và Home đa kỳ / P0 | Đúng 5 đích, tháng/quý/năm/custom; balance/as-of và coverage rõ | REQ-NAV-01/REPORT-01; AC-19/20 |
-| Insights / P0 | Điểm đáng chú ý có căn cứ, mở đúng detail và không bịa xu hướng | REQ-INSIGHT-01; AC-21 |
-| Plan / P0 | Thu nhập/chi tiêu/đầu tư dự kiến, ánh xạ actual, dashboard/tracking và remaining forecast | REQ-PLAN-01/02; AC-22/23 |
-| Goals và mô phỏng / P0 | Phân bổ, funded progress/shortfall, kịch bản đạt goal và tác động có điều kiện | REQ-GOAL-01/02/SIM-01; AC-24…26 |
-| Trợ lý AI / P0 | Chat/history/scripted result cards và linh vật contextual ở mọi navigation | REQ-AI-01/02; AC-27/28 |
+| Giao diện | Trách nhiệm |
+| --- | --- |
+| User web | Theo dõi/sửa dữ liệu của mình, tài sản, giao dịch, Review, thiết bị; tạo Plan/Goals thủ công hoặc cùng Agent |
+| User Android | Các tác vụ user cốt lõi và native notification access, chọn app nguồn, trạng thái collector/outbox; APK có ký |
+| Admin web | Tình trạng tài khoản, app/parser/provider/jobs/quotas, lỗi đã khử dữ liệu và hành động vận hành có audit; không đọc sổ tiền, raw notifications hay hội thoại của user |
 
-Luồng lần đầu: thiết lập → đưa dữ liệu → Tổng quan → khám phá giao dịch/holding → cập nhật hoặc Review → tiếp tục theo dõi. Lần sau mở Tổng quan trực tiếp; Review là nhánh có lựa chọn, không cổng bắt buộc. Giá mới không cập nhật lượng và không thành thu nhập. Tiền chuyển trong phạm vi không là thu/chi sinh hoạt; tài khoản ngoài phạm vi làm dòng tiền của phạm vi thay đổi.
+Một backend, một ledger, cùng workspace trên web/mobile. Web vẫn dùng được với manual/CSV khi chưa cài Android; chỉ thu nhận notification phụ thuộc điện thoại đã cài app và cấp quyền. Admin có role/session/API riêng, không nút đổi sang workspace tài chính của user.
 
-Plan/Goals/AI/Insights được chọn theo D-19. Alerts và Budget advanced độc lập vẫn out-of-scope; không giả card/inbox ngoài scope hoạt động. BĐS/vốn kinh doanh/nợ/thẻ/đa tiền tệ tài khoản/hộ gia đình, nguồn thật/collector, export/batch/user rules/trade engine đầy đủ chưa chọn. Status/badge Review và nguồn vẫn trong lõi. Không gọi tổng bốn nhóm là tài sản ròng đầy đủ.
+## 3. Phạm vi và thứ tự phát hành
 
-## Chất lượng và tiêu chí thành công
+- **R1 tracking:** identity thật, ba giao diện, persistence, Android notification cho app được xác minh, manual/CSV fallback, holdings cổ phiếu/vàng, daily/manual prices, sync/Review, quyền và restore.
+- **R1.1 Plan/Goals có Agent:** Plan/Goals/simulation đã có thiết kế được nối dữ liệu thật; Agent tích hợp ngay trong tạo/chỉnh/theo dõi kế hoạch và mục tiêu, không chỉ trang chat riêng. Thử nghiệm giá trị Agent là gate nghiệm thu tính năng, không lý do tách nó khỏi Plan/Goals. Tracking vẫn hoạt động khi model không khả dụng.
 
-Các mục dưới là **mục tiêu chưa đo**, không kết quả: 28/28 AC có tác vụ và expected; oracle khớp từng giá trị; mọi tổng có nguồn/kỳ/unit/version và drill-down; không còn lỗi nghiêm trọng khiến không hoàn thành hoặc hiểu sai tài chính. Bước 3 cần kiểm tra 1440×900, 390×844, rộng 360px, bàn phím và masking. Chart có bảng thay thế; dữ liệu thiếu/cũ/tự khai báo có nhãn. NFR cụ thể nằm SRS; không đưa ngưỡng hiệu năng server bịa vào M1.
+Ưu tiên miễn phí, không cam kết dữ liệu thị trường, AI, domain hoặc quy mô nào cũng 0đ. Ngoài R1: iOS collection/IPA, SMS/email, Accessibility scraping, tự đăng nhập ngân hàng, chuyển tiền/đặt lệnh, mọi ngân hàng/ví, realtime tick, nợ/đa tiền tệ và microservices. Giữ frontend hiện có để tái sử dụng; thứ tự release không có nghĩa xóa màn.
 
-Nếu có người thật, dùng A-04 như đề xuất, chốt rubric trước thử; chưa có thì chỉ báo Agent walkthrough. Với số giả, AC-13 kỳ vọng tiền 31,1 triệu; tài sản 76,1→77,6 triệu khi đổi giá; thu nhập 10 triệu, gross 1,1 triệu, refund 0,2 triệu, net 0,9 triệu, dòng tiền +9,1 triệu. [Operational Scenarios](operational-scenarios.md) mô tả thứ tự/reset và nhánh độc lập.
+## 4. Cổ phiếu và vàng
 
-## Giả định, dependency và release boundary
+### Cổ phiếu
 
-OD-02: tháng 10/2026, clock demo 31/10 18:00 +07; giá >24h, lượng >30 ngày, nguồn >48h chỉ là fixture policy. OD-03: CSV demo có mapping; OD-04: vàng nhẫn demo 9999, VND/chỉ và quốc tế+FX giả. Những lựa chọn dẫn xuất (rounding, error transitions, category/refund) có nhãn ở D-13…18/BR; thay đổi phải impact RTM/scenarios/data, không tự phê duyệt.
+User chọn mã từ catalog hỗ trợ và nhập số cổ phiếu; hệ thống gắn instrumentId/sàn/đơn vị, ngày khai báo mặc định hôm nay. Chỉ hỏi thêm khi mã không duy nhất; cost basis tùy chọn. Không bắt user nhập API key để khai báo holdings. Nếu provider chỉ cho key cá nhân, đó là dependency chưa đạt luồng tối giản, không tự thêm vào onboarding bắt buộc.
 
-OD-01/A-01…06 nghiên cứu còn mở; OD-05/06 provider/license và OD-07 boundary/key/client/recovery chưa xác minh. AG theo dõi, PO chỉ định reviewer thực trước bước cần chốt. M2 kế thừa hồ sơ rồi đặc tả API/transport; M3 phải có Ledger/Engine và gate privacy thật. Không gửi real finance cho Agent phát triển/LLM, không key thật trong repo/demo. Không billing hoặc public deployment.
+Giá trị = quantity × quote hợp lệ VND/cổ phiếu. Quote không thay quantity hoặc cash/income. Thiếu giá vốn thì lãi/lỗ unknown, vẫn định giá được. Quantity do user khai báo/sửa có lịch sử; instrument đổi hoặc corporate action chưa xử lý phải Review, không suy đoán holdings từ giá.
 
-## Gate hồ sơ
+### Vàng
 
-DoR/DoD theo [Plan](../execution/plan.md). Bước 2 đủ khi có 10 artefact nhất quán, UC đầy đủ, rule testable, state độc lập, REQ–AC–SCN–rule–data truy vết và self-review có evidence. Formal approval pending external review; đạt hồ sơ bước 2 không đồng nghĩa đạt M1. Backlog BL-02…06 thực hiện bước này; BL-07…17 là kế tiếp khi được giao.
+User xác nhận **một hồ sơ vàng mặc định** trong onboarding: loại, tuổi vàng, thương hiệu/nguồn, chiều mua/bán. Sau đó chỉ nhập số chỉ; có thể chọn loại khác khi cần. Đề xuất vàng nhẫn 9999 của một nguồn nội địa có quyền, dùng giá mua vào để ước tính bán lại. Nguồn/sản phẩm cụ thể còn phải xác minh; không dùng profile demo làm giá thật.
 
-## Phạm vi bổ sung — 5 navigation, 28 FR/AC
+Giá trị = số chỉ × giá mua vào VND/chỉ; một lượng = 10 chỉ. Ghi là giá trị tham chiếu, không giá bán lại được bảo đảm. Không gộp nhẫn/miếng/tuổi vàng/thương hiệu, không lấy giá quốc tế quy đổi làm giá thu mua trong nước. Hồ sơ chưa xác nhận hoặc quote không tương thích: giữ quantity và hiển thị chưa định giá.
 
-[Scope§10](scope.md) là nguồn 5 navigation: Home(Tổng hợp/Báo cáo/Tài khoản&Tài sản), Giao dịch, Plan, Dữ liệu(Nguồn/Kiểm tra), Trợ lý AI; settings ở hồ sơ. Home cho phép 1–2 khối lớn, chọn 2 khối Tiền&Hoạt động / Tài sản&Cơ cấu làm mặc định thiết kế D-20. Tháng/quý/năm/custom đổi period/scope, balance as-of khác dòng tiền kỳ; Insights có rule/result refs, no fake trends hoặc số thiếu thành0. Cơ cấu bốn nhóm không full balance sheet do chưa nợ.
+### Giá hằng ngày và cập nhật chủ động
 
-Plan gồm planned income/expense/investment, dashboards/timeline, liên kết actual và variance/remaining forecast; Goals có target/due/allocations/progress/shortfall; mô phỏng khi đạt goal/mua/đầu tư có assumptions và không actual writes. M1 mô phỏng bằng synthetic fixture, không Engine thật hoặc đặt lệnh.
+Server lập lịch một lượt mỗi ngày; mặc định thiết kế 18:00 Asia/Ho_Chi_Minh, cấu hình được. Không bảo đảm provider có giá đóng cửa đúng thời điểm đó. Ngày nghỉ dùng giá phiên gần nhất với quoteAsOf gốc. Nút Cập nhật yêu cầu lấy dữ liệu mới nhất nguồn cho phép, không hứa giá sẽ đổi.
 
-AI có full chat/history và mascot contextual trên cả 5 navigation, cùng conversation/cards nguồn Engine. M1 scripted responses/read-only tool result simulation, errors/no data/context change có kịch bản; không model/key/billing. Goals/Assistant không còn out-of-scope. Chi tiêu kế hoạch thuộc Plan, không mặc định chọn Budget advanced/Alerts. Mục tiêu nghiệm thu bước 3 nay 28 AC, dữ liệu người dùng vẫn chưa kiểm chứng; gate M1 cũ không đủ scope-v2.
+Daily/manual dùng chung pipeline, coalesce job đang chạy, cooldown/cache/quota theo quyền dữ liệu. Phân biệt lastAttempt, lastSuccess, quoteAsOf và trạng thái job. Lỗi/partial giữ giá cuối cùng có nhãn, không thay missing bằng 0 hoặc đổi timestamp giá khi chưa có giá mới. Giá biến động không tạo income/expense trong ledger.
+
+## 5. Giao dịch ngân hàng/ví qua Android
+
+Luồng: giải thích quyền → user bật Notification access trong Android → chọn app hỗ trợ → map nguồn với tài khoản → thu notification mới → lọc/chuẩn hóa → durable receipt trên server → posting hoặc Review → hai client lấy snapshot mới.
+
+Từ chối/thu hồi quyền không ngăn dùng manual/CSV. Chỉ xử lý app được chọn, không thu OTP/credentials/nội dung app khác. Notification là evidence quan sát, không chứng nhận giao dịch cuối cùng ở ngân hàng. Thiếu amount/direction/account, mẫu không hỗ trợ hoặc nội dung che: Review, không bịa bút toán.
+
+Phân biệt gửi lại cùng sự kiện, notification bị update, hai thiết bị, CSV chồng dữ liệu với hai giao dịch thật cùng số tiền. Transfer nội bộ có thể có hai thông báo nhưng chỉ một transfer hai legs, phí riêng. Thiếu opening/coverage thì số dư mang nhãn tính toán/không đầy đủ.
+
+Không hứa thu hồi lịch sử đã mất, nguồn không phát thông báo, force-stop, OS redaction hay mọi OEM. Phải có support matrix từ thử thiết bị thật; [thiết kế Android](../architecture/android-collector.md) nêu giới hạn. Không dùng SMS/email như fallback tự động chưa được user chọn.
+
+## 6. Sync và authority
+
+Server giữ ledger/snapshot chuẩn; mobile giữ encrypted outbox và cache versioned. ACK received chưa phải posted. Sau commit, client refresh snapshot. Foreground polling + refresh-on-focus là baseline; realtime push là tối ưu sau, không bắt buộc để đạt cùng dữ liệu khi mở app.
+
+Retry không double money; conflict yêu cầu xem lại, không last-write-wins. Logout/revoke dừng capture/upload. Không gửi hàng đợi user A bằng phiên user B. Client không cần bật để server cập nhật giá hằng ngày.
+
+## 7. Agent tích hợp Plan và Goals
+
+**Kế thừa và phát triển cùng một trợ lý:** giữ hỏi–đáp/giải thích tiền, giao dịch, tài sản, Plan/Goals/mô phỏng; full chat, history, evidence/drill và linh vật contextual. Agent đa bước bổ sung trên nền đó, dùng chung conversation và Engine. Người dùng hỏi câu đơn giản vẫn được trả lời trực tiếp. [AI-SPEC-001](ai-agent-specification.md) hợp nhất yêu cầu cũ/mới với mã AI-FR-001…024 và AI-NFR-001…008; không yêu cầu xóa capability cũ. Scripted adapter là demo/baseline, implementation thật có thể tiến hóa mà giữ capability.
+
+**UC-PG-AGENT:** user nêu mục tiêu → Agent đọc snapshot tài chính/Plan/Goals được phép → hỏi target/deadline/priorities/reserve khi thiếu → đề xuất GoalDraft và PlanDraft liên kết → Engine tính khả thi, shortfall, cashflow và allocations → Agent so sánh/điều chỉnh theo phản hồi → user xem preview thay đổi → xác nhận → backend lưu phiên bản mới có audit.
+
+User có thể tạo Goal trước rồi nhờ Agent xây Plan, hoặc nhờ Agent xây Plan tổng thể rồi đề xuất các Goal phù hợp. Không phải mọi planned item đều gắn một Goal. Tiền dự kiến không trở thành funded allocation. Khi thực tế lệch kế hoạch, user mở “Phân tích và điều chỉnh”; Agent điều tra nguyên nhân, nêu dữ liệu thiếu, tạo amendment draft; không tự sửa active plan. Nhắc rà soát định kỳ có thể dùng rule trigger, còn cuộc điều tra dùng Agent nếu thực sự cần.
+
+**UC-INVESTIGATE:** “Vì sao tiền giảm dù thu nhập không đổi?” Agent kiểm coverage, transfer/refund/trùng/phí, planned-vs-actual và biến động giá; chọn bước tiếp theo dựa trên kết quả; trả evidence, kết luận và phần chưa xác định. Đề xuất xử lý case không đồng nghĩa đã sửa ledger.
+
+Agent vẫn sử dụng tool calling; giá trị là chuỗi quyết định phụ thuộc evidence, hỏi lại, lặp mô phỏng và xử lý mục tiêu mở. Scheduler/định giá/số dư/sync/dedupe chắc chắn dùng thuật toán xác định. Không tuyên bố workflow lập trình thường không thể làm các tác vụ này; cần đo Agent có giúp hoàn thành tốt hơn và giảm công người dùng hay không.
+
+[Agent spec](ai-agent-specification.md) định nghĩa draft tools, state/budget, so sánh baseline và failure modes. Linh vật/chat riêng là điểm truy cập phụ; entry points trong Plan/Goals là bắt buộc ở release tính năng này.
+
+## 8. Nghiệm thu và dependency chưa giải quyết
+
+R1 cần APK cài được, một ngân hàng và một ví cụ thể được thử end-to-end, nguồn giá có quyền, daily/manual jobs, persistence/restart, sync, admin authorization, restore và UAT theo [SRS](../requirements/srs.md). Các nguồn chưa thử phải ghi unsupported. AC mock cũ chỉ là evidence synthetic ở thời điểm test.
+
+Owner đã chọn **A + T1 TRUSTED-SERVER** ngày08/10/2026 tại [ADR-008](../architecture/adr/ADR-008-modular-backend-trusted-server.md): modular backend/shared Engine, infrastructure/runtime/DBA được tin xử lý finance dạng rõ; app-admin vẫn không đọc finance. Thay target chống root Ops trước đây theo [SRS NFR-08 cập nhật](../requirements/srs.md); không cam kết anti-Ops. Chưa xác minh: ngân hàng/ví, provider/entitlement/chi phí, gold profile, Android/OEM, model/privacy/budget và security/runtime evidence. T1 không bảo đảm miễn phí hoặc tự cho phép dữ liệu thật trước SEC-REAL-T1.

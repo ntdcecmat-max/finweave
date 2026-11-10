@@ -1,0 +1,64 @@
+"""Sync current architecture/AI product spec only; prior sealed packages stay intact."""
+from pathlib import Path
+import json,os,re
+R=Path(__file__).resolve().parents[2];E=R/'docs/execution/evidence/arch-12-agent-2026-10-09'
+def link(p,n):return os.path.relpath(R/n,p.parent).replace('\\','/')
+def main():
+    names=json.loads((R/'docs/execution/evidence/arch-11-sources-2026-10-09/current-documents.json').read_text(encoding='utf-8'))['files']
+    detail={
+      'README.md':'Agent runtime design kế thừa toàn bộ assistant/chat/history/mascot/manual và PG-01/02/03/INV-01. API005, native003, DB005; model thực chưa selected/enabled, frontend chưa adapter migration.',
+      'docs/architecture/README.md':'ARCH12 chốt custom TS state loop + J2/Engine/ToolGateway/ContextBuilder/GroundedRenderer,13capabilities. API005 sửa prototype-only mode, ARCH13 Operations tiếp theo; model/runtime NOT RUN.',
+      'docs/architecture/architecture-decision-agenda.md':'ARCH-12 ACCEPTED AGENT RUNTIME DESIGN trong stack hiện hành; local Ollama/Qwen3-4B chỉ PoC candidate chưa pin/benchmark. ARCH-13 REVIEW PENDING.',
+      'docs/architecture/android-collector.md':'Native API005 handshake cần bridge003 kế thừa002, chỉ exact revision fields đổi. Notification parser vẫn deterministic; raw/OTP không Agent. Android owner UI đầy đủ Agent/manual qua owner broker, worker không có token owner.',
+      'docs/architecture/deployment-topology.md':'Inference service local/private ACL chỉ AgentWorker→chat route, no public11434/browser access. I1 cohost cần đo RAM/CPU, không bảo đảm free VM đủ model; không tunnel/paid/cloud tự động.',
+      'docs/architecture/environment-matrix.md':'Scripted/deterministic baseline riêng local_model/hosted_model output modes. Missing model/runtime/artifact pins/eval/egress rights→model disabled. API005/bridge003 design only, no deployment/account/weights download.',
+      'docs/architecture/high-level-design.md':'Assistant module orchestration adaptive evidence→clarify/compare/draft/finish; Engine financial authority; Planning module draft commands. Owner confirm separate no actual. Một conversation/history, không Agent ledger/runtime queue thứ hai.',
+      'docs/architecture/low-level-design.md':'Server single decision, exact schemas/scope/intent/live fences; journal action reservation→unknown→observed, draft/result/checkpoint same UoW, budget cộng dồn/cancel CAS. Grounded rendering từ numeric refs, không model free financial prose.',
+      'docs/architecture/module-high-level-design.md':'Assistant owns messages/agent_runs/tool_results/private execution kinds; Planning owns planning_drafts/commit; AgentAdmission narrow Ops aggregate quota broker, no generic cross-module DB access. Worker calls local ports via ticket, không impersonate owner HTTP.',
+      'docs/architecture/tech-stack.md':'Custom TypeScript orchestrator trong Fastify/P2/J2, không thêm framework queue authority. Local Ollama+Qwen3-4B candidate chưa cài/pin; runtime/model/tokenizer/chat template/quantization phải benchmark. No dependency/lockfile change.',
+      'docs/architecture/views/architecture-views.md':'User API→frozen message/run/J2→AgentWorker→private ModelAdapter→validated ToolGateway→Engine/Planning draft→GroundedRenderer→same conversation. API/model/actual trust boundaries giữ T1, no Agent owner-confirm.',
+      'docs/contracts/README.md':'API005153operations634schemas supersedes unreleased004; five Assistant result.mode consts mở enum4 và Agent counters0..8. Request/routes/actors unchanged. Native003 exact005; các gói004 vẫn historical immutable.',
+      'docs/data/data-requirements.md':'DB00587tables1001cols162FK unchanged. Registered private execution checkpoint/workspace usage bucket Assistant + narrow ops_quotas aggregate broker SPECIFIED; no model prompt/thinking persistence hoặc finance trong global counter.',
+      'docs/data/logical-data-model.md':'Assistant/Planning ownership giữ nguyên. Stable server action identity/result refs+checkpoint/draft commit atomic; model provider call_id không authority. Typed payload registry addendum cần real uniqueness/grants/retention tests, không jsonschema=SQL PASS.',
+      'docs/governance/artifact-register.md':'Register FW-AGENT-DESIGN-001 / FW-AGENT-POLICY-001 / FW-AGENT-TOOLS-001 / FW-AGENT-EVAL-001 / ADR019 / API005 / native bridge003. Prior ARCH06–11/API004/baselines unchanged; current overview hashes nằm manifest ARCH12.',
+      'docs/handover/README.md':'Thêm Agent LLD/eval/32runtimecases, API005/native003 consumer delta và binding matrix từ packages cũ. DB005 unchanged; no model/runtime/backend/frontend migration acceptance. Giữ r1/r2, source gates.',
+      'docs/product/ai-agent-specification.md':'AI-SPEC-001 v1.1 tiếp tục nguồn product requirements duy nhất; ART-01…32 là implementation refinements, không thay AI-FR/NFR/41AC. Agent adaptive Plan–Goals/investigation vẫn tools; benefit cần baseline A/B/C và held-out mới. Không drop feature khi chưa đạt.',
+      'docs/product/backend-backlog.md':'Giữ tất cả 41 AC / AI-FR-001…024 và AI-NFR-001…008. ART-01…ART-32 bao phủ runtime/tools/draft/admission/recovery/grounding/privacy/eval; API005/bridge003 adapters còn phải code. Không bỏ tính năng khi model/source gates chưa đủ.',
+      'docs/product/business-rules.md':'Agent không tính tiền cạnh tranh Engine hoặc tự áp active/actual. Hard constraints không tự hạ, 8actions gồm ask/finish,60sactive/2clarifications cộng dồn; root+UTCday admission recheck khi crossday, không reset vì resume.',
+      'docs/product/cost-model.md':'External budget0, scripted/deterministic local baseline. Ollama local inference không API invoice nhưng RAM/CPU/điện/chất lượng chưa đo;10workspace/50global model roots mỗiUTCday là starting caps, no paid/cloud silent fallback.',
+      'docs/requirements/context-model.md':'Model/inference là untrusted decision generator dưới trusted T1 host; server ToolGateway/Engine quyết authority. Source-derived context cần use-specific rights kể cả local non-display, cloud thêm external egress grant.',
+      'docs/requirements/srs.md':'AI-FR-001…024 / AI-NFR-001…008 và 41 AC giữ đủ, ART-01…ART-32 thêm runtime detail. Simple Q&A không forcedAgent, multi-step Goal/Plan/variance/investigation có draft/evidence/clarification và owner-confirm riêng.',
+      'docs/security/security-design.md':'No raw/OTP/credentials/accountRef/transactionRef/thinking/model free factual-money output. Nested auth/per-intent caps, injection cannot grant tools, current epochs checked per action. Model service private/no DB/upstream keys, no arbitrary HTTP/trade/confirm.',
+      'docs/testing/integration-handover.md':'Current target API005 exact+hash/native003, DB005 unchanged. Old source/async/security bundles bind via explicit inheritance (request/actor unchanged). Frontend prototype hybrid not migrated; five result.mode projections and counter bounds cần runtime tests.',
+      'docs/testing/technical-spikes.md':'Agent PoC: structured decision/tiếngViệt/hardware cold-warm, grounding+injection+source rights, draft replay/action budget/cancel/answer CAS, UTCdaily quota/concurrency/restore, API005/native003, A/B/C benefit + heldout. All NOT RUN.',
+      'docs/design/android-ui-specification.md':'Owner mobile Agent flows giữ đủ: Plan/Goal entry↔chat/panel same refs, state/partial/cancel/stale/manualhandoff. Bridge003/API005 execution mode truthfulness và mask mọi narrative/cards/accessibility; native source capture không Agent task.',
+      'docs/handover/operational-decisions.md':'Chốt orchestration design O1 typed TS/J2; local Ollama/Qwen3-4B candidate PoC chưa artifact pins/hardware/eval. Không hosted model/account/quota được chọn; gates/budget0 giữ. Source VCB/MoMo/SSI/PNJ/SJC chưa activate.',
+    }
+    assert set(names)==set(detail)
+    for name in names:
+        p=R/name;s=p.read_text(encoding='utf-8')
+        s=re.sub(r'^> \*\*ARCH-12 hiện hành[^\n]*\n\n','',s)
+        s=re.sub(r'\n## ARCH-12 — Agent runtime handover\n.*\Z','',s,flags=re.S)
+        if name=='docs/product/ai-agent-specification.md':
+            s=s.replace('ID: AI-SPEC-001 · v1.0 · 08/10/2026','ID: AI-SPEC-001 · v1.1 · 09/10/2026',1)
+            s=s.replace('queued→planning/reading→awaiting_user','queued→reading→awaiting_user')
+            s=s.replace('[API delta](../contracts/operational-api-spec.md)','[API005 hiện hành](../contracts/v2-t1-r5/README.md)')
+            s=s.replace('Không đạt benefit của Agent thì thu hẹp phần đa bước cho case có ích; không bỏ hỏi–đáp/history/mascot/manual planner để hợp thức hóa benchmark','Không đạt benefit thì cải thiện model/runtime hoặc dùng deterministic/manual fallback trong cùng feature, giữ Agent use cases ở backlog; không bỏ khả năng mới/cũ để hợp thức hóa benchmark')
+            s=s.replace('Không đạt lợi ích thì giữ capability cũ và thu hẹp đa bước, không xóa capability cũ.','Không đạt lợi ích thì giữ mọi capability/Agent use case trong backlog, cải thiện runtime và dùng fallback minh bạch; không cắt feature để đạt benchmark.')
+        if name=='docs/architecture/architecture-decision-agenda.md':
+            s=s.replace('ARCH-11 ACCEPTED SOURCE INTEGRATION DESIGN; ARCH-12…13 REVIEW PENDING','ARCH-11 ACCEPTED SOURCE INTEGRATION DESIGN; ARCH-12 ACCEPTED AGENT RUNTIME DESIGN; ARCH-13 REVIEW PENDING',1)
+            s=s.replace('| ARCH-12 Agent | Model/runtime, simple tool vs multi-step, registry/state/budget/eval/fallback | Năng lực investigation/replan, latency/cost; tool không vượt quyền | AI LLD/eval/provider ADR |','| ARCH-12 Agent — ACCEPTED RUNTIME DESIGN | Typed TS/J2/Engine,13capabilities, local model candidate, API005/native003/DB005 |32runtimecases +30publiceval/12regression NOT RUN; model disabled/pins/eval missing |[Agent](../agent/README.md)/[ADR019](adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md)/[report](ARCH-12-change-report.md) |')
+        notice=f'> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD]({link(p,"docs/agent/README.md")}) và [ADR019]({link(p,"docs/architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md")}). Current **[API005]({link(p,"docs/contracts/v2-t1-r5/README.md")}) / DB005 / native bridge003**, [bundle/hash]({link(p,"docs/agent/implementation-bundle.json")}); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.\n\n'
+        s=notice+s.rstrip()+'\n\n## ARCH-12 — Agent runtime handover\n\n'+detail[name]+f'\n\n[Runtime design]({link(p,"docs/agent/README.md")}) · [Acceptance32 NOT RUN]({link(p,"docs/agent/acceptance-plan.md")}) · [Báo cáo ARCH12]({link(p,"docs/architecture/ARCH-12-change-report.md")}).\n'
+        p.write_text(s,encoding='utf-8')
+    (E/'current-documents.json').write_text(json.dumps({'date':'2026-10-09','files':names},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    # Final design bundle after all authored templates exist.
+    files={'api':'docs/contracts/v2-t1-r5/openapi.json','database':'docs/data/target-t1-async/target-model.json','sourceBundle':'docs/sources/implementation-bundle.json','asyncBundle':'docs/async/implementation-bundle.json','androidBase':'docs/android/implementation-bundle.json','nativeBridge':'docs/agent/native-bridge-003.json','security':'docs/security/t1/security-policy.json','engine':'docs/domain/engine-policy.json','policy':'docs/agent/agent-policy.json','tools':'docs/agent/tool-registry.json','decisions':'docs/agent/decision-schemas.json','promptTemplate':'docs/agent/prompt-template.md','evalCases':'docs/agent/evaluation-cases.json','aiProductSpec':'docs/product/ai-agent-specification.md'}
+    import hashlib
+    def sha(n):return hashlib.sha256((R/n).read_bytes()).hexdigest()
+    manifest=json.loads((R/'docs/agent/model-manifest-template.json').read_text(encoding='utf-8'));manifest['promptHash']=sha(files['promptTemplate'])
+    (R/'docs/agent/model-manifest-template.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    files['modelManifest']='docs/agent/model-manifest-template.json'
+    (R/'docs/agent/implementation-bundle.json').write_text(json.dumps({'id':'FW-AGENT-BUNDLE-20261009','status':'DESIGN_ONLY','apiRevision':'FW-API-T1-D1J2-005','databaseRevision':'FW-PHYS-T1-ASYNC-005','nativeBridgeRevision':'FW-NATIVE-BRIDGE-003','files':{k:{'path':n,'sha256':sha(n)} for k,n in files.items()},'inheritedBindings':'Source/async/API004 and security/API002 semantic base; current request/auth actors unchanged, explicit output/bridge delta in API005. Grants/registry/consumers NOT_IMPLEMENTED.','runtime':'NOT_RUN','modelEnabled':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps({'currentDocs':len(names),'apiRevision':'005','runtime':'NOT_RUN'}))
+if __name__=='__main__':main()

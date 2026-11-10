@@ -1,0 +1,462 @@
+{
+  "baselineOperations": 133,
+  "targetOperations": 141,
+  "addedOperations": [
+    "executeImportJob",
+    "getCommandOutcome",
+    "issueCollectorCredential",
+    "opsGetCommandOutcome",
+    "reconcileReceipts",
+    "renewNativeSession",
+    "requestCollectorCredentialChallenge",
+    "verifyNativeIdentityChallenge"
+  ],
+  "changedSchemas": [
+    {
+      "schema": "Device",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "131ac91beccda5a0490ef643e9cf0113fe8d9e423201276b420f6127828c36c3",
+      "afterSha256": "e614328fcf01d53efef216023270b4be835153c64bb9e48e2022d5694239210d"
+    },
+    {
+      "schema": "PriceJob",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ba1950f7d6349e64a93e2217822fe53a7df6511a6d978d63b4dad37f12f7e205",
+      "afterSha256": "0e9ae4e86ccc78b1891b85c631277f617103bf421dd921cfc11ae3145bb17e75"
+    },
+    {
+      "schema": "Error",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a29935206e746c442233a9c3725f975cc7043288d4ee6fe69c61841fc11cc3e3",
+      "afterSha256": "e6090f0e23afaf7c65e5ccba3765455fe0b47a31c5aedc0758396195c49bd989"
+    },
+    {
+      "schema": "getSessionRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "84cb3f207fcd772df60e5d6f99d9d510ab44ca75aaf5712f3e5afbc2d8d2e7cb",
+      "afterSha256": "27885e954f646da9462c6348696434b90aeb25ab32cff8105b6ee342bc52c8ca"
+    },
+    {
+      "schema": "getSessionReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "cab7112ebdc506d25f6968e244a0447557c23bf1a25c84d90432987953cc1824",
+      "afterSha256": "01856a741c9798f7b9a2bd578242d2f72bc09aae50f1f1dfbbf54611e7443844"
+    },
+    {
+      "schema": "signInRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ddf643453856dd20e3119b31baff98817fcec36f2849347b258c38083cc7592b",
+      "afterSha256": "872ffedd888e9feb0701261be7ecc2e136910a4c5b3d274c2376490e556fa2cd"
+    },
+    {
+      "schema": "signInReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "f2f1aafd6808418ff03762942fac40fb1ca4cd491c74b6481184fed74f63d2d8",
+      "afterSha256": "9c3363ff5289f14020479d1afbe6178b25bde24632e709aeab98cbdcc986739c"
+    },
+    {
+      "schema": "registerIdentityRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "c92372b9dfdcb65b694c7acf2bc876fa3fef416fa5d85da47972f220d54c4054",
+      "afterSha256": "2a7762fd7e7a94c02d9c8f81e7d90252ef676f9da1c0af136b80846b07183251"
+    },
+    {
+      "schema": "registerIdentityReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "6dc943be5103b003fe7ced56bbca833326ab1d6da5e54fbe67af3218ea06d0e0",
+      "afterSha256": "04c10a1d44aca8324d0a5ea033d680d3fdaeb3eec17c7a758fc222ea882a4090"
+    },
+    {
+      "schema": "verifyIdentityChallengeRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "962ef20bac96ec32f43fa6a2d9b0f5a8be4de78084bedf2f5ac8ab80518f36f9",
+      "afterSha256": "f39735ba414df3e6717bf7b6360ba4929e841c34afeb81f368bc8fcdcf9f4e18"
+    },
+    {
+      "schema": "verifyIdentityChallengeReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "add8786302714fd6a0ffb1d2a5c84d3d39e0f6311f0d23702cec5160d64ea64e",
+      "afterSha256": "55bfea2070ec66a122e098a774bbc914cc007fe41d70bf89d747ea14e9945b14"
+    },
+    {
+      "schema": "requestPasswordResetRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "8b2604fc76620dd0472bb9fea4adb94b1254a8a318a937938d5c78676088aff6",
+      "afterSha256": "eb1a4ec8b06f5892800d3e1ae5930bb356103d7c6b2b428ad118ddb0eba71795"
+    },
+    {
+      "schema": "requestPasswordResetReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "59f4c0ad389ed751ada4d355113b938144eed62dfd0ba6d6263d47fc550d227f",
+      "afterSha256": "1265f28545480f8b8d96feabad7552de7d60612b027710d30ccf272b23122b59"
+    },
+    {
+      "schema": "resetIdentityPasswordRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "deccb8a3dd1b0a936f49d5626ac2668ed4450a87efbbc52f2a13731e2af7161a",
+      "afterSha256": "a41879428bacc8a763018ae236456bd276614fc70cdb3d0a69f77624f7b56320"
+    },
+    {
+      "schema": "resetIdentityPasswordReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "f007164cd74506c44dd1afe37d7f96782f715b1ba8c5aad5ad5f991021188170",
+      "afterSha256": "43658eed05e4b81a668d44df8ae017ec787d5c73b3269ed9ac2bfc1ac6cedb8c"
+    },
+    {
+      "schema": "signOutRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "5614253795c138a04d103087fc47d1a735556465bcb551e623e8abd32f40a6cb",
+      "afterSha256": "075c39e3195059ea02c3911674917884a4424071e764fc625229fe1c6f9b2daf"
+    },
+    {
+      "schema": "signOutReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "b6a714209aec169ce3a1cf42d56dca3544549e5f3baae9faef23c232bf37e97e",
+      "afterSha256": "ab44e152294f2102fd29dc743eb54cf2bfb229f08875146b476524e3fd86b21b"
+    },
+    {
+      "schema": "requestPriceRefreshOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ba1950f7d6349e64a93e2217822fe53a7df6511a6d978d63b4dad37f12f7e205",
+      "afterSha256": "0e9ae4e86ccc78b1891b85c631277f617103bf421dd921cfc11ae3145bb17e75"
+    },
+    {
+      "schema": "revokeDeviceOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "131ac91beccda5a0490ef643e9cf0113fe8d9e423201276b420f6127828c36c3",
+      "afterSha256": "e614328fcf01d53efef216023270b4be835153c64bb9e48e2022d5694239210d"
+    },
+    {
+      "schema": "listSessionsRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "5ec81229fe16782c7295d1ab21d0ed00e44bd7729fe4234eefa029a9144d7742",
+      "afterSha256": "f71153a922d64bdcf7b03e0a7f53331275375cc6a3e92605a1b48cbc450dfa4b"
+    },
+    {
+      "schema": "listSessionsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "7dd7ac953d9b2649b9ebeeb335967a868a590d87b3e7497ce3a595711825216e",
+      "afterSha256": "bec1688f85f15d472edcbced4f3c808cd12fc57b01ecc33f83926e121cd146de"
+    },
+    {
+      "schema": "renewSessionRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a017dc3607a64d7a011cc366aa392e1df253f425892ad85a6ab3911ebe6058af",
+      "afterSha256": "757638697f059fc2c23548a9ac76a9ce2c66308be15118ebcb891376e0793352"
+    },
+    {
+      "schema": "renewSessionReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "49db9f04a5b1c625949d1933c284ee20a3cdc493d5386e83edc34efae6603d6f",
+      "afterSha256": "6b3a45d1aa06f1934b4d4f514a5b304734be9d0967570b1e74a58c0287c7b8fe"
+    },
+    {
+      "schema": "revokeSessionRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a47a98625ddfb71dd28a2f8685a4ffc2e51e09bdf024998168c1078595e98870",
+      "afterSha256": "5fbb5c83c03d0eee64513f50b8fba6509417d0c659bbc6d573fc57b554c2b311"
+    },
+    {
+      "schema": "revokeSessionReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "d2c3c23f84dabd4b4d65847db817dfcd75bb3d16da70cccab00c0f6bef73dfaa",
+      "afterSha256": "a786058eaed437126790f0d636f42484f2bb06f9392d1437b8ca95ef2de3cdb1"
+    },
+    {
+      "schema": "listWorkspacesRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "df954cc985e8ad52a287f3d432feeb88a84a5b2b0ec36d61fd5f95963c37e61e",
+      "afterSha256": "ea05b588752b3e34079b3bad98749b97e96d4299f1a879dc9a83a1fbac8de1a3"
+    },
+    {
+      "schema": "listWorkspacesReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "286f8f3645f938c9184812baa9b6f92f642eefe6ea4aee42ece6dbc43b485bd1",
+      "afterSha256": "fa30d08693ab0058f18b347da016e038ecbd905d890cc4e667a0fb3759d69463"
+    },
+    {
+      "schema": "createWorkspaceRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "36daac8a519d56c6995eee6352e9556b7d076d26cb9e295ac873275ff2ec5861",
+      "afterSha256": "418082593967d1a8a15941e8850c8dba793a77f9f618ff00781e29ffef54e5f6"
+    },
+    {
+      "schema": "createWorkspaceReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "77478cd2bac49279774cd48273059bc15c6b988b89d8efa037491a4c37bf4425",
+      "afterSha256": "1a607bb2a3a3013b6103a9d236710da6891b228a7dbb85a5d361b245375368a0"
+    },
+    {
+      "schema": "registerDeviceOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "131ac91beccda5a0490ef643e9cf0113fe8d9e423201276b420f6127828c36c3",
+      "afterSha256": "e614328fcf01d53efef216023270b4be835153c64bb9e48e2022d5694239210d"
+    },
+    {
+      "schema": "listDevicesOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "07eeb9664cd20c556c953727fc0dcd2a89f3b26c08638903449d3c71fabcf467",
+      "afterSha256": "67df2ff071d9fb2d851eb303920588e775845da886a2d0d2bd784a90cd1c0659"
+    },
+    {
+      "schema": "ingestNotificationsInput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "88e5fc6a54fe61bb69eb615a928e7acf3deb2aa2cdf6bce8c3778a9af7e1470f",
+      "afterSha256": "74facddf40f7117d4e518e20e3a2a7dc76fee4c05bd9935c17f1706aed725053"
+    },
+    {
+      "schema": "ingestNotificationsOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "40c2dc372134c11556c42e415b348bcdc1fe2a0ceed2678a5a7bfdd7251e7305",
+      "afterSha256": "614bd33ff77e7115558ab9badb9acab16f44ca85c83fd745c0b942827e985108"
+    },
+    {
+      "schema": "ingestNotificationsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "2ba6134acc1133c1dfc8f6f8edc16d01a1a2a50b8542a47d575e5dcabf38a960",
+      "afterSha256": "d291e48d7374155dd718907d8c05e8d6c410390a71cea57260622603b08464b5"
+    },
+    {
+      "schema": "getSyncStateOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "e0da8df742453db605023beaaaf996c8c07128a7648022e8e2147b632e4d25e2",
+      "afterSha256": "ed0bc1d2363ac7bf3b9afbc85e753aac8b3076d77043587fa978150a0ba74835"
+    },
+    {
+      "schema": "getRefreshJobOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ba1950f7d6349e64a93e2217822fe53a7df6511a6d978d63b4dad37f12f7e205",
+      "afterSha256": "0e9ae4e86ccc78b1891b85c631277f617103bf421dd921cfc11ae3145bb17e75"
+    },
+    {
+      "schema": "listRefreshJobsOutput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "3393054bb68ac10ee1211ca3bd23a817c663e640f8a1d105c43d27eea787c7fc",
+      "afterSha256": "48449c06b577b2030b9cd5cf5c3e6d49e03b5cb8623808e5a4ad14db81c8e9b4"
+    },
+    {
+      "schema": "adminSignInRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "b36838ba6778861b8873f1bd8cfa72db6b09245d7c5742ad245611d0b3b0bd8f",
+      "afterSha256": "313bd46a272c33f2a2b05b9d510e1330e95cd15799eb6284a5579fbb87ffcc9f"
+    },
+    {
+      "schema": "adminSignInReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "25c644cd62bf75f60fa4824437bb4ea1ab055484a6c18836170cdc245a8f3aa5",
+      "afterSha256": "38359896a289ef2e7ba83ff998cc57c6539f0c170c07ed7bfcd031d39838452f"
+    },
+    {
+      "schema": "adminSignOutRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "9ea594bea66ab4440496a8ff621e4020346e4490d16032881bb3f795fafab1c9",
+      "afterSha256": "014c43aeb8c566febb5339e5adff2ec8bad11e471eeb3b9789f53e4ddc826fe9"
+    },
+    {
+      "schema": "adminSignOutReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "afb5d84e869f626cb0125e6b5fef0d988d5615c81bfc58ff61afae4610427b6b",
+      "afterSha256": "861f2cb5a47284053fa0cbba34fad3b0f0eef3aeb108ffabd0bdf4e0938ed18b"
+    },
+    {
+      "schema": "opsStatusRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "dc03bb09f868170e2184381e2b2ae4b982dfc2c1ee28f60a0161d94ed24ff6b0",
+      "afterSha256": "0b0ce4067cb72c79b8a9857134343bbd3a7760724a5ba15fb9616df91138ee8f"
+    },
+    {
+      "schema": "opsStatusReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "74bf8606a96ec816aca655adbc2780b1a4b2e3eced8a2e79343f1eea5544c7ee",
+      "afterSha256": "684c1461d36ec16b8fac31daf6ed7f48ffbb94589067c4b535d65c6c6499e247"
+    },
+    {
+      "schema": "opsListAccountsRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "d8e421a503713527a490b0a8417d4577a737b01d9bdd0232e9e8213d3a2f0880",
+      "afterSha256": "e8c56999dcf367ddf11496cf4a81a437a9ba41d559f321b1316b046f6539aa87"
+    },
+    {
+      "schema": "opsListAccountsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ac53b6f06643733c49adbb611416d2b3f650ef5f9b8a43ff9a16a2f9e86628a0",
+      "afterSha256": "0b75911df671711766960f9750e3a86f3f6fc092dbfa6e6e9ed3248d111e2dd6"
+    },
+    {
+      "schema": "opsListSourcesRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ade53d7b52f5bf2f7ce3e421e725ab4e40077576f319a0c2b6590252eebb2b8c",
+      "afterSha256": "13a306190b0ddb3aed570979dab9648ab49c53e58e074a18055fdc3ae59dbc6d"
+    },
+    {
+      "schema": "opsListSourcesReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "e1ef9caa5a193dde159c7e7b0d5ec71203d9b3708d7b50c90b100a7558b2842f",
+      "afterSha256": "a92a400d9688bbaeb207789408ec7e701d8d47462a92a1a460dd6bf7ed45cd33"
+    },
+    {
+      "schema": "opsListJobsRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "1f337cc1a552864def00fc47c32e6808404f68b6fb415cf2a0f91504b798670d",
+      "afterSha256": "b11aa3cc523ec9c6c9c29948dad7f1666a8f3b7faf5c8b25da6f64dcb7876dec"
+    },
+    {
+      "schema": "opsListJobsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "2f9762105c3ba3efeec0c25d8b3aebba65224168c8db126c14af4d48bb0e00dc",
+      "afterSha256": "a3247a0607e1aed04dbdf7f48384aa854bac20f0992afdede62359a2cf2c8707"
+    },
+    {
+      "schema": "opsListQuotasRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "7b9519580892a4f3dbf80cf9e0f2eb91be76e994ea501b3d1a7388454744a23a",
+      "afterSha256": "1792f45771c8553741fb38f6b029cef9504880bdb23a141dd563326d790382ac"
+    },
+    {
+      "schema": "opsListQuotasReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a83ff04691d32ce834bf8622ef19cc928700c12facbd4b9c1d97865e90460127",
+      "afterSha256": "4f276fdbe95491d3e510a46101793b0af5815c8821326e25adf01aab55f7114c"
+    },
+    {
+      "schema": "opsListReleasesRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "2b9b23d17b9c83167bf72a5dba57c7e56b1882fa19333e645d47517874c46242",
+      "afterSha256": "cbd83e2843448a2266017d685452ad166ba8fd990ba86dc8956f4e34b1f68b02"
+    },
+    {
+      "schema": "opsListReleasesReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "ebc0e2bffd099c8b497df1b57ea48cb95eb8f1b88d6884faf4f042cbbe94468e",
+      "afterSha256": "07db8790e5d36173196c1519194a61f7c982b403828b9d0745005534dce9a49a"
+    },
+    {
+      "schema": "opsListIncidentsRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "c20c415028a1fd37ca199ee2da363bb78c569d49401b978c0bda694ec5978127",
+      "afterSha256": "b16bd7e79cdd8374a4592af7f81c527148ac2f31425198f1a1efd3169819926b"
+    },
+    {
+      "schema": "opsListIncidentsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "81c5b32e49c28bdaf1b8415e602bab05d673ad4b4c36612568874a0dcfad9941",
+      "afterSha256": "7d8949f8deb32778c23371c73ff5e1525660d9841c24569bf9ffb1a7b2eaebaf"
+    },
+    {
+      "schema": "opsListAuditRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "b227ec559e832c3a6bc15c29475b6879a761f7ed59032f4bf4c8c71f91a24b2d",
+      "afterSha256": "95c1f9533b752847dc91c39f771797ed4fda3720cdfd2ce5281c2ff84892f667"
+    },
+    {
+      "schema": "opsListAuditReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "fad8c0acbe8dcc22f36d49f6bd8ab5a7592e20db558ddb2980c6c4170707d6cf",
+      "afterSha256": "9d486032481937c587313eb13fab153cd9ee245dbf94c7a801df23f794334ac4"
+    },
+    {
+      "schema": "opsPreviewActionRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "2234c44d6582b1c1ca180d344f5eb843489e46a3b6615212db81afd3262745cc",
+      "afterSha256": "8d40f3d41901b7fcfb71a45bb949632c0810ed1eec9efdff8e275331ba3fce77"
+    },
+    {
+      "schema": "opsPreviewActionReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a640702c0adeb18cb0f6d3bbb326a27792fc55f85d7eb77bed480c02e799aa0d",
+      "afterSha256": "f3932885c597b48c9dcad71b70209b408eb1c0167e5271d16792ffcf70c79b60"
+    },
+    {
+      "schema": "opsConfirmActionRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "f2aa8d88017deef54d2d8ab288d9c624a491112222bc05c7957cbb2696d1f5cd",
+      "afterSha256": "6fed689759401f155a42ca1d2e7acee7a04bcef82a8938d3752d0d36eb9038c1"
+    },
+    {
+      "schema": "opsConfirmActionReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "3c7d146c5de90af335c61dbbfa5247db9f49bbce216c28e8f4bc48da222964d8",
+      "afterSha256": "8d3a321da004b76d3d734a67039343e0da0a5e26c7f81a329d7347cd6ae0aa79"
+    },
+    {
+      "schema": "dispatchJobsRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "87287ead1e204c973c5f6ca33358f857fab48026df23d8689253e0f7bb6ac0fa",
+      "afterSha256": "7d93c66f7802daa387b45e94d16ad634b9234bb2e6da9a499d829f2c7a53dbc1"
+    },
+    {
+      "schema": "dispatchJobsReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "73bc93e9c164ac62c6f646e6c5d4b04d42a2ebb2fbf97cc0c6b7018fef20edf5",
+      "afterSha256": "1d03d1ccd84e723b61065a6d382a4620e577c2bbe40e09385febe7f35cb4b888"
+    },
+    {
+      "schema": "processIngestionReceiptInput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "730d1023b83c72f075f3ba0af962cbd2fd7a19c704ea63c1a69f353165b75ff4",
+      "afterSha256": "7f3a7cae02a6b45f35cb8344129d7ccf71e36596bf9018bcaca2382d264af04f"
+    },
+    {
+      "schema": "processIngestionReceiptRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "b4fe8bcf463d71d76bbbee5a6ddc6f094bcf248cce93a46e8892e566b6736558",
+      "afterSha256": "fb6ad2d9da52c78e243b6b3c884a50f387b496149e12a34ef211aff3490aa667"
+    },
+    {
+      "schema": "processIngestionReceiptReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "2a12884ecca5d2c842232fa8734684519355a70c6a3371b71176d098f8051934",
+      "afterSha256": "9d0140f85437aebd10eb8af2aeb9425c54532b138fb5279bfb32b3be4f8888af"
+    },
+    {
+      "schema": "executePriceRefreshInput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "d466dceab9b16f7647f54423e9740521077d86ac4718004fc376af193d83dff5",
+      "afterSha256": "cfccde16066cfc04d315311ee844b0fa14550c312da1de1055b6ced75c309833"
+    },
+    {
+      "schema": "executePriceRefreshRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "a262fbbd6e6ec1736e1dfb5a9473218e39c238b8fabc536ae6c098de2e2f8e62",
+      "afterSha256": "3b53240334e430d51f230943c04e39a3d1d01ef82a6a572a5557c6d375bb26c6"
+    },
+    {
+      "schema": "executePriceRefreshReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "8299b58751bbf7f68c718c3875406b375c4539c5314f4261069db198f0593794",
+      "afterSha256": "5f8b82512668127c98a263a32ea62539a3e6fc423992ffbfeaa8cb010abe766f"
+    },
+    {
+      "schema": "executeAgentStepInput",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "9f9092b01c701cc7815b34a98d663997af91ea9bfb88553881dd6d8091f9bf42",
+      "afterSha256": "31655b78fb496555a83e6252b5cb09e739210796d91dc9cf65ef6afbcf2638ee"
+    },
+    {
+      "schema": "executeAgentStepRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "c50249430e07641715ded0c030e00e3d75825e35a86eceb980f6c16561895043",
+      "afterSha256": "b0611d94d50285b99b647f305e9e6378762bdbb1c25405e1e8cdbe85702f47c4"
+    },
+    {
+      "schema": "executeAgentStepReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "0f396fd0e1a8d776e60cacb149a33e288a6e13e4dad6cc9c27de162c1512836a",
+      "afterSha256": "8a11f71ca10b02e1f8d2703955fb709aab1a6f5591c7acbb75c84e0fb71b02ce"
+    },
+    {
+      "schema": "purgeExpiredDataRequest",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "b7f39f72d0c0e7175346bbe99b2d0dcf06b0d6787eca7813e4d1f83ea3cb1949",
+      "afterSha256": "98933ce7c0da6db0d2370fdf89cb7dddf699c028de157618e29c2f1bf7f79d80"
+    },
+    {
+      "schema": "purgeExpiredDataReply",
+      "status": "CHANGED_UNRELEASED_REVISION",
+      "beforeSha256": "7d1b1ce97180f96c5549697414f6616f56e92e429df932defb1d32f79df43696",
+      "afterSha256": "a421ca5ffb074cb99fc709cb83a9edbe22771342066baeeda0fdd0cffeee4d23"
+    }
+  ],
+  "unchangedSchemas": 470,
+  "warning": "Unreleased revision, not wire-compatible by2.0.0 label; baseline inputs unchanged."
+}

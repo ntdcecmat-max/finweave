@@ -1,3 +1,17 @@
+> **03/11/2026 — Nhập giao dịch bằng ảnh:** phương thức nhập chính chuyển sang người dùng chọn/chụp ảnh, OCR tách từng giao dịch và tự lưu khi đủ thông tin; trường thiếu chờ kiểm tra. Notification Android là tùy chọn. [Yêu cầu và thiết kế hiện hành](screenshot-transaction-entry.md). Các mô tả collector bắt buộc bên dưới là lịch sử phương án trước thay đổi này.
+
+> **ARCH-12 hiện hành — 09/10/2026:** [Agent LLD](../agent/README.md) và [ADR019](../architecture/adr/ADR-019-bounded-agent-runtime-and-grounded-planning.md). Current **[API005](../contracts/v2-t1-r5/README.md) / DB005 / native bridge003**, [bundle/hash](../agent/implementation-bundle.json); Assistant mode/counter output delta, request/roles unchanged. **Design SPECIFIED; model disabled; runtime/evals NOT RUN.** Kế thừa AI-SPEC và các gói ARCH06–11 bằng explicit binding, không sửa historical packages/frontend.
+
+> **ARCH-11 hiện hành — 09/10/2026:** [Sources](../sources/README.md), [ADR018](../architecture/adr/ADR-018-verified-source-profiles-and-market-entitlements.md) và [bundle pin](../sources/implementation-bundle.json). Chốt source profile/normalization/rights/consumer mapping; API004/DB005/bridge2 giữ nguyên. **Design SPECIFIED; REAL SOURCES NOT ACTIVATED; runtime NOT RUN.** ARCH11 làm rõ nguồn/binding/Review; notes ARCH05…10 là base và lịch sử, không evidence live support.
+
+> **ARCH-10 hiện hành — 09/10/2026:** [Android design](../android/README.md), [ADR017](../architecture/adr/ADR-017-android-native-collector-and-signed-apk.md) và [bundle pin](../android/implementation-bundle.json). Capacitor/Kotlin, native identity/Room/Keystore/WorkManager, bridge2, support/clock/retention và signed APK. API004/DB005 giữ nguyên; frontend không sửa. **Design SPECIFIED; APK NOT BUILT, Android/runtime NOT RUN.** ARCH10 thay mô tả native cũ khi khác; notes ARCH05…09 là lịch sử và vẫn là base security/domain/async.
+
+> **ARCH-09 hiện hành — 09/10/2026:** [Async/sync](../async/README.md), [API004: 153 operations / 634 schemas](../contracts/v2-t1-r4/README.md), [DB005: 87 bảng / 1001 cột](../data/target-t1-async/README.md) và [bundle/hashes](../async/implementation-bundle.json). Kế thừa đầy đủ tính năng; sửa CSV selectors và coverage paging, chốt J2/retry/ACK/scheduler/quota/cancellation/offline. **Thiết kế đã chốt; backend/SQL/native/provider/concurrency NOT RUN.** Các notes ARCH-05…08 bên dưới là lịch sử revision; target hiện hành theo004/005 và addenda này.
+
+> Current trust delta: owner đã chọn A + T1 tại [ADR-008](../architecture/adr/ADR-008-modular-backend-trusted-server.md); các mô tả anti-Ops lịch sử dưới đây không override T1. [ADR-011 D1 + J2](../architecture/adr/ADR-011-evolving-schema-and-shared-jobs.md) cụ thể hóa DB/queue/role boundaries; tests chưa chạy.
+
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Business Rules Catalogue
 
 ID REQ-BR-001 · v2.0 · analysis-v2/scope-v2 · 05/10/2026 · in-review. Agent owner/self-review; PO pending. Nguồn: Ideas §1.5–1.12/3–9/14/19, Playbook §5/13, [Scope AC-01…28](scope.md). `Giữ nguồn` = yêu cầu đã có; `Giả định` = lựa chọn phân tích, chưa PO duyệt. Mọi expected dưới đây là oracle/specification, chưa phải test app pass. [Scenarios](operational-scenarios.md) chứa fixture tương ứng; M1 mô phỏng, M2 mock, M3 thực thi/test thật.
@@ -65,3 +79,65 @@ OD-02/03/04 được user cho phép dùng **giả định**, AG owner cập nh�
 Plan: draft→active (user confirm valid fields)→archived; edits tạo version mới, không lén cập nhật simulation/forecast cũ. PlannedItem: scheduled/linked_partial/linked_complete/overrun theo mapping, không dùng posting status. Goal: active/achieved/archived; funding: funded/shortfall/unknown độc lập lifecycle. Simulation: draft→calculating→ready/failed; cancel không actual mutation. Conversation: active/archived; Message: queued/processing/completed/failed/cancelled; tool result validity current/stale/denied độc lập. Closing mascot không cancel actual commit (AI không writes) hoặc xóa history. Khôngcase/narrativeAI trở thành nguồn sự thật ledger.
 
 Masking trong AI: structured amounts/quantity/cards phải che như Home; message body tự do/history có số tiền nhạy cảm được ẩn toàn bộ khi privacy mode bật, thay vì dùng regex đoán hết mọi amount trong free text. Context labels ngày/kỳ vẫn rõ; không giữ plaintextfinance trong accessible text/tooltips. BR-35/NFR-12/15 áp dụng.
+
+## Delta nghiệp vụ v3 — 08/10/2026
+
+Các quy tắc sau là phần hiện hành bổ sung vào BR-01…36. BR-37 làm rõ ngoại lệ draft cho quy tắc AI read-only cũ, không cấp quyền ghi actual hoặc xác nhận thay người dùng.
+
+| ID | Quy tắc |
+| --- | --- |
+| BR-37 | Agent được tạo/sửa PlanningDraft riêng của owner, gồm GoalDraft/PlanDraft và links. Draft không active, không funded và không là giao dịch. Mọi áp dụng cần owner preview/confirm với versions/digest/idempotency; commit bundle atomic |
+| BR-38 | Planned contribution → Goal không tự là ActualLink hoặc cash allocation. Một Goal có nhiều plan items; plan item có thể không gắn Goal. Không double-count future income thành tiền hiện có |
+| BR-39 | Agent điều chỉnh kế hoạch theo actual phải tạo amendment draft, giữ version cũ; stale snapshot phải simulate/preview lại. Không tự hạ reserve, tăng thu nhập giả hoặc gán lợi suất để biến infeasible thành feasible |
+| BR-40 | Stock catalog resolve instrument/sàn; vàng phải có profile được user xác nhận gồm loại/tuổi/nguồn/side/unit. Quote mới không thay quantity, không tạo thu nhập. Thiếu cost chỉ khiến P/L unknown |
+| BR-41 | Daily/manual refresh chung pipeline có entitlement/quota/coalescing. LastAttempt/lastSuccess/quoteAsOf riêng; ngày nghỉ giữ asOf thật, refresh thất bại không giá0 hoặc giả giá lịch sử |
+| BR-42 | Receipt received khác posted. Retry identity=(workspace,device,eventId), semantic duplicate dùng evidence/source reference; hai giao dịch thật cùng amount không tự gộp. Không đủ evidence chuyển Review |
+| BR-43 | Notification là observation, không chứng minh coverage hoặc balance ngân hàng. Permission/gaps/source support và opening thiếu phải hiển thị; không capture OTP/app ngoài allowlist, không phục hồi lịch sử bằng suy đoán |
+| BR-44 | Ba giao diện dùng một authority; admin application không đọc finance user. T1 theo ADR-008 thay anti-root-Ops của ADR-006: infrastructure/root/DBA được tin và có khả năng đọc finance. D1/J2 theo ADR-011 tách admin/worker capabilities; consent/revoke/logout/restore epochs không cho queue đổi owner |
+
+Nguồn triển khai: [SRS v3](../requirements/srs.md), [Agent spec](ai-agent-specification.md), [Android](../architecture/android-collector.md), [LLD](../architecture/low-level-design.md). Các quy tắc mới chưa có backend implementation/evidence.
+
+## Nguồn AI hợp nhất — 08/10/2026
+
+[AI-SPEC-001](ai-agent-specification.md) hợp nhất BR-33…35 với BR-37…39 thành trợ lý hỏi–đáp/giải thích/history/linh vật được kế thừa và Agent draft/điều tra phát triển thêm. Quy tắc read-only áp dụng cho câu hỏi đọc và actual/active boundary; draft write được cho phép theo BR-37, confirmation vẫn do owner. Không bỏ capability cũ, không tạo conversation authority hoặc Engine thứ hai. Mã chi tiết AI-FR-001…024/AI-NFR-001…008 có acceptance criteria và mapping SRS trong spec.
+
+## ARCH-08 — Làm rõ business rules khi xây Engine (09/10/2026)
+
+Các refinement sau cụ thể hóa BR-01…44, không bỏ capability hoặc thêm parent AC.
+
+| ID | Quy tắc tiếp nối |
+| --- | --- |
+| BR-45 | Ledger posted là balance authority; opening declaration chỉ ghi đúng một lần qua opening group, zero opening không tạo zero lines. Unknown baseline/coverage không là0verified |
+| BR-46 | Sealed groups không append/update/delete; correction exact reversal/replacement/history atomic. Transfer thiếu chân dùng clearing; fee không posted độc lập với draft/pending transfer; link refund không cash lần2 |
+| BR-47 | Monthly recurrence giữ anchor day, không truncate horizon inclusive; timestamp đổi sang business timezone; snapshots freeze cả effective cutoff và recorded version |
+| BR-48 | Active actual family không match hai occurrences trong cùng planning scope qua revisions. Refund/reversal signed đúng kỳ; Plan baseline lấy snapshot chung, không item đầu |
+| BR-49 | Funding hiện tại pro-rata/stableallocationId; future schedules dùng shared source state, không reuse same cash. Achieved dựa actual criterion + liquidity AND, không simulation probability |
+| BR-50 | Extended forecast giữ mọi settings/presets/criteria; baselines có coverage, recurring replacement khác additive oneoff; explicit overdue policy, no silentclamp/truncation |
+| BR-51 | Model/RNG/grid/seed/rounding được version; counterfactual cùng random factors; stress một lần; probability có sample size/assumptions, missing/incomplete/pastdue không fake100% |
+| BR-52 | Forecast run freeze+enqueue qua J2, compute-only worker/checkpoint/pages; chỉ publish full results sau current fence check. Run/history không actual authority hoặc permission bypass |
+
+[Domain LLD](../domain/README.md), [ADR-015](../architecture/adr/ADR-015-exact-financial-engine-and-frozen-forecast-runs.md), [30 runtime cases](../domain/acceptance-plan.md). Rules SPECIFIED; backend/SQL/concurrency NOT RUN. Prototype khác rule mới được ghi [source review](../domain/source-review.md); không sửa frontend ở đây.
+
+## ARCH-09 — Async refinements
+
+Không tăng parent requirements: ACK≠posted; delivery retry không tạo actual effect lần2; equal amount/time không tự dedupe; cancellation không reverse committed facts. Source quota/rights, snapshot coverage và recovery epoch thắng completion trễ; Agent/draft/forecast không ghi actual. Money/calendar/Goal criteria theo ARCH-08 giữ nguyên.
+
+[Hồ sơ async](../async/README.md), [API004](../contracts/v2-t1-r4/README.md), [DB005](../data/target-t1-async/README.md), [ADR-016](../architecture/adr/ADR-016-postgresql-dispatch-and-explicit-sync-outcomes.md), [32 ca runtime](../async/acceptance-plan.md).
+
+## ARCH-10 — Android implementation handover
+
+Android callback/OS permission/ACK do not prove posted or complete coverage. No observation≠no transaction. Clock/epoch/owner mismatch seals/quarantines, never retag. Expiry no physical-delete guarantee while off.
+
+[Chi tiết Android](../android/README.md) · [Acceptance32 NOT RUN](../android/acceptance-plan.md) · [Báo cáo ARCH10](../architecture/ARCH-10-change-report.md).
+
+## ARCH-11 — Source integration handover
+
+SRC-06/08/10/12: unbound local warning, pending không actual, transport≠economic dedupe, internal transfer không expense+income double count. SRC-18…SRC-26: exact unit/profile/time/rights/quota; client compatible không authority.
+
+[Source design](../sources/README.md) · [Acceptance32 NOT RUN](../sources/acceptance-plan.md) · [Báo cáo ARCH11](../architecture/ARCH-11-change-report.md).
+
+## ARCH-12 — Agent runtime handover
+
+Agent không tính tiền cạnh tranh Engine hoặc tự áp active/actual. Hard constraints không tự hạ, 8actions gồm ask/finish,60sactive/2clarifications cộng dồn; root+UTCday admission recheck khi crossday, không reset vì resume.
+
+[Runtime design](../agent/README.md) · [Acceptance32 NOT RUN](../agent/acceptance-plan.md) · [Báo cáo ARCH12](../architecture/ARCH-12-change-report.md).

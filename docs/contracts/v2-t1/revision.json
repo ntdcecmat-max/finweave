@@ -1,0 +1,11 @@
+{
+  "revision": "FW-API-T1-D1J2-001",
+  "contractVersion": "2.0.0",
+  "status": "ACCEPTED_DESIGN_NOT_IMPLEMENTED",
+  "openapiSha256": "a2f2c20ac316b5eb7efddcf5936b8bcbd70abd3430fe88f85f261dff1e278c0c",
+  "operations": 141,
+  "schemas": 576,
+  "fieldRows": 9686,
+  "consumerRows": 145,
+  "observedSource": "../../execution/evidence/arch-05-t1-2026-10-08/observed-contracts.json"
+}

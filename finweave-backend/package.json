@@ -1,0 +1,55 @@
+{
+  "name": "finweave-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "check": "node scripts/check.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --test-concurrency=1 tests/*.test.ts",
+    "test:postgres": "node scripts/test-postgres.ts",
+    "verify:pins": "node scripts/verify-pins.ts",
+    "start:user": "node src/runtime/main.ts",
+    "start:ops": "node src/runtime/main.ts",
+    "test:runtime": "node scripts/test-runtime.ts",
+    "test:retention": "node scripts/test-retention.ts",
+    "test:finance": "node scripts/test-finance.ts",
+    "test:screenshots": "node scripts/test-screenshots.ts",
+    "local:init": "node scripts/local-runtime.ts init",
+    "test:async": "node scripts/test-async.ts",
+    "test:business": "node scripts/test-business.ts",
+    "check:business": "node scripts/check-business.ts",
+    "contract:business": "node scripts/build-business-contract.ts",
+    "verify:business": "node scripts/verify-business-evidence.ts",
+    "observe:async": "node scripts/observe-async.ts",
+    "test:assistant": "node scripts/test-assistant.ts",
+    "eval:agent": "node scripts/evaluate-agent.ts",
+    "test:ops": "node scripts/test-ops.ts",
+    "contract:ops": "node scripts/build-ops-contract.ts",
+    "verify:ops": "node scripts/verify-ops-evidence.ts",
+    "contract:be19": "node scripts/build-be19-contract.ts",
+    "verify:be19": "node scripts/build-be19-contract.ts --check",
+    "test:operations": "node scripts/test-operations.ts",
+    "build:operations": "node scripts/build-operations-release.ts",
+    "operations:init": "node scripts/init-operations.ts",
+    "operations": "node scripts/operate.ts"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "2.2.2",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "canonicalize": "5.1.0",
+    "fastify": "5.12.5",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@embedded-postgres/windows-x64": "16.14.0-beta.17",
+    "@types/node": "24.19.1",
+    "@types/pg": "8.23.1",
+    "typescript": "5.9.3"
+  }
+}

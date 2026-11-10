@@ -1,0 +1,215 @@
+{
+  "id": "FW-AGENT-TOOLS-001",
+  "allActionsChargeBudget": true,
+  "capabilities": [
+    {
+      "name": "getFinancialSnapshot",
+      "kind": "read",
+      "apiOperations": [
+        "getPresentationSnapshot",
+        "getPortfolio"
+      ],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Authorized frozen financial facts; no invented totals"
+    },
+    {
+      "name": "getCoverage",
+      "kind": "read",
+      "apiOperations": [
+        "listCoverage",
+        "listCoverageGaps"
+      ],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Bounded explicit completeness; pages charge actions"
+    },
+    {
+      "name": "getTransactions",
+      "kind": "read",
+      "apiOperations": [
+        "listTransactions"
+      ],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Authorized filters only, no memo/ref to model"
+    },
+    {
+      "name": "getEvidence",
+      "kind": "read",
+      "apiOperations": [
+        "getEvidence"
+      ],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Sanitized structured evidence; original refs stay server"
+    },
+    {
+      "name": "getPlanningContext",
+      "kind": "read",
+      "apiOperations": [
+        "listPlanItems",
+        "listGoals",
+        "getGoalProgress"
+      ],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Full competing reservation closure via local scoped query ports or partial, never truncated as complete"
+    },
+    {
+      "name": "getPlanActualVariance",
+      "kind": "read",
+      "apiOperations": [],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Local Engine/query port over frozen authorized Plan/actual lineage"
+    },
+    {
+      "name": "simulatePlan",
+      "kind": "pure",
+      "apiOperations": [
+        "simulatePlanningDraft"
+      ],
+      "intents": [
+        "goal",
+        "plan"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Pure Engine; live draft expectedVersion or frozen candidate input"
+    },
+    {
+      "name": "compareScenarios",
+      "kind": "pure",
+      "apiOperations": [],
+      "intents": [
+        "goal",
+        "plan"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Local pure bounded Engine batch up to3 candidates, no recursive egress"
+    },
+    {
+      "name": "proposePlanningDraft",
+      "kind": "draft",
+      "apiOperations": [
+        "createPlanningDraft"
+      ],
+      "intents": [
+        "goal",
+        "plan"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Same UoW draft + tool result + action checkpoint, no owner confirm"
+    },
+    {
+      "name": "amendPlanningDraft",
+      "kind": "draft",
+      "apiOperations": [
+        "reviseDraft"
+      ],
+      "intents": [
+        "goal",
+        "plan"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Expected draft/context versions, no actual/active writes"
+    },
+    {
+      "name": "proposeReviewActions",
+      "kind": "proposal",
+      "apiOperations": [],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Private recommendations + evidence only; no Review merge/post"
+    },
+    {
+      "name": "askClarification",
+      "kind": "control",
+      "apiOperations": [],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "CAS question plus release lease, max2, counted action"
+    },
+    {
+      "name": "finishRun",
+      "kind": "control",
+      "apiOperations": [],
+      "intents": [
+        "goal",
+        "plan",
+        "investigation"
+      ],
+      "portScope": "SERVER_CAPTURED_OWNER_FROZEN_CONTEXT",
+      "actualAuthority": false,
+      "requiresLiveAuthorization": true,
+      "rule": "Grounded conclusion refs rendered by server; counted action"
+    }
+  ],
+  "legacyAliases": {
+    "getPlans": "getPlanningContext",
+    "getGoals": "getPlanningContext",
+    "getAllocations": "getPlanningContext",
+    "simulatePlanningDraft": "simulatePlan",
+    "compareDraftOptions": "compareScenarios",
+    "createGoalDraft": "proposePlanningDraft",
+    "createPlanDraft": "proposePlanningDraft",
+    "updatePlanningDraft": "amendPlanningDraft"
+  },
+  "runtime": "NOT_RUN"
+}

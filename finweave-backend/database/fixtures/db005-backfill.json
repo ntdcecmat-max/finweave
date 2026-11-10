@@ -1,0 +1,13 @@
+{
+  "revision": "SYNTHETIC_ONLY_LEGACY_MAPPING_001",
+  "rows": {
+    "devices": {
+      "[\"W_A\", \"D_A\"]": {
+        "signing_algorithm": "ES256",
+        "public_key_format": "base64url_der_spki",
+        "installation_id": "LEGACY_REVOKED_FIXTURE",
+        "authorized_until": "2026-10-01T00:00:00Z"
+      }
+    }
+  }
+}

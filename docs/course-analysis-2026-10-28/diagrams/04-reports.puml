@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam packageStyle rectangle
+title FinWeave — Báo cáo, tổng quan và rà soát
+actor "Chủ workspace" as Owner
+rectangle "FinWeave — Báo cáo, tổng quan và rà soát" {
+usecase "UC-OVERVIEW-01\nXem tổng quan tài chính, dòng\ntiền và tài sản" as UC_OVERVIEW_01
+usecase "UC-REPORT-01\nXem báo cáo tài chính theo kỳ" as UC_REPORT_01
+usecase "UC-INSIGHT-01\nĐọc nhận định và phát hiện bất\nthường" as UC_INSIGHT_01
+usecase "UC-REVIEW-01\nRà soát nghi vấn dữ liệu tiền" as UC_REVIEW_01
+usecase "UC-UX-01\nBật hoặc tắt che thông tin tài\nchính" as UC_UX_01
+usecase "UC-DRILL-01\nPhân tích chi tiết và điều chỉnh\nphạm vi" as UC_DRILL_01
+usecase "UC-EVIDENCE-01\nXem chứng từ và nguồn gốc số\nliệu" as UC_EVIDENCE_01
+usecase "UC-RESOLVE-01\nXác nhận quyết định xử lý case" as UC_RESOLVE_01
+}
+Owner -- UC_OVERVIEW_01
+Owner -- UC_REPORT_01
+Owner -- UC_DRILL_01
+Owner -- UC_INSIGHT_01
+Owner -- UC_REVIEW_01
+Owner -- UC_RESOLVE_01
+Owner -- UC_EVIDENCE_01
+Owner -- UC_UX_01
+UC_DRILL_01 ..> UC_OVERVIEW_01 : <<extend>>\n[chọn chỉ số để phân tích]
+note on link
+  Extension point: sau khi xem số tổng
+end note
+UC_DRILL_01 ..> UC_REPORT_01 : <<extend>>\n[chọn chỉ tiêu báo cáo]
+note on link
+  Extension point: sau khi xem báo cáo
+end note
+UC_EVIDENCE_01 ..> UC_OVERVIEW_01 : <<extend>>\n[chọn xem căn cứ]
+note on link
+  Extension point: sau khi hiển thị chỉ số
+end note
+UC_EVIDENCE_01 ..> UC_REPORT_01 : <<extend>>\n[chọn xem căn cứ]
+note on link
+  Extension point: sau khi hiển thị báo cáo
+end note
+UC_EVIDENCE_01 ..> UC_INSIGHT_01 : <<extend>>\n[chọn xem căn cứ]
+note on link
+  Extension point: sau khi đọc nhận định
+end note
+UC_RESOLVE_01 ..> UC_REVIEW_01 : <<extend>>\n[owner chọn hành động xử lý]
+note on link
+  Extension point: sau khi đọc case
+end note
+@enduml

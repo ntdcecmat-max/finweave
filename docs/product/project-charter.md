@@ -1,3 +1,5 @@
+> Baseline v3 — 07/10/2026: nội dung dưới giữ phân tích/quy tắc lịch sử v2. Khi khác phạm vi, ưu tiên [PRD v3](prd.md), [Scope v3](scope.md), [SRS v3](../requirements/srs.md) và [Agent trong Plan/Goals](ai-agent-specification.md). Không dùng giới hạn web/mock/M2 dưới đây làm giới hạn sản phẩm mới; invariant nghiệp vụ và anti-Ops vẫn giữ trừ delta được ghi rõ.
+
 # FinWeave — Project Charter
 
 Ngày 05/10/2026; baseline `scope-v2`. Chủ sản phẩm là người giao nhiệm vụ trong chat; chưa có danh tính pháp nhân, nhà tài trợ, nhóm vận hành hoặc ngân sách được chỉ định. Đây là charter làm việc, không tự tạo phê duyệt tổ chức.

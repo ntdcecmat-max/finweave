@@ -1,0 +1,99 @@
+{
+  "id": "FW-SEC-T1-001",
+  "date": "2026-10-09",
+  "status": "ACCEPTED_DESIGN_RUNTIME_NOT_RUN",
+  "trust": "T1_TRUSTED_SERVER",
+  "trustLimits": [
+    "trusted infrastructure/root/DBA/backup/key operators can read plaintext",
+    "RLS does not contain a compromised owner API with its DB authority",
+    "no zero-loss/HA or immediate crypto-erasure claim"
+  ],
+  "apiRevision": "FW-API-T1-D1J2-002",
+  "apiSha256": "2b7727363508ecf7e805e96838c3d478d211d6fa4a461210d111ad3fee8d3578",
+  "database": "FW-PHYS-T1-SECURITY-003",
+  "frontendMutation": false,
+  "realEnabled": false,
+  "logs": {
+    "allowed": [
+      "requestId",
+      "operationClass",
+      "statusClass",
+      "safeCode",
+      "latencyBucket",
+      "workerProfile",
+      "attemptBucket",
+      "releaseId",
+      "environmentId"
+    ],
+    "forbidden": [
+      "body",
+      "headers",
+      "token",
+      "password",
+      "bankOTP",
+      "rawNotification",
+      "amount",
+      "balance",
+      "quantity",
+      "accountRef",
+      "email",
+      "prompt",
+      "sqlParameters",
+      "privateURL"
+    ],
+    "retentionDays": 30
+  },
+  "backup": {
+    "tool": "restic",
+    "databaseExport": "pg_dump custom consistent logical export; global role manifest reconstructed separately",
+    "repository": "Off-host append-only authenticated TLS rest-server; exact destination not provisioned",
+    "writerCanDelete": false,
+    "normalSchedule": "daily",
+    "dailyCount": 7,
+    "weeklyCount": 4,
+    "snapshotHardMaxAgeDays": 34,
+    "unreferencedPackPurgeMaxHours": 24,
+    "erasureMaxDaysFromRequest": 35,
+    "rpoHoursTarget": 24,
+    "rtoHoursTarget": 24,
+    "measured": false
+  },
+  "checkpoint": {
+    "independent": true,
+    "denyOnly": true,
+    "successRequiresDurableAnchor": true,
+    "latestHeadRequiresFreshNonce": true,
+    "publicFinancePayloadAllowed": false,
+    "minRetentionDays": 90,
+    "retainUntilAllCopiesExpired": true,
+    "witnessProvisioned": false
+  },
+  "restore": {
+    "state": "LOCKED_UNTIL_RECONCILED",
+    "oldHostMustBeFenced": true,
+    "invalidateAllSessionsTokensChallengesRecoveryCodes": true,
+    "requireFreshOwnerPasswordReset": true,
+    "reactivateOldAuthReplay": false
+  },
+  "egress": {
+    "default": "DENY",
+    "profiles": [
+      "licensed_market",
+      "auth_mail",
+      "approved_inference",
+      "encrypted_backup",
+      "recovery_witness"
+    ],
+    "externalLLMFinanceDefault": false,
+    "bankRawAnywhere": false
+  },
+  "gates": [
+    "SEC-REAL-T1",
+    "AUTH-MAIL-REAL",
+    "GATE-NATIVE",
+    "GATE-SOURCE",
+    "GATE-AGENT",
+    "GATE-RESTORE"
+  ],
+  "runtimeCases": 32
+}
