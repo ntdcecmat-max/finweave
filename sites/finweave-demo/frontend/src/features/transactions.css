@@ -1,0 +1,24 @@
+.transactions-page { --tx-accent: #28594a; --tx-soft: #e9f3ed; background:linear-gradient(180deg,var(--tx-soft),transparent 700px); border-radius:16px; }
+.transactions-flow { --tx-accent: #26784b; --tx-soft: #e7f5df; }
+.transactions-transfers { --tx-accent: #7550a0; --tx-soft: #eee6fa; }
+.transactions-refunds { --tx-accent: #256b9e; --tx-soft: #e1f1fd; }
+.transaction-heading {
+  padding: 28px;
+  border: 1px solid color-mix(in srgb, var(--tx-accent) 18%, white);
+  border-radius: 16px;
+  background: radial-gradient(ellipse at right bottom, var(--tx-soft), transparent 70%), linear-gradient(110deg, #fff, var(--tx-soft));
+  border-left: 5px solid var(--tx-accent);
+}
+.transaction-heading h1, .transaction-heading .eyebrow { color: var(--tx-accent); }
+.transactions-page .subtabs .active { color: var(--tx-accent); border-color: var(--tx-accent); background: var(--tx-soft); border-radius: 8px 8px 0 0; }
+.transactions-page .transaction-list { border-top: 3px solid var(--tx-accent); }
+.transactions-page .transaction-list .card-head { background: linear-gradient(90deg, var(--tx-soft), transparent); border-radius: 8px; padding: 12px; }
+.transactions-page .filter-card { padding: 0; }
+.filter-summary { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; cursor:pointer; list-style:none; font-weight:600; color:var(--tx-accent); }
+.filter-summary::-webkit-details-marker { display:none; }
+.filter-summary>svg { transition:transform .15s; }
+.filter-card[open] .filter-summary>svg { transform:rotate(180deg); }
+.filter-summary:focus-visible { outline:2px solid var(--tx-accent); outline-offset:-3px; border-radius:12px; }
+.filter-options { padding:0 20px 20px; }
+@media(max-width:639px) { .transaction-heading { padding:20px 16px; } .transaction-heading h1 { font-size:26px; } .transactions-page .subtabs button { padding:12px 9px; } .filter-options { padding:0 14px 16px; } }
+@media(prefers-reduced-motion:reduce) { .filter-summary>svg { transition:none; } }

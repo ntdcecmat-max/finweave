@@ -1,0 +1,30 @@
+.mascot-visual{position:relative;display:block;width:var(--mascot-size);height:var(--mascot-size);flex:none;pointer-events:none;isolation:isolate}
+.mascot-poster{position:absolute;inset:5%;width:90%;height:90%;object-fit:contain;user-select:none}
+.mascot-poster.is-playing{opacity:0}
+.mascot-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.mascot-canvas.is-playing{opacity:1}
+.header-actions .mascot-entry .mascot-visual{display:block}
+.floating-pet{position:fixed;z-index:var(--z-mascot);width:120px;display:flex;flex-direction:column;align-items:center;user-select:none}
+.pet-character{display:flex;align-items:center;justify-content:center;width:120px;height:120px;padding:4px;border:0;border-radius:24px;background:transparent;cursor:grab;touch-action:none;filter:drop-shadow(0 5px 5px #17342d26)}
+.is-dragging .pet-character{cursor:grabbing}
+.pet-character:focus-visible{outline:3px solid var(--color-focus);outline-offset:2px}
+.pet-caption{max-width:150px;white-space:nowrap;background:#fffef9ed;border:1px solid #e7dfc8;box-shadow:0 3px 12px #17342d0a;border-radius:99px;padding:4px 11px;color:#496351;font-size:11px;line-height:18px;pointer-events:none}
+.pet-controls{display:flex;align-self:flex-end;gap:0;margin-bottom:-8px;opacity:0;transition:opacity 120ms}
+.floating-pet:hover .pet-controls,.floating-pet:focus-within .pet-controls{opacity:1}
+.pet-control{width:36px;height:36px;border:1px solid #dce5df;border-radius:50%;background:#fffefaed;color:#4b6256;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px #17342d0a}
+.pet-menu{position:absolute;right:0;bottom:calc(100% + 8px);width:224px;max-width:calc(100vw - 32px);padding:14px;background:#fffefa;border:1px solid #dce5df;border-radius:14px;box-shadow:0 10px 32px #17342d20;z-index:1;font-size:13px}
+.pet-menu.opens-below{bottom:auto;top:calc(100% + 8px)}
+.pet-menu>strong{display:block;font-size:14px}
+.pet-menu>p{color:#60716b;font-size:11px;line-height:17px;margin:4px 0 8px}
+.pet-menu>button{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:8px 4px;border:0;border-radius:6px;background:transparent;color:#294b3b;text-align:left;font-size:12px}
+.pet-menu>button:hover{background:#e8f2ed}
+.floating-pet.is-collapsed{width:48px}
+.pet-restore{width:48px;height:48px;padding:3px;display:flex;align-items:center;justify-content:center;background:#fffefa;border:1px solid #dedfcf;border-radius:50%;box-shadow:0 3px 12px #17342d12}
+.chat-mascot{display:flex;align-items:center;gap:12px;min-height:68px;padding-bottom:12px;border-bottom:1px solid var(--color-border)}
+.chat-mascot-character{padding:0;border:0;border-radius:16px;background:transparent;flex:none}
+.chat-mascot strong{display:block;font-size:15px;color:var(--color-primary)}
+.chat-mascot span{display:block;font-size:12px;line-height:19px;color:var(--color-muted);margin-top:3px}
+.message-mascot{display:flex;align-items:center;gap:6px;margin-bottom:10px;color:var(--color-primary);font-size:12px;font-weight:600}
+@media(max-width:759px){.floating-pet{width:100px}.pet-character{width:100px;height:100px;padding:4px}.pet-character .mascot-visual{--mascot-size:92px!important}.pet-caption{font-size:10px;padding:3px 9px}.pet-controls{opacity:1}.pet-control{width:32px;height:32px}.chat-mascot{gap:8px}.chat-mascot strong{font-size:14px}}
+@media(pointer:coarse){.pet-controls{opacity:1}}
+@media(prefers-reduced-motion:reduce){.pet-controls{transition:none}}

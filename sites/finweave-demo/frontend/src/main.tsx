@@ -1,0 +1,9 @@
+import React from 'react';import ReactDOM from 'react-dom/client';import {BrowserRouter} from 'react-router';import {QueryClient,QueryClientProvider} from '@tanstack/react-query';import './design/tokens.css';import './design/base.css';import './design/layout.css';import {App} from './app/App';import {AppProvider} from './app/context';
+import {AuthProvider,AuthGate} from './features/Auth';import {dataMode,setSyntheticWakeup} from './services/api';
+import {Capacitor} from '@capacitor/core';
+import {bootstrapNative} from './native/bootstrap';
+import {startCloudDemo} from './services/cloud-demo';
+const client=new QueryClient({defaultOptions:{queries:{staleTime:Infinity,refetchOnWindowFocus:false,retry:false},mutations:{retry:false}}});
+async function start(){if(!['synthetic_mock','backend'].includes(dataMode))throw Error('VITE_DATA_MODE không hợp lệ.');bootstrapNative();if(import.meta.env.VITE_DEMO_TRANSPORT==='http'){await startCloudDemo();}else if(dataMode==='synthetic_mock'){if(Capacitor.isNativePlatform()){const{startNativeSyntheticNetwork}=await import('./mocks/native-network');startNativeSyntheticNetwork();}else{const{startSyntheticNetwork,wakeSyntheticNetwork}=await import('./mocks/browser');await startSyntheticNetwork();setSyntheticWakeup(wakeSyntheticNetwork);}}else{const registrations=await navigator.serviceWorker?.getRegistrations();await Promise.all((registrations??[]).filter(r=>r.active?.scriptURL.endsWith('/mockServiceWorker.js')).map(r=>r.unregister()));}ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><QueryClientProvider client={client}><AuthProvider><AuthGate><AppProvider><App/></AppProvider></AuthGate></AuthProvider></QueryClientProvider></BrowserRouter></React.StrictMode>);}
+start().catch(e=>{document.getElementById('root')!.textContent='Không khởi động được FinWeave. '+e.message;});
+

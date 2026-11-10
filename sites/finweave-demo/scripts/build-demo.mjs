@@ -1,0 +1,11 @@
+import { build } from 'vite';
+import { spawnSync } from 'node:child_process';
+import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+mkdirSync('public', { recursive: true });
+cpSync('frontend/public', 'public', { recursive: true });
+await build({ configFile: 'frontend/vite.config.ts' });
+mkdirSync('server', { recursive: true });
+writeFileSync('server/spa-html.ts', 'export default ' + JSON.stringify(readFileSync('public/demo/index.html', 'utf8')) + ';\n');
+const result = spawnSync(process.execPath, ['scripts/run-framework.mjs', 'build'], { stdio: 'inherit', windowsHide: true });
+if (result.error) throw result.error;
+process.exit(result.status ?? 1);

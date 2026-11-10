@@ -1,0 +1,82 @@
+import {createContext,useContext,useEffect,useState,useRef} from 'react';
+import type {ReactNode,FormEvent} from 'react';
+import {Link,useLocation,useNavigate} from 'react-router';
+import {useQueryClient} from '@tanstack/react-query';
+import {Eye,EyeOff,Info,Fingerprint,LogOut} from 'lucide-react';
+import {Button} from '../components/ui';
+import {BrandLogo} from '../components/BrandLogo';
+import {identityServices,identityOptions,setApiSession,getApiSession,dataMode} from '../services/api';
+import {nativeCollector,nativeShellAvailable} from '../native/collector';
+import {clearPresentationDrafts} from '../services/presentation';
+const DEMO_EMAIL='demo@finweave.test',DEMO_PASSWORD='FinWeaveDemo!2026',DEMO_CODE='123456';
+import {realCall,selectWorkspace,invalidateTransport} from '../services/real-transport';
+type MockIdentity={sessionId?:string;email:string;name:string;expiresAt:number;deviceId:string|null;role:'owner';synthetic:boolean};
+const mock=dataMode==='synthetic_mock';
+import './auth.css';
+const sessionKey=mock?'fw:synthetic-session':'fw:backend-profile';
+function restoreSyntheticSession():MockIdentity|null {
+ if(!mock)return null;
+ try {const value=JSON.parse(sessionStorage.getItem(sessionKey)||'null');if(value?.synthetic===true&&typeof value.sessionId==='string'&&value.role==='owner'&&value.deviceId==='DEVICE-DEMO'&&typeof value.email==='string'&&value.email.endsWith('@finweave.test')&&typeof value.name==='string'&&typeof value.expiresAt==='number'&&value.expiresAt>Date.now()){setApiSession(value.sessionId);return value;}sessionStorage.removeItem(sessionKey);}catch{sessionStorage.removeItem(sessionKey);}return null;
+}
+const AuthContext=createContext<{sessionNotice:string;restoring:boolean;user:MockIdentity|null;sessionDestination:string|null;setUser:(user:MockIdentity|null)=>void;endSession:(expired?:boolean)=>Promise<void>}>({sessionNotice:'',restoring:false,user:null,sessionDestination:null,setUser:()=>{},endSession:async()=>{}});
+export function AuthProvider({children}:{children:ReactNode}) {
+ const [sessionNotice,setSessionNotice]=useState('');
+ const [restoring,setRestoring]=useState(!mock&&!!sessionStorage.getItem(sessionKey));
+ const [user,updateUser]=useState<MockIdentity|null>(restoreSyntheticSession);const [sessionDestination,setSessionDestination]=useState<string|null>(null);const ending=useRef(false);const client=useQueryClient();const nav=useNavigate();
+ const setUser=(identity:MockIdentity|null)=>{setApiSession(identity?.sessionId||null);if(identity){setSessionNotice('');sessionStorage.setItem(sessionKey,JSON.stringify(identity));setSessionDestination(null);ending.current=false;}else sessionStorage.removeItem(sessionKey);updateUser(identity);};
+ useEffect(()=>{if(mock)return;let live=true;const saved=sessionStorage.getItem(sessionKey);if(saved){void realCall('getSession',{}, {workspaceId:null}).then(r=>{if(!live)return;const profile=JSON.parse(saved);if(profile.sessionId!==r.data.sessionId)throw Error('SESSION_CHANGED');selectWorkspace(r.data.workspaceIds[0]??null);setUser({...profile,sessionId:r.data.sessionId,deviceId:r.data.deviceId,expiresAt:Date.parse(r.data.expiresAt)});}).catch(()=>{if(live){sessionStorage.removeItem(sessionKey);sessionStorage.removeItem('fw:forecast:v2');sessionStorage.removeItem('fw:gold-profile');client.clear();selectWorkspace(null);}}).finally(()=>{if(live)setRestoring(false);});}else setRestoring(false);return()=>{live=false;};},[]);
+ const endSession=async(expired=false)=>{if(ending.current)return;ending.current=true;const destination=expired?'/auth/expired':'/auth/login';if(nativeShellAvailable())await nativeCollector('stop').catch(()=>undefined);invalidateTransport();selectWorkspace(null);const serverCall=user?.sessionId?identityServices.signOut({sessionId:user.sessionId},identityOptions()).then(r=>{if(dataMode==='backend'&&(r as any).serverOutcome==='not_sent'&&getApiSession()===null)setSessionNotice('Phiên đã đóng trên client. Chưa xác nhận thu hồi phiên trên máy chủ.');}).catch(()=>{if(dataMode==='backend'&&getApiSession()===null)setSessionNotice('Phiên đã đóng trên client. Chưa xác nhận thu hồi trên máy chủ; kiểm tra lại khi có mạng.');}):Promise.resolve();await client.cancelQueries();client.clear();clearPresentationDrafts();sessionStorage.removeItem('fw:forecast:v2');sessionStorage.removeItem('fw:gold-profile');sessionStorage.removeItem('fw:synthetic-challenge');setSessionDestination(destination);setUser(null);nav(destination,{replace:true});await serverCall;};
+ useEffect(()=>{const expired=()=>{if(user)void endSession(true);};window.addEventListener('fw:session-expired',expired);return()=>window.removeEventListener('fw:session-expired',expired);},[user?.sessionId]);
+ useEffect(()=>{if(mock||!user)return;let live=true;const timer=setInterval(()=>{void realCall('getSession',{}, {workspaceId:null}).then(r=>{if(live&&!ending.current&&r.data.sessionId!==user.sessionId){void endSession(true);return;}if(live&&!ending.current)setUser({...user,expiresAt:Date.parse(r.data.expiresAt),deviceId:r.data.deviceId});}).catch(()=>{});},30000);return()=>{live=false;clearInterval(timer);};},[user?.sessionId]);
+ useEffect(()=>{if(!user)return;const timer=setTimeout(()=>void endSession(true),Math.max(0,user.expiresAt-Date.now()));return()=>clearTimeout(timer);},[user?.expiresAt]);
+ return <AuthContext.Provider value={{sessionNotice,restoring,user,sessionDestination,setUser,endSession}}>{children}</AuthContext.Provider>;
+}
+export const useAuth=()=>useContext(AuthContext);
+export function AuthGate({children}:{children:ReactNode}) {
+ const {user,sessionDestination,restoring}=useAuth();const location=useLocation();const nav=useNavigate();
+ useEffect(()=>{if(!restoring&&!user&&!location.pathname.startsWith('/auth/'))nav(sessionDestination||'/auth/login',{replace:true,state:{returnTo:location.pathname+location.search}});},[user,location.pathname,sessionDestination,restoring]);
+ if(restoring)return <main role="status">Đang kiểm tra phiên máy chủ…</main>;
+ if(location.pathname.startsWith('/auth/'))return <AuthScreen/>;
+ return user?children:<AuthScreen/>;
+}
+const headings:Record<string,string>=mock?{login:'Đăng nhập FinWeave',register:'Tạo tài khoản demo',forgot:'Quên mật khẩu',reset:'Đặt lại mật khẩu demo',verify:'Xác thực mã demo',expired:'Phiên demo đã hết hạn',denied:'Bạn chưa có quyền truy cập'}:{login:'Đăng nhập FinWeave',register:'Tạo tài khoản',forgot:'Quên mật khẩu',reset:'Đặt lại mật khẩu',verify:'Xác thực email',expired:'Phiên đã hết hạn',denied:'Bạn chưa có quyền truy cập'};
+function AuthScreen() {
+ const loc=useLocation(),nav=useNavigate();const screen=loc.pathname.split('/')[2]||'login';const {user,setUser,endSession,sessionNotice}=useAuth();
+ const submitLock=useRef(false);const attempts=useRef(new Map<string,ReturnType<typeof identityOptions>>());const authOptions=(payload:unknown)=>{const key=JSON.stringify({screen,payload});let options=attempts.current.get(key);if(!options){options=identityOptions();attempts.current.set(key,options);}return options;};
+ const [email,setEmail]=useState(mock?DEMO_EMAIL:''),[name,setName]=useState(''),[password,setPassword]=useState(''),[confirm,setConfirm]=useState(''),[code,setCode]=useState(''),[visible,setVisible]=useState(false),[ack,setAck]=useState(false),[error,setError]=useState(''),[result,setResult]=useState(''),[busy,setBusy]=useState(false),[passkeyNotice,setPasskeyNotice]=useState(false);
+ useEffect(()=>{setError('');setResult('');setPassword(screen==='login'&&mock?DEMO_PASSWORD:'');setConfirm('');setCode('');setVisible(false);setBusy(false);setPasskeyNotice(false);document.title=(headings[screen]||headings.login)+' · FinWeave';document.getElementById('auth-title')?.focus();},[screen]);
+ useEffect(()=>{if(screen==='expired'&&user)void endSession(true);},[screen]);
+ const submit=async(e:FormEvent)=>{e.preventDefault();if(submitLock.current)return;submitLock.current=true;setError('');setResult('');setBusy(true);try {
+  await Promise.resolve();
+  if(screen==='login'){const response=await identityServices.signIn({email:email.trim(),password},authOptions({email:email.trim(),password}));sessionStorage.setItem('fw:synthetic-challenge',response.challengeId);setPassword('');nav('/auth/verify',{state:{returnTo:(loc.state as {returnTo?:string}|null)?.returnTo}});}
+  else if(screen==='register'){if(!ack)throw new Error('Xác nhận sử dụng dữ liệu giả để tiếp tục.');const response=await identityServices.registerIdentity({name,email:email.trim(),password,passwordConfirmation:confirm,syntheticAcknowledgement:ack},authOptions({name,email:email.trim(),password,passwordConfirmation:confirm,syntheticAcknowledgement:ack}));sessionStorage.setItem('fw:synthetic-challenge',response.challengeId);setPassword('');setConfirm('');nav('/auth/verify');}
+  else if(screen==='verify'){const response=await identityServices.verifyIdentityChallenge({challengeId:sessionStorage.getItem('fw:synthetic-challenge')||'MISSING',code},authOptions({challengeId:sessionStorage.getItem('fw:synthetic-challenge')||'MISSING',code}));const identity={...response.profile,sessionId:response.session.sessionId,expiresAt:Date.parse(response.session.expiresAt),deviceId:response.session.deviceId,role:'owner' as const,synthetic:response.synthetic};setUser(identity);sessionStorage.removeItem('fw:synthetic-challenge');const target=(loc.state as {returnTo?:string}|null)?.returnTo;const allowed=['/home','/home/reports','/home/assets','/transactions','/transactions/flow','/transactions/transfers','/transactions/refunds','/plan','/plan/items','/plan/investments','/plan/goals','/plan/simulation','/data','/data/review','/ai','/ai/history','/design'];nav(target&&allowed.includes(target.split('?')[0])?target:'/home',{replace:true});}
+  else if(screen==='forgot')setResult((await identityServices.requestPasswordReset({email:email.trim()},authOptions({email:email.trim()}))).message);
+  else if(screen==='reset'){setResult((await identityServices.resetIdentityPassword({resetToken:new URLSearchParams(loc.search).get('token')||'MISSING',password,passwordConfirmation:confirm},authOptions({resetToken:new URLSearchParams(loc.search).get('token')||'MISSING',password,passwordConfirmation:confirm}))).message);setPassword('');setConfirm('');}
+ }catch(ex){setError((ex as Error).message);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('.auth-form input:not([type=checkbox])')?.focus());}finally{setBusy(false);submitLock.current=false;}};
+ const field=(id:string,label:string,value:string,set:(value:string)=>void,type='text',autoComplete='off')=><div className={`field auth-field ${id==='auth-password'?'auth-password-field':''}`}><label htmlFor={id}>{label}<span className="auth-required" aria-hidden="true">*</span></label><input id={id} aria-label={id==='auth-password'?(mock?'Mật khẩu demo':'Mật khẩu'):undefined} type={type} value={value} onChange={e=>set(e.target.value)} autoComplete={autoComplete} required maxLength={id==='auth-password'||id==='auth-confirm'?(mock?128:256):500} aria-describedby={error?'auth-error':undefined}/>{id==='auth-password'&&<button type="button" className="auth-reveal" aria-label={visible?'Ẩn mật khẩu':'Hiện mật khẩu'} aria-pressed={visible} onClick={()=>setVisible(!visible)}>{visible?<EyeOff size={20}/>:<Eye size={20}/>}</button>}</div>;
+ const isForm=['login','register','forgot','reset','verify'].includes(screen);
+ return <main className="auth-shell" id="auth-main"><header className="auth-header"><Link className="auth-brand" to="/auth/login" aria-label="FinWeave · Đăng nhập"><BrandLogo/></Link><h1 className="auth-name">FinWeave</h1><p className="auth-tagline">A brighter financial you</p></header><section className="auth-content" aria-labelledby="auth-title"><div className="auth-card">
+ {['login','register'].includes(screen)&&<nav className="auth-tabs" aria-label="Tài khoản"><Link to="/auth/login" aria-current={screen==='login'?'page':undefined}>Đăng nhập</Link><Link to="/auth/register" aria-current={screen==='register'?'page':undefined}>Tạo tài khoản</Link></nav>}
+ <h2 className={['login','register'].includes(screen)?'sr-only':''} id="auth-title" tabIndex={-1}>{headings[screen]||headings.login}</h2>
+ {mock&&['login','register'].includes(screen)?<div className="auth-demo"><Info size={21} aria-hidden="true"/><div><p className="auth-demo-title">Chế độ Demo đang hoạt động</p><p>{screen==='login'?'Đây là môi trường minh họa. Thông tin đăng nhập đã được điền sẵn để tiện sử dụng. Vui lòng không nhập thông tin thật hoặc nhạy cảm.':'Đây là môi trường minh họa. Vui lòng dùng email @finweave.test và mật khẩu mẫu, không nhập thông tin thật hoặc nhạy cảm.'}</p>{screen==='login'&&<button type="button" className="auth-fill" onClick={()=>{setEmail(DEMO_EMAIL);setPassword(DEMO_PASSWORD);}}>Điền thông tin mẫu</button>}</div></div>:<p className="auth-description">Nhập thông tin FinWeave. Mã xác thực và liên kết khôi phục được gửi qua kênh của môi trường máy chủ.</p>}
+ {mock&&screen==='verify'&&<div className="notice info">Mã mô phỏng: <strong>{DEMO_CODE}</strong>. Không gửi SMS/email thật.</div>}
+ {sessionNotice&&<p className="notice warning" role="status">{sessionNotice}</p>}{isForm&&<form className="auth-form" onSubmit={submit}>
+ {screen==='register'&&field('auth-name','Tên hiển thị',name,setName)}
+ {['login','register','forgot'].includes(screen)&&field('auth-email','Địa chỉ email',email,setEmail,'email','username')}
+ {['login','register','reset'].includes(screen)&&<>{field('auth-password','Mật khẩu',password,setPassword,visible?'text':'password',screen==='login'?'current-password':'new-password')}{screen!=='login'&&<p className="meta muted">{mock?'12–128 ký tự, gồm chữ, số và ký hiệu.':'15–128 ký tự Unicode.'}</p>}</>}
+ {['register','reset'].includes(screen)&&field('auth-confirm','Nhập lại mật khẩu demo',confirm,setConfirm,visible?'text':'password','new-password')}
+ {screen==='verify'&&<div className="field auth-field"><label htmlFor="auth-code">Mã xác thực demo<span className="auth-required" aria-hidden="true">*</span></label><input id="auth-code" value={code} onChange={e=>setCode(e.target.value)} inputMode="numeric" autoComplete="one-time-code" maxLength={6} required aria-describedby={error?'auth-error':undefined}/></div>}
+ {screen==='register'&&<label className="check"><input type="checkbox" checked={ack} onChange={e=>setAck(e.target.checked)}/>Tôi hiểu đây là mô phỏng dùng dữ liệu giả.</label>}
+ {error&&<p className="notice error" id="auth-error" role="alert">{error}</p>}
+ {!result&&<Button type="submit" variant="primary" className="auth-submit" aria-label={screen==='login'?(mock?'Đăng nhập demo':'Đăng nhập'):screen==='register'?(mock?'Tạo tài khoản demo':'Tạo tài khoản'):undefined} disabled={busy}>{busy?'Đang kiểm tra…':({login:'Đăng nhập',register:'Tạo tài khoản',forgot:'Tiếp tục khôi phục demo',reset:'Đặt lại mật khẩu demo',verify:mock?'Xác nhận mã demo':'Xác nhận mã'} as Record<string,string>)[screen]}</Button>}
+ </form>}
+ {result&&<div role="status" className="notice info">{result}</div>}
+ {mock&&screen==='forgot'&&result&&<Link className="btn primary" to="/auth/reset?token=DEMO-RESET">Mở liên kết đặt lại mô phỏng</Link>}
+ {screen==='reset'&&result&&<Link className="btn primary" to="/auth/login">Về đăng nhập</Link>}
+ {screen==='expired'&&<><div className="notice warning" role="status">Phiên 30 phút đã kết thúc. Dữ liệu phiên, chat và cache được xóa; đăng nhập demo để bắt đầu lại.</div><Link className="btn primary" to="/auth/login">Đăng nhập lại</Link></>}
+ {screen==='denied'&&<><div className="notice error" role="alert">Không có dữ liệu tài chính được trả cho workspace hoặc đối tượng không được phép.</div>{user?<Link className="btn primary" to="/home">Về workspace demo của tôi</Link>:<Link className="btn primary" to="/auth/login">Về đăng nhập</Link>}</>}
+ <div className="auth-links">{screen==='login'?<Link to="/auth/forgot">Quên mật khẩu?</Link>:screen!=='reset'||!result?<Link to="/auth/login" onClick={()=>sessionStorage.removeItem('fw:synthetic-challenge')}>Về đăng nhập</Link>:null}{user&&<Button variant="ghost" onClick={()=>void endSession()}><LogOut size={16}/>Đăng xuất</Button>}</div>
+ {screen==='login'&&<><Button type="button" className="auth-passkey" onClick={()=>setPasskeyNotice(true)}><Fingerprint size={25} aria-hidden="true"/>Đăng nhập bằng passkey</Button>{passkeyNotice&&<p className="auth-passkey-note" role="status">Bản demo chưa hỗ trợ passkey. Vui lòng dùng email và mật khẩu mẫu ở trên.</p>}</>}
+ </div></section></main>;
+}
